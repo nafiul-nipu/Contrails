@@ -12,7 +12,7 @@ class Clusters extends React.Component {
 
     render(){
         return(
-            <div>Clusters</div>
+            <div>Clusters and other components</div>
         )
     }
 }
