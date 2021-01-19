@@ -5,6 +5,7 @@ import ParametersPlot from '../parameters-plot/parameters-plot.component';
 import Clusters from '../clusters/clusters.component';
 import Projection2D from '../projection-2d/projection-2d.component';
 import Projection3D from '../projection-3d/projection-3d.component';
+import DropdownPanel from '../dropdown-panel/dropdown-panel.component';
 
 import './components-container.styles.css';
 import Container from 'react-bootstrap/Container';
@@ -29,23 +30,45 @@ class ComponentsContainer extends React.Component {
                         <QueryPanel/>
                     </Col>
                     <Col xs={6}style={{height:'100vh'}}>
-                        <Row xs={2} sm={2} md={2} lg={2} xl={2}>
-                            <Col xs={6}style={{height:'25vh'}}>
-                                <Projection3D/>
+                    <Row xs={3}> 
+                            {/* 3d view and the dropdown */}
+                            <Col xs={6}>
+                                <Row xs={2}>
+                                    <Col xs={12}>
+                                        <DropdownPanel/>
+                                    </Col>
+                                </Row>
+                                <Row xs={10}>
+                                    <Col xs={12}>
+                                        <Projection3D/>
+                                    </Col>                                    
+                                </Row>
                             </Col>
-                            <Col xs={6}style={{backgroundColor: '#d1e5f0',height:'25vh'}}>
+                            {/* 2d view */}
+                            <Col xs={6} style={{backgroundColor: '#d1e5f0',height:'25vh'}}>
                                 <Projection2D/>
                             </Col>
                         </Row>
-                        <Row xs={2} sm={2} md={2} lg={2} xl={2}>
-                            <Col xs={6}style={{height:'25vh'}}>
-                                <Projection3D/>
+                        <Row xs={3}> 
+                            {/* 3d view and the dropdown */}
+                            <Col xs={6}>
+                                <Row xs={2}>
+                                    <Col xs={12}>
+                                        <DropdownPanel/>
+                                    </Col>
+                                </Row>
+                                <Row xs={10}>
+                                    <Col xs={12}>
+                                        <Projection3D/>
+                                    </Col>                                    
+                                </Row>
                             </Col>
-                            <Col xs={6}style={{backgroundColor: '#fddbc7',height:'25vh'}}>
+                            {/* 2d view */}
+                            <Col xs={6} style={{backgroundColor: '#d1e5f0',height:'25vh'}}>
                                 <Projection2D/>
                             </Col>
                         </Row>
-                        <Row xs={8}>
+                        <Row xs={6}>
                             <Col xs={12}style={{backgroundColor: '#67a9cf',height:'50vh'}}>
                                 <Clusters/>
                             </Col>
