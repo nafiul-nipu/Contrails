@@ -22,16 +22,30 @@ class ComponentsContainer extends React.Component {
         this.state = {
 
         }
-        this.data = []    
+        this.data = []   
+        this.firstCanvas = React.createRef(); 
+        this.firstThree = React.createRef(); 
+        this.secondCanvas = React.createRef(); 
+        this.secondThree = React.createRef(); 
     }
 
     componentDidMount(){ 
-        // console.log('i am from container')
-        // let dd = new Projection()
-        // dd.sceneSetup(".firstContainer");
-        // const url = 'https://raw.githubusercontent.com/nafiul-nipu/High-Performance-Contrails-Visualization/master/particles/timestep_21.csv'
-        // dd.addCustomSceneObjects(url);        
-        // dd.eventListener();
+        let threeD = new Projection();
+        //first container
+        threeD.sceneSetup(this.firstThree.current, this.firstCanvas.current);
+        //     this.sceneSetup(".firstContainer");
+        const url = 'https://raw.githubusercontent.com/nafiul-nipu/High-Performance-Contrails-Visualization/master/particles/timestep_21.csv'
+        threeD.addCustomSceneObjects(url);        
+        threeD.widnowResizeHandler(this.firstThree.current)
+
+
+        let threeD2 = new Projection();
+        threeD2.sceneSetup(this.secondThree.current, this.secondCanvas.current);
+        //     this.sceneSetup(".secondContainer");
+        const url2 = 'https://raw.githubusercontent.com/nafiul-nipu/High-Performance-Contrails-Visualization/master/particles/timestep_12.csv'
+        threeD2.addCustomSceneObjects(url2);        
+        threeD2.widnowResizeHandler(this.secondThree.current)       
+        
     }
 
 
@@ -52,8 +66,9 @@ class ComponentsContainer extends React.Component {
                                     </Col>
                                 </Row>
                                 <Row xs={10}>
-                                    <Col xs={12} style={{height:'22vh'}} className={'firstContainer'}>
-                                        <Projection3D/>
+                                    <Col xs={12} style={{height:'22vh'}} ref = {this.firstThree}>
+                                    <div ref = {this.firstCanvas}></div>
+                                        {/* <Projection/> */}
                                     </Col>                                    
                                 </Row>
                             </Col>
@@ -71,8 +86,8 @@ class ComponentsContainer extends React.Component {
                                     </Col>
                                 </Row>
                                 <Row xs={10}>
-                                    <Col xs={12} style={{height:'22vh'}}>
-                                        <Projection3D/>
+                                    <Col xs={12} style={{height:'22vh'}} ref={this.secondThree}>
+                                        <div ref = {this.secondCanvas}></div>
                                     </Col>                                    
                                 </Row>
                             </Col>

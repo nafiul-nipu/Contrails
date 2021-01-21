@@ -1,30 +1,26 @@
 import React from 'react';
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import particleData from '../data-component/particleData';
+
 import * as d3 from 'd3'
+import { VertexColors } from 'three';
 
 const style = {
     height: 240 // we can control scene size by setting container dimensions
   };
 
-class Projection3D extends React.Component {
-    componentDidMount() {
-        this.sceneSetup(".firstContainer");
-        const url = 'https://raw.githubusercontent.com/nafiul-nipu/High-Performance-Contrails-Visualization/master/particles/timestep_21.csv'
-        this.addCustomSceneObjects(url);        
-        window.addEventListener("resize", this.handleWindowResize);
-      }
-    
-      componentWillUnmount() {
-        window.removeEventListener("resize", this.handleWindowResize);
-        window.cancelAnimationFrame(this.requestID);
-        this.controls.dispose();
-      }
-    
+class Projection extends React.Component {
+    constructor(){
+        super();
+        this.scene = null;
+        this.camera = null;
+        this.renderer = null;
+        this.controls = null;
+    }    
+
       // Standard scene setup in Three.js. Check "Creating a scene" manual for more information
       // https://threejs.org/docs/#manual/en/introduction/Creating-a-scene
-      sceneSetup = (containerName) => {
+      sceneSetup = (containerName, canvasName) => {
         // get container dimensions and use them for scene sizing
         const width = d3.select(containerName).node().clientWidth
         // console.log(width)
@@ -42,7 +38,7 @@ class Projection3D extends React.Component {
 
         this.camera = new THREE.PerspectiveCamera(
           fieldOfView, // fov = field of view
-          width / height, // aspect ratio
+          aspect, // aspect ratio
           near, // near plane
           far // far plane
         );
@@ -51,42 +47,60 @@ class Projection3D extends React.Component {
         this.camera.position.z = 40; // is used here to set some distance from a cube that is located at z = 0
         // OrbitControls allow a camera to orbit around the object
         // https://threejs.org/docs/#examples/controls/OrbitControls
-        this.controls = new OrbitControls(this.camera, this.el);
         this.renderer = new THREE.WebGLRenderer();
         this.renderer.setSize(width, height);
-        this.el.appendChild(this.renderer.domElement); // mount using React ref
+
+        this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+
+        canvasName.appendChild(this.renderer.domElement); // mount using React ref
       };
     
-      // Here should come custom code.
-      // Code below is taken from Three.js BoxGeometry example
-      // https://threejs.org/docs/#api/en/geometries/BoxGeometry
+
+      //adding the particle system
       addCustomSceneObjects = (url) => {
         this.data = []
+        // this.tempscaling = null;
+        this.tempDomain = {};
+        this.tempColor = ["#fff5f0","#67000d"]
         // const url = 'https://raw.githubusercontent.com/nafiul-nipu/High-Performance-Contrails-Visualization/master/particles/timestep_21.csv'
         d3.csv(url, d => {
             this.data.push({
                 x: parseFloat(d['Points:0']),
                 y: parseFloat(d['Points:1']),
-                z: parseFloat(d['Points:2'])
+                z: parseFloat(d['Points:2']),
+                temp: parseFloat(d['T'])
             });
+            this.tempDomain.min = Math.min(this.tempDomain.min || Infinity, parseFloat(d['T']));
+            this.tempDomain.max = Math.max(this.tempDomain.max || -Infinity, parseFloat(d['T']));
         }).then(() =>{
-            console.log(this.data)
-            // console.log(this.props.data)
-            const geometry = new THREE.Geometry();
-            const material = new THREE.PointsMaterial({
-              color: 0x156289,
-              // emissive: 0x072534,
-              size: 0.2
-              // side: THREE.DoubleSide,
-              // flatShading: true
-            });
 
+            // console.log(this.tempDomain)
+            let tempscaling = d3.scaleLinear(/*d3.schemeReds[9]*/)
+                            .domain([this.tempDomain.min, this.tempDomain.max])
+                            .range(this.tempColor);
+
+            // console.log(tempscaling(292))
+
+            // console.log(this.props.data)
+            let geometry = new THREE.Geometry();
+            // console.log(this.data)
             this.data.forEach(function(d){ 
-              let particle = new THREE.Vector3(d.x, d.y, d.z);
-              geometry.vertices.push(particle)
+              geometry.vertices.push(new THREE.Vector3(d.x, d.y, d.z));
+              let color = tempscaling(d.temp)
+            //   console.log(color)
+              geometry.colors.push(new THREE.Color(color));
 
             })
             
+            let material = new THREE.PointsMaterial({
+                //   color: 0x156289,
+                  // emissive: 0x072534,
+                  size: 0.2,
+                  // side: THREE.DoubleSide,
+                  // flatShading: true
+                  vertexColors: true
+                });
+
             this.cube = new THREE.Points(geometry, material);
             this.scene.add(this.cube);
         
@@ -119,9 +133,10 @@ class Projection3D extends React.Component {
         this.requestID = window.requestAnimationFrame(this.startAnimationLoop);
       };
     
-      handleWindowResize = () => {
-        const width = this.el.clientWidth;
-        const height = this.el.clientHeight;
+      handleWindowResize = (containerName) => {
+        const width = d3.select(containerName).node().clientWidth
+        // console.log(width)
+        const height = d3.select(containerName).node().clientHeight;
     
         this.renderer.setSize(width, height);
         this.camera.aspect = width / height;
@@ -131,14 +146,9 @@ class Projection3D extends React.Component {
         this.camera.updateProjectionMatrix();
       };
 
-      test = () => {
-        return 5
-      }
-    
-      render() {
-        // console.log(this.props.data)
-        return <div style={style} ref={ref => (this.el = ref)} />;
+      widnowResizeHandler = (containerName) => {
+        window.addEventListener("resize", this.handleWindowResize(containerName));
       }
     }
 
-export default Projection3D;
+export default Projection;
