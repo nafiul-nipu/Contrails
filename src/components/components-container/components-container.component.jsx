@@ -1,11 +1,15 @@
 import React from 'react';
+import * as d3 from 'd3'
 
 import QueryPanel from '../query-panel/query-panel.component';
 import ParametersPlot from '../parameters-plot/parameters-plot.component';
 import Clusters from '../clusters/clusters.component';
 import Projection2D from '../projection-2d/projection-2d.component';
 import Projection3D from '../projection-3d/projection-3d.component';
+import Projection from '../projection-3d/projection.component'
 import DropdownPanel from '../dropdown-panel/dropdown-panel.component';
+
+import particleData from '../data-component/particleData'
 
 import './components-container.styles.css';
 import Container from 'react-bootstrap/Container';
@@ -18,7 +22,16 @@ class ComponentsContainer extends React.Component {
         this.state = {
 
         }
-    
+        this.data = []    
+    }
+
+    componentDidMount(){ 
+        // console.log('i am from container')
+        // let dd = new Projection()
+        // dd.sceneSetup(".firstContainer");
+        // const url = 'https://raw.githubusercontent.com/nafiul-nipu/High-Performance-Contrails-Visualization/master/particles/timestep_21.csv'
+        // dd.addCustomSceneObjects(url);        
+        // dd.eventListener();
     }
 
 
@@ -34,12 +47,12 @@ class ComponentsContainer extends React.Component {
                             {/* 3d view and the dropdown */}
                             <Col xs={6}>
                                 <Row xs={2}>
-                                    <Col xs={12}>
+                                    <Col xs={12} style={{height:'3vh'}}>
                                         <DropdownPanel/>
                                     </Col>
                                 </Row>
                                 <Row xs={10}>
-                                    <Col xs={12}>
+                                    <Col xs={12} style={{height:'22vh'}} className={'firstContainer'}>
                                         <Projection3D/>
                                     </Col>                                    
                                 </Row>
@@ -53,12 +66,12 @@ class ComponentsContainer extends React.Component {
                             {/* 3d view and the dropdown */}
                             <Col xs={6}>
                                 <Row xs={2}>
-                                    <Col xs={12}>
+                                    <Col xs={12} style={{height:'3vh'}}>
                                         <DropdownPanel/>
                                     </Col>
                                 </Row>
                                 <Row xs={10}>
-                                    <Col xs={12}>
+                                    <Col xs={12} style={{height:'22vh'}}>
                                         <Projection3D/>
                                     </Col>                                    
                                 </Row>
@@ -81,6 +94,8 @@ class ComponentsContainer extends React.Component {
             </Container>
         )
     }
+
 }
+
 
 export default ComponentsContainer;
