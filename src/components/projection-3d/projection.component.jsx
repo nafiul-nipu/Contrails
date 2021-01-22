@@ -28,6 +28,8 @@ class Projection extends React.Component {
         // console.log(height)
     
         this.scene = new THREE.Scene();
+        // var scene = new THREE.Scene(); // initialising the scene
+        this.scene.background = new THREE.Color( 0x31393F );
 
         //camera
         const fieldOfView = 4;
@@ -48,7 +50,9 @@ class Projection extends React.Component {
         // OrbitControls allow a camera to orbit around the object
         // https://threejs.org/docs/#examples/controls/OrbitControls
         this.renderer = new THREE.WebGLRenderer();
+        // this.renderer.setClearColor('hsl(0, 0%, 0%)', 0);
         this.renderer.setSize(width, height);
+        // this.renderer.setPixelRatio(window.devicePixelRatio)
 
         this.controls = new OrbitControls(this.camera, this.renderer.domElement);
 

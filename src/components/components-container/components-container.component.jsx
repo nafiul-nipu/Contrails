@@ -122,7 +122,7 @@ class ComponentsContainer extends React.Component {
         function updateThreeScatter(object, particleData, tempDomain, threeDiv, objectForScatter, divForScatter){
             object.addCustomSceneObjects(particleData, tempDomain);        
             object.widnowResizeHandler(threeDiv)
-            console.log(tempDomain, xDomain, yDomain)
+            // console.log(tempDomain, xDomain, yDomain)
             objectForScatter.scatterplot(particleData, tempDomain, xDomain, yDomain, divForScatter)
 
             console.log("updated")
@@ -157,7 +157,7 @@ class ComponentsContainer extends React.Component {
                                 </Row>
                             </Col>
                             {/* 2d view */}
-                            <Col xs={6} style={{backgroundColor: '#d1e5f0',height:'25vh'}} ref = {this.firstScatter}>
+                            <Col xs={6} style={{backgroundColor: '#636363',height:'25vh'}} ref = {this.firstScatter}>
                                 {/* <Projection2D/> */}
                                 {/* <div ref = {this.firstScatter}></div> */}
                             </Col>
@@ -178,7 +178,7 @@ class ComponentsContainer extends React.Component {
                                 </Row>
                             </Col>
                             {/* 2d view */}
-                            <Col xs={6} style={{backgroundColor: '#d1e5f0',height:'25vh'}}  ref = {this.secondScatter}>
+                            <Col xs={6} style={{backgroundColor: '#636363',height:'25vh'}}  ref = {this.secondScatter}>
                                 {/* <Projection2D/> */}
                                 {/* <div ref = {this.secondScatter}></div> */}
                             </Col>
