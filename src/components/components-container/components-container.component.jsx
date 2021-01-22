@@ -25,26 +25,42 @@ class ComponentsContainer extends React.Component {
         this.data = []   
         this.firstCanvas = React.createRef(); 
         this.firstThree = React.createRef(); 
+        this.firstDropdown = React.createRef();
+
+
         this.secondCanvas = React.createRef(); 
         this.secondThree = React.createRef(); 
+        this.secondDropdown = React.createRef();
     }
 
     componentDidMount(){ 
+        // console.log(dataForlder)
+        //creating the first particlesystem
         let threeD = new Projection();
         //first container
         threeD.sceneSetup(this.firstThree.current, this.firstCanvas.current);
         //     this.sceneSetup(".firstContainer");
         const url = 'https://raw.githubusercontent.com/nafiul-nipu/High-Performance-Contrails-Visualization/master/particles/timestep_21.csv'
+        // const url = "../../particles/timestep_21.csv"
         threeD.addCustomSceneObjects(url);        
         threeD.widnowResizeHandler(this.firstThree.current)
 
+        // creating the first dropdown
+        let dropdown1 = new DropdownPanel();
+        dropdown1.createDropdown(this.firstDropdown.current)
 
+
+        //creating the second particle system
         let threeD2 = new Projection();
         threeD2.sceneSetup(this.secondThree.current, this.secondCanvas.current);
         //     this.sceneSetup(".secondContainer");
         const url2 = 'https://raw.githubusercontent.com/nafiul-nipu/High-Performance-Contrails-Visualization/master/particles/timestep_12.csv'
         threeD2.addCustomSceneObjects(url2);        
-        threeD2.widnowResizeHandler(this.secondThree.current)       
+        threeD2.widnowResizeHandler(this.secondThree.current)      
+        
+        //creating the second dropdown
+        let dropdown2 = new DropdownPanel();
+        dropdown1.createDropdown(this.secondDropdown.current)
         
     }
 
@@ -62,7 +78,8 @@ class ComponentsContainer extends React.Component {
                             <Col xs={6}>
                                 <Row xs={2}>
                                     <Col xs={12} style={{height:'3vh'}}>
-                                        <DropdownPanel/>
+                                        {/* <DropdownPanel/> */}
+                                        <div ref={this.firstDropdown}></div>
                                     </Col>
                                 </Row>
                                 <Row xs={10}>
@@ -82,7 +99,8 @@ class ComponentsContainer extends React.Component {
                             <Col xs={6}>
                                 <Row xs={2}>
                                     <Col xs={12} style={{height:'3vh'}}>
-                                        <DropdownPanel/>
+                                        {/* <DropdownPanel/> */}
+                                        <div ref={this.secondDropdown}></div>
                                     </Col>
                                 </Row>
                                 <Row xs={10}>
