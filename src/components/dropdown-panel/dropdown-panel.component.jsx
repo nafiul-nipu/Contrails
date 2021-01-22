@@ -1,6 +1,7 @@
 import React from 'react';
 import * as d3 from 'd3';
 import $, { data } from 'jquery'
+import './dropdown-panel.style.css'
 
 import dataRegistry from '../data-component/dataRegistry.json'
 
@@ -18,6 +19,7 @@ class DropdownPanel extends React.Component {
     createDropdown = (object,threeDivname, memberNumber, divName, idName, objectForScatter, divForScatter) =>{
         let list = dataRegistry[(memberNumber - 1)].timeSteps;
         // console.log(divName.className)
+        d3.select(divName).attr("class", "dropdownMenu")
         d3.select(divName).append('label')
                          .attr('for', 'members')
                          .text("Members: ")
@@ -49,7 +51,7 @@ class DropdownPanel extends React.Component {
                         .text((d) => {return d.ensembleMember})
 
         d3.select(divName).append('button')
-                        // .attr("id", divName)
+                        .attr("id", "button")
                         .text("Previous")
                         .on("click", function(){
                             // console.log(idName)
@@ -101,7 +103,7 @@ class DropdownPanel extends React.Component {
                         .text((d) => {return d})
 
         d3.select(divName).append('button')
-                        // .attr('id', divName)
+                        .attr('id', "button")
                         .text("Next")
                         .on("click", function(){
                             // console.log(idName)
