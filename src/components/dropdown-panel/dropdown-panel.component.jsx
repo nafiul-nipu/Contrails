@@ -15,7 +15,7 @@ class DropdownPanel extends React.Component {
     
     }
 
-    createDropdown = (object,threeDivname, memberNumber, divName, idName) =>{
+    createDropdown = (object,threeDivname, memberNumber, divName, idName, objectForScatter, divForScatter) =>{
         let list = dataRegistry[(memberNumber - 1)].timeSteps;
         // console.log(divName.className)
         d3.select(divName).append('label')
@@ -71,7 +71,7 @@ class DropdownPanel extends React.Component {
                             let file = timeList[previousIndex];
                             $(`#timestep${idName}`).val(file)
                             let container = new mainComponent()
-                            container.dataLoader(object, folder, file, threeDivname)
+                            container.dataLoader(object, folder, file, threeDivname, objectForScatter, divForScatter)
                             // console.log(list[nextIndex])
                             // console.log(folder, file)
                             
@@ -90,7 +90,7 @@ class DropdownPanel extends React.Component {
                             let file = this.value;
                             // console.log(file)
                             let container = new mainComponent();
-                            container.dataLoader(object, folder, file, threeDivname)
+                            container.dataLoader(object, folder, file, threeDivname, objectForScatter, divForScatter)
                         })
                         .selectAll('option')
                         .data(dataRegistry[(memberNumber - 1)].timeSteps)
@@ -123,7 +123,7 @@ class DropdownPanel extends React.Component {
                             let file = timeList[nextIndex];
                             $(`#timestep${idName}`).val(file)
                             let container = new mainComponent()
-                            container.dataLoader(object, folder, file, threeDivname)                          
+                            container.dataLoader(object, folder, file, threeDivname, objectForScatter, divForScatter)                          
                         })
 
 
@@ -148,7 +148,7 @@ class DropdownPanel extends React.Component {
                         .text((d) => {return d})
 
             let container = new mainComponent();
-            container.dataLoader(object, folder, list[0], threeDivname)
+            container.dataLoader(object, folder, list[0], threeDivname, objectForScatter, divForScatter)
 
         }
 

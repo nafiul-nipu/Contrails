@@ -11,6 +11,7 @@ import DropdownPanel from '../dropdown-panel/dropdown-panel.component';
 
 import particleData from '../data-component/particleData'
 import dataRegistry from '../data-component/dataRegistry.json'
+import Scatter from '../projection-2d/projection-2d-d3.component'
 
 import './components-container.styles.css';
 import Container from 'react-bootstrap/Container';
@@ -24,6 +25,8 @@ let idName1 = 'firstDropdown'
 let idName2 = 'secondDropdown'
 let threeObject1 = new Projection();
 let threeObject2 = new Projection();
+let scatterObject1 = new Scatter();
+let scatterObject2 = new Scatter();
 
 class ComponentsContainer extends React.Component {
     constructor(){
@@ -35,11 +38,13 @@ class ComponentsContainer extends React.Component {
         this.firstCanvas = React.createRef(); 
         this.firstThree = React.createRef(); 
         this.firstDropdown = React.createRef();
+        this.firstScatter = React.createRef();
 
 
         this.secondCanvas = React.createRef(); 
         this.secondThree = React.createRef(); 
         this.secondDropdown = React.createRef();
+        this.secondScatter = React.createRef();
     }
 
     componentDidMount(){ 
@@ -47,8 +52,8 @@ class ComponentsContainer extends React.Component {
         //data registry is a json file manually added the member and data names
         // creating the dropdowns first
         // by default first and second member will be selected
-        this.dropdownCreator(threeObject1, this.firstThree.current, dropdownObject1, 1, this.firstDropdown.current, idName1)
-        this.dropdownCreator(threeObject2, this.secondThree.current, dropdownObject2, 2, this.secondDropdown.current, idName2)
+        this.dropdownCreator(threeObject1, this.firstThree.current, dropdownObject1, 1, this.firstDropdown.current, idName1,scatterObject1, this.firstScatter.current)
+        this.dropdownCreator(threeObject2, this.secondThree.current, dropdownObject2, 2, this.secondDropdown.current, idName2, scatterObject2, this.secondScatter.current)
 
         //creating the first particlesystem
         //we want the scene loaded 
@@ -57,18 +62,18 @@ class ComponentsContainer extends React.Component {
         this.createScene(threeObject2, this.secondThree.current, this.secondCanvas.current)
 
         //now we want to load the data particle system and the scatter plot
-        this.forPromise(threeObject1, 1, 2.305, this.firstThree.current).then(function(){
+        this.forPromise(threeObject1, 1, 2.305, this.firstThree.current, scatterObject1, this.firstScatter.current).then(function(){
             console.log("first 3D loaded")
         })
 
-        this.forPromise(threeObject2, 2, 2.3075, this.secondThree.current).then(function(){
+        this.forPromise(threeObject2, 2, 2.3075, this.secondThree.current, scatterObject2, this.secondScatter.current).then(function(){
             console.log("second 3D loaded")
         })      
         
     }
 
-    dropdownCreator = (object, threeDivname, dropdown, memberNumber, divName, idName) =>{        
-        dropdown.createDropdown(object,threeDivname, memberNumber, divName, idName)
+    dropdownCreator = (object, threeDivname, dropdown, memberNumber, divName, idName, objectForScatter, divForScatter) =>{        
+        dropdown.createDropdown(object,threeDivname, memberNumber, divName, idName, objectForScatter, divForScatter)
     }
 
     createScene = (object, threediv, canvas) =>{
@@ -77,15 +82,17 @@ class ComponentsContainer extends React.Component {
         // console.log(three)
     }
 
-    forPromise = (object, folder, file, div) =>{
-        return Promise.resolve(this.dataLoader(object, folder, file, div))
+    forPromise = (object, folder, file, div, objectForScatter, divForScatter) =>{
+        return Promise.resolve(this.dataLoader(object, folder, file, div, objectForScatter, divForScatter))
 
     }
 
-    dataLoader = (object, folder, file, divName) =>{
+    dataLoader = (object, folder, file, divName, objectForScatter, divForScatter) =>{
         let url = `https://raw.githubusercontent.com/CarlaFloricel/Contrails/nafiul-testing/src/data/${folder}/${file}.csv`
         let data = []
         let tempDomain = {}
+        let xDomain = {}
+        let yDomain = {}
         d3.csv(url, d => {
         data.push({
             x: parseFloat(d['Points:0']),
@@ -95,6 +102,12 @@ class ComponentsContainer extends React.Component {
         });
         tempDomain.min = Math.min(tempDomain.min || Infinity, parseFloat(d['T']));
         tempDomain.max = Math.max(tempDomain.max || -Infinity, parseFloat(d['T']));
+
+        xDomain.min = Math.min(xDomain.min || Infinity, parseFloat(d['Points:0']));
+        xDomain.max = Math.max(xDomain.max || -Infinity, parseFloat(d['Points:0']));
+
+        yDomain.min = Math.min(yDomain.min || Infinity, parseFloat(d['Points:1']));
+        yDomain.max = Math.max(yDomain.max || -Infinity, parseFloat(d['Points:1']));
         }).then(function(){
             console.log("data")
             // console.log(data)
@@ -103,12 +116,15 @@ class ComponentsContainer extends React.Component {
             // console.log(three)
             // three.addCustomSceneObjects(data, tempDomain);        
             // three.widnowResizeHandler(divName)
-            updateThreeScatter(object, data, tempDomain, divName)
+            updateThreeScatter(object, data, tempDomain, divName, objectForScatter, divForScatter)
         })
 
-        function updateThreeScatter(object, particleData, tempDomain, threeDiv){
+        function updateThreeScatter(object, particleData, tempDomain, threeDiv, objectForScatter, divForScatter){
             object.addCustomSceneObjects(particleData, tempDomain);        
             object.widnowResizeHandler(threeDiv)
+            console.log(tempDomain, xDomain, yDomain)
+            objectForScatter.scatterplot(particleData, tempDomain, xDomain, yDomain, divForScatter)
+
             console.log("updated")
 
         }
@@ -141,8 +157,9 @@ class ComponentsContainer extends React.Component {
                                 </Row>
                             </Col>
                             {/* 2d view */}
-                            <Col xs={6} style={{backgroundColor: '#d1e5f0',height:'25vh'}}>
-                                <Projection2D/>
+                            <Col xs={6} style={{backgroundColor: '#d1e5f0',height:'25vh'}} ref = {this.firstScatter}>
+                                {/* <Projection2D/> */}
+                                {/* <div ref = {this.firstScatter}></div> */}
                             </Col>
                         </Row>
                         <Row xs={3}> 
@@ -161,8 +178,9 @@ class ComponentsContainer extends React.Component {
                                 </Row>
                             </Col>
                             {/* 2d view */}
-                            <Col xs={6} style={{backgroundColor: '#d1e5f0',height:'25vh'}}>
-                                <Projection2D/>
+                            <Col xs={6} style={{backgroundColor: '#d1e5f0',height:'25vh'}}  ref = {this.secondScatter}>
+                                {/* <Projection2D/> */}
+                                {/* <div ref = {this.secondScatter}></div> */}
                             </Col>
                         </Row>
                         <Row xs={6}>
