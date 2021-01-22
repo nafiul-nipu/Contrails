@@ -10,11 +10,20 @@ import Projection from '../projection-3d/projection.component'
 import DropdownPanel from '../dropdown-panel/dropdown-panel.component';
 
 import particleData from '../data-component/particleData'
+import dataRegistry from '../data-component/dataRegistry.json'
 
 import './components-container.styles.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+
+//creating objects at the very first
+let dropdownObject1 = new DropdownPanel();
+let dropdownObject2 = new DropdownPanel();
+let idName1 = 'firstDropdown'
+let idName2 = 'secondDropdown'
+let threeObject1 = new Projection();
+let threeObject2 = new Projection();
 
 class ComponentsContainer extends React.Component {
     constructor(){
@@ -22,7 +31,7 @@ class ComponentsContainer extends React.Component {
         this.state = {
 
         }
-        this.data = []   
+
         this.firstCanvas = React.createRef(); 
         this.firstThree = React.createRef(); 
         this.firstDropdown = React.createRef();
@@ -34,36 +43,78 @@ class ComponentsContainer extends React.Component {
     }
 
     componentDidMount(){ 
-        // console.log(dataForlder)
+        // console.log(dataRegistry[1].timeSteps[0])
+        //data registry is a json file manually added the member and data names
+        // creating the dropdowns first
+        // by default first and second member will be selected
+        this.dropdownCreator(threeObject1, this.firstThree.current, dropdownObject1, 1, this.firstDropdown.current, idName1)
+        this.dropdownCreator(threeObject2, this.secondThree.current, dropdownObject2, 2, this.secondDropdown.current, idName2)
+
         //creating the first particlesystem
-        let threeD = new Projection();
-        //first container
-        threeD.sceneSetup(this.firstThree.current, this.firstCanvas.current);
-        //     this.sceneSetup(".firstContainer");
-        const url = 'https://raw.githubusercontent.com/nafiul-nipu/High-Performance-Contrails-Visualization/master/particles/timestep_21.csv'
-        // const url = "../../particles/timestep_21.csv"
-        threeD.addCustomSceneObjects(url);        
-        threeD.widnowResizeHandler(this.firstThree.current)
+        //we want the scene loaded 
+        //then the particle system will change.. no need to render the scene everytime?
+        this.createScene(threeObject1, this.firstThree.current, this.firstCanvas.current)
+        this.createScene(threeObject2, this.secondThree.current, this.secondCanvas.current)
 
-        // creating the first dropdown
-        let dropdown1 = new DropdownPanel();
-        dropdown1.createDropdown(this.firstDropdown.current)
+        //now we want to load the data particle system and the scatter plot
+        this.forPromise(threeObject1, 1, 2.305, this.firstThree.current).then(function(){
+            console.log("first 3D loaded")
+        })
 
-
-        //creating the second particle system
-        let threeD2 = new Projection();
-        threeD2.sceneSetup(this.secondThree.current, this.secondCanvas.current);
-        //     this.sceneSetup(".secondContainer");
-        const url2 = 'https://raw.githubusercontent.com/nafiul-nipu/High-Performance-Contrails-Visualization/master/particles/timestep_12.csv'
-        threeD2.addCustomSceneObjects(url2);        
-        threeD2.widnowResizeHandler(this.secondThree.current)      
-        
-        //creating the second dropdown
-        let dropdown2 = new DropdownPanel();
-        dropdown1.createDropdown(this.secondDropdown.current)
+        this.forPromise(threeObject2, 2, 2.3075, this.secondThree.current).then(function(){
+            console.log("second 3D loaded")
+        })      
         
     }
 
+    dropdownCreator = (object, threeDivname, dropdown, memberNumber, divName, idName) =>{        
+        dropdown.createDropdown(object,threeDivname, memberNumber, divName, idName)
+    }
+
+    createScene = (object, threediv, canvas) =>{
+        object.sceneSetup(threediv, canvas)
+        // console.log("createScene")
+        // console.log(three)
+    }
+
+    forPromise = (object, folder, file, div) =>{
+        return Promise.resolve(this.dataLoader(object, folder, file, div))
+
+    }
+
+    dataLoader = (object, folder, file, divName) =>{
+        let url = `https://raw.githubusercontent.com/CarlaFloricel/Contrails/nafiul-testing/src/data/${folder}/${file}.csv`
+        let data = []
+        let tempDomain = {}
+        d3.csv(url, d => {
+        data.push({
+            x: parseFloat(d['Points:0']),
+            y: parseFloat(d['Points:1']),
+            z: parseFloat(d['Points:2']),
+            temp: parseFloat(d['T'])
+        });
+        tempDomain.min = Math.min(tempDomain.min || Infinity, parseFloat(d['T']));
+        tempDomain.max = Math.max(tempDomain.max || -Infinity, parseFloat(d['T']));
+        }).then(function(){
+            console.log("data")
+            // console.log(data)
+            // console.log(tempDomain)
+            // console.log(divName)
+            // console.log(three)
+            // three.addCustomSceneObjects(data, tempDomain);        
+            // three.widnowResizeHandler(divName)
+            updateThreeScatter(object, data, tempDomain, divName)
+        })
+
+        function updateThreeScatter(object, particleData, tempDomain, threeDiv){
+            object.addCustomSceneObjects(particleData, tempDomain);        
+            object.widnowResizeHandler(threeDiv)
+            console.log("updated")
+
+        }
+
+    }
+   
 
     render(){
         return(
@@ -79,7 +130,7 @@ class ComponentsContainer extends React.Component {
                                 <Row xs={2}>
                                     <Col xs={12} style={{height:'3vh'}}>
                                         {/* <DropdownPanel/> */}
-                                        <div ref={this.firstDropdown}></div>
+                                        <div ref={this.firstDropdown} ></div>
                                     </Col>
                                 </Row>
                                 <Row xs={10}>

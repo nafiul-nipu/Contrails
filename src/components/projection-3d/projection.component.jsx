@@ -57,69 +57,56 @@ class Projection extends React.Component {
     
 
       //adding the particle system
-      addCustomSceneObjects = (url) => {
-        this.data = []
-        // this.tempscaling = null;
-        this.tempDomain = {};
+      addCustomSceneObjects = (data, domainData) => {
         this.tempColor = ["#fff5f0","#67000d"]
-        // const url = 'https://raw.githubusercontent.com/nafiul-nipu/High-Performance-Contrails-Visualization/master/particles/timestep_21.csv'
-        d3.csv(url, d => {
-            this.data.push({
-                x: parseFloat(d['Points:0']),
-                y: parseFloat(d['Points:1']),
-                z: parseFloat(d['Points:2']),
-                temp: parseFloat(d['T'])
+        // console.log(domainData)
+        let tempscaling = d3.scaleLinear(/*d3.schemeReds[9]*/)
+                        .domain([domainData.min, domainData.max])
+                        .range(this.tempColor);
+
+        // console.log(tempscaling(292))
+
+        // console.log(this.props.data)
+        let geometry = new THREE.Geometry();
+        // console.log(data)
+        data.forEach(function(d){ 
+          geometry.vertices.push(new THREE.Vector3(d.x, d.y, d.z));
+          let color = tempscaling(d.temp)
+        //   console.log(color)
+          geometry.colors.push(new THREE.Color(color));
+        })
+        if(this.cube){
+          this.scene.remove(this.cube)
+        }
+        
+        let material = new THREE.PointsMaterial({
+            //   color: 0x156289,
+              // emissive: 0x072534,
+              size: 0.2,
+              // side: THREE.DoubleSide,
+              // flatShading: true
+              vertexColors: true
             });
-            this.tempDomain.min = Math.min(this.tempDomain.min || Infinity, parseFloat(d['T']));
-            this.tempDomain.max = Math.max(this.tempDomain.max || -Infinity, parseFloat(d['T']));
-        }).then(() =>{
 
-            // console.log(this.tempDomain)
-            let tempscaling = d3.scaleLinear(/*d3.schemeReds[9]*/)
-                            .domain([this.tempDomain.min, this.tempDomain.max])
-                            .range(this.tempColor);
+        this.cube = new THREE.Points(geometry, material);
+        this.scene.add(this.cube);
+    
+        const lights = [];
+        lights[0] = new THREE.PointLight(0xffffff, 1, 0);
+        lights[1] = new THREE.PointLight(0xffffff, 1, 0);
+        lights[2] = new THREE.PointLight(0xffffff, 1, 0);
+    
+        lights[0].position.set(0, 200, 0);
+        lights[1].position.set(100, 200, 100);
+        lights[2].position.set(-100, -200, -100);
+    
+        this.scene.add(lights[0]);
+        this.scene.add(lights[1]);
+        this.scene.add(lights[2]);
 
-            // console.log(tempscaling(292))
-
-            // console.log(this.props.data)
-            let geometry = new THREE.Geometry();
-            // console.log(this.data)
-            this.data.forEach(function(d){ 
-              geometry.vertices.push(new THREE.Vector3(d.x, d.y, d.z));
-              let color = tempscaling(d.temp)
-            //   console.log(color)
-              geometry.colors.push(new THREE.Color(color));
-
-            })
-            
-            let material = new THREE.PointsMaterial({
-                //   color: 0x156289,
-                  // emissive: 0x072534,
-                  size: 0.2,
-                  // side: THREE.DoubleSide,
-                  // flatShading: true
-                  vertexColors: true
-                });
-
-            this.cube = new THREE.Points(geometry, material);
-            this.scene.add(this.cube);
+        this.startAnimationLoop();
         
-            const lights = [];
-            lights[0] = new THREE.PointLight(0xffffff, 1, 0);
-            lights[1] = new THREE.PointLight(0xffffff, 1, 0);
-            lights[2] = new THREE.PointLight(0xffffff, 1, 0);
-        
-            lights[0].position.set(0, 200, 0);
-            lights[1].position.set(100, 200, 100);
-            lights[2].position.set(-100, -200, -100);
-        
-            this.scene.add(lights[0]);
-            this.scene.add(lights[1]);
-            this.scene.add(lights[2]);
-
-            this.startAnimationLoop();
-            })
-          };
+      };
     
       startAnimationLoop = () => {
         // this.cube.rotation.x += 0.01;
