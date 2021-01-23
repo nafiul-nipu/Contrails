@@ -5,7 +5,7 @@ import './dropdown-panel.style.css'
 
 import dataRegistry from '../data-component/dataRegistry.json'
 
-import mainComponent from '../components-container/components-container.component'
+import mainComponent from '../projection-container/projection-container.component'
 
 class DropdownPanel extends React.Component {
     constructor(){
