@@ -140,13 +140,13 @@ class ProjectionContainer extends React.Component {
                 {/* 3d view and the dropdown */}
                 <Col xs={6}>
                     <Row xs={2}>
-                        <Col xs={12} style={{height:'3vh'}}>
+                        <Col xs={12} style={{height:'5vh', backgroundColor:'#31393F'}} >
                             {/* <DropdownPanel/> */}
                             <div ref={this.firstDropdown} ></div>
                         </Col>
                     </Row>
                     <Row xs={10}>
-                        <Col xs={12} style={{height:'22vh'}} ref = {this.firstThree}>
+                        <Col xs={12} style={{height:'22vh', backgroundColor:'#31393F'}} ref = {this.firstThree}>
                         <div ref = {this.firstCanvas}></div>
                             {/* <Projection/> */}
                         </Col>                                    

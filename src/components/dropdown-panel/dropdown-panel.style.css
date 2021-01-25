@@ -9,5 +9,36 @@
 
 } */
 .dropdownMenu{
-    font-size: 0.75rem;;
+    font-size: 0.75rem;
+    float: left;
 }
+
+.axis text{
+    font-size: 0.5rem;
+    fill: white;
+}
+.slider text {
+  font-size: 0.75rem;
+  font-weight: bold;
+  fill: white;
+}
+.slider-svg{
+    position: relative;
+    float: left;
+    bottom: 20px
+}
+.members{
+    float: left;
+}
+
+#play-pause-btn{
+    float: left;
+}
+
+/* .axis text {
+    fill: red;
+  } */
+
+  /* .slider text {
+    fill: green;
+  } */
