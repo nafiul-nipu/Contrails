@@ -28,8 +28,9 @@ class DropdownPanel extends React.Component {
                         .on('change', function(){
                             let folder = this.value
                             let list = dataRegistry[(folder - 1)].timeSteps
-                            // console.log(folder)
-                            // console.log(list)
+                            console.log(folder)
+                            console.log(list)
+                            console.log(idName)
                             updateDropdown(folder, list, idName)
                         })
                         .selectAll('option')
@@ -167,6 +168,7 @@ class DropdownPanel extends React.Component {
 
 
         function updateDropdown(folder, list, idName){
+            // console.log(folder, id)
             d3.select(`#timestep${idName}`).selectAll('option').remove()
 
             d3.select(`#timestep${idName}`)
