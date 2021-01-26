@@ -60,13 +60,13 @@ class ProjectionContainer extends React.Component {
             //then the particle system will change.. no need to render the scene everytime?
             this.createScene(threeObject1, this.firstThree.current, this.firstCanvas.current)
             //now we want to load the data particle system and the scatter plot
-            this.forPromise(threeObject1, 1, 2.305, this.firstThree.current, scatterObject1, this.firstScatter.current).then(function(){
+            this.forPromise(threeObject1, 1, 2.31, this.firstThree.current, scatterObject1, this.firstScatter.current).then(function(){
                 console.log("first 3D loaded")
             })
         }else if (this.props.renderArea === 'bottom'){
             this.dropdownCreator(threeObject2, this.firstThree.current, dropdownObject2, 3, this.firstDropdown.current, idName2,scatterObject1, this.firstScatter.current)     
             this.createScene(threeObject2, this.firstThree.current, this.firstCanvas.current)   
-            this.forPromise(threeObject2, 3, 1.60, this.firstThree.current, scatterObject2, this.firstScatter.current).then(function(){
+            this.forPromise(threeObject2, 3, 1.64, this.firstThree.current, scatterObject2, this.firstScatter.current).then(function(){
                 console.log("second 3D loaded")
             })
         }      

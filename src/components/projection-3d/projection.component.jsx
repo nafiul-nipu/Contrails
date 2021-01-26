@@ -121,7 +121,7 @@ class Projection extends React.Component {
         // The window.requestAnimationFrame() method tells the browser that you wish to perform
         // an animation and requests that the browser call a specified function
         // to update an animation before the next repaint
-        this.requestID = window.requestAnimationFrame(this.startAnimationLoop);
+        // this.requestID = window.requestAnimationFrame(this.startAnimationLoop);
       };
     
       handleWindowResize = (containerName) => {
