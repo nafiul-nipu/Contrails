@@ -66,11 +66,15 @@ class DropdownPanel extends React.Component {
         // const height = d3.select(divName).node().clientHeight;
         // console.log(select * 1.25)
         let slider = sliderHorizontal()
-                        .min(0)
-                        .max(10)
-                        .step(1)
+                        .min(d3.min(list))
+                        .max(d3.max(list))
+                        .default(list[0])
+                        // .ticks(list.length)
+                        // .tickValues(function(d){ return d})
+                        .step(.01)
                         .tickPadding(0)
                         .width(width - 50)
+                        .on('onchange', value => console.log(d3.format('.2f')(value)))
        d3.select(divName).append('svg')
                         .attr('class', 'slider-svg')
                         .attr('width', width )
@@ -78,6 +82,7 @@ class DropdownPanel extends React.Component {
                         .append('g')
                         .attr('transform', 'translate(30, 30)')
                         .call(slider)
+
 
         
 
