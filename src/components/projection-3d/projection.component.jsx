@@ -108,7 +108,19 @@ class Projection extends React.Component {
         this.scene.add(lights[1]);
         this.scene.add(lights[2]);
 
-        this.startAnimationLoop();
+        this.startAnimationLoop()
+
+        // setTimeout(this.startAnimationLoop, (function rec(pass) {
+        //   if (pass < 3) {
+        //       // if (startup) {
+        //       //     document.body.style.cursor = 'default';
+        //       //     document.body.style.visibility = 'visible';
+        //       // }
+        //       this.startAnimationLoop();
+        //       console.log(this.startAnimationLoop, setTimeout(rec, 500, pass + 1))
+        //       setTimeout(this.startAnimationLoop, rec, 500, pass + 1);
+        //   }
+        // }), 500, 0);
         
       };
     
@@ -121,7 +133,7 @@ class Projection extends React.Component {
         // The window.requestAnimationFrame() method tells the browser that you wish to perform
         // an animation and requests that the browser call a specified function
         // to update an animation before the next repaint
-        // this.requestID = window.requestAnimationFrame(this.startAnimationLoop);
+        this.requestID = window.requestAnimationFrame(this.startAnimationLoop);
       };
     
       handleWindowResize = (containerName) => {
