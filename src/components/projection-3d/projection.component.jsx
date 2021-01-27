@@ -3,6 +3,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 import * as d3 from 'd3'
+import * as dat from 'dat.gui'
 import { VertexColors } from 'three';
 
 const style = {
@@ -16,6 +17,7 @@ class Projection extends React.Component {
         this.camera = null;
         this.renderer = null;
         this.controls = null;
+        this.gui = null;
     }    
 
       // Standard scene setup in Three.js. Check "Creating a scene" manual for more information
@@ -44,8 +46,8 @@ class Projection extends React.Component {
           near, // near plane
           far // far plane
         );
-        // this.camera.position.x = 30;
-        // this.camera.position.y = 10
+        // this.camera.position.x = 5;
+        // this.camera.position.y = 100;
         this.camera.position.z = 40; // is used here to set some distance from a cube that is located at z = 0
         // OrbitControls allow a camera to orbit around the object
         // https://threejs.org/docs/#examples/controls/OrbitControls
@@ -55,6 +57,7 @@ class Projection extends React.Component {
         // this.renderer.setPixelRatio(window.devicePixelRatio)
 
         this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+
 
         canvasName.appendChild(this.renderer.domElement); // mount using React ref
       };
@@ -94,6 +97,8 @@ class Projection extends React.Component {
 
         this.cube = new THREE.Points(geometry, material);
         this.scene.add(this.cube);
+
+
     
         const lights = [];
         lights[0] = new THREE.PointLight(0xffffff, 1, 0);
@@ -108,7 +113,16 @@ class Projection extends React.Component {
         this.scene.add(lights[1]);
         this.scene.add(lights[2]);
 
-        this.startAnimationLoop()
+        // this.gui = new dat.GUI();
+
+        // let cam = this.gui.addFolder('Camere');
+        // cam.add(this.camera.position, 'x', 0, 20).listen();
+        // cam.add(this.camera.position, 'y', 0, 20).listen();
+        // cam.add(this.camera.position, 'z', 0, 100).listen();
+        // cam.open();
+
+        setTimeout(this.startAnimationLoop(), 5000)
+        // this.startAnimationLoop()
 
         // setTimeout(this.startAnimationLoop, (function rec(pass) {
         //   if (pass < 3) {

@@ -8,6 +8,7 @@ import dataRegistry from '../data-component/dataRegistry.json'
 
 import mainComponent from '../projection-container/projection-container.component'
 
+// let slider;
 class DropdownPanel extends React.Component {
     constructor(){
         super();
@@ -50,10 +51,111 @@ class DropdownPanel extends React.Component {
                         .text((d) => {return "Member : "+d.ensembleMember})
 
         d3.select(divName).append('button')
-                        .attr('id', 'play-pause-btn')
-                        .text('Play')
+                        .attr('class', `btn${idName}`)
+                        .attr('id', "play-pause-btn")
+                        .attr('value', 'pause')
+                        .text('Pause')
+                        .on('click', function(d){
+                            console.log(this.value, "  ", idName)
+                            if(this.value === 'play'){
+                                d3.select(`.btn${idName}`).attr('value', 'pause')
+                                                    .text('Pause')
+                                // animation(slider)
+                            }else if(this.value === 'pause'){
+                                d3.select(`.btn${idName}`).attr('value', 'play')
+                                                    .text('Play')
+                            }
+                            
+                        })
 
         createSlider(list)
+
+        function createSlider(list){
+            let container = d3.select(divName).node().parentNode.clientWidth;
+            let select = d3.select(".members").node().clientWidth;
+            let button = d3.select('#play-pause-btn').node().clientWidth;
+            let margin = select + button
+            let width = container - margin * 1.75
+            console.log(container, select, button, width)
+            // const height = d3.select(divName).node().clientHeight;
+            // console.log(select * 1.25)
+            let slider = sliderHorizontal()
+                            .min(d3.min(list))
+                            .max(d3.max(list))
+                            .default(list[0])
+                            .ticks(list.length)
+                            .tickValues(list)
+                            .step(list[1] - list[0])
+                            .tickPadding(0)
+                            .width(width - 50)
+                            .on('onchange', function(){
+                                let file = +(d3.format('.2f')(slider.value()));
+                                let folder = +($(`#member${idName}`).val());
+                                // console.log("file ", file)
+                                // console.log("folder ", folder)
+                                let container = new mainComponent()
+                                container.dataLoader(object, folder, file, threeDivname, objectForScatter, divForScatter);
+                                animation(slider);
+                            })
+            d3.select(divName).append('svg')
+                                .attr('class', 'slider-svg')
+                                .attr('id', `slider${idName}`)
+                                .attr('width', width )
+                                .attr('height', 70)
+                                .append('g')
+                                .attr('transform', 'translate(30, 30)')
+                                .call(slider)
+
+            animation(slider);
+        
+        }
+
+        function updateDropdown(folder, list){
+            // console.log(folder, id)
+            d3.select(`#slider${idName}`).remove()
+            createSlider(list)
+
+            let container = new mainComponent();
+            container.dataLoader(object, folder, list[0], threeDivname, objectForScatter, divForScatter)
+
+        }
+
+        function animation(slider){
+            // console.log(+(d3.format('.2f')(slider.value())))
+            if( $(`.btn${idName}`).val() === 'pause'){
+                setTimeout(() => {
+                    let currentValue = +(d3.format('.2f')(slider.value()))
+                    let folder = +($(`#member${idName}`).val());
+                    console.log("file ", currentValue, " folder", folder)
+                    // console.log("folder ", folder)
+                    let list = dataRegistry[folder - 1].timeSteps;
+                    let index = list.indexOf(currentValue)
+                    // console.log(list)
+                    let nextValue;
+                    if(index + 1 === list.length){
+                        nextValue = list[0]
+                    }else{
+                        nextValue = list[index + 1]
+                    }
+                    // console.log(currentValue, index, nextValue)
+                    slider.value(nextValue)
+                    console.log("set time out")
+                }, 7000)
+            }
+
+        }
+
+    }
+    
+}
+
+export default DropdownPanel;
+
+
+
+
+
+// dropdown timesteps codes
 
         // d3.select(divName).append('button')
         //                 .attr("id", "button")
@@ -132,54 +234,3 @@ class DropdownPanel extends React.Component {
         //                     let container = new mainComponent()
         //                     container.dataLoader(object, folder, file, threeDivname, objectForScatter, divForScatter)                          
         //                 })
-
-
-        function createSlider(list){
-            let container = d3.select(divName).node().parentNode.clientWidth;
-            let select = d3.select(".members").node().clientWidth;
-            let button = d3.select('#play-pause-btn').node().clientWidth;
-            let margin = select + button
-            let width = container - margin * 1.75
-            console.log(container, select, button, width)
-            // const height = d3.select(divName).node().clientHeight;
-            // console.log(select * 1.25)
-            let slider = sliderHorizontal()
-                            .min(d3.min(list))
-                            .max(d3.max(list))
-                            .default(list[0])
-                            .ticks(list.length)
-                            .tickValues(list)
-                            .step(list[1] - list[0])
-                            .tickPadding(0)
-                            .width(width - 50)
-                            .on('onchange', function(){
-                                let file = +(d3.format('.2f')(slider.value()));
-                                let folder = +($(`#member${idName}`).val());
-                                let container = new mainComponent()
-                                container.dataLoader(object, folder, file, threeDivname, objectForScatter, divForScatter);
-                            })
-        d3.select(divName).append('svg')
-                            .attr('class', 'slider-svg')
-                            .attr('id', `slider${idName}`)
-                            .attr('width', width )
-                            .attr('height', 70)
-                            .append('g')
-                            .attr('transform', 'translate(30, 30)')
-                            .call(slider)
-        }
-
-        function updateDropdown(folder, list){
-            // console.log(folder, id)
-            d3.select(`#slider${idName}`).remove()
-            createSlider(list)
-
-            let container = new mainComponent();
-            container.dataLoader(object, folder, list[0], threeDivname, objectForScatter, divForScatter)
-
-        }
-
-    }
-    
-}
-
-export default DropdownPanel;
