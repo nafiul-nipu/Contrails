@@ -1,14 +1,9 @@
 import React from 'react';
 import * as d3 from 'd3'
 
-import Projection2D from '../projection-2d/projection-2d.component';
-import Projection3D from '../projection-3d/projection-3d.component';
 import Projection from '../projection-3d/projection.component'
 import DropdownPanel from '../dropdown-panel/dropdown-panel.component';
 
-
-import particleData from '../data-component/particleData'
-import dataRegistry from '../data-component/dataRegistry.json'
 import Scatter from '../projection-2d/projection-2d-d3.component'
 
 
@@ -60,13 +55,13 @@ class ProjectionContainer extends React.Component {
             //then the particle system will change.. no need to render the scene everytime?
             this.createScene(threeObject1, this.firstThree.current, this.firstCanvas.current)
             //now we want to load the data particle system and the scatter plot
-            this.forPromise(threeObject1, 1, 2.305, this.firstThree.current, scatterObject1, this.firstScatter.current).then(function(){
+            this.forPromise(threeObject1, 1, 2.31, this.firstThree.current, scatterObject1, this.firstScatter.current).then(function(){
                 console.log("first 3D loaded")
             })
         }else if (this.props.renderArea === 'bottom'){
-            this.dropdownCreator(threeObject2, this.firstThree.current, dropdownObject2, 2, this.firstDropdown.current, idName2,scatterObject1, this.firstScatter.current)     
+            this.dropdownCreator(threeObject2, this.firstThree.current, dropdownObject2, 4, this.firstDropdown.current, idName2,scatterObject1, this.firstScatter.current)     
             this.createScene(threeObject2, this.firstThree.current, this.firstCanvas.current)   
-            this.forPromise(threeObject2, 2, 2.3075, this.firstThree.current, scatterObject2, this.firstScatter.current).then(function(){
+            this.forPromise(threeObject2, 4, 0.11, this.firstThree.current, scatterObject2, this.firstScatter.current).then(function(){
                 console.log("second 3D loaded")
             })
         }      
@@ -118,11 +113,11 @@ class ProjectionContainer extends React.Component {
             // console.log(three)
             // three.addCustomSceneObjects(data, tempDomain);        
             // three.widnowResizeHandler(divName)
-            updateThreeScatter(object, data, tempDomain, divName, objectForScatter, divForScatter)
+            updateThreeScatter(object, data, tempDomain, divName, objectForScatter, divForScatter, folder)
         })
 
-        function updateThreeScatter(object, particleData, tempDomain, threeDiv, objectForScatter, divForScatter){
-            object.addCustomSceneObjects(particleData, tempDomain);        
+        function updateThreeScatter(object, particleData, tempDomain, threeDiv, objectForScatter, divForScatter, member){
+            object.addCustomSceneObjects(particleData, tempDomain, member);        
             object.widnowResizeHandler(threeDiv)
             // console.log(tempDomain, xDomain, yDomain)
             objectForScatter.scatterplot(particleData, tempDomain, xDomain, yDomain, divForScatter)
@@ -140,13 +135,13 @@ class ProjectionContainer extends React.Component {
                 {/* 3d view and the dropdown */}
                 <Col xs={6}>
                     <Row xs={2}>
-                        <Col xs={12} style={{height:'3vh'}}>
+                        <Col xs={12} style={{height:'5vh', backgroundColor:'#31393F'}} >
                             {/* <DropdownPanel/> */}
                             <div ref={this.firstDropdown} ></div>
                         </Col>
                     </Row>
                     <Row xs={10}>
-                        <Col xs={12} style={{height:'22vh'}} ref = {this.firstThree}>
+                        <Col xs={12} style={{height:'22vh', backgroundColor:'#31393F'}} ref = {this.firstThree}>
                         <div ref = {this.firstCanvas}></div>
                             {/* <Projection/> */}
                         </Col>                                    
