@@ -1,14 +1,9 @@
 import React from 'react';
 import * as d3 from 'd3'
 
-import Projection2D from '../projection-2d/projection-2d.component';
-import Projection3D from '../projection-3d/projection-3d.component';
 import Projection from '../projection-3d/projection.component'
 import DropdownPanel from '../dropdown-panel/dropdown-panel.component';
 
-
-import particleData from '../data-component/particleData'
-import dataRegistry from '../data-component/dataRegistry.json'
 import Scatter from '../projection-2d/projection-2d-d3.component'
 
 
@@ -118,11 +113,11 @@ class ProjectionContainer extends React.Component {
             // console.log(three)
             // three.addCustomSceneObjects(data, tempDomain);        
             // three.widnowResizeHandler(divName)
-            updateThreeScatter(object, data, tempDomain, divName, objectForScatter, divForScatter)
+            updateThreeScatter(object, data, tempDomain, divName, objectForScatter, divForScatter, folder)
         })
 
-        function updateThreeScatter(object, particleData, tempDomain, threeDiv, objectForScatter, divForScatter){
-            object.addCustomSceneObjects(particleData, tempDomain);        
+        function updateThreeScatter(object, particleData, tempDomain, threeDiv, objectForScatter, divForScatter, member){
+            object.addCustomSceneObjects(particleData, tempDomain, member);        
             object.widnowResizeHandler(threeDiv)
             // console.log(tempDomain, xDomain, yDomain)
             objectForScatter.scatterplot(particleData, tempDomain, xDomain, yDomain, divForScatter)

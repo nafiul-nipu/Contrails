@@ -1,10 +1,12 @@
 import React from 'react';
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import dataRegistry from '../data-component/dataRegistry.json'
 
 import * as d3 from 'd3'
 import * as dat from 'dat.gui'
 import { VertexColors } from 'three';
+import $ from 'jquery'
 
 const style = {
     height: 240 // we can control scene size by setting container dimensions
@@ -46,9 +48,9 @@ class Projection extends React.Component {
           near, // near plane
           far // far plane
         );
-        // this.camera.position.x = 5;
-        // this.camera.position.y = 100;
-        this.camera.position.z = 40; // is used here to set some distance from a cube that is located at z = 0
+        // this.camera.position.x = 12;
+        // this.camera.position.y = 11;
+        // this.camera.position.z = 500; // is used here to set some distance from a cube that is located at z = 0
         // OrbitControls allow a camera to orbit around the object
         // https://threejs.org/docs/#examples/controls/OrbitControls
         this.renderer = new THREE.WebGLRenderer();
@@ -57,16 +59,39 @@ class Projection extends React.Component {
         // this.renderer.setPixelRatio(window.devicePixelRatio)
 
         this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+        // this.controls.addEventListener('change', this.startAnimationLoop)
 
+        // this.gui = new dat.GUI();
+
+        // let cam = this.gui.addFolder('Camere');
+        // cam.add(this.camera.position, 'x', -500, 500).listen();
+        // cam.add(this.camera.position, 'y', -500, 500).listen();
+        // cam.add(this.camera.position, 'z', -500, 500).listen();
+        // cam.open();
+
+        // this.camera.position.x = 5;
+        // this.camera.position.y = 100;
+        // this.camera.position.set(4,0,40);
+        // this.controls.target.set(4,0,40);
+
+        // this.controls.update()
 
         canvasName.appendChild(this.renderer.domElement); // mount using React ref
       };
     
 
       //adding the particle system
-      addCustomSceneObjects = (data, domainData) => {
+      addCustomSceneObjects = (data, domainData, member) => {
+        let memberPosition = dataRegistry[(member - 1)].position;
+        // console.log(memberPosition)
+        this.camera.position.x = memberPosition.x;
+        this.camera.position.y = memberPosition.y;
+        this.camera.position.z = memberPosition.z;
+        // this.camera.lookAt (new THREE.Vector3(-5,0,0));
+
+        this.controls.update()
+
         this.tempColor = ["#fff5f0","#67000d"]
-        // console.log(domainData)
         let tempscaling = d3.scaleLinear(/*d3.schemeReds[9]*/)
                         .domain([domainData.min, domainData.max])
                         .range(this.tempColor);
@@ -96,7 +121,12 @@ class Projection extends React.Component {
             });
 
         this.cube = new THREE.Points(geometry, material);
+        // this.cube.position.x = memberPosition.x
+        // this.cube.position.y = memberPosition.y
+        // this.cube.position.z = memberPosition.z
         this.scene.add(this.cube);
+
+        // this.controls.target.set(this.cube.position.x, this.cube.position.y, this.cube.position.z);
 
 
     
@@ -115,14 +145,20 @@ class Projection extends React.Component {
 
         // this.gui = new dat.GUI();
 
-        // let cam = this.gui.addFolder('Camere');
-        // cam.add(this.camera.position, 'x', 0, 20).listen();
-        // cam.add(this.camera.position, 'y', 0, 20).listen();
-        // cam.add(this.camera.position, 'z', 0, 100).listen();
+        // let cam = this.gui.addFolder('Object');
+        // cam.add(this.cube.position, 'x', -100, 20).listen();
+        // cam.add(this.cube.position, 'y', -20, 20).listen();
+        // cam.add(this.cube.position, 'z', -300, 15).listen();
         // cam.open();
 
-        setTimeout(this.startAnimationLoop(), 5000)
-        // this.startAnimationLoop()
+        // let orb = this.gui.addFolder('orbit')
+        // orb.add(this.controls.target.position, 'x', -100, 20).listen();
+        // orb.add(this.controls.target.position, 'y', -20, 20).listen();
+        // orb.add(this.controls.target.position, 'z', -300, 15).listen();
+        // orb.open();
+
+        // setTimeout(this.startAnimationLoop(), 5000)
+        this.startAnimationLoop()
 
         // setTimeout(this.startAnimationLoop, (function rec(pass) {
         //   if (pass < 3) {
@@ -143,6 +179,7 @@ class Projection extends React.Component {
         // this.cube.rotation.y += 0.01;
     
         this.renderer.render(this.scene, this.camera);
+        // this.controls.update()
     
         // The window.requestAnimationFrame() method tells the browser that you wish to perform
         // an animation and requests that the browser call a specified function

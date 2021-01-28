@@ -1,7 +1,7 @@
 import React from 'react';
 import * as d3 from 'd3';
-import $, { data } from 'jquery'
-import {sliderTop, sliderRight, sliderBottom,sliderHorizontal} from 'd3-simple-slider'
+import $ from 'jquery'
+import {sliderHorizontal} from 'd3-simple-slider'
 import './dropdown-panel.style.css'
 
 import dataRegistry from '../data-component/dataRegistry.json'
@@ -55,18 +55,6 @@ class DropdownPanel extends React.Component {
                         .attr('id', "play-pause-btn")
                         .attr('value', 'pause')
                         .text('Pause')
-                        .on('click', function(d){
-                            console.log(this.value, "  ", idName)
-                            if(this.value === 'play'){
-                                d3.select(`.btn${idName}`).attr('value', 'pause')
-                                                    .text('Pause')
-                                // animation(slider)
-                            }else if(this.value === 'pause'){
-                                d3.select(`.btn${idName}`).attr('value', 'play')
-                                                    .text('Play')
-                            }
-                            
-                        })
 
         createSlider(list)
 
@@ -76,7 +64,7 @@ class DropdownPanel extends React.Component {
             let button = d3.select('#play-pause-btn').node().clientWidth;
             let margin = select + button
             let width = container - margin * 1.75
-            console.log(container, select, button, width)
+            // console.log(container, select, button, width)
             // const height = d3.select(divName).node().clientHeight;
             // console.log(select * 1.25)
             let slider = sliderHorizontal()
@@ -97,6 +85,20 @@ class DropdownPanel extends React.Component {
                                 container.dataLoader(object, folder, file, threeDivname, objectForScatter, divForScatter);
                                 animation(slider);
                             })
+
+            d3.select(`.btn${idName}`).on('click', function(d){
+                    console.log(this.value, "  ", idName)
+                    if(this.value === 'play'){
+                        d3.select(`.btn${idName}`).attr('value', 'pause')
+                                            .text('Pause')
+                        animation(slider)
+                    }else if(this.value === 'pause'){
+                        d3.select(`.btn${idName}`).attr('value', 'play')
+                                            .text('Play')
+                    }
+                    
+                })
+
             d3.select(divName).append('svg')
                                 .attr('class', 'slider-svg')
                                 .attr('id', `slider${idName}`)
@@ -140,7 +142,7 @@ class DropdownPanel extends React.Component {
                     // console.log(currentValue, index, nextValue)
                     slider.value(nextValue)
                     console.log("set time out")
-                }, 7000)
+                }, 5000)
             }
 
         }
