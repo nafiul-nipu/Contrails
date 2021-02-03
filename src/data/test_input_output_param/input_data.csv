@@ -1,0 +1,7 @@
+﻿scope,T,P,rho,U,k,solution,turbulence_model
+nozzle,engine - zeroGradient,nozzle - zeroGradient,nossle - calculated,inlet - freestream,inet - inletOutlet,FALSE,kOmegaSST
+,fatfield - zeroGradient,outlet - waveTransmissive,,nozzle - noSlip,nozzle - kqRWallFunction,,
+,inlet - inletOutlet,,,outlet - inletOutlet ,,,
+,nozzel - zeroGradient,,,,,,
+,outlet - zeroGradient,,,,,,
+,turbine - totalTemperature,,,,,,

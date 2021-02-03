@@ -1,4 +1,9 @@
 import React from 'react';
+import InputParameters from './input-parameters.component';
+import OutputParameters from './output-parameters.component';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 class ParametersPlot extends React.Component {
     constructor(){
@@ -12,7 +17,18 @@ class ParametersPlot extends React.Component {
 
     render(){
         return(
-            <div>Parameters panel</div>
+            <Container fluid>
+            <Row > 
+                <Col xs={6}>
+                <InputParameters/>
+                </Col>
+                {/* 2d view */}
+                <Col xs={6}>
+                <OutputParameters/>
+                </Col>
+            </Row>
+            </Container>
+
         )
     }
 }

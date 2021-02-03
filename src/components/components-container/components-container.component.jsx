@@ -1,5 +1,4 @@
 import React from 'react';
-import * as d3 from 'd3'
 
 import QueryPanel from '../query-panel/query-panel.component';
 import ParametersPlot from '../parameters-plot/parameters-plot.component';
@@ -29,19 +28,19 @@ class ComponentsContainer extends React.Component {
         return(
             <Container fluid >
                 <Row xs={12}>
-                    <Col xs={1} style={{backgroundColor: '#b2182b',height:'100vh'}}>
+                    <Col xs={1} style={{backgroundColor: '#31393f',height:'100vh', "padding":"0",}}>
                         <QueryPanel/>
                     </Col>
-                    <Col xs={7}style={{height:'100vh'}}>
+                    <Col xs={7}style={{height:'100vh'}}  style={{backgroundColor: '#31393f'}}>
                         <ProjectionContainer renderArea={'top'}/>
                         <ProjectionContainer renderArea={'bottom'}/>
                         <Row xs={6}>
-                            <Col xs={12}style={{backgroundColor: '#67a9cf',height:'50vh'}}>
+                            <Col xs={12} style={{backgroundColor: '#31393f',height:'50vh'}}>
                                 <Clusters/>
                             </Col>
                         </Row>
                     </Col>
-                    <Col xs={4}style={{backgroundColor: '#2166ac',height:'100vh'}}>
+                    <Col xs={4}style={{backgroundColor: '#31393f',height:'100vh', overflowY: 'scroll', "padding":"0"}}>
                         <ParametersPlot/>
                     </Col>
                 </Row>

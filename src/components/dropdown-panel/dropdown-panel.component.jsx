@@ -83,7 +83,7 @@ class DropdownPanel extends React.Component {
                                 // console.log("folder ", folder)
                                 let container = new mainComponent()
                                 container.dataLoader(object, folder, file, threeDivname, objectForScatter, divForScatter);
-                                animation(slider);
+                                // animation(slider);
                             })
 
             d3.select(`.btn${idName}`).on('click', function(d){
@@ -91,7 +91,7 @@ class DropdownPanel extends React.Component {
                     if(this.value === 'play'){
                         d3.select(`.btn${idName}`).attr('value', 'pause')
                                             .text('Pause')
-                        animation(slider)
+                        // animation(slider)
                     }else if(this.value === 'pause'){
                         d3.select(`.btn${idName}`).attr('value', 'play')
                                             .text('Play')
@@ -108,7 +108,7 @@ class DropdownPanel extends React.Component {
                                 .attr('transform', 'translate(30, 30)')
                                 .call(slider)
 
-            animation(slider);
+            // animation(slider);
         
         }
 

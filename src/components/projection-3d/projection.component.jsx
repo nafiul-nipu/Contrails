@@ -104,7 +104,7 @@ class Projection extends React.Component {
         data.forEach(function(d){ 
           geometry.vertices.push(new THREE.Vector3(d.x, d.y, d.z));
           let color = tempscaling(d.temp)
-        //   console.log(color)
+        // console.log(d)
           geometry.colors.push(new THREE.Color(color));
         })
         if(this.cube){
