@@ -36,14 +36,14 @@ class OutputParametersPanel extends React.Component {
                 </Form.Control>
             </Form>
             {this.state.paramType == 'lagrangian' ?
-                <Form style={{textAlign: 'left', 'margin-left': "20px"}}>
+                <Form style={{textAlign: 'left', marginLeft: "20px"}}>
                     <Form.Check type="checkbox" label="T" />
                     <Form.Check type="checkbox" label="rho" />
                     <Form.Check type="checkbox" label="d" />
                     <Form.Check type="checkbox" label="Ygas" />
                 </Form>
                 : 
-                <Form style={{textAlign: 'left', 'margin-left': "20px"}}>
+                <Form style={{textAlign: 'left', marginLeft: "20px"}}>
                     <Form.Check type="checkbox" label="T" />
                     <Form.Check type="checkbox" label="rho" />
                     <Form.Check type="checkbox" label="p" />

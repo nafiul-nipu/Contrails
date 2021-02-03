@@ -1,5 +1,7 @@
 import React from 'react';
 import OutputParametersD3 from './output-parameters-d3.component';
+import statistics from '../data-component/statistics.json';
+
 
 class OutputParameters extends React.Component {
 
@@ -20,16 +22,8 @@ class OutputParameters extends React.Component {
     }
 
     componentDidMount(){
-        new OutputParametersD3(this.refs.chart1, 
-            this.state.T_lagr = 1, 
-            this.state.rho_lagr = 2, 
-            this.state.Ygas_lagr = 3,
-            this.state.k_eul = 3,
-            this.state.rho_eul = 4,
-            this.state.T_eul = 5,
-            this.state.P_eul = 6
 
-            )
+        new OutputParametersD3(this.refs.chartoutput,statistics)
        
    
     }
@@ -37,7 +31,7 @@ class OutputParameters extends React.Component {
     render(){
         return(
             <div >
-            <div ref="chart1"></div>
+            <div ref="chartoutput"></div>
 
 
             </div>

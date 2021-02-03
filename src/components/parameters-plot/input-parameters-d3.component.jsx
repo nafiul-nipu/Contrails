@@ -1,5 +1,4 @@
 import * as d3 from 'd3';
-import React from 'react';
 
 
 const height = 100
@@ -8,7 +7,6 @@ export default class InputParametersD3 {
    
     
         constructor(element, categParam1, categParam2, categParam3, categParam4, categParam5, categParam6, quantParam1, quantParam2, quantParam3, quantParam4){
-            console.log(categParam1)
             const width=100
             const height=100
             const svg = d3.select(element)
