@@ -122,7 +122,7 @@ class Projection extends React.Component {
         let material = new THREE.PointsMaterial({
             //   color: 0x156289,
               // emissive: 0x072534,
-              size: 0.2,
+              size: 0.02,
               // side: THREE.DoubleSide,
               // flatShading: true
               vertexColors: true

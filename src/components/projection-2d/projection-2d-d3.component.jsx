@@ -52,7 +52,7 @@ export default class ProjeProjection2DD3 {
           .append("circle")
             .attr("cx", function (d) { return x(d.x); } )
             .attr("cy", function (d) { return y(d.y); } )
-            .attr("r", 1.5)
+            .attr("r", 0.5)
             .style("fill", function(d){ return color(d.temp)})
 
   }
