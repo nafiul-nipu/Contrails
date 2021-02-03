@@ -99,14 +99,22 @@ class Projection extends React.Component {
         // console.log(tempscaling(292))
 
         // console.log(this.props.data)
-        let geometry = new THREE.Geometry();
+        let geometry = new THREE.BufferGeometry();
+        let positions = [];
+        let colors = []
         // console.log(data)
         data.forEach(function(d){ 
-          geometry.vertices.push(new THREE.Vector3(d.x, d.y, d.z));
-          let color = tempscaling(d.temp)
-        // console.log(d)
-          geometry.colors.push(new THREE.Color(color));
+          positions.push(d.x, d.y, d.z)
+        //   geometry.vertices.push(new Float32Array([d.x, d.y, d.z]));
+          let rgb = tempscaling(d.temp)
+          let color = new THREE.Color(rgb);
+          // console.log(color)
+          colors.push(color.r, color.g, color.b);
         })
+        // console.log(colors)
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+        geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+        geometry.computeBoundingSphere();
         if(this.cube){
           this.scene.remove(this.cube)
         }
@@ -114,7 +122,7 @@ class Projection extends React.Component {
         let material = new THREE.PointsMaterial({
             //   color: 0x156289,
               // emissive: 0x072534,
-              size: 0.2,
+              size: 0.02,
               // side: THREE.DoubleSide,
               // flatShading: true
               vertexColors: true

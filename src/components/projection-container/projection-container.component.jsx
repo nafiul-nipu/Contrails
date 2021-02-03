@@ -90,13 +90,17 @@ class ProjectionContainer extends React.Component {
         let tempDomain = {}
         let xDomain = {}
         let yDomain = {}
+        let index = 0;
         d3.csv(url, d => {
-        data.push({
-            x: parseFloat(d['Points:0']),
-            y: parseFloat(d['Points:1']),
-            z: parseFloat(d['Points:2']),
-            temp: parseFloat(d['T'])
-        });
+            index = index + 1;
+            if(index % 10 == 0){
+                data.push({
+                    x: parseFloat(d['Points:0']),
+                    y: parseFloat(d['Points:1']),
+                    z: parseFloat(d['Points:2']),
+                    temp: parseFloat(d['T'])
+                });
+            }
         tempDomain.min = Math.min(tempDomain.min || Infinity, parseFloat(d['T']));
         tempDomain.max = Math.max(tempDomain.max || -Infinity, parseFloat(d['T']));
 
