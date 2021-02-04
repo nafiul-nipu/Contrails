@@ -61,7 +61,7 @@ class ProjectionContainer extends React.Component {
         }else if (this.props.renderArea === 'bottom'){
             this.dropdownCreator(threeObject2, this.firstThree.current, dropdownObject2, 4, this.firstDropdown.current, idName2,scatterObject1, this.firstScatter.current)     
             this.createScene(threeObject2, this.firstThree.current, this.firstCanvas.current)   
-            this.forPromise(threeObject2, 4, 0.11, this.firstThree.current, scatterObject2, this.firstScatter.current).then(function(){
+            this.forPromise(threeObject2, 5, 0.1, this.firstThree.current, scatterObject2, this.firstScatter.current).then(function(){
                 console.log("second 3D loaded")
             })
         }      
