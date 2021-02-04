@@ -24,7 +24,7 @@ class ParametersPlot extends React.Component {
                 </Col>
                 {/* 2d view */}
                 <Col xs={6}>
-                <OutputParameters/>
+                <OutputParameters style={{marginTop:"100px"}}/>q
                 </Col>
             </Row>
             </Container>
