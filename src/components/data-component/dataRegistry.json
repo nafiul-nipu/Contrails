@@ -36,5 +36,13 @@
         "timeSteps": [0.1, 0.2, 0.3],
         "position":{"x": 77,   "y": 11, "z": 170}
 
+    },
+    {
+        "id": 6,
+        "name": "Coaxial",
+        "ensembleMember": 6,
+        "timeSteps": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7],
+        "position":{"x": 77,   "y": 11, "z": 170}
+
     }
 ]
