@@ -81,9 +81,15 @@ class DropdownPanel extends React.Component {
                                 let folder = +($(`#member${idName}`).val());
                                 // console.log("file ", file)
                                 // console.log("folder ", folder)
-                                let container = new mainComponent()
-                                container.dataLoader(object, folder, file, threeDivname, objectForScatter, divForScatter);
+                                // let container = new mainComponent()
+                                // container.dataLoader(object, folder, file, threeDivname, objectForScatter, divForScatter);
                                 // animation(slider);
+
+                                setTimeout(() => {
+                                    let container = new mainComponent()
+                                    container.dataLoader(object, folder, file, threeDivname, objectForScatter, divForScatter);
+                                    animation(slider);                
+                                }, 5000);
                             })
 
             d3.select(`.btn${idName}`).on('click', function(d){
@@ -91,7 +97,7 @@ class DropdownPanel extends React.Component {
                     if(this.value === 'play'){
                         d3.select(`.btn${idName}`).attr('value', 'pause')
                                             .text('Pause')
-                        // animation(slider)
+                        animation(slider)
                     }else if(this.value === 'pause'){
                         d3.select(`.btn${idName}`).attr('value', 'play')
                                             .text('Play')
@@ -108,7 +114,10 @@ class DropdownPanel extends React.Component {
                                 .attr('transform', 'translate(30, 30)')
                                 .call(slider)
 
-            // animation(slider);
+            setTimeout(() => {
+                animation(slider);                
+            }, 5000);
+            
         
         }
 
@@ -125,7 +134,9 @@ class DropdownPanel extends React.Component {
         function animation(slider){
             // console.log(+(d3.format('.2f')(slider.value())))
             if( $(`.btn${idName}`).val() === 'pause'){
-                setTimeout(() => {
+                // setTimeout(() => {
+                    // let container = new mainComponent()
+                    // container.dataLoader(object, folder, file, threeDivname, objectForScatter, divForScatter);
                     let currentValue = +(d3.format('.2f')(slider.value()))
                     let folder = +($(`#member${idName}`).val());
                     console.log("file ", currentValue, " folder", folder)
@@ -141,8 +152,8 @@ class DropdownPanel extends React.Component {
                     }
                     // console.log(currentValue, index, nextValue)
                     slider.value(nextValue)
-                    console.log("set time out")
-                }, 5000)
+                    // console.log("set time out")
+                // }, 2500)
             }
 
         }

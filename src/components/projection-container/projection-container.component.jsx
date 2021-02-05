@@ -59,9 +59,9 @@ class ProjectionContainer extends React.Component {
                 console.log("first 3D loaded")
             })
         }else if (this.props.renderArea === 'bottom'){
-            this.dropdownCreator(threeObject2, this.firstThree.current, dropdownObject2, 5, this.firstDropdown.current, idName2,scatterObject1, this.firstScatter.current)     
+            this.dropdownCreator(threeObject2, this.firstThree.current, dropdownObject2, 4, this.firstDropdown.current, idName2,scatterObject1, this.firstScatter.current)     
             this.createScene(threeObject2, this.firstThree.current, this.firstCanvas.current)   
-            this.forPromise(threeObject2, 5, 0.1, this.firstThree.current, scatterObject2, this.firstScatter.current).then(function(){
+            this.forPromise(threeObject2, 4, 0.11, this.firstThree.current, scatterObject2, this.firstScatter.current).then(function(){
                 console.log("second 3D loaded")
             })
         }      
@@ -93,13 +93,15 @@ class ProjectionContainer extends React.Component {
         let index = 0;
         d3.csv(url, d => {
             index = index + 1;
-
+            if(index % 10 == 0){
                 data.push({
                     x: parseFloat(d['Points:0']),
                     y: parseFloat(d['Points:1']),
                     z: parseFloat(d['Points:2']),
                     temp: parseFloat(d['T'])
                 });
+
+            }
             
         tempDomain.min = Math.min(tempDomain.min || Infinity, parseFloat(d['T']));
         tempDomain.max = Math.max(tempDomain.max || -Infinity, parseFloat(d['T']));

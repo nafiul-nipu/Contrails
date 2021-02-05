@@ -22,7 +22,9 @@
     "react-fontawesome": "^1.7.1",
     "react-icons": "^4.1.0",
     "react-scripts": "4.0.1",
+    "stats.js": "^0.17.0",
     "three": "^0.124.0",
+    "three-webgl-stats": "^1.0.5",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
