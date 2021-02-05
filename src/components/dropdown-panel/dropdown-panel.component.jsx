@@ -81,10 +81,6 @@ class DropdownPanel extends React.Component {
                                 let folder = +($(`#member${idName}`).val());
                                 // console.log("file ", file)
                                 // console.log("folder ", folder)
-                                // let container = new mainComponent()
-                                // container.dataLoader(object, folder, file, threeDivname, objectForScatter, divForScatter);
-                                // animation(slider);
-
                                 setTimeout(() => {
                                     let container = new mainComponent()
                                     container.dataLoader(object, folder, file, threeDivname, objectForScatter, divForScatter);
@@ -97,7 +93,9 @@ class DropdownPanel extends React.Component {
                     if(this.value === 'play'){
                         d3.select(`.btn${idName}`).attr('value', 'pause')
                                             .text('Pause')
-                        animation(slider)
+                        setTimeout(() => {
+                            animation(slider);                
+                        }, 5000);
                     }else if(this.value === 'pause'){
                         d3.select(`.btn${idName}`).attr('value', 'play')
                                             .text('Play')
@@ -126,8 +124,10 @@ class DropdownPanel extends React.Component {
             d3.select(`#slider${idName}`).remove()
             createSlider(list)
 
-            let container = new mainComponent();
-            container.dataLoader(object, folder, list[0], threeDivname, objectForScatter, divForScatter)
+            setTimeout(() => {
+                let container = new mainComponent();
+                container.dataLoader(object, folder, list[0], threeDivname, objectForScatter, divForScatter)               
+            }, 5000);            
 
         }
 
@@ -135,8 +135,6 @@ class DropdownPanel extends React.Component {
             // console.log(+(d3.format('.2f')(slider.value())))
             if( $(`.btn${idName}`).val() === 'pause'){
                 // setTimeout(() => {
-                    // let container = new mainComponent()
-                    // container.dataLoader(object, folder, file, threeDivname, objectForScatter, divForScatter);
                     let currentValue = +(d3.format('.2f')(slider.value()))
                     let folder = +($(`#member${idName}`).val());
                     console.log("file ", currentValue, " folder", folder)
