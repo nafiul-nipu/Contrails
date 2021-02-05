@@ -21,37 +21,73 @@ export default class InputParametersD3 {
                 .attr("y", height/2 - 10)
                 .attr("width", 20)
                 .attr("height", 20)
-                .attr("fill", 'red')
+                .attr("fill", '#543005')
+                .on('mouseover', function () {
+                    d3.select(this)
+                      .append("title")
+                      .text("lag_T_avg" )
+              })
+  
             group.append('rect')
                 .attr("x",21 )
                 .attr("y", height/2 - 10)
                 .attr("width", 20)
                 .attr("height", 20)
-                .attr("fill", 'yellow')
+                .attr("fill", '#8c510a')
+                .on('mouseover', function () {
+                    d3.select(this)
+                      .append("title")
+                      .text("lag_P_avg" )
+              })
+  
             group.append('rect')
                 .attr("x",42 )
                 .attr("y", height/2 - 10)
                 .attr("width", 20)
                 .attr("height", 20)
-                .attr("fill", 'green')
+                .attr("fill", '#bf812d')
+                .on('mouseover', function () {
+                    d3.select(this)
+                      .append("title")
+                      .text("lag_k_avg" )
+              })
+  
             group.append('rect')
                 .attr("x",63 )
                 .attr("y", height/2 - 10)
                 .attr("width", 20)
                 .attr("height", 20)
-                .attr("fill", 'blue')
+                .attr("fill", '#dfc27d')
+                .on('mouseover', function () {
+                    d3.select(this)
+                      .append("title")
+                      .text("lag_rho_avg" )
+              })
+  
             group.append('rect')
                 .attr("x",84 )
                 .attr("y", height/2 - 10)
                 .attr("width", 20)
                 .attr("height", 20)
-                .attr("fill", 'purple')
+                .attr("fill", '#f6e8c3')
+                .on('mouseover', function () {
+                    d3.select(this)
+                      .append("title")
+                      .text("Lag_param5" )
+              })
+  
             group.append('rect')
                 .attr("x",105 )
                 .attr("y", height/2 - 10)
                 .attr("width", 20)
                 .attr("height", 20)
-                .attr("fill", 'pink')
+                .attr("fill", '#f5f5f5')
+                .on('mouseover', function () {
+                    d3.select(this)
+                      .append("title")
+                      .text("lag_param6" )
+              })
+  
 
 
             group.append('rect')
@@ -59,26 +95,50 @@ export default class InputParametersD3 {
                 .attr("y", height/2+10)
                 .attr("width", 10)
                 .attr("height", 50)
-                .attr("fill", 'black')
+                .attr("fill", '#c7eae5')
+                .on('mouseover', function () {
+                    d3.select(this)
+                      .append("title")
+                      .text("eul_P_avg" )
+              })
+  
             group.append('rect')
                 .attr("x",40 )
                 .attr("y", height/2 +10)
                 .attr("width", 10)
                 .attr("height", 20)
-                .attr("fill", 'white')
+                .attr("fill", '#80cdc1')
+                .on('mouseover', function () {
+                    d3.select(this)
+                      .append("title")
+                      .text("eul_k_avg" )
+              })
+  
 
             group.append('rect')
                 .attr("x",20 )
                 .attr("y", height/2 -10- 30)
                 .attr("width", 10)
                 .attr("height", 30)
-                .attr("fill", 'orange')
+                .attr("fill", '#35978f')
+                .on('mouseover', function () {
+                    d3.select(this)
+                      .append("title")
+                      .text("eul_rho_avg" )
+              })
+  
             group.append('rect')
                 .attr("x",40 )
                 .attr("y", height/2 - 10 - 40)
                 .attr("width", 10)
                 .attr("height", 40)
-                .attr("fill", 'brown')
+                .attr("fill", '#01665e')
+                .on('mouseover', function () {
+                    d3.select(this)
+                      .append("title")
+                      .text("eul_T_avg" )
+              })
+  
 
 
 

@@ -26,13 +26,13 @@ class QueryPanel extends React.Component {
         return(
             // <div>Query panel and val is {this.state.currentVal}</div>
             <Container style={{}}>
-                <Row style={{"height": '25vh', 'borderStyle':'solid', 'borderWidth': '.5px', 'borderColor':'#d5ff80'}}>
+                <Row style={{"height": '25vh', 'borderStyle':'solid', 'borderWidth': '.5px', 'borderColor':'#05ecec'}}>
                     <OutputParametersPanel/>
                 </Row>
-                <Row  style={{"height": '50vh','borderStyle':'solid', 'borderWidth': '.5px', 'borderColor':'#d5ff80',}}>
+                <Row  style={{"height": '50vh','borderStyle':'solid', 'borderWidth': '.5px', 'borderColor':'#05ecec',}}>
                     <InputParametersPanel/>
                 </Row>
-                <Row  style={{"height": '25vh', 'borderStyle':'solid', 'borderWidth': '.5px', 'borderColor':'#d5ff80'}}>
+                <Row  style={{"height": '25vh', 'borderStyle':'solid', 'borderWidth': '.5px', 'borderColor':'#05ecec'}}>
                     <ClusteringParametersPanel/>
                 </Row>
             </Container>

@@ -32,7 +32,7 @@ class ClusteringParametersPanel extends React.Component {
                 <Form.Check type="checkbox" label="U" />
                 <Form.Check type="checkbox" label="rho" />
                 <Form.Check type="checkbox" label="d" />
-                <Form.Check type="checkbox" label="Ygas" />
+                {/* <Form.Check type="checkbox" label="Ygas" /> */}
                 </Form>
             </div>
 

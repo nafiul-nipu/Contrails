@@ -74,7 +74,7 @@ class Projection3D extends React.Component {
             const material = new THREE.PointsMaterial({
               color: 0x156289,
               // emissive: 0x072534,
-              size: 0.2
+              size: 0.3
               // side: THREE.DoubleSide,
               // flatShading: true
             });
@@ -101,7 +101,7 @@ class Projection3D extends React.Component {
             this.scene.add(lights[1]);
             this.scene.add(lights[2]);
 
-            this.startAnimationLoop();
+            // this.startAnimationLoop();
             })
           };
     

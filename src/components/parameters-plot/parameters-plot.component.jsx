@@ -19,16 +19,16 @@ class ParametersPlot extends React.Component {
         return(
             <Container fluid>
             <Row > 
-                <Col xs={6}>
+                <Col xs={6} style={{margin:"0px"}}>
                 <InputParameters/>
                 </Col>
                 {/* 2d view */}
-                <Col xs={6}>
-                <OutputParameters />
-                <OutputParameters />
-                <OutputParameters />
-                <OutputParameters />
-                <OutputParameters />
+                <Col xs={5} style={{margin:"0px"}}>
+                <OutputParameters style={{margin:"0px"}}/>
+                <OutputParameters style={{margin:"0px"}}/>
+                <OutputParameters style={{margin:"0px"}}/>
+                <OutputParameters style={{margin:"0px"}}/>
+                <OutputParameters style={{margin:"0px"}}/>
 
                 </Col>
             </Row>

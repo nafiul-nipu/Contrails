@@ -31,16 +31,16 @@ class ComponentsContainer extends React.Component {
                     <Col xs={1} style={{backgroundColor: '#31393f',height:'100vh', "padding":"0",}}>
                         <QueryPanel/>
                     </Col>
-                    <Col xs={7}style={{height:'100vh'}}  style={{backgroundColor: '#31393f'}}>
+                    <Col xs={7} style={{backgroundColor: '#31393f','borderStyle':'solid','borderWidth': '.5px', borderColor: "#05ecec"}}>
                         <ProjectionContainer renderArea={'top'}/>
                         <ProjectionContainer renderArea={'bottom'}/>
-                        <Row xs={6}>
-                            <Col xs={12} style={{backgroundColor: '#31393f',height:'50vh'}}>
+                        {/* <Row xs={5}>
+                            <Col xs={12} style={{backgroundColor: '#31393f',height:'50vh','borderStyle':'solid','borderWidth': '.5px', borderColor: "#05ecec"}}>
                                 <Clusters/>
                             </Col>
-                        </Row>
+                        </Row> */}
                     </Col>
-                    <Col xs={4}style={{backgroundColor: '#31393f',height:'100vh', overflowY: 'scroll', "padding":"0"}}>
+                    <Col xs={4} style={{backgroundColor: '#31393f',height:'100vh',  "padding":"0", 'borderStyle':'solid','borderWidth': '.5px', borderColor: "#05ecec", overflowY: 'scroll', overflowX: 'hidden'}}>
                         <ParametersPlot/>
                     </Col>
                 </Row>
