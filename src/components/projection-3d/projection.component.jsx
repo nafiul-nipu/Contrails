@@ -3,10 +3,14 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import dataRegistry from '../data-component/dataRegistry.json'
 
+import Stats from 'stats.js';
+
+
 import * as d3 from 'd3'
 import * as dat from 'dat.gui'
 import { VertexColors } from 'three';
 import $ from 'jquery'
+import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 
 const style = {
     height: 240 // we can control scene size by setting container dimensions
@@ -20,6 +24,8 @@ class Projection extends React.Component {
         this.renderer = null;
         this.controls = null;
         this.gui = null;
+        this.stats = new Stats();
+        this.statsOneTime = false;
     }    
 
       // Standard scene setup in Three.js. Check "Creating a scene" manual for more information
@@ -77,6 +83,17 @@ class Projection extends React.Component {
         // this.controls.update()
 
         canvasName.appendChild(this.renderer.domElement); // mount using React ref
+
+        //let's create fps
+        if(!this.statsOneTime){
+          this.stats.domElement.style.position = 'absolute';
+          this.stats.domElement.style.top = '0px';
+          this.stats.domElement.style.right = '0px';
+          canvasName.appendChild(this.stats.domElement);
+          this.statsOneTime = true;
+
+        }
+        
       };
     
 
@@ -187,6 +204,7 @@ class Projection extends React.Component {
         // this.cube.rotation.y += 0.01;
     
         this.renderer.render(this.scene, this.camera);
+        this.stats.update()
         // this.controls.update()
     
         // The window.requestAnimationFrame() method tells the browser that you wish to perform

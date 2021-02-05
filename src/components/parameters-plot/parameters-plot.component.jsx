@@ -29,6 +29,7 @@ class ParametersPlot extends React.Component {
                 <OutputParameters />
                 <OutputParameters />
                 <OutputParameters />
+
                 </Col>
             </Row>
             </Container>
