@@ -1,10 +1,8 @@
 
 import * as d3 from 'd3';
-import { ReplaceStencilOp } from 'three';
-
 
 const url ="https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/2_TwoNum.csv"
-export default class ProjeProjection2DD3 {
+export default class ClustersD3 {
     scatterplot = (data, domainData, xDomain, yDomain, element) => {
         d3.select(element).select('svg').remove()
         const width = d3.select(element).node().clientWidth;
@@ -53,7 +51,7 @@ export default class ProjeProjection2DD3 {
           .append("circle")
             .attr("cx", function (d) { return x(d.x); } )
             .attr("cy", function (d) { return y(d.y); } )
-            .attr("r", 0.8)
+            .attr("r", 4.8)
             .style("fill", function(d){ return color(d.temp)})
 
   }

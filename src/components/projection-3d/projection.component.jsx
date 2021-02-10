@@ -2,15 +2,8 @@ import React from 'react';
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import dataRegistry from '../data-component/dataRegistry.json'
-
 import Stats from 'stats.js';
-
-
 import * as d3 from 'd3'
-import * as dat from 'dat.gui'
-import { VertexColors } from 'three';
-import $ from 'jquery'
-import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 
 const style = {
     height: 240 // we can control scene size by setting container dimensions
