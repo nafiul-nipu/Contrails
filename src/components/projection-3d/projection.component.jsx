@@ -139,7 +139,7 @@ class Projection extends React.Component {
         let material = new THREE.PointsMaterial({
             //   color: 0x156289,
               // emissive: 0x072534,
-              size: 0.02,
+              size: 0.05,
               // side: THREE.DoubleSide,
               // flatShading: true
               vertexColors: true
@@ -183,7 +183,7 @@ class Projection extends React.Component {
         // orb.open();
 
         // setTimeout(this.startAnimationLoop(), 5000)
-        this.startAnimationLoop()
+        //this.startAnimationLoop()
 
         // setTimeout(this.startAnimationLoop, (function rec(pass) {
         //   if (pass < 3) {

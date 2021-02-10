@@ -68,7 +68,6 @@ class Projection3D extends React.Component {
                 z: parseFloat(d['Points:2'])
             });
         }).then(() =>{
-            console.log(this.data)
             // console.log(this.props.data)
             const geometry = new THREE.Geometry();
             const material = new THREE.PointsMaterial({
@@ -105,17 +104,17 @@ class Projection3D extends React.Component {
             })
           };
     
-      startAnimationLoop = () => {
-        // this.cube.rotation.x += 0.01;
-        // this.cube.rotation.y += 0.01;
+      // startAnimationLoop = () => {
+      //   // this.cube.rotation.x += 0.01;
+      //   // this.cube.rotation.y += 0.01;
     
-        this.renderer.render(this.scene, this.camera);
+      //   this.renderer.render(this.scene, this.camera);
     
-        // The window.requestAnimationFrame() method tells the browser that you wish to perform
-        // an animation and requests that the browser call a specified function
-        // to update an animation before the next repaint
-        this.requestID = window.requestAnimationFrame(this.startAnimationLoop);
-      };
+      //   // The window.requestAnimationFrame() method tells the browser that you wish to perform
+      //   // an animation and requests that the browser call a specified function
+      //   // to update an animation before the next repaint
+      //   this.requestID = window.requestAnimationFrame(this.startAnimationLoop);
+      // };
     
       handleWindowResize = () => {
         const width = this.el.clientWidth;

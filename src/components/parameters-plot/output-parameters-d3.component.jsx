@@ -74,29 +74,48 @@ export default class OutputParametersD3 {
             const eul_rho_max = 0.345907
             const eul_k_max = 91.03569
             const lag_T_max = 654.7868
+
+            const eul_T_min = 322.4222
+            const eul_P_min = 29283.44
+            const eul_rho_min = 0.345535
+            const eul_k_min = 91.01908
+            const lag_T_min = 315.1326
+
             const lag_d_max = 0.00001
             const lag_rho_max = 10000
             const lag_Ygas_max = 0
-			//const dif_vect = [1/Math.abs(-0.0000012406062843695054), 1/Math.abs(1e-9), 1/Math.abs(-6.203031420737304e-7)]
-            const dif_list_eul_T = []
-            for (var j = 1; j< sum.length; j++){
-                  var d = 1/(sum[j]["eul_T_avg"]*10000000- sum[j-1]["eul_T_avg"]*10000000)
-                  dif_list_eul_T.push(d)
+
+            const norm_T_lag = []
+            const norm_T_eul = []
+            const norm_P_eul = []
+            const norm_rho_eul = []
+            const norm_k_eul = []
+            
+
+            for (var j = 0; j< sum.length; j++){
+                  norm_T_lag.push((sum[j]["lag_T_avg"] - lag_T_min)/(lag_T_max - lag_T_min))
+                  norm_T_eul.push((sum[j]["eul_T_avg"] - eul_T_min)/(eul_T_max - eul_T_min))
+                  norm_P_eul.push((sum[j]["eul_P_avg"] - eul_P_min)/(eul_P_max - eul_P_min))
+                  norm_k_eul.push((sum[j]["eul_k_avg"] - eul_k_min)/(eul_k_max - eul_k_min))
+                  norm_rho_eul.push((sum[j]["eul_rho_avg"] - eul_rho_min)/(eul_rho_max - eul_rho_min))
+
+                  console.log(norm_k_eul[j] + " " + sum[j]["eul_k_avg"] )
+
             }
 
-const min = Math.min(...dif_list_eul_T)
 
             for(var k = 1; k< sum.length; k++){
 
-                 
+            //      console.log(norm_T_eul)
                   var dif =sum[k]["eul_T_avg"]- sum[k-1]["eul_T_avg"]
+                  var diff = norm_T_eul[k]-norm_T_eul[k-1]
 				 
-                  var angle = (dif*100000) *  angleRange
-                  const vala = rotate(0,0,0,20,-angle);
-                  
+                  var angle = (diff* 100) *  angleRange
+                  const vala = rotate(0,0,0,20,angle);
+                  // console.log(diff)
                   prevX = vala[0] + prevX;
                   prevY = vala[1] + prevY;
-                 console.log("coodr "+ dif_list_eul_T[k-1])  
+                  
                   points.push({x: prevX, y: prevY})
 
                   g.append('circle')
@@ -105,12 +124,14 @@ const min = Math.min(...dif_list_eul_T)
                   .attr('r',4)
                   .attr('fill-opacity', 0.65)
                   .attr('fill', '#83aad4')
+                  .attr("id", k-1)
 
 
 
                   var dif2 =sum[k]["lag_T_avg"]- sum[k-1]["lag_T_avg"]; 
-                  var angle2 = (dif2/2) *  angleRange;
-                  const vala2 = rotate(0,0,0,20,-angle2);
+                  var diff2 = norm_T_lag[k] - norm_T_lag[k-1]
+                  var angle2 = (diff2*100) *  angleRange;
+                  const vala2 = rotate(0,0,0,20,angle2);
                   prevX2 = vala2[0] + prevX2;
                   prevY2 = vala2[1] + prevY2;
                   points2.push({x: prevX2, y: prevY2})
@@ -124,8 +145,9 @@ const min = Math.min(...dif_list_eul_T)
 
 
                   var dif3 =sum[k]["eul_k_avg"]- sum[k-1]["eul_k_avg"]; 
+                  var diff3 = norm_k_eul[k] - norm_k_eul[k-1]
                   var angle3 = (dif3*10000)*  angleRange 
-                  const vala3 = rotate(0,0,0,20,-angle3);
+                  const vala3 = rotate(0,0,0,20,angle3);
                   prevX3 = vala3[0] + prevX3;
                   prevY3 = vala3[1] + prevY3;
                   points3.push({x: prevX3, y: prevY3})
@@ -140,8 +162,9 @@ const min = Math.min(...dif_list_eul_T)
 
 
                   var dif4 =sum[k]["eul_rho_avg"]- sum[k-1]["eul_rho_avg"]; 
-                  var angle4 = (dif4*100000) *  angleRange 
-                  const vala4 = rotate(0,0,0,20,-angle4);
+                  var diff4 = norm_rho_eul[k] - norm_rho_eul[k-1]
+                  var angle4 = (diff4*100) *  angleRange 
+                  const vala4 = rotate(0,0,0,20,angle4);
                   prevX4 = vala4[0] + prevX4;
                   prevY4 = vala4[1] + prevY4;
                   points4.push({x: prevX4, y: prevY4})
@@ -154,9 +177,10 @@ const min = Math.min(...dif_list_eul_T)
                   .attr('fill', '#83aad4')
 
 
-                  var dif5 =sum[k]["lag_Ygas_avg"]- sum[k-1]["lag_Ygas_avg"]; 
-                  var angle5 = (dif5) * angleRange  
-                  const vala5 = rotate(0,0,0,20,-angle5);
+                  var dif5 =sum[k]["eul_P_avg"]- sum[k-1]["eul_P_avg"]; 
+                  var diff5 = norm_P_eul[k] - norm_P_eul[k-1]
+                  var angle5 = (diff5 * 100) * angleRange  
+                  const vala5 = rotate(0,0,0,20,angle5);
                   prevX5 = vala5[0] + prevX5;
                   prevY5 = vala5[1] + prevY5;
                   points5.push({x: prevX5, y: prevY5})
@@ -169,19 +193,19 @@ const min = Math.min(...dif_list_eul_T)
                   .attr('fill', '#83aad4')
 
 
-                  var dif6 =sum[k]["lag_d_avg"]- sum[k-1]["lag_d_avg"]; 
-                  var angle6 = (dif6) *  angleRange 
-                  const vala6 = rotate(0,0,0,20,-angle6);
-                  prevX6 = vala6[0] + prevX6;
-                  prevY6 = vala6[1] + prevY6;
-                  points6.push({x: prevX6, y: prevY6})
-                  console.log("lala "+ dif6 )
-                  g.append('circle')
-                  .attr('cx', prevX6)
-                  .attr('cy', prevY6)
-                  .attr('r',4)
-                  .attr('fill-opacity', 0.65)
-                  .attr('fill', '#83aad4')
+                  // var dif6 =sum[k]["lag_d_avg"]- sum[k-1]["lag_d_avg"]; 
+                  // var angle6 = (dif6) *  angleRange 
+                  // const vala6 = rotate(0,0,0,20,angle6);
+                  // prevX6 = vala6[0] + prevX6;
+                  // prevY6 = vala6[1] + prevY6;
+                  // points6.push({x: prevX6, y: prevY6})
+                  // console.log("lala "+ dif6 )
+                  // g.append('circle')
+                  // .attr('cx', prevX6)
+                  // .attr('cy', prevY6)
+                  // .attr('r',4)
+                  // .attr('fill-opacity', 0.65)
+                  // .attr('fill', '#83aad4')
                       
                 //   var dif7 =sum[k]["lag_rho_avg"]- sum[k-1]["lag_rho_avg"];
 
@@ -269,21 +293,21 @@ const min = Math.min(...dif_list_eul_T)
             .on('mouseover', function () {
                   d3.select(this)
                     .append("title")
-                    .text("lag_Ygas_avg" )
+                    .text("eul_P_avg" )
             })
 
 
-            g.append('path')
-            .attr('fill', 'none')
-            .attr('stroke', 'pink')
-            .attr('stroke-width', '2.5px')
-            .attr("opacity", 1 )
-            .attr('d', line(points6))
-            .on('mouseover', function () {
-                  d3.select(this)
-                    .append("title")
-                    .text("lag_d_avg" )
-            })
+            // g.append('path')
+            // .attr('fill', 'none')
+            // .attr('stroke', 'pink')
+            // .attr('stroke-width', '2.5px')
+            // .attr("opacity", 1 )
+            // .attr('d', line(points6))
+            // .on('mouseover', function () {
+            //       d3.select(this)
+            //         .append("title")
+            //         .text("lag_d_avg" )
+            // })
 
             // g.append('path')
             // .attr('fill', 'none')

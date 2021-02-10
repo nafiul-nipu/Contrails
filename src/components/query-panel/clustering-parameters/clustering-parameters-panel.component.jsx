@@ -20,20 +20,22 @@ class ClusteringParametersPanel extends React.Component {
     render(){
         return(
             // <div>Query panel and val is {this.state.currentVal}</div>
-            <div >
-                <h5>Clustering Parameters</h5>
-                <div style={{"color":"#BEBEBE", marginTop: "10px"}}>Simulation Runs:</div>
-                <Form style={{textAlign: 'left', marginLeft: "20px"}}>
+            <div className="mx-auto">
+                <h6>Clustering Parameters</h6>
+                <div style={{textAlign: 'left'}}>
+                <div style={{"color":"#BEBEBE", marginTop: "5%"}}>Simulation Runs:</div>
+                <Form style={{textAlign: 'left'}}>
                 <Form.Check type="checkbox" label="solution" />
                 </Form>
-                <div style={{"color":"#BEBEBE", marginTop: "10px"}}>Lagrangian Attr:</div>
-                <Form style={{textAlign: 'left', marginLeft: "20px"}}>
-                <Form.Check type="checkbox" label="T" />
-                <Form.Check type="checkbox" label="U" />
-                <Form.Check type="checkbox" label="rho" />
-                <Form.Check type="checkbox" label="d" />
-                {/* <Form.Check type="checkbox" label="Ygas" /> */}
+                <div style={{"color":"#BEBEBE", marginTop: "5%"}}>Lagrangian Attr:</div>
+                <Form style={{textAlign: 'left'}}>
+                <Form.Check type="checkbox" label="T" id="cluster-T"/>
+                <Form.Check type="checkbox" label="U"  id="cluster-U"/>
+                <Form.Check type="checkbox" label="rho"  id="cluster-rho"/>
+                <Form.Check type="checkbox" label="d"  id="cluster-d"/>
+                <Form.Check type="checkbox" label="Ygas"  id="cluster-Ygas"/>
                 </Form>
+                </div>
             </div>
 
         )
