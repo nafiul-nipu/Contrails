@@ -48,25 +48,25 @@ class ProjectionContainer extends React.Component {
         // creating the dropdowns first
         // by default first and second member will be selected
 
-        if(this.props.renderArea === "top"){
-            this.dropdownCreator(threeObject1, this.firstThree.current, dropdownObject1, 1, this.firstDropdown.current, idName1,scatterObject1, this.firstScatter.current)
-            //creating the first particlesystem
-            //we want the scene loaded 
-            //then the particle system will change.. no need to render the scene everytime?
-            this.createScene(threeObject1, this.firstThree.current, this.firstCanvas.current)
-            //now we want to load the data particle system and the scatter plot
-            this.forPromise(threeObject1, 1, 2.31, this.firstThree.current, scatterObject1, this.firstScatter.current).then(function(){
-                console.log("first 3D loaded")
-            })
-        }else if (this.props.renderArea === 'bottom'){
+        // if(this.props.renderArea === "top"){
+        //     this.dropdownCreator(threeObject1, this.firstThree.current, dropdownObject1, 1, this.firstDropdown.current, idName1,scatterObject1, this.firstScatter.current)
+        //     //creating the first particlesystem
+        //     //we want the scene loaded 
+        //     //then the particle system will change.. no need to render the scene everytime?
+        //     this.createScene(threeObject1, this.firstThree.current, this.firstCanvas.current)
+        //     //now we want to load the data particle system and the scatter plot
+        //     this.forPromise(threeObject1, 1, 2.31, this.firstThree.current, scatterObject1, this.firstScatter.current).then(function(){
+        //         console.log("first 3D loaded")
+        //     })
+        // }else if (this.props.renderArea === 'bottom'){
 
-            this.dropdownCreator(threeObject2, this.firstThree.current, dropdownObject2, 6, this.firstDropdown.current, idName2,scatterObject1, this.firstScatter.current)     
-            this.createScene(threeObject2, this.firstThree.current, this.firstCanvas.current)   
-            this.forPromise(threeObject2, 6, 0.1, this.firstThree.current, scatterObject2, this.firstScatter.current).then(function(){
+        //     this.dropdownCreator(threeObject2, this.firstThree.current, dropdownObject2, 6, this.firstDropdown.current, idName2,scatterObject1, this.firstScatter.current)     
+        //     this.createScene(threeObject2, this.firstThree.current, this.firstCanvas.current)   
+        //     this.forPromise(threeObject2, 6, 0.1, this.firstThree.current, scatterObject2, this.firstScatter.current).then(function(){
 
-                console.log("second 3D loaded")
-            })
-        }      
+        //         console.log("second 3D loaded")
+        //     })
+        // }      
         
     }
 

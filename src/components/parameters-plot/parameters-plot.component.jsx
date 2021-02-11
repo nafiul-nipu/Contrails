@@ -25,10 +25,10 @@ class ParametersPlot extends React.Component {
                 {/* 2d view */}
                 <Col xs={5} style={{margin:"0px"}}>
                 <OutputParameters style={{margin:"0px"}}/>
+                {/* <OutputParameters style={{margin:"0px"}}/>
                 <OutputParameters style={{margin:"0px"}}/>
                 <OutputParameters style={{margin:"0px"}}/>
-                <OutputParameters style={{margin:"0px"}}/>
-                <OutputParameters style={{margin:"0px"}}/>
+                <OutputParameters style={{margin:"0px"}}/> */}
 
                 </Col>
             </Row>

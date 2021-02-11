@@ -1,19 +1,40 @@
 import React from 'react';
 import ClustersD3 from './clusters-d3.component';
-import clusterData from '../../data/test_cluster.csv';
+import dataRegistry from '../data-component/dataRegistry.json'
+const clusterData =  `https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/data/test_cluster.csv`
 class Clusters extends React.Component {
-    componentDidMount(){
-        const data = clusterData
-        const domainData = [1,2,3,4,5,6]
-        const xDomain = [1,2,3,4,5,6]
-        const yDomain = [1,2,3,4,5,6]
-
-        new ClustersD3(this.refs.chart_cluster, data, domainData, xDomain, yDomain)
+    constructor(){
+        super();
+        this.state = {
+            currentVal: 1,
+            data: []
+        }
+  
     }
+    
+    handleChange(event) {
+        this.setState({paramType: event.target.value});
+      }
+
+
+    async componentDidMount(){
+
+        const data_for_child = await fetch('/backendscript', {method:"POST", mode: 'cors', cache:"no-cache", headers:{"content_type":"application/json"},body:JSON.stringify(dataRegistry)}).then(res => res.json()).then(data => {
+             return data.PCAdata
+         })
+        if(data_for_child){
+            new ClustersD3(this.refs.chart_cluster, data_for_child)
+        }
+        
+        
+    }
+
+
 
     render(){
         return(
-            <div ref="chart_cluster"></div>
+
+            <div ref="chart_cluster">{console.log(this.data)}</div>
         )
     }
 }

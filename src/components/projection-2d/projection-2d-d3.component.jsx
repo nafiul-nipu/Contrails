@@ -2,7 +2,6 @@
 import * as d3 from 'd3';
 import { ReplaceStencilOp } from 'three';
 
-
 const url ="https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/2_TwoNum.csv"
 export default class ProjeProjection2DD3 {
     scatterplot = (data, domainData, xDomain, yDomain, element) => {

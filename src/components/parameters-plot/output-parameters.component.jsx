@@ -1,7 +1,7 @@
 import React from 'react';
 import OutputParametersD3 from './output-parameters-d3.component';
 import statistics from '../data-component/statistics.json';
-
+import dataRegistry from '../data-component/dataRegistry.json'
 
 class OutputParameters extends React.Component {
 
@@ -23,7 +23,7 @@ class OutputParameters extends React.Component {
 
     componentDidMount(){
 
-        new OutputParametersD3(this.refs.chartoutput,statistics)
+        new OutputParametersD3(this.refs.chartoutput,statistics, dataRegistry)
        
    
     }

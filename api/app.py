@@ -1,5 +1,14 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
+import sklearn 
+from sklearn.cluster import AgglomerativeClustering 
+from sklearn.decomposition import PCA
+from pandas import pandas
+import pandas as pd
+import math 
+import numpy as np
+from copy import deepcopy
+
 
 app = Flask(__name__)
 
@@ -7,9 +16,49 @@ app = Flask(__name__)
 @cross_origin()
 
 def get_value():
-    val_vechi = request.json
-    sum = val_vechi[0] + val_vechi[1]
-    return {"val": sum}
+    data = request.json
+    d = deepcopy(data)
+    pca = PCA()
+    total_T =list()
+    total_rho =list()
+    total_d =list()
+    total_Ygas =list()
+    
+    for i,el in enumerate(d):
+        el2 =  el['output-parameters']
+        total_T.append(el2["T_lag_avg"])
+        total_rho.append(el2["rho_lag_avg"])
+        total_d.append(el2["d_lag_avg"])
+        total_Ygas.append(el2["Ygas_lag_avg"])
+
+    X = pd.DataFrame()
+    
+    X['T_lag_avg'] = total_T
+    X['rho_lag_avg"'] = total_rho
+    X['d_lag_avg'] = total_d
+    X['Ygas_lag_avg'] = total_Ygas
+    
+    
+    x_pca = pca.fit_transform(X)
+    
+    x_pca = pd.DataFrame(X)
+    
+    x_pca = x_pca.iloc[:, list(range(2))]
+    x_pca.columns = ['PC1', 'PC2']
+    x_pca_pc1 =  x_pca['PC1'].to_numpy()
+    x_pca_pc1 = (x_pca_pc1 - x_pca_pc1.mean()) / np.std(x_pca_pc1)
+    x_pca_pc2 =  x_pca['PC2'].to_numpy()
+    x_pca_pc2 = (x_pca_pc2 - x_pca_pc2.mean()) / np.std(x_pca_pc2)
+
+ 
+    for i,el in enumerate(d):
+        d[i]['x']= x_pca_pc1[i]
+        d[i]['y']= x_pca_pc2[i]
+
+
+
+
+    return {"PCAdata": d}
 
 if __name__ == '__main__':
 	app.run(debug=True)

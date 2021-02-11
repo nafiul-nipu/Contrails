@@ -60,32 +60,31 @@ class InputParametersPanel extends React.Component {
             <div style={{"color":"#BEBEBE", marginTop: "10px"}}>Boundary Conditions</div>
             <div style={{color:"grey", marginTop:"5%"}}>T</div>
             <Form  >
-                <Form.Check inline  type="checkbox" id="T_lag" label="engine" onChange={this.handleButton}/>
-                <Form.Check inline  type="checkbox" id="T_lag" label="farfield" onChange={this.handleButton}/>
-                <Form.Check inline  type="checkbox" id="T_lag" label="inlet" onChange={this.handleButton}/>
-                <Form.Check inline  type="checkbox" id="T_lag" label="nozzle" onChange={this.handleButton}/>
-                <Form.Check inline  type="checkbox" id="T_lag" label="outlet" onChange={this.handleButton}/>
-                <Form.Check inline  type="checkbox" id="T_lag" label="turbine" onChange={this.handleButton}/>
+                <Form.Check inline  type="checkbox" id="boundary-T-engine" label="engine" onChange={this.handleButton}/>
+                <Form.Check inline  type="checkbox" id="boundary-T-farfield" label="farfield" onChange={this.handleButton}/>
+                <Form.Check inline  type="checkbox" id="boundary-T-nozzle" label="nozzle" onChange={this.handleButton}/>
+                <Form.Check inline  type="checkbox" id="boundary-T-outlet" label="outlet" onChange={this.handleButton}/>
+                <Form.Check inline  type="checkbox" id="T_turbine" label="turbine" onChange={this.handleButton}/>
             </Form>
             <div style={{color:"grey", marginTop:"5%"}}>U</div>
             <Form  >
-                <Form.Check inline  type="checkbox" id="T_lag" label="inlet" onChange={this.handleButton}/>
-                <Form.Check inline  type="checkbox" id="T_lag" label="nozzle" onChange={this.handleButton}/>
-                <Form.Check inline  type="checkbox" id="T_lag" label="outlet" onChange={this.handleButton}/>
+                <Form.Check inline  type="checkbox" id="boundary-U-inlet" label="inlet" onChange={this.handleButton}/>
+                <Form.Check inline  type="checkbox" id="boundary-U-nozzle" label="nozzle" onChange={this.handleButton}/>
+                <Form.Check inline  type="checkbox" id="boundary-U-outlet" label="outlet" onChange={this.handleButton}/>
             </Form>
             <div style={{color:"grey", marginTop:"5%"}}>P</div>
             <Form  >
-                <Form.Check inline  type="checkbox" id="T_lag" label="nozzle" onChange={this.handleButton}/>
-                <Form.Check inline  type="checkbox" id="T_lag" label="outlet" onChange={this.handleButton}/>
+                <Form.Check inline  type="checkbox" id="boundary-P-nozzle" label="nozzle" onChange={this.handleButton}/>
+                <Form.Check inline  type="checkbox" id="boundary-P-outlet" label="outlet" onChange={this.handleButton}/>
             </Form>
             <div style={{color:"grey", marginTop:"5%"}}>k</div>
             <Form  >
-                <Form.Check inline  type="checkbox" id="T_lag" label="inlet" onChange={this.handleButton}/>
-                <Form.Check inline  type="checkbox" id="T_lag" label="nozzle" onChange={this.handleButton}/>
+                <Form.Check inline  type="checkbox" id="boundary-k-inlet" label="inlet" onChange={this.handleButton}/>
+                <Form.Check inline  type="checkbox" id="boundary-k-nozzle" label="nozzle" onChange={this.handleButton}/>
             </Form>
             <div style={{color:"grey", marginTop:"5%"}}>rho</div>
             <Form  >
-                <Form.Check inline  type="checkbox" id="T_lag" label="nozzle" onChange={this.handleButton}/>
+                <Form.Check inline  type="checkbox" id="boundary-rho-nozzle" label="nozzle" onChange={this.handleButton}/>
             </Form>
 
 
