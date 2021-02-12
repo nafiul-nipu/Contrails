@@ -2,18 +2,20 @@ import React from 'react';
 import Form from 'react-bootstrap/Form'
 
 class InputParametersPanel extends React.Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             currentVal: 0,
             value:[4,5],
             paramType: 'lagrangian'
         }
-        this.handleChange = this.handleChange.bind(this);
+        this.handleButton = this.handleButton.bind(this);
     }
     
-    handleChange(event) {
-        this.setState({paramType: event.target.value});
+    handleButton(param) {
+        var new_param = param.target.id.toString()
+        this.props.onInputSelectChange(new_param)
+        // this.setState({paramType: event.target.value});
       }
 
 
@@ -55,8 +57,8 @@ class InputParametersPanel extends React.Component {
                 <Form.Check inline  type="checkbox" id="solution-uncoupled" label="false" onChange={this.handleButton}/>
             </Form>
             <div style={{color:"grey", marginTop:"5%"}}>Turbulence Model</div>
-                <Form.Check inline  type="checkbox" id="turbulence-t1" label="T1" onChange={this.handleButton}/>
-                <Form.Check inline  type="checkbox" id="turbulence-t2" label="T2" onChange={this.handleButton}/>
+                <Form.Check inline  type="checkbox" id="turbulence-T1" label="T1" onChange={this.handleButton}/>
+                <Form.Check inline  type="checkbox" id="turbulence-T2" label="T2" onChange={this.handleButton}/>
             <div style={{"color":"#BEBEBE", marginTop: "10px"}}>Boundary Conditions</div>
             <div style={{color:"grey", marginTop:"5%"}}>T</div>
             <Form  >
@@ -64,7 +66,7 @@ class InputParametersPanel extends React.Component {
                 <Form.Check inline  type="checkbox" id="boundary-T-farfield" label="farfield" onChange={this.handleButton}/>
                 <Form.Check inline  type="checkbox" id="boundary-T-nozzle" label="nozzle" onChange={this.handleButton}/>
                 <Form.Check inline  type="checkbox" id="boundary-T-outlet" label="outlet" onChange={this.handleButton}/>
-                <Form.Check inline  type="checkbox" id="T_turbine" label="turbine" onChange={this.handleButton}/>
+                <Form.Check inline  type="checkbox" id="boundary-T_turbine" label="turbine" onChange={this.handleButton}/>
             </Form>
             <div style={{color:"grey", marginTop:"5%"}}>U</div>
             <Form  >

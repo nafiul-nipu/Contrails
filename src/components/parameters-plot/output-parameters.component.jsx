@@ -6,26 +6,27 @@ import dataRegistry from '../data-component/dataRegistry.json'
 class OutputParameters extends React.Component {
 
        
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         
         this.state = {
-            T_lagr : null,
-            rho_lagr : null,
-            Ygas_lagr : null,
-            k_eul : null,
-            rho_eul : null,
-            T_eul : null,
-            P_eul : null
+
         }
     
     }
 
     componentDidMount(){
+        this.setState({chart: new OutputParametersD3(this.refs.chartoutput,statistics, this.props.elements)}) 
 
-        new OutputParametersD3(this.refs.chartoutput,statistics, dataRegistry)
-       
-   
+    }
+
+    shouldComponentUpdate(){
+        return false
+    }
+
+    componentWillReceiveProps(nextProps){
+        this.state.chart.update(nextProps.elements)
+
     }
 
     render(){

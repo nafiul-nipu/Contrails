@@ -147,7 +147,7 @@
         },
         "input-parameters":{
             "aircraft-engine":"one",
-            "geometry":"short",
+            "geometry":"cowl",
             "scope":"nozzle",
             "grid":"coarse",
             "solution":"coupled",
@@ -188,8 +188,8 @@
         },
         "input-parameters":{
             "aircraft-engine":"one",
-            "geometry":"short",
-            "scope":"nozzle",
+            "geometry":"cowl",
+            "scope":"whole",
             "grid":"coarse",
             "solution":"coupled",
             "turbulence":"T1",

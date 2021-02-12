@@ -4,17 +4,22 @@ import Form from 'react-bootstrap/Form'
 import '../query-panel.styles.css';
 
 class ClusteringParametersPanel extends React.Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
-            currentVal: 0,
-            value:[4,5]
         }
-    
+    this.handleFilterChange = this.handleFilterChange.bind(this)
+    }
+
+    handleFilterChange(param){
+        var new_param = param.target.id.toString()
+     
+        // this.props.handleClusteringChange(new_param)
+        this.props.onClusteringSelectChange(new_param)
+
     }
     
     componentDidMount(){
-        //fetch('/backendscript', {method:"POST", mode: 'cors', cache:"no-cache", headers:{"content_type":"application/json"},body:JSON.stringify(this.state.value)}).then(res => res.json()).then(data => this.setState({currentVal:data.val}))
     }
 
     render(){
@@ -29,11 +34,11 @@ class ClusteringParametersPanel extends React.Component {
                 </Form>
                 <div style={{"color":"#BEBEBE", marginTop: "5%"}}>Lagrangian Attr:</div>
                 <Form style={{textAlign: 'left'}}>
-                <Form.Check type="checkbox" label="T" id="cluster-T"/>
-                <Form.Check type="checkbox" label="U"  id="cluster-U"/>
-                <Form.Check type="checkbox" label="rho"  id="cluster-rho"/>
-                <Form.Check type="checkbox" label="d"  id="cluster-d"/>
-                <Form.Check type="checkbox" label="Ygas"  id="cluster-Ygas"/>
+                <Form.Check type="checkbox" label="T" id="T_lag_avg" onChange= {this.handleFilterChange}/>
+                <Form.Check type="checkbox" label="U"  id="U_lag_avg" />
+                <Form.Check type="checkbox" label="rho"  id="rho_lag_avg" onChange= {this.handleFilterChange}/>
+                <Form.Check type="checkbox" label="d"  id="d_lag_avg" onChange= {this.handleFilterChange}/>
+                <Form.Check type="checkbox" label="Ygas"  id="Ygas_lag_avg" onChange= {this.handleFilterChange}/>
                 </Form>
                 </div>
             </div>
