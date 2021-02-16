@@ -5,6 +5,8 @@ import dataRegistry from '../data-component/dataRegistry.json'
 import Stats from 'stats.js';
 import * as d3 from 'd3'
 
+import {vertexColors} from 'three'
+
 const style = {
     height: 240 // we can control scene size by setting container dimensions
   };
@@ -176,7 +178,7 @@ class Projection extends React.Component {
         // orb.open();
 
         // setTimeout(this.startAnimationLoop(), 5000)
-        //this.startAnimationLoop()
+        this.startAnimationLoop()
 
         // setTimeout(this.startAnimationLoop, (function rec(pass) {
         //   if (pass < 3) {
