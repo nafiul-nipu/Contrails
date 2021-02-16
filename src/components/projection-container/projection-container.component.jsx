@@ -11,6 +11,8 @@ import './projection-container.style.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+import dataRegistry from '../data-component/dataRegistry.json'
+
 //creating objects at the very first
 let dropdownObject1 = new DropdownPanel();
 let dropdownObject2 = new DropdownPanel();
@@ -85,33 +87,48 @@ class ProjectionContainer extends React.Component {
     }
 
     dataLoader = (object, folder, file, divName, objectForScatter, divForScatter) =>{
-        let url = `https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/data/${folder}/${file}.csv`
-        let data = []
-        let tempDomain = {}
-        let xDomain = {}
-        let yDomain = {}
-        let index = 0;
-        d3.csv(url, d => {
-            index = index + 1;
-            if(index % 10 == 0){
-                data.push({
-                    x: parseFloat(d['Points:0']),
-                    y: parseFloat(d['Points:1']),
-                    z: parseFloat(d['Points:2']),
-                    temp: parseFloat(d['T'])
-                });
+        // console.log(folder, file)
+        let list = dataRegistry[folder-1].timeSteps
+        // console.log()
+        // let url_checker = []
+        let promises = []
+        for(let i = 0; i< list.length; i++){
+            let url_checker = `https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/data/${folder}/${list[i]}.csv`
+            promises.push(d3.csv(url_checker))
+  
+        }
+        // console.log('promises')
+        // console.log(promises)
+        Promise.all(promises).then(function(files){
+            // let url = `https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/data/${folder}/${file}.csv`
+            let data = []
+            let tempDomain = {}
+            let xDomain = {}
+            let yDomain = {}
+            let index = list.indexOf(file)
+            console.log(file, index)
+            let particle_limit = 0;
+            files[index].forEach(d => {
+                particle_limit = particle_limit + 1;
+                if(particle_limit % 10 == 0){
+                    data.push({
+                        x: parseFloat(d['Points:0']),
+                        y: parseFloat(d['Points:1']),
+                        z: parseFloat(d['Points:2']),
+                        temp: parseFloat(d['T'])
+                    });
 
-            }
-            
-        tempDomain.min = Math.min(tempDomain.min || Infinity, parseFloat(d['T']));
-        tempDomain.max = Math.max(tempDomain.max || -Infinity, parseFloat(d['T']));
+                }
+                
+                tempDomain.min = Math.min(tempDomain.min || Infinity, parseFloat(d['T']));
+                tempDomain.max = Math.max(tempDomain.max || -Infinity, parseFloat(d['T']));
 
-        xDomain.min = Math.min(xDomain.min || Infinity, parseFloat(d['Points:0']));
-        xDomain.max = Math.max(xDomain.max || -Infinity, parseFloat(d['Points:0']));
+                xDomain.min = Math.min(xDomain.min || Infinity, parseFloat(d['Points:0']));
+                xDomain.max = Math.max(xDomain.max || -Infinity, parseFloat(d['Points:0']));
 
-        yDomain.min = Math.min(yDomain.min || Infinity, parseFloat(d['Points:1']));
-        yDomain.max = Math.max(yDomain.max || -Infinity, parseFloat(d['Points:1']));
-        }).then(function(){
+                yDomain.min = Math.min(yDomain.min || Infinity, parseFloat(d['Points:1']));
+                yDomain.max = Math.max(yDomain.max || -Infinity, parseFloat(d['Points:1']));
+            })
             console.log("data")
             // console.log(data)
             // console.log(tempDomain)
@@ -120,17 +137,21 @@ class ProjectionContainer extends React.Component {
             // three.addCustomSceneObjects(data, tempDomain);        
             // three.widnowResizeHandler(divName)
             updateThreeScatter(object, data, tempDomain, divName, objectForScatter, divForScatter, folder)
+
+            function updateThreeScatter(object, particleData, tempDomain, threeDiv, objectForScatter, divForScatter, member){
+                object.addCustomSceneObjects(particleData, tempDomain, member);        
+                object.widnowResizeHandler(threeDiv)
+                // console.log(tempDomain, xDomain, yDomain)
+                objectForScatter.scatterplot(particleData, tempDomain, xDomain, yDomain, divForScatter)
+    
+                console.log("updated")
+    
+            }
+            
         })
 
-        function updateThreeScatter(object, particleData, tempDomain, threeDiv, objectForScatter, divForScatter, member){
-            object.addCustomSceneObjects(particleData, tempDomain, member);        
-            object.widnowResizeHandler(threeDiv)
-            // console.log(tempDomain, xDomain, yDomain)
-            objectForScatter.scatterplot(particleData, tempDomain, xDomain, yDomain, divForScatter)
-
-            console.log("updated")
-
-        }
+        
+               
 
     }
 
