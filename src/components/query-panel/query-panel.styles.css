@@ -3,9 +3,31 @@ h5 {
 }
 
 h6 {
-    color:gray ;
+    color:#05ecec;
+    margin-top: 2%;
+    margin-bottom: 5%;
 }
 
 .form-check-label{
     color: 	#F5F5F5
+}
+
+
+.interior-form{
+    height: calc(1em + .5rem + 2px);
+    padding: .1rem .1rem;
+    font-size: .75rem;
+}
+
+/* .form-control-sm{
+    background-color: grey;
+    color: white;
+} */
+
+.hidden{
+    visibility: hidden;
+}
+
+.show{
+    visibility: visible;
 }

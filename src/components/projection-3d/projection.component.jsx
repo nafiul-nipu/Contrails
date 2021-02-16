@@ -2,15 +2,8 @@ import React from 'react';
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import dataRegistry from '../data-component/dataRegistry.json'
-
 import Stats from 'stats.js';
-
-
 import * as d3 from 'd3'
-import * as dat from 'dat.gui'
-import { VertexColors } from 'three';
-import $ from 'jquery'
-import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 
 const style = {
     height: 240 // we can control scene size by setting container dimensions
@@ -139,7 +132,7 @@ class Projection extends React.Component {
         let material = new THREE.PointsMaterial({
             //   color: 0x156289,
               // emissive: 0x072534,
-              size: 0.02,
+              size: 0.05,
               // side: THREE.DoubleSide,
               // flatShading: true
               vertexColors: true
@@ -183,7 +176,7 @@ class Projection extends React.Component {
         // orb.open();
 
         // setTimeout(this.startAnimationLoop(), 5000)
-        this.startAnimationLoop()
+        //this.startAnimationLoop()
 
         // setTimeout(this.startAnimationLoop, (function rec(pass) {
         //   if (pass < 3) {
