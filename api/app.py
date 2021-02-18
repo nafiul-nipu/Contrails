@@ -21,6 +21,8 @@ def get_value():
     d = deepcopy(data[0])
     if len(data) >2:
         filter = deepcopy(data[2])
+    if len(data[0]) <1:
+         return jsonify({"PCAdata": []})
     pca = PCA()
     total_T =list()
     total_rho =list()

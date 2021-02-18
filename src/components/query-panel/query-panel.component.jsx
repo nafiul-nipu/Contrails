@@ -27,13 +27,21 @@ class QueryPanel extends React.Component {
             boundary_conditions_U: [],
             boundary_conditions_P: [],
             boundary_conditions_k: [],
-            boundary_conditions_rho: []
-  
-
+            boundary_conditions_rho: [],
+            T_lag_avg: null,
+            T_eul_avg: null,
+            rho_lag_avg: null,
+            rho_eul_avg: null,
+            d_lag_avg: null,
+            Ygas_lag_avg: null,
+            k_eul_avg: null,
+            p_eul_avg: null
         }
 
         this.handleClusteringChange = this.handleClusteringChange.bind(this)
         this.handleInputChange = this.handleInputChange.bind(this)
+        this.handleOutputChange = this.handleOutputChange.bind(this)
+        this.changeOutputFilters = this.changeOutputFilters.bind(this)
 
     }
 
@@ -97,7 +105,7 @@ class QueryPanel extends React.Component {
 
 
     handleInputChange(param) {
-   
+
         if (param.includes('aircraft-engine')) {
            var el = param.replace('aircraft-engine-', "")
            var new_el = this.state.aircraft_engine
@@ -183,7 +191,8 @@ class QueryPanel extends React.Component {
                 }
                 this.setState({boundary_conditions_T: new_el})
             }
-            if(param.includes('P')){
+            if(param.includes('-P-')){
+                
                 var el = param.replace('boundary-P-', "")
                 var new_el = this.state.boundary_conditions_P
                 if (this.state.boundary_conditions_P.includes(el)) {
@@ -195,7 +204,7 @@ class QueryPanel extends React.Component {
                 }
                 this.setState({boundary_conditions_P: new_el})
             }
-            if(param.includes('k')){
+            if(param.includes('-k-')){
                 var el = param.replace('boundary-k-', "")
                 var new_el = this.state.boundary_conditions_k
                 if (this.state.boundary_conditions_k.includes(el)) {
@@ -207,18 +216,18 @@ class QueryPanel extends React.Component {
                 }
                 this.setState({boundary_conditions_k: new_el})
             }
-            // if(param.includes('U')){
-            //     var el = param.replace('boundary-U-', "")
-            //     var new_el = this.state.boundary_conditions_U
-            //     if (this.state.boundary_conditions_U.includes(el)) {
-            //         var index = this.state.boundary_conditions_U.indexOf(el)
-            //         new_el.splice(index, 1)
-            //     }
-            //     else{
-            //      new_el.push(el)
-            //     }
-            //     this.setState({boundary_conditions_U: new_el})
-            // }
+            if(param.includes('U')){
+                var el = param.replace('boundary-U-', "")
+                var new_el = this.state.boundary_conditions_U
+                if (this.state.boundary_conditions_U.includes(el)) {
+                    var index = this.state.boundary_conditions_U.indexOf(el)
+                    new_el.splice(index, 1)
+                }
+                else{
+                 new_el.push(el)
+                }
+                this.setState({boundary_conditions_U: new_el})
+            }
             if(param.includes('rho')){
                 var el = param.replace('boundary-rho-', "")
                 var new_el = this.state.boundary_conditions_rho
@@ -243,12 +252,64 @@ class QueryPanel extends React.Component {
   
     }
 
+    handleOutputChange(param){
+       var  el = param[0]
+       var val = param[1]
+        if(!param[1] || isNaN(param[1])){
+            if(el == "T_lag_avg")
+                this.setState({T_lag_avg: null}, () => {this.changeOutputFilters()})
+            if(el == "T_eul_avg")
+                this.setState({T_eul_avg: null}, () => {this.changeOutputFilters()})
+            if(el == "d_lag_avg")
+                this.setState({d_lag_avg: null}, () => {this.changeOutputFilters()})
+            if(el == "k_eul_avg")
+                this.setState({k_eul_avg: null}, () => {this.changeOutputFilters()})
+            if(el == "rho_eul_avg")
+                this.setState({rho_eul_avg: null}, () => {this.changeOutputFilters()})
+            if(el == "rho_lag_avg")
+                this.setState({rho_lag_avg: null}, () => {this.changeOutputFilters()})
+            if(el == "p_eul_avg")
+                this.setState({p_eul_avg: null}, () => {this.changeOutputFilters()})
+            if(el == "Ygas_lag_avg")
+                this.setState({Ygas_lag_avg: null}, () => {this.changeOutputFilters()}) 
+        }
+        else{
+            if (el == "T_lag_avg")
+                this.setState({ T_lag_avg: val }, () => {this.changeOutputFilters()})
+            if (el == "T_eul_avg")
+                this.setState({ T_eul_avg:val }, () => {this.changeOutputFilters()})
+            if (el == "d_lag_avg")
+                this.setState({ d_lag_avg: val }, () => {this.changeOutputFilters()})
+            if (el == "d_eul_avg")
+                this.setState({ k_eul_avg: val}, () => {this.changeOutputFilters()})
+            if (el == "rho_eul_avg")
+                this.setState({ rho_eul_avg: val}, () => {this.changeOutputFilters()})
+            if (el == "rho_lag_avg")
+                this.setState({ rho_lag_avg: val}, () => {this.changeOutputFilters()})
+            if (el == "p_eul_avg")
+                this.setState({ p_eul_avg: val}, () => {this.changeOutputFilters()})
+            if (el == "Ygas_lag_avg")
+                this.setState({ Ygas_lag_avg: val}, () => {this.changeOutputFilters()}) 
+        }
+
+        
+        
+    }
+
+    changeOutputFilters(){
+        this.props.outputFilters({'T_lag_avg': this.state.T_lag_avg, 'T_eul_avg': this.state.T_eul_avg,
+        'rho_lag_avg': this.state.rho_lag_avg, 'rho_eul_avg': this.state.rho_eul_avg,
+        'd_lag_avg': this.state.d_lag_avg, 'Ygas_lag_avg': this.state.Ygas_lag_avg,
+        'p_eul_avg': this.state.p_eul_avg, 'k_eul_avg': this.state.k_eul_avg})
+
+    }
+
     render() {
         return (
             // <div>Query panel and val is {this.state.currentVal}</div>
             <Container style={{}}>
                 <Row style={{ "height": '20vh', 'borderStyle': 'solid', 'borderWidth': '.5px', 'borderColor': '#05ecec', overflowY: "auto" }}>
-                    <OutputParametersPanel />
+                    <OutputParametersPanel onOutputSelectChange ={this.handleOutputChange}/>
                 </Row>
                 <Row style={{ "height": '55vh', 'borderStyle': 'solid', 'borderWidth': '.5px', 'borderColor': '#05ecec', overflowY: "auto" }}>
                     <InputParametersPanel onInputSelectChange={this.handleInputChange} />

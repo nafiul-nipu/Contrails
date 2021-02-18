@@ -43,7 +43,6 @@ class Clusters extends React.Component {
         }
         
         if(this.state.clusteringParams == this.props.clusteringParams)
-        console.log("yes")
             var send_data = [this.props.dataRegistry, this.props.clusteringParams]
             const data_for_child = await fetch('/backendscript', {method:"POST", mode: 'cors', cache:"no-cache", headers:{"content_type":"application/json"},body:JSON.stringify(send_data)}).then(res => res.json()).then(data => {
                 

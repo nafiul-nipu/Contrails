@@ -66,7 +66,7 @@ class InputParametersPanel extends React.Component {
                 <Form.Check inline  type="checkbox" id="boundary-T-farfield" label="farfield" onChange={this.handleButton}/>
                 <Form.Check inline  type="checkbox" id="boundary-T-nozzle" label="nozzle" onChange={this.handleButton}/>
                 <Form.Check inline  type="checkbox" id="boundary-T-outlet" label="outlet" onChange={this.handleButton}/>
-                <Form.Check inline  type="checkbox" id="boundary-T_turbine" label="turbine" onChange={this.handleButton}/>
+                <Form.Check inline  type="checkbox" id="boundary-T-turbine" label="turbine" onChange={this.handleButton}/>
             </Form>
             <div style={{color:"grey", marginTop:"5%"}}>U</div>
             <Form  >

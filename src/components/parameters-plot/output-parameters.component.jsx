@@ -16,16 +16,16 @@ class OutputParameters extends React.Component {
     }
 
     componentDidMount(){
-        this.setState({chart: new OutputParametersD3(this.refs.chartoutput,statistics, this.props.elements)}) 
+        this.setState({chart: new OutputParametersD3(this.refs.chartoutput,statistics, this.props.outputelements)}) 
 
     }
 
-    shouldComponentUpdate(){
-        return false
-    }
+    // shouldComponentUpdate(){
+    //     return false
+    // }
 
     componentWillReceiveProps(nextProps){
-        this.state.chart.update(nextProps.elements)
+        this.state.chart.update(nextProps.outputelements)
 
     }
 
