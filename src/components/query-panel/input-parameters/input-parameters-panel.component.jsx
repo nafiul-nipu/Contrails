@@ -1,5 +1,6 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form'
+import "./input-parameters.styles.css"
 
 class InputParametersPanel extends React.Component {
     constructor(props){
@@ -31,7 +32,8 @@ class InputParametersPanel extends React.Component {
             <div style={{textAlign: 'left', marginLeft:"10%"}}>
             <div style={{color:"grey", marginTop:"5%"}}>Aircraft Engine -Steams</div>
             <Form  >
-                <Form.Check inline  type="checkbox"  id="aircraft-engine-one" label="one" onChange={this.handleButton}/>
+
+                <Form.Check inline  type="checkbox"  id="aircraft-engine-one" label="one" onChange={this.handleButton} className="airplane-one"/>
                 <Form.Check inline  type="checkbox"  id="aircraft-engine-two" label="two" onChange={this.handleButton}/>
             </Form>
             <div style={{color:"grey", marginTop:"5%"}}>Geometry</div>

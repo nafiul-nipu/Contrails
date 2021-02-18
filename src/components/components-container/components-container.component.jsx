@@ -277,7 +277,7 @@ render() {
                         </Row>
                     </Col>
                 </Col>
-                <Col style={{ minWidth: "30%", backgroundColor: '#31393f', height: '100vh', "padding": "0", 'borderStyle': 'solid', 'borderWidth': '.5px', borderColor: "#05ecec", overflowY: 'scroll', overflowX: 'hidden' }}>
+                <Col style={{ minWidth: "30%", backgroundColor: '#31393f', height: '100vh', "padding": "0", 'borderStyle': 'solid', 'borderWidth': '.5px', borderColor: "#05ecec", overflow: 'hidden' }}>
                     <ParametersPlot elements={this.state.filtered_data} />
                 </Col>
             </Row>

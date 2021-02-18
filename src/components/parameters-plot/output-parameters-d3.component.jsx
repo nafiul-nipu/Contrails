@@ -148,6 +148,7 @@ export default class OutputParametersD3 {
                                           .append("title")
                                           .text("Member " + title_id + "\n" + timepoints_tooltip(values))
                                     $(`.highlight_${el_idfinal}`).css("opacity", '0.7')
+                                    $(`.cluster_airplane_${el_idfinal}`).css("fill", '#05ecec')
                               })
                               .on('mouseout', function () {
                                     const el_id = this.id.replace("path_","")
@@ -158,6 +159,7 @@ export default class OutputParametersD3 {
                                     $('.circles').css("opacity", '0.65')
                                     d3.selectAll('title').remove()
                                     $(`.highlight_${el_idfinal}`).css("opacity", '0')
+                                    $(`.cluster_airplane_${el_idfinal}`).css("fill", 'white')
                               })
 
                   }

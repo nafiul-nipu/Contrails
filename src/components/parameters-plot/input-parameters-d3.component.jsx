@@ -20,7 +20,8 @@ export default class InputParametersD3 {
     const svg = d3.select(element)
       .append("svg")
       .attr("width", 300)
-      .attr("height", 10 * height)
+      .attr("height", data.length* height)
+
     svg.append("text").text("Members' Input Parameters")
       .attr('transform', `translate(${width / 4},20)`)
       .attr("fill", '#05ecec')
@@ -41,6 +42,8 @@ export default class InputParametersD3 {
           $(`.path_${id}_`).css("stroke-width", '2.8')
                 .css('opacity', 1)
           $(`.circle_${id}`).css("opacity", '1')
+          $(`.cluster_airplane_${id}`).css("fill", '#05ecec')
+
           d3.select(this)
             .append("title")
             .text("Aircraft engine:" + data)
@@ -49,6 +52,7 @@ export default class InputParametersD3 {
           d3.selectAll('title').remove()
           $('.tendrils').css("opacity", '1')
           $('.circles').css("opacity", '0.65')
+          $(`.cluster_airplane_${id}`).css("fill", 'white')
         })
 
     }
@@ -66,6 +70,7 @@ export default class InputParametersD3 {
           $(`.path_${id}_`).css("stroke-width", '2.8')
                 .css('opacity', 1)
           $(`.circle_${id}`).css("opacity", '1')
+          $(`.cluster_airplane_${id}`).css("fill", '#05ecec')
           d3.select(this)
             .append("title")
             .text("Geometry: " + data)
@@ -92,6 +97,7 @@ export default class InputParametersD3 {
           $(`.path_${id}_`).css("stroke-width", '2.8')
                 .css('opacity', 1)
           $(`.circle_${id}`).css("opacity", '1')
+          $(`.cluster_airplane_${id}`).css("fill", '#05ecec')
           d3.select(this)
             .append("title")
             .text("Scope: " + data)
@@ -118,6 +124,7 @@ export default class InputParametersD3 {
           $(`.path_${id}_`).css("stroke-width", '2.8')
                 .css('opacity', 1)
           $(`.circle_${id}`).css("opacity", '1')
+          $(`.cluster_airplane_${id}`).css("fill", '#05ecec')
           d3.select(this)
             .append("title")
             .text("Grid: " + data)
@@ -126,6 +133,7 @@ export default class InputParametersD3 {
           d3.selectAll('title').remove()
           $('.tendrils').css("opacity", '1')
           $('.circles').css("opacity", '0.65')
+          $(`.cluster_airplane_${id}`).css("fill", 'white')
         })
 
     }
@@ -143,6 +151,7 @@ export default class InputParametersD3 {
           $(`.path_${id}_`).css("stroke-width", '2.8')
                 .css('opacity', 1)
           $(`.circle_${id}`).css("opacity", '1')
+          $(`.cluster_airplane_${id}`).css("fill", '#05ecec')
           d3.select(this)
             .append("title")
             .text("Solution: " + data)
@@ -151,6 +160,7 @@ export default class InputParametersD3 {
           d3.selectAll('title').remove()
           $('.tendrils').css("opacity", '1')
           $('.circles').css("opacity", '0.65')
+          $(`.cluster_airplane_${id}`).css("fill", 'white')
         })
 
     }
@@ -168,6 +178,7 @@ export default class InputParametersD3 {
           $(`.path_${id}_`).css("stroke-width", '2.8')
                 .css('opacity', 1)
           $(`.circle_${id}`).css("opacity", '1')
+          $(`.cluster_airplane_${id}`).css("fill", '#05ecec')
           d3.select(this)
             .append("title")
             .text("Turbulence model: " + data)
@@ -176,6 +187,7 @@ export default class InputParametersD3 {
           d3.selectAll('title').remove()
           $('.tendrils').css("opacity", '1')
           $('.circles').css("opacity", '0.65')
+          $(`.cluster_airplane_${id}`).css("fill", 'white')
         })
 
     }
@@ -223,7 +235,7 @@ export default class InputParametersD3 {
         .attr('opacity', data.includes('engine') ? 1 : 0)
         .style("cursor", "default")
         .on('mouseover', function () {
-          
+          $(`.cluster_airplane_${id}`).css("fill", '#05ecec')
           $('.tendrils').css("opacity", '0.2')
           $('.circles').css("opacity", '0.2')
           $(`.path_${id}_`).css("stroke-width", '2.8')
@@ -238,6 +250,7 @@ export default class InputParametersD3 {
           d3.selectAll('title').remove()
           $('.tendrils').css("opacity", '1')
           $('.circles').css("opacity", '0.65')
+          $(`.cluster_airplane_${id}`).css("fill", 'white')
         })
       group.append('text')
         .text("x")
@@ -248,7 +261,7 @@ export default class InputParametersD3 {
         .attr('opacity', data.includes('farfield') ? 1 : 0)
         .style("cursor", "default")
         .on('mouseover', function () {
-          
+          $(`.cluster_airplane_${id}`).css("fill", '#05ecec')
           $('.tendrils').css("opacity", '0.2')
           $('.circles').css("opacity", '0.2')
           $(`.path_${id}_`).css("stroke-width", '2.8')
@@ -263,6 +276,7 @@ export default class InputParametersD3 {
           d3.selectAll('title').remove()
           $('.tendrils').css("opacity", '1')
           $('.circles').css("opacity", '0.65')
+          $(`.cluster_airplane_${id}`).css("fill", 'white')
         })
       group.append('text')
         .text("x")
@@ -273,7 +287,7 @@ export default class InputParametersD3 {
         .attr('opacity', data.includes('nozzle') ? 1 : 0)
         .style("cursor", "default")
         .on('mouseover', function () {
-          
+          $(`.cluster_airplane_${id}`).css("fill", '#05ecec')
           $('.tendrils').css("opacity", '0.2')
           $('.circles').css("opacity", '0.2')
           $(`.path_${id}_`).css("stroke-width", '2.8')
@@ -288,6 +302,7 @@ export default class InputParametersD3 {
           d3.selectAll('title').remove()
           $('.tendrils').css("opacity", '1')
           $('.circles').css("opacity", '0.65')
+          $(`.cluster_airplane_${id}`).css("fill", 'white')
         })
       group.append('text')
         .text("x")
@@ -298,7 +313,7 @@ export default class InputParametersD3 {
         .attr('opacity', data.includes('outlet') ? 1 : 0)
         .style("cursor", "default")
         .on('mouseover', function () {
-          
+          $(`.cluster_airplane_${id}`).css("fill", '#05ecec')
           $('.tendrils').css("opacity", '0.2')
           $('.circles').css("opacity", '0.2')
           $(`.path_${id}_`).css("stroke-width", '2.8')
@@ -313,6 +328,7 @@ export default class InputParametersD3 {
           d3.selectAll('title').remove()
           $('.tendrils').css("opacity", '1')
           $('.circles').css("opacity", '0.65')
+          $(`.cluster_airplane_${id}`).css("fill", 'white')
         })
       group.append('text')
         .text("x")
@@ -323,7 +339,7 @@ export default class InputParametersD3 {
         .attr('opacity', data.includes('turbine') ? 1 : 0)
         .style("cursor", "default")
         .on('mouseover', function () {
-          
+          $(`.cluster_airplane_${id}`).css("fill", '#05ecec')
           $('.tendrils').css("opacity", '0.2')
           $('.circles').css("opacity", '0.2')
           $(`.path_${id}_`).css("stroke-width", '2.8')
@@ -338,6 +354,7 @@ export default class InputParametersD3 {
           d3.selectAll('title').remove()
           $('.tendrils').css("opacity", '1')
           $('.circles').css("opacity", '0.65')
+          $(`.cluster_airplane_${id}`).css("fill", 'white')
         })
 
     }
@@ -374,7 +391,7 @@ export default class InputParametersD3 {
         .attr('opacity', data.includes('inlet') ? 1 : 0)
         .style("cursor", "default")
         .on('mouseover', function () {
-          
+          $(`.cluster_airplane_${id}`).css("fill", '#05ecec')
           $('.tendrils').css("opacity", '0.2')
           $('.circles').css("opacity", '0.2')
           $(`.path_${id}_`).css("stroke-width", '2.8')
@@ -389,6 +406,7 @@ export default class InputParametersD3 {
           d3.selectAll('title').remove()
           $('.tendrils').css("opacity", '1')
           $('.circles').css("opacity", '0.65')
+          $(`.cluster_airplane_${id}`).css("fill", 'white')
         })
       group.append('text')
         .text("x")
@@ -399,7 +417,7 @@ export default class InputParametersD3 {
         .attr('opacity', data.includes('nozzle') ? 1 : 0)
         .style("cursor", "default")
         .on('mouseover', function () {
-          
+          $(`.cluster_airplane_${id}`).css("fill", '#05ecec')
           $('.tendrils').css("opacity", '0.2')
           $('.circles').css("opacity", '0.2')
           $(`.path_${id}_`).css("stroke-width", '2.8')
@@ -414,6 +432,7 @@ export default class InputParametersD3 {
           d3.selectAll('title').remove()
           $('.tendrils').css("opacity", '1')
           $('.circles').css("opacity", '0.65')
+          $(`.cluster_airplane_${id}`).css("fill", 'white')
         })
       group.append('text')
         .text("x")
@@ -424,7 +443,7 @@ export default class InputParametersD3 {
         .attr('opacity', data.includes('outlet') ? 1 : 0)
         .style("cursor", "default")
         .on('mouseover', function () {
-          
+          $(`.cluster_airplane_${id}`).css("fill", '#05ecec')
           $('.tendrils').css("opacity", '0.2')
           $('.circles').css("opacity", '0.2')
           $(`.path_${id}_`).css("stroke-width", '2.8')
@@ -439,6 +458,7 @@ export default class InputParametersD3 {
           d3.selectAll('title').remove()
           $('.tendrils').css("opacity", '1')
           $('.circles').css("opacity", '0.65')
+          $(`.cluster_airplane_${id}`).css("fill", 'white')
         })
 
     }
@@ -467,7 +487,7 @@ export default class InputParametersD3 {
         .attr('opacity', data.includes('nozzle') ? 1 : 0)
         .style("cursor", "default")
         .on('mouseover', function () {
-          
+          $(`.cluster_airplane_${id}`).css("fill", '#05ecec')
           $('.tendrils').css("opacity", '0.2')
           $('.circles').css("opacity", '0.2')
           $(`.path_${id}_`).css("stroke-width", '2.8')
@@ -482,6 +502,7 @@ export default class InputParametersD3 {
           d3.selectAll('title').remove()
           $('.tendrils').css("opacity", '1')
           $('.circles').css("opacity", '0.65')
+          $(`.cluster_airplane_${id}`).css("fill", 'white')
         })
       group.append('text')
         .text("x")
@@ -492,7 +513,7 @@ export default class InputParametersD3 {
         .attr('opacity', data.includes('outlet') ? 1 : 0)
         .style("cursor", "default")
         .on('mouseover', function () {
-          
+          $(`.cluster_airplane_${id}`).css("fill", '#05ecec')
           $('.tendrils').css("opacity", '0.2')
           $('.circles').css("opacity", '0.2')
           $(`.path_${id}_`).css("stroke-width", '2.8')
@@ -507,6 +528,7 @@ export default class InputParametersD3 {
           d3.selectAll('title').remove()
           $('.tendrils').css("opacity", '1')
           $('.circles').css("opacity", '0.65')
+          $(`.cluster_airplane_${id}`).css("fill", 'white')
         })
 
 
@@ -538,7 +560,7 @@ export default class InputParametersD3 {
         .attr('opacity', data.includes('inlet') ? 1 : 0)
         .style("cursor", "default")
         .on('mouseover', function () {
-          
+          $(`.cluster_airplane_${id}`).css("fill", '#05ecec')
           $('.tendrils').css("opacity", '0.2')
           $('.circles').css("opacity", '0.2')
           $(`.path_${id}_`).css("stroke-width", '2.8')
@@ -553,6 +575,7 @@ export default class InputParametersD3 {
           d3.selectAll('title').remove()
           $('.tendrils').css("opacity", '1')
           $('.circles').css("opacity", '0.65')
+          $(`.cluster_airplane_${id}`).css("fill", 'white')
         })
       group.append('text')
         .text("x")
@@ -563,7 +586,7 @@ export default class InputParametersD3 {
         .attr('opacity', data.includes('nozzle') ? 1 : 0)
         .style("cursor", "default")
         .on('mouseover', function () {
-          
+          $(`.cluster_airplane_${id}`).css("fill", '#05ecec')
           $('.tendrils').css("opacity", '0.2')
           $('.circles').css("opacity", '0.2')
           $(`.path_${id}_`).css("stroke-width", '2.8')
@@ -578,6 +601,7 @@ export default class InputParametersD3 {
           d3.selectAll('title').remove()
           $('.tendrils').css("opacity", '1')
           $('.circles').css("opacity", '0.65')
+          $(`.cluster_airplane_${id}`).css("fill", 'white')
         })
 
     }
@@ -598,7 +622,7 @@ export default class InputParametersD3 {
         .attr('opacity', data.includes('nozzle') ? 1 : 0)
         .style("cursor", "default")
         .on('mouseover', function () {
-          
+          $(`.cluster_airplane_${id}`).css("fill", '#05ecec')
           $('.tendrils').css("opacity", '0.2')
           $('.circles').css("opacity", '0.2')
           $(`.path_${id}_`).css("stroke-width", '2.8')
@@ -608,11 +632,13 @@ export default class InputParametersD3 {
             .append("title")
             .text("Boundary Condition rho: " + data)
             
+            
         })
         .on('mouseout', function () {
           d3.selectAll('title').remove()
           $('.tendrils').css("opacity", '1')
           $('.circles').css("opacity", '0.65')
+          $(`.cluster_airplane_${id}`).css("fill", 'white')
         })
 
 
