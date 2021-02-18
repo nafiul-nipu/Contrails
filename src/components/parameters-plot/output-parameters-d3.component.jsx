@@ -137,6 +137,8 @@ export default class OutputParametersD3 {
                               .attr("opacity", 1)
                               .attr('d', line(p))
                               .on('mouseover', function () {
+                                    const el_id = this.id.replace("path_","")
+                                    const el_idfinal = el_id.replace("_",'')
                                     $('.tendrils').css("opacity", '0.2')
                                     $('.circles').css("opacity", '0.2')
                                     $(`.${this.id}`).css("stroke-width", '2.8')
@@ -144,15 +146,18 @@ export default class OutputParametersD3 {
                                     $(`.circle_${this.id}`).css("opacity", '1')
                                     d3.select(this)
                                           .append("title")
-                                          .text("Member " + title_id + "\n" + timepoints_tooltip(values)
-                                          )
+                                          .text("Member " + title_id + "\n" + timepoints_tooltip(values))
+                                    $(`.highlight_${el_idfinal}`).css("opacity", '0.7')
                               })
                               .on('mouseout', function () {
+                                    const el_id = this.id.replace("path_","")
+                                    const el_idfinal = el_id.replace("_",'')
                                     d3.select(this)
                                     $(`.${this.id}`).css("stroke-width", '2.5')
                                     $('.tendrils').css("opacity", '1')
                                     $('.circles').css("opacity", '0.65')
                                     d3.selectAll('title').remove()
+                                    $(`.highlight_${el_idfinal}`).css("opacity", '0')
                               })
 
                   }

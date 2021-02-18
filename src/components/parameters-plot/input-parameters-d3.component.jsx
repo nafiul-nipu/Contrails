@@ -1,3 +1,4 @@
+import { getDefaultNormalizer } from '@testing-library/react';
 import * as d3 from 'd3';
 import $ from 'jquery'
 
@@ -618,6 +619,15 @@ export default class InputParametersD3 {
     }
 
     for (var i = 0; i < data.length; i++) {
+      group.append('rect')
+        .attr("x", 40)
+        .attr("y", height * i+ 42)
+        .attr("class", "highlight_"+data[i]['id'])
+        .attr("width", 150)
+        .attr("height", 120)
+        .attr("fill", 'grey')
+        .attr('opacity', 0)
+        .attr('rx', '15')
       draw_aircraft_engine(50, height * i + height / 2 - 10, data[i]['input-parameters']['aircraft-engine'], data[i]['id'])
       draw_geometry(71, height * i + height / 2 - 10, data[i]['input-parameters']['geometry'], data[i]['id'])
       draw_scope(92, height * i + height / 2 - 10, data[i]['input-parameters']['scope'], data[i]['id'])
