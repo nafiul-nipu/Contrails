@@ -49,7 +49,7 @@ class Clusters extends React.Component {
                  return data.PCAdata
              })
           if(data_for_child){
-            new ClustersD3(this.refs.chart_cluster, data_for_child, )
+            new ClustersD3(this.refs.chart_cluster, data_for_child)
           }
 
           

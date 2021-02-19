@@ -665,7 +665,7 @@ export default class InputParametersD3 {
       draw_boundary_U(90, (height * i) + height / 2 + 11, data[i]['input-parameters']['boundary-conditions']['U'], data[i]['id'])
       draw_boundary_p(70, (height * i) + height / 2 - 11, data[i]['input-parameters']['boundary-conditions']['p'], data[i]['id'])
       draw_boundary_k(90, (height * i) + height / 2 - 11, data[i]['input-parameters']['boundary-conditions']['k'], data[i]['id'])
-      draw_boundary_rho(110, height * i + height / 2 - 11, data[i]['input-parameters']['boundary-conditions']['rho'], data[i]['id'])
+      // draw_boundary_rho(110, height * i + height / 2 - 11, data[i]['input-parameters']['boundary-conditions']['rho'], data[i]['id'])
 
 
 
@@ -676,7 +676,7 @@ export default class InputParametersD3 {
 
   update(data) {
     let vis = this
-    d3.selectAll('svg').remove()
+    d3.select(vis.element).select('svg').remove()
     this.draw_airplane(vis.element, data)
 
   }

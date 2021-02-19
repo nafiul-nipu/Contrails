@@ -6,15 +6,15 @@ class InputParameters extends React.Component {
        
     constructor(props){
         super(props);
-        
+        this.chart = React.createRef()
         this.state = {
+
         }
     
     }
 
     componentDidMount(){
-        console.log(this.props.elements)
-        this.setState({chart: new InputParametersD3(this.refs.chartinput, this.props.elements)}) 
+        this.setState({chartinput: new InputParametersD3(this.chart.current, this.props.elements)}) 
     }
 
     // shouldComponentUpdate(){
@@ -23,7 +23,7 @@ class InputParameters extends React.Component {
 
     componentWillReceiveProps(nextProps){
         console.log(nextProps.elements)
-        this.state.chart.update(nextProps.elements)
+        this.state.chartinput.update(nextProps.elements)
 
     }
 
@@ -33,7 +33,7 @@ class InputParameters extends React.Component {
     render(){
         return(
             <div >
-            <div ref="chartinput"></div>
+            <div ref={this.chart}></div>
 
             </div>
         )

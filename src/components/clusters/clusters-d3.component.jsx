@@ -5,7 +5,6 @@ import $ from 'jquery'
 
 export default class ClustersD3 {
     constructor (element, data) {
-
         d3.select(element).select('svg').remove()
 
         const width = 400;

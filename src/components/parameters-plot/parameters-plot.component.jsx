@@ -21,7 +21,7 @@ class ParametersPlot extends React.Component {
             <Container fluid>
                 <Row >
                     <Col xs={6} style={{ margin: "0px", overflowY: 'auto',overflowX: 'hidden', height: '100vh'}} className="airplane-container">
-                        <InputParameters elements={this.props.elements}/>
+                        <InputParameters elements={this.props.elements} />
                     </Col>
                     <Col xs={6} style={{ margin: "0px" }}>
                         <OutputParameters style={{ margin: "0px" }} outputelements={this.props.elements} />

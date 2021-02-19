@@ -11,15 +11,12 @@ export default class OutputParametersD3 {
 
 
 
-      constructor(element, data, data_registry) {
+      constructor(element,  data_registry) {
             this.element = element
-            let vis = this
             this.draw_tendrils(element, data_registry)
-            // vis.update(this.dataRegistry)
       }
 
       draw_tendrils(element, data_registry) {
-
             const dataRegistry = data_registry
 
             const line = d3.line()
@@ -113,7 +110,7 @@ export default class OutputParametersD3 {
 
                         for (var k = 1; k < data[i].length; k++) {
                               var dif = normalized_data[k] - normalized_data[k - 1]
-                              var angle = (dif * 100) * angleRange
+                              var angle = (dif * 50) * angleRange
                               const val = rotate(0, 0, 0, 20, angle);
                               prevX[i] = val[0] + prevX[i];
                               prevY[i] = val[1] + prevY[i];
@@ -209,11 +206,10 @@ export default class OutputParametersD3 {
       }
 
       update(data) {
-            console.log("te-a sunat 2")
-            let vis = this
-            d3.selectAll('svg').remove()
+            let el = this
+            d3.select(el.element).select('svg').remove()
 
-            this.draw_tendrils(vis.element, data)
+            this.draw_tendrils(el.element, data)
 
       }
 
