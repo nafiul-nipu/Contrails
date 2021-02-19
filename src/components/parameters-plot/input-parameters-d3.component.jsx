@@ -29,7 +29,7 @@ export default class InputParametersD3 {
     const group = svg.append('g')
 
     function draw_aircraft_engine(x, y, data, id) {
-      const color = data == "one" ? '#543005' : "#f8c587"
+      const color = data == "one" ? '#b2182b' : "#d6604d"
       group.append('rect')
         .attr("x", x)
         .attr("y", y)
@@ -57,7 +57,7 @@ export default class InputParametersD3 {
 
     }
     function draw_geometry(x, y, data, id) {
-      const color = data == "short" ? '#8c510a' : data == "cowl" ? "#2a8a0a" : "#0a6a8a"
+      const color = data == "short" ? '#1a9850' : data == "cowl" ? "#66bd63" : "#a6d96a"
       group.append('rect')
         .attr("x", x)
         .attr("y", y)
@@ -84,7 +84,7 @@ export default class InputParametersD3 {
     }
 
     function draw_scope(x, y, data, id) {
-      const color = data == "nozzle" ? "#bf812d" : "#bebe2d"
+      const color = data == "nozzle" ? "#542788" : "#8073ac"
       group.append('rect')
         .attr("x", x)
         .attr("y", y)
@@ -111,7 +111,7 @@ export default class InputParametersD3 {
     }
 
     function draw_grid(x, y, data, id) {
-      const color = data == "coase" ? '#dfc27d' : data == "medium" ? "#c6de7c" : "#7c95de"
+      const color = data == "coase" ? '#92c5de' : data == "medium" ? "#4393c3" : "#2166ac"
       group.append('rect')
         .attr("x", x)
         .attr("y", y)
@@ -138,7 +138,7 @@ export default class InputParametersD3 {
 
     }
     function draw_solution(x, y, data, id) {
-      const color = data == "coupled" ? 'yellow' : "black"
+      const color = data == "coupled" ? '#bebebe' : "#bebebe"
       group.append('rect')
         .attr("x", x)
         .attr("y", y)
@@ -162,10 +162,36 @@ export default class InputParametersD3 {
           $('.circles').css("opacity", '0.65')
           $(`.cluster_airplane_${id}`).css("fill", 'white')
         })
+        group.append('text')
+        .text("x")
+        .attr("color", 'black')
+        .attr("x", x+4)
+        .attr("y", y + 17)
+        .attr("font-size", 'x-large')
+        .attr('opacity', data.includes('uncoupled') ? 0 : 1)
+        .style("cursor", "default")
+        .on('mouseover', function () {
+          $(`.cluster_airplane_${id}`).css("fill", '#05ecec')
+          $('.tendrils').css("opacity", '0.2')
+          $('.circles').css("opacity", '0.2')
+          $(`.path_${id}_`).css("stroke-width", '2.8')
+                .css('opacity', 1)
+          $(`.circle_${id}`).css("opacity", '1')
+          d3.select(this)
+            .append("title")
+            .text("Solution: " + data)
+            
+        })
+        .on('mouseout', function () {
+          d3.selectAll('title').remove()
+          $('.tendrils').css("opacity", '1')
+          $('.circles').css("opacity", '0.65')
+          $(`.cluster_airplane_${id}`).css("fill", 'white')
+        })
 
     }
     function draw_turbulence(x, y, data, id) {
-      const color = data == "T1" ? '#f5f5f5' : "#999999"
+      const color = data == "T1" ? '#F1B900' : "#fee08b"
       group.append('rect')
         .attr("x", x)
         .attr("y", y)
@@ -199,7 +225,7 @@ export default class InputParametersD3 {
         .attr("y", y)
         .attr("width", 12)
         .attr("height", 5 * 12 + 1)
-        .attr("fill", '#edf8fb')
+        .attr("fill", '#bebebe')
 
       group.append('rect')
         .attr("x", x)
@@ -367,7 +393,7 @@ export default class InputParametersD3 {
         .attr("y", y)
         .attr("width", 12)
         .attr("height", 3 * 12)
-        .attr("fill", '#ccece6')
+        .attr("fill", '#bebebe')
 
       group.append('rect')
         .attr("x", x)
@@ -469,7 +495,7 @@ export default class InputParametersD3 {
         .attr("y", y - 2 * 12 - 1)
         .attr("width", 12)
         .attr("height", 2 * 12 + 1)
-        .attr("fill", '#f1eef6')
+        .attr("fill", '#bebebe')
 
       group.append('rect')
         .attr("x", x)
@@ -542,7 +568,7 @@ export default class InputParametersD3 {
         .attr("y", y - 2 * 12 - 1)
         .attr("width", 12)
         .attr("height", 2 * 12 + 1)
-        .attr("fill", '#d4b9da')
+        .attr("fill", '#bebebe')
 
       group.append('rect')
         .attr("x", x)
@@ -612,7 +638,7 @@ export default class InputParametersD3 {
         .attr("y", y - 1 * 12 - 1)
         .attr("width", 12)
         .attr("height", 1 * 12 + 1)
-        .attr("fill", '#feebe2')
+        .attr("fill", '#bebebe')
       group.append('text')
         .text("x")
         .attr("color", 'black')
@@ -657,9 +683,9 @@ export default class InputParametersD3 {
       draw_aircraft_engine(50, height * i + height / 2 - 10, data[i]['input-parameters']['aircraft-engine'], data[i]['id'])
       draw_geometry(71, height * i + height / 2 - 10, data[i]['input-parameters']['geometry'], data[i]['id'])
       draw_scope(92, height * i + height / 2 - 10, data[i]['input-parameters']['scope'], data[i]['id'])
-      draw_grid(113, height * i + height / 2 - 10, data[i]['input-parameters']['grid'], data[i]['id'])
-      draw_solution(134, height * i + height / 2 - 10, data[i]['input-parameters']['solution'], data[i]['id'])
-      draw_turbulence(155, height * i + height / 2 - 10, data[i]['input-parameters']['turbulence'], data[i]['id'])
+      draw_grid(134, height * i + height / 2 - 10, data[i]['input-parameters']['grid'], data[i]['id'])
+      draw_solution(155, height * i + height / 2 - 10, data[i]['input-parameters']['solution'], data[i]['id'])
+      draw_turbulence(113, height * i + height / 2 - 10, data[i]['input-parameters']['turbulence'], data[i]['id'])
 
       draw_boundary_T(70, (height * i) + height / 2 + 11, data[i]['input-parameters']['boundary-conditions']['T'], data[i]['id'])
       draw_boundary_U(90, (height * i) + height / 2 + 11, data[i]['input-parameters']['boundary-conditions']['U'], data[i]['id'])

@@ -94,7 +94,7 @@ export default class OutputParametersD3 {
 
             function create_tendril_plot(data, prevX_first, prevY_first, points, title, ids, color) {
                   svg.append("text").text(title)
-                        .attr('transform', `translate(${prevX_first + 30},${prevY_first - 45})`)
+                        .attr('transform', `translate(${prevX_first + 30},${prevY_first - 35})`)
                         .attr('fill', 'white')
 
                   var prevX = new Array(data.length)
@@ -195,14 +195,24 @@ export default class OutputParametersD3 {
                   return e['k_eul_avg_timepoints']
             })
 
-            create_tendril_plot(T_lags, 50, 100, [{ x: 50, y: 100 }], 'T_lag_avg', ids, '#b2182b')
-            create_tendril_plot(T_euls, 50, 220, [{ x: 50, y: 220 }], 'T_eul_avg', ids, '#d6604d')
-            create_tendril_plot(d_lags, 50, 340, [{ x: 50, y: 340 }], 'd_lag_avg', ids, '#f4a582')
-            create_tendril_plot(rho_lags, 50, 460, [{ x: 50, y: 460 }], 'rho_lag_avg', ids, '#fddbc7')
-            create_tendril_plot(rho_euls, 50, 580, [{ x: 50, y: 580 }], 'rho_eul_avg', ids, '#d1e5f0')
-            create_tendril_plot(k_euls, 50, 700, [{ x: 50, y: 700 }], 'k_eul_avg', ids, '#92c5de')
-            create_tendril_plot(p_euls, 50, 830, [{ x: 50, y: 830 }], 'p_eul_avg', ids, '#4393c3')
+            // create_tendril_plot(T_lags, 50, 100, [{ x: 50, y: 100 }], 'T_lag_avg', ids, '#b2182b')
+            // create_tendril_plot(T_euls, 50, 220, [{ x: 50, y: 220 }], 'T_eul_avg', ids, '#d6604d')
+            // create_tendril_plot(d_lags, 50, 340, [{ x: 50, y: 340 }], 'd_lag_avg', ids, '#f4a582')
+            // create_tendril_plot(rho_lags, 50, 460, [{ x: 50, y: 460 }], 'rho_lag_avg', ids, '#fddbc7')
+            // create_tendril_plot(rho_euls, 50, 580, [{ x: 50, y: 580 }], 'rho_eul_avg', ids, '#d1e5f0')
+            // create_tendril_plot(k_euls, 50, 700, [{ x: 50, y: 700 }], 'k_eul_avg', ids, '#92c5de')
+            // create_tendril_plot(p_euls, 50, 830, [{ x: 50, y: 830 }], 'p_eul_avg', ids, '#4393c3')
 
+            
+            create_tendril_plot(T_lags, 50, 100, [{ x: 50, y: 100 }], 'T_lag_avg', ids, '#FF6F61')
+            create_tendril_plot(T_euls, 50, 220, [{ x: 50, y: 220 }], 'T_eul_avg', ids, '#FF6F61')
+            create_tendril_plot(d_lags, 50, 340, [{ x: 50, y: 340 }], 'd_lag_avg', ids, '#FF6F61')
+            create_tendril_plot(rho_lags, 50, 460, [{ x: 50, y: 460 }], 'rho_lag_avg', ids, '#FF6F61')
+            create_tendril_plot(rho_euls, 50, 580, [{ x: 50, y: 580 }], 'rho_eul_avg', ids, '#FF6F61')
+            create_tendril_plot(k_euls, 50, 700, [{ x: 50, y: 700 }], 'k_eul_avg', ids, '#FF6F61')
+            create_tendril_plot(p_euls, 50, 830, [{ x: 50, y: 830 }], 'p_eul_avg', ids, '#FF6F61')
+
+           
       }
 
       update(data) {

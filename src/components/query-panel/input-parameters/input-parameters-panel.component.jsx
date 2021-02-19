@@ -16,51 +16,83 @@ class InputParametersPanel extends React.Component {
     handleButton(param) {
         var new_param = param.target.id.toString()
         this.props.onInputSelectChange(new_param)
-        // this.setState({paramType: event.target.value});
       }
 
 
-    componentDidMount(){
-        //fetch('/backendscript', {method:"POST", mode: 'cors', cache:"no-cache", headers:{"content_type":"application/json"},body:JSON.stringify(this.state.value)}).then(res => res.json()).then(data => this.setState({currentVal:data.val}))
-    }
-
     render(){
         return(
-            // <div>Query panel and val is {this.state.currentVal}</div>
             <div className="mx-auto" >
             <h6 >Input Parameters</h6>
-            <div style={{textAlign: 'left', marginLeft:"10%"}}>
+            <div style={{textAlign: 'left', marginLeft:"7%"}}>
             <div style={{color:"grey", marginTop:"5%"}}>Aircraft Engine -Steams</div>
             <Form  >
-
                 <Form.Check inline  type="checkbox"  id="aircraft-engine-one" label="one" onChange={this.handleButton} className="airplane-one"/>
+                <svg class="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#b2182b" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="8" height="8" rx="1" />
+                </svg>
                 <Form.Check inline  type="checkbox"  id="aircraft-engine-two" label="two" onChange={this.handleButton}/>
+                <svg class="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#d6604d" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="8" height="8" rx="1" />
+                </svg>
             </Form>
             <div style={{color:"grey", marginTop:"5%"}}>Geometry</div>
             <Form  >
                 <Form.Check inline  type="checkbox" id="geometry-short" label="short" onChange={this.handleButton}/>
+                <svg class="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#1a9850" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="8" height="8" rx="1" />
+                </svg>
                 <Form.Check inline  type="checkbox" id="geometry-cowl" label="cowl" onChange={this.handleButton}/>
+                <svg class="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#66bd63" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="8" height="8" rx="1" />
+                </svg>
                 <Form.Check inline  type="checkbox" id="geometry-nozzle" label="nozzle" onChange={this.handleButton}/>
+                <svg class="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#a6d96a" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="8" height="8" rx="1" />
+                </svg>
             </Form>
             <div style={{color:"grey", marginTop:"5%"}}>Scope</div>
             <Form  >
                 <Form.Check inline  type="checkbox" id="scope-nozzle" label="nozzle" onChange={this.handleButton}/>
+                <svg class="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#542788" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="8" height="8" rx="1" />
+                </svg>
                 <Form.Check inline  type="checkbox" id="scope-whole" label="whole" onChange={this.handleButton}/>
+                <svg class="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#8073ac" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="8" height="8" rx="1" />
+                </svg>
             </Form>
+            <div style={{color:"grey", marginTop:"5%"}}>Turbulence Model</div>
+            <Form  >
+                <Form.Check inline  type="checkbox" id="turbulence-T1" label="T1" onChange={this.handleButton}/>
+                <svg class="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#ffd400" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="8" height="8" rx="1" />
+                </svg>
+                <Form.Check inline  type="checkbox" id="turbulence-T2" label="T2" onChange={this.handleButton}/>
+                <svg class="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#fee08b" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="8" height="8" rx="1" />
+                </svg>
+                </Form>
             <div style={{color:"grey", marginTop:"5%"}}>Grid Resolution</div>
             <Form  >
                 <Form.Check inline  type="checkbox" id="grid-coarse" label="coarse" onChange={this.handleButton}/>
+                <svg class="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#92c5de" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="8" height="8" rx="1" />
+                </svg>
                 <Form.Check inline  type="checkbox" id="grid-medium" label="medium" onChange={this.handleButton}/>
+                <svg class="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#4393c3" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="8" height="8" rx="1" />
+                </svg>
                 <Form.Check inline  type="checkbox" id="grid-fine" label="fine" onChange={this.handleButton}/>
+                <svg class="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#2166ac" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="8" height="8" rx="1" />
+                </svg>
             </Form>
             <div style={{color:"grey", marginTop:"5%"}}>Solution -coupled</div>
             <Form  >
                 <Form.Check inline  type="checkbox" id="solution-coupled" label="true" onChange={this.handleButton}/>
                 <Form.Check inline  type="checkbox" id="solution-uncoupled" label="false" onChange={this.handleButton}/>
             </Form>
-            <div style={{color:"grey", marginTop:"5%"}}>Turbulence Model</div>
-                <Form.Check inline  type="checkbox" id="turbulence-T1" label="T1" onChange={this.handleButton}/>
-                <Form.Check inline  type="checkbox" id="turbulence-T2" label="T2" onChange={this.handleButton}/>
+
             <div style={{"color":"#BEBEBE", marginTop: "10px"}}>Boundary Conditions</div>
             <div style={{color:"grey", marginTop:"5%"}}>T</div>
             <Form  >
@@ -91,8 +123,6 @@ class InputParametersPanel extends React.Component {
                 <Form.Check inline  type="checkbox" id="boundary-rho-nozzle" label="nozzle" onChange={this.handleButton}/>
             </Form>
 
-
-        
         
         </div>
         </div>
