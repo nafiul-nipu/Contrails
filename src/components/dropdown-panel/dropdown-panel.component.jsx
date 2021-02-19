@@ -6,33 +6,54 @@ import './dropdown-panel.style.css'
 
 import dataRegistry from '../data-component/dataRegistry.json'
 
-import mainComponent from '../projection-container/projection-container.component'
+import ProjectionContainer from '../projection-container/projection-container.component'
 
 // let slider;
 class DropdownPanel extends React.Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
 
         }
+
+        this.firstDropdown = React.createRef()
+        this.members = React.createRef()
     
     }
 
-    createDropdown = (object,threeDivname, memberNumber, divName, idName, objectForScatter, divForScatter) =>{
-        let list = dataRegistry[(memberNumber - 1)].timeSteps;
-        // console.log(divName.className)
-        d3.select(divName).attr("class", "dropdownMenu")
+    componentDidMount(){
+        // console.log(this.props.renderArea)
+        if(this.props.renderArea === 'top'){
+            d3.select(this.firstDropdown.current).attr("id", "top")
+            this.createDropdown(1)
+            
+        }else if (this.props.renderArea === 'bottom'){
+            d3.select(this.firstDropdown.current).attr("id", "bottom")
+            this.createDropdown(6)
+           
+        }
+        // console.log(this.props.dropdownUpdate())
+        // console.log(this.props.sliderUpdate())
 
-        d3.select(divName).append('select')
+    }
+
+    createDropdown = (memberNumber) =>{
+        const self = this;
+        let list = dataRegistry[(memberNumber - 1)].timeSteps;
+        let id = `#${self.props.renderArea}`
+        // console.log( id)
+        d3.select(id).attr("class", "dropdownMenu")
+
+        d3.select(id).append('select')
                         .attr('class', "members")
-                        .attr("id", `member${idName}`)
+                        .attr("id", `member${this.props.renderArea}`)
                         .on('change', function(){
                             let folder = this.value
                             let list = dataRegistry[(folder - 1)].timeSteps
                             // console.log(folder)
                             // console.log(list)
                             // console.log(idName)
-                            updateDropdown(folder, list)
+                            self.updateDropdown( folder, list)
                         })
                         .selectAll('option')
                         .data(dataRegistry)
@@ -50,22 +71,26 @@ class DropdownPanel extends React.Component {
                         })
                         .text((d) => {return "Member : "+d.ensembleMember})
 
-        d3.select(divName).append('button')
-                        .attr('class', `btn${idName}`)
+        d3.select(id).append('button')
+                        .attr('class', `btn${this.props.renderArea}`)
                         .attr('id', "play-pause-btn")
                         .attr('value', 'pause')
                         .text('Pause')
 
-        createSlider(list)
+        this.createSlider(list, memberNumber)
 
-        function createSlider(list){
-            let container = d3.select(divName).node().parentNode.clientWidth;
-            let select = d3.select(".members").node().clientWidth;
+    }
+
+    createSlider = (list, memberNumber) =>{
+        // console.log(list)
+        const self = this
+            let container = d3.select(this.firstDropdown.current).node().parentNode.clientWidth;
+            let select = d3.select(`#member${self.props.renderArea}`).node().clientWidth;
             let button = d3.select('#play-pause-btn').node().clientWidth;
             let margin = select + button
             let width = container - margin * 1.75
             // console.log(container, select, button, width)
-            // const height = d3.select(divName).node().clientHeight;
+            // const height = d3.select(this.firstDropdown.current).node().clientHeight;
             // console.log(select * 1.25)
             let slider = sliderHorizontal()
                             .min(d3.min(list))
@@ -78,34 +103,39 @@ class DropdownPanel extends React.Component {
                             .width(width - 50)
                             .on('onchange', function(){
                                 let file = +(d3.format('.2f')(slider.value()));
-                                let folder = +($(`#member${idName}`).val());
-                                // console.log("file ", file)
-                                // console.log("folder ", folder)
+                                let folder = +($(`#member${self.props.renderArea}`).val());
+                                // console.log(file, folder)
                                 setTimeout(() => {
-                                    let container = new mainComponent()
-                                    container.dataLoader(object, folder, file, threeDivname, objectForScatter, divForScatter);
-                                    animation(slider);                
-                                }, 5000);
+                                    // console.log()
+                                    // let container = new mainComponent()
+                                    // after_data_loaded(object, threethis.firstDropdown.current, objectForScatter, divForScatter, file, folder) 
+                                    // container.loaded()
+                                    // animation(slider);    
+                                    self.props.sliderUpdate(file, folder);
+                                    self.animation(slider);             
+                                }, 3000);
+                                
                             })
 
-            d3.select(`.btn${idName}`).on('click', function(d){
-                    console.log(this.value, "  ", idName)
+            d3.select(`.btn${self.props.renderArea}`).on('click', function(d){
+                    console.log(`.btn${self.props.renderArea}`)
                     if(this.value === 'play'){
-                        d3.select(`.btn${idName}`).attr('value', 'pause')
+                        d3.select(`.btn${self.props.renderArea}`).attr('value', 'pause')
                                             .text('Pause')
                         setTimeout(() => {
-                            animation(slider);                
-                        }, 5000);
+                            self.animation(slider);                
+                        }, 3000);
+                    //    self. animation(slider);
                     }else if(this.value === 'pause'){
-                        d3.select(`.btn${idName}`).attr('value', 'play')
+                        d3.select(`.btn${self.props.renderArea}`).attr('value', 'play')
                                             .text('Play')
                     }
                     
                 })
 
-            d3.select(divName).append('svg')
+            d3.select(`#${self.props.renderArea}`).append('svg')
                                 .attr('class', 'slider-svg')
-                                .attr('id', `slider${idName}`)
+                                .attr("id", `slider${this.props.renderArea}`)
                                 .attr('width', width )
                                 .attr('height', 70)
                                 .append('g')
@@ -113,31 +143,37 @@ class DropdownPanel extends React.Component {
                                 .call(slider)
 
             setTimeout(() => {
-                animation(slider);                
-            }, 5000);
+                self.animation(slider);                
+            }, 3000);
             
         
         }
 
-        function updateDropdown(folder, list){
-            // console.log(folder, id)
-            d3.select(`#slider${idName}`).remove()
-            createSlider(list)
+    updateDropdown = ( folder, list) => {
+        const self= this
+            // console.log(folder, list)
+            d3.select(`#slider${self.props.renderArea}`).remove()
+            this.createSlider(list, folder)
+            this.props.dropdownUpdate(folder, list)
 
-            setTimeout(() => {
-                let container = new mainComponent();
-                container.dataLoader(object, folder, list[0], threeDivname, objectForScatter, divForScatter)               
-            }, 5000);            
+            // setTimeout(() => {
+            //     let container = new mainComponent();
+            //     // object, threeDiv, objectForScatter, divForScatter, file, folder
+            //     container.dataLoader(object, threethis.firstDropdown.current, objectForScatter, divForScatter, list[0], folder);    
+            // }, 3000);            
 
         }
 
-        function animation(slider){
+    animation = (slider) =>{
+        const self = this
+        // console.log('i am animaiton')
             // console.log(+(d3.format('.2f')(slider.value())))
-            if( $(`.btn${idName}`).val() === 'pause'){
+            // console.log($(`.btn`).val())
+            if( $(`.btn${self.props.renderArea}`).val() === 'pause'){
                 // setTimeout(() => {
                     let currentValue = +(d3.format('.2f')(slider.value()))
-                    let folder = +($(`#member${idName}`).val());
-                    console.log("file ", currentValue, " folder", folder)
+                    let folder = +($(`#member${self.props.renderArea}`).val());
+                    // console.log("file ", currentValue, " folder", folder)
                     // console.log("folder ", folder)
                     let list = dataRegistry[folder - 1].timeSteps;
                     let index = list.indexOf(currentValue)
@@ -156,92 +192,13 @@ class DropdownPanel extends React.Component {
 
         }
 
+
+    render(){
+        return(
+        <div ref={this.firstDropdown} ></div>
+        )
     }
     
 }
 
 export default DropdownPanel;
-
-
-
-
-
-// dropdown timesteps codes
-
-        // d3.select(divName).append('button')
-        //                 .attr("id", "button")
-        //                 .text("Previous")
-        //                 .on("click", function(){
-        //                     // console.log(idName)
-        //                     let previousIndex;
-        //                     let value = +($(`#timestep${idName}`).val());
-        //                     // console.log(value)
-        //                     let member = +($(`#member${idName}`).val());
-        //                     // console.log(member)
-        //                     let timeList = dataRegistry[(member - 1)].timeSteps
-        //                     // console.log(timeList)
-        //                     let index = timeList.indexOf(value);
-        //                     let total = timeList.length - 1;
-        //                     if(index != 0){
-        //                         previousIndex = index - 1;
-        //                     }else{
-        //                         previousIndex = total;
-        //                     }
-        //                     let folder = member;
-        //                     let file = timeList[previousIndex];
-        //                     $(`#timestep${idName}`).val(file)
-        //                     let container = new mainComponent()
-        //                     container.dataLoader(object, folder, file, threeDivname, objectForScatter, divForScatter)
-        //                     // console.log(list[nextIndex])
-        //                     // console.log(folder, file)
-                            
-        //                 })
-
-        // d3.select(divName).append('label')
-        //                  .attr('for', 'timesteps')
-        //                  .text("Time steps")
-
-        // d3.select(divName).append('select')
-        //                 .attr('class', 'timesteps')
-        //                 .attr('id', `timestep${idName}`)
-        //                 .on("change", function(){
-        //                     // console.log(memberNumber)
-        //                     let folder = +($(`#member${idName}`).val());;
-        //                     let file = this.value;
-        //                     // console.log(file)
-        //                     let container = new mainComponent();
-        //                     container.dataLoader(object, folder, file, threeDivname, objectForScatter, divForScatter)
-        //                 })
-        //                 .selectAll('option')
-        //                 .data(dataRegistry[(memberNumber - 1)].timeSteps)
-        //                 .enter()
-        //                 .append('option')
-        //                 .attr('id', function(d){ return d})
-        //                 .attr('value', function(d){return d})
-        //                 .text((d) => {return d})
-
-        // d3.select(divName).append('button')
-        //                 .attr('id', "button")
-        //                 .text("Next")
-        //                 .on("click", function(){
-        //                     // console.log(idName)
-        //                     let nextIndex;
-        //                     let value = +($(`#timestep${idName}`).val());
-        //                     // console.log(value)
-        //                     let member = +($(`#member${idName}`).val());
-        //                     // console.log(member)
-        //                     let timeList = dataRegistry[(member - 1)].timeSteps
-        //                     // console.log(timeList)
-        //                     let index = timeList.indexOf(value);
-        //                     let total = timeList.length - 1;
-        //                     if(index != total){
-        //                         nextIndex = (index % total) + 1;
-        //                     }else{
-        //                         nextIndex = 0;
-        //                     }
-        //                     let folder = member;
-        //                     let file = timeList[nextIndex];
-        //                     $(`#timestep${idName}`).val(file)
-        //                     let container = new mainComponent()
-        //                     container.dataLoader(object, folder, file, threeDivname, objectForScatter, divForScatter)                          
-        //                 })

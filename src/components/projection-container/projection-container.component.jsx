@@ -1,5 +1,6 @@
 import React from 'react';
 import * as d3 from 'd3'
+import * as THREE from "three";
 
 import Projection from '../projection-3d/projection.component'
 import DropdownPanel from '../dropdown-panel/dropdown-panel.component';
@@ -26,21 +27,16 @@ let scatterObject2 = new Scatter();
 class ProjectionContainer extends React.Component {
     constructor(props){
         super();
+
         this.state = {
+            state_all_data : null,
+            state_all_tempDomain : null,
+            state_all_xDomain : null,
+            state_all_yDomain : null,
 
+            state_three_positions : null,
+            state_colors : null
         }
-        // this.props.renderArea = renderArea;
-
-        this.firstCanvas = React.createRef(); 
-        this.firstThree = React.createRef(); 
-        this.firstDropdown = React.createRef();
-        this.firstScatter = React.createRef();
-
-
-        // this.secondCanvas = React.createRef(); 
-        // this.secondThree = React.createRef(); 
-        // this.secondDropdown = React.createRef();
-        // this.secondScatter = React.createRef();
     
     }
 
@@ -49,49 +45,67 @@ class ProjectionContainer extends React.Component {
         // data registry is a json file manually added the member and data names
         // creating the dropdowns first
         // by default first and second member will be selected
-
+        // console.log(this.test)
+        const self = this;
         if(this.props.renderArea === "top"){
-            this.dropdownCreator(threeObject1, this.firstThree.current, dropdownObject1, 1, this.firstDropdown.current, idName1,scatterObject1, this.firstScatter.current)
-            //creating the first particlesystem
-            //we want the scene loaded 
-            //then the particle system will change.. no need to render the scene everytime?
-            this.createScene(threeObject1, this.firstThree.current, this.firstCanvas.current)
-            //now we want to load the data particle system and the scatter plot
-            this.forPromise(threeObject1, 1, 2.31, this.firstThree.current, scatterObject1, this.firstScatter.current).then(function(){
-                console.log("first 3D loaded")
+            this.forPromise(1, 2.31).then(function(){
+                // <Projection id = {self.firstDropdown.current} data={self.state}/>
+                console.log('done top')
             })
-        }else if (this.props.renderArea === 'bottom'){
-
-            this.dropdownCreator(threeObject2, this.firstThree.current, dropdownObject2, 6, this.firstDropdown.current, idName2,scatterObject1, this.firstScatter.current)     
-            this.createScene(threeObject2, this.firstThree.current, this.firstCanvas.current)   
-            this.forPromise(threeObject2, 6, 0.1, this.firstThree.current, scatterObject2, this.firstScatter.current).then(function(){
-
-                console.log("second 3D loaded")
+        }else if(this.props.renderArea === 'bottom'){
+            this.forPromise(6, 0.1).then(function(){
+                // <Projection id = {self.firstDropdown.current} data={self.state}/>
+                console.log('done bottom')
             })
-        }      
+        }  
         
     }
 
-
-    dropdownCreator = (object, threeDivname, dropdown, memberNumber, divName, idName, objectForScatter, divForScatter) =>{        
-        dropdown.createDropdown(object,threeDivname, memberNumber, divName, idName, objectForScatter, divForScatter)
+    updateDropdown = (folder, list) =>{
+        // this.ref.childCall.test_scatter()
+        const self = this
+        // console.log(folder, list)
+        setTimeout(() => {
+                self.forPromise(folder, list[0]).then(function(){
+                // <Projection id = {self.firstDropdown.current} data={self.state}/>
+                // console.log('done bottom')
+                let list = dataRegistry[folder-1].timeSteps
+                let index =  list.indexOf(list[0])
+                self.updateSlider(list[0], folder);
+                self.updateScatterPlot(index)
+            })  
+            }, 5000);  
+        console.log("i am dropdown update")
+        
     }
 
-    createScene = (object, threediv, canvas) =>{
-        object.sceneSetup(threediv, canvas)
-        // console.log("createScene")
-        // console.log(three)
+    updateScatterPlot = (index) => {
+        this.scatterPlot.scatterplot(index)
     }
-
-    forPromise = (object, folder, file, div, objectForScatter, divForScatter) =>{
-        return Promise.resolve(this.dataLoader(object, folder, file, div, objectForScatter, divForScatter))
-
-    }
-
-    dataLoader = (object, folder, file, divName, objectForScatter, divForScatter) =>{
-        // console.log(folder, file)
+    updateSlider = (file, folder) =>{
+        // console.log("I am slider update")
+        // console.log(file, folder)
         let list = dataRegistry[folder-1].timeSteps
-        // console.log()
+        let index =  list.indexOf(file)
+        // console.log(index)
+        // position data colors and member
+        // this.scatterPlot.test()
+        this.threePlot.addCustomSceneObjects(this.state.state_three_positions[index], this.state.state_colors[index], folder); 
+        // this.scatterPlot.scatterplot(index)
+
+    }
+
+    forPromise = (folder, file) =>{
+        return Promise.resolve(this.dataLoader(folder, file))
+
+    }
+
+    dataLoader = (folder, file) =>{
+        // console.log(folder, file)
+        const self = this;
+        // console.log(this.state)
+        let list = dataRegistry[folder-1].timeSteps
+        
         // let url_checker = []
         let promises = []
         for(let i = 0; i< list.length; i++){
@@ -102,35 +116,109 @@ class ProjectionContainer extends React.Component {
         // console.log('promises')
         // console.log(promises)
         Promise.all(promises).then(function(files){
+            // console.log(self.state)
             // let url = `https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/data/${folder}/${file}.csv`
             let data = []
+            let all_data = {}
+            let all_tempDomain = {}
+            let all_xDomain = {}
+            let all_yDomain = {}
+
+            let three_positions = {};
+            let colors = {}
+            let tempColor = ["#fff5f0","#67000d"]
+            let tempscaling = d3.scaleLinear(/*d3.schemeReds[9]*/)
+                            .range(tempColor);
+
             let tempDomain = {}
             let xDomain = {}
             let yDomain = {}
-            let index = list.indexOf(file)
-            console.log(file, index)
-            let particle_limit = 0;
-            files[index].forEach(d => {
-                particle_limit = particle_limit + 1;
-                if(particle_limit % 10 == 0){
-                    data.push({
-                        x: parseFloat(d['Points:0']),
-                        y: parseFloat(d['Points:1']),
-                        z: parseFloat(d['Points:2']),
-                        temp: parseFloat(d['T'])
-                    });
+            // console.log(file, index)
+            // let particle_limit = 0;
 
-                }
-                
-                tempDomain.min = Math.min(tempDomain.min || Infinity, parseFloat(d['T']));
-                tempDomain.max = Math.max(tempDomain.max || -Infinity, parseFloat(d['T']));
+            files.forEach(function (value, i) {
+                // console.log('%d: %s', i, value);
+                all_data[i] = []
+                all_tempDomain[i] = {}
+                all_xDomain[i] = {}
+                all_yDomain[i] = {}
+                value.forEach(d => {
+                    // particle_limit = particle_limit + 1;
+                    // if(particle_limit % 10 == 0){
+                        all_data[i].push({
+                            x: parseFloat(d['Points:0']),
+                            y: parseFloat(d['Points:1']),
+                            z: parseFloat(d['Points:2']),
+                            temp: parseFloat(d['T'])
+                        });
+    
+                    // }
+                    
+                    all_tempDomain[i].min = Math.min(all_tempDomain[i].min || Infinity, parseFloat(d['T']));
+                    all_tempDomain[i].max = Math.max(all_tempDomain[i].max || -Infinity, parseFloat(d['T']));
+    
+                    all_xDomain[i].min = Math.min(all_xDomain[i].min || Infinity, parseFloat(d['Points:0']));
+                    all_xDomain[i].max = Math.max(all_xDomain[i].max || -Infinity, parseFloat(d['Points:0']));
+    
+                    all_yDomain[i].min = Math.min(all_yDomain[i].min || Infinity, parseFloat(d['Points:1']));
+                    all_yDomain[i].max = Math.max(all_yDomain[i].max || -Infinity, parseFloat(d['Points:1']));
+                })
+            });
+            // console.log(all_data)
+            // console.log(all_tempDomain)
+            // console.log(all_xDomain)
+            // console.log(all_yDomain)
 
-                xDomain.min = Math.min(xDomain.min || Infinity, parseFloat(d['Points:0']));
-                xDomain.max = Math.max(xDomain.max || -Infinity, parseFloat(d['Points:0']));
+            files.forEach(function (value, i) {
+                // console.log('%d: %s', i, value);
+                three_positions[i] = []
+                colors[i] = []
+                tempscaling.domain([all_tempDomain[i].min, all_tempDomain[i].max])
+                // console.log(value)
+                value.forEach(d => {
+                    three_positions[i].push(parseFloat(d['Points:0']), parseFloat(d['Points:1']), parseFloat(d['Points:2']))
+                    //   geometry.vertices.push(new Float32Array([d.x, d.y, d.z]));                    
+                    let rgb = tempscaling(parseFloat(d['T']));
+                    let color = new THREE.Color(rgb);
+                    // console.log(color)
+                    colors[i].push(color.r, color.g, color.b);
+                })
+            });
 
-                yDomain.min = Math.min(yDomain.min || Infinity, parseFloat(d['Points:1']));
-                yDomain.max = Math.max(yDomain.max || -Infinity, parseFloat(d['Points:1']));
+            self.setState({
+                state_all_data : all_data,
+                state_all_tempDomain : all_tempDomain,
+                state_all_xDomain : all_xDomain,
+                state_all_yDomain : all_yDomain,
+
+                state_three_positions : three_positions,
+                state_colors : colors
+
             })
+
+            // console.log(self.state)
+
+            // files[index].forEach(d => {
+            //     particle_limit = particle_limit + 1;
+            //     if(particle_limit % 10 == 0){
+            //         data.push({
+            //             x: parseFloat(d['Points:0']),
+            //             y: parseFloat(d['Points:1']),
+            //             z: parseFloat(d['Points:2']),
+            //             temp: parseFloat(d['T'])
+            //         });
+
+            //     }
+                
+            //     tempDomain.min = Math.min(tempDomain.min || Infinity, parseFloat(d['T']));
+            //     tempDomain.max = Math.max(tempDomain.max || -Infinity, parseFloat(d['T']));
+
+            //     xDomain.min = Math.min(xDomain.min || Infinity, parseFloat(d['Points:0']));
+            //     xDomain.max = Math.max(xDomain.max || -Infinity, parseFloat(d['Points:0']));
+
+            //     yDomain.min = Math.min(yDomain.min || Infinity, parseFloat(d['Points:1']));
+            //     yDomain.max = Math.max(yDomain.max || -Infinity, parseFloat(d['Points:1']));
+            // })
             console.log("data")
             // console.log(data)
             // console.log(tempDomain)
@@ -138,51 +226,59 @@ class ProjectionContainer extends React.Component {
             // console.log(three)
             // three.addCustomSceneObjects(data, tempDomain);        
             // three.widnowResizeHandler(divName)
-            updateThreeScatter(object, data, tempDomain, divName, objectForScatter, divForScatter, folder)
-
-            function updateThreeScatter(object, particleData, tempDomain, threeDiv, objectForScatter, divForScatter, member){
-                object.addCustomSceneObjects(particleData, tempDomain, member);        
-                object.widnowResizeHandler(threeDiv)
-                // console.log(tempDomain, xDomain, yDomain)
-                objectForScatter.scatterplot(particleData, tempDomain, xDomain, yDomain, divForScatter)
-    
-                console.log("updated")
-    
-            }
-            
-        })
-
-        
+            // self.updateThreeScatter(object, divName, objectForScatter, divForScatter, file, folder)            
+        })     
                
 
     }
 
-
     render(){
-        return(
-            <Row xs={3}> 
-                {/* 3d view and the dropdown */}
-                <Col xs={6}>
-                    <Row xs={2}>
-                        <Col xs={12} style={{height:'5vh', backgroundColor:'#31393F'}} >
-                            {/* <DropdownPanel/> */}
-                            <div ref={this.firstDropdown} ></div>
-                        </Col>
-                    </Row>
-                    <Row xs={10}>
-                        <Col xs={12} style={{height:'22vh', backgroundColor:'#31393F'}} ref = {this.firstThree}>
-                        <div ref = {this.firstCanvas}></div>
-                            {/* <Projection/> */}
-                        </Col>                                    
-                    </Row>
-                </Col>
-                {/* 2d view */}
-                <Col xs={6} style={{backgroundColor: '#636363',height:'25vh'}} ref = {this.firstScatter}>
-                    {/* <Projection2D/> */}
-                    {/* <div ref = {this.firstScatter}></div> */}
-                </Col>
-            </Row>
-        )
+        // console.log(this.state.state_colors)
+        if(!this.state.state_colors){
+            return(
+                <div>Loading ...</div>
+            )
+        }else{
+            return(
+                <Row xs={3}> 
+                    {/* 3d view and the dropdown */}
+                    <Col xs={6}>
+                        <Row xs={2}>
+                            <Col xs={12} style={{height:'5vh', backgroundColor:'#31393F'}} >
+                                <DropdownPanel
+                                    data={this.state}   
+                                    renderArea={this.props.renderArea}
+                                    dropdownUpdate = {this.updateDropdown}
+                                    sliderUpdate = {this.updateSlider}
+                                    />
+                                {/* <div ref={this.firstDropdown} ></div> */}
+                            </Col>
+                        </Row>
+                        <Row xs={10}>
+                            <Col xs={12} style={{height:'22vh', backgroundColor:'#31393F'}} className={"threeContainer"}>
+                            {/* <div ref = {this.firstCanvas}></div> */}
+                                <Projection
+                                    parentId={".threeContainer"} 
+                                    data={this.state}
+                                    ref={(cd) => this.threePlot = cd}
+                                    />
+                            </Col>                                    
+                        </Row>
+                    </Col>
+                    {/* 2d view */}
+                    <Col xs={6} style={{backgroundColor: '#636363',height:'25vh'}} className={"scatterContainer"}>
+                        <Scatter 
+                            parentId={".scatterContainer"} 
+                            renderArea={this.props.renderArea}
+                            data={this.state}
+                            ref={(cd) => this.scatterPlot = cd}
+                        />
+                        {/* <div ref = {this.firstScatter}></div> */}
+                    </Col>
+                </Row>
+            )
+
+        }
     }
 }
 

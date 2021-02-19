@@ -6,6 +6,9 @@ import Stats from 'stats.js';
 import * as d3 from 'd3'
 
 import {vertexColors} from 'three'
+import { render } from '@testing-library/react';
+
+
 
 const style = {
     height: 240 // we can control scene size by setting container dimensions
@@ -21,15 +24,25 @@ class Projection extends React.Component {
         this.gui = null;
         this.stats = new Stats();
         this.statsOneTime = false;
-    }    
+
+        this.canvas = React.createRef();
+    }  
+    
+    componentDidMount(){
+      // console.log(this.props.data)
+      // console.log(d3.select(this.props.parentId).node().clientWidth)
+      this.sceneSetup();
+      this.addCustomSceneObjects(this.props.data.state_three_positions[0], this.props.data.state_colors[0], 1); 
+      
+    }
 
       // Standard scene setup in Three.js. Check "Creating a scene" manual for more information
       // https://threejs.org/docs/#manual/en/introduction/Creating-a-scene
-      sceneSetup = (containerName, canvasName) => {
+      sceneSetup = () => {
         // get container dimensions and use them for scene sizing
-        const width = d3.select(containerName).node().clientWidth
+        const width = d3.select(this.props.parentId).node().clientWidth
         // console.log(width)
-        const height = d3.select(containerName).node().clientHeight;
+        const height = d3.select(this.props.parentId).node().clientHeight;
         // console.log(height)
     
         this.scene = new THREE.Scene();
@@ -77,14 +90,14 @@ class Projection extends React.Component {
 
         // this.controls.update()
 
-        canvasName.appendChild(this.renderer.domElement); // mount using React ref
+        this.canvas.current.appendChild(this.renderer.domElement); // mount using React ref
 
         //let's create fps
         if(!this.statsOneTime){
           this.stats.domElement.style.position = 'absolute';
           this.stats.domElement.style.top = '0px';
           this.stats.domElement.style.right = '0px';
-          canvasName.appendChild(this.stats.domElement);
+          this.canvas.current.appendChild(this.stats.domElement);
           this.statsOneTime = true;
 
         }
@@ -93,7 +106,8 @@ class Projection extends React.Component {
     
 
       //adding the particle system
-      addCustomSceneObjects = (data, domainData, member) => {
+      // three_positions[index], colors[index], all_tempDomain[index], folder
+      addCustomSceneObjects = (positions, colors, member) => {
         let memberPosition = dataRegistry[(member - 1)].position;
         // console.log(memberPosition)
         this.camera.position.x = memberPosition.x;
@@ -103,27 +117,43 @@ class Projection extends React.Component {
 
         this.controls.update()
 
-        this.tempColor = ["#fff5f0","#67000d"]
-        let tempscaling = d3.scaleLinear(/*d3.schemeReds[9]*/)
-                        .domain([domainData.min, domainData.max])
-                        .range(this.tempColor);
+        // this.tempColor = ["#fff5f0","#67000d"]
+        // let tempscaling = d3.scaleLinear(/*d3.schemeReds[9]*/)
+        //                 .domain([domainData.min, domainData.max])
+        //                 .range(this.tempColor);
 
         // console.log(tempscaling(292))
 
         // console.log(this.props.data)
         let geometry = new THREE.BufferGeometry();
-        let positions = [];
-        let colors = []
-        // console.log(data)
-        data.forEach(function(d){ 
-          positions.push(d.x, d.y, d.z)
-        //   geometry.vertices.push(new Float32Array([d.x, d.y, d.z]));
-          let rgb = tempscaling(d.temp)
-          let color = new THREE.Color(rgb);
-          // console.log(color)
-          colors.push(color.r, color.g, color.b);
-        })
-        // console.log(colors)
+        // let positions = [];
+        // let colors = []
+        // // console.log(data)
+
+
+        // data.forEach(function(d){ 
+        //   positions.push(d.x, d.y, d.z)
+        // //   geometry.vertices.push(new Float32Array([d.x, d.y, d.z]));
+        //   let rgb = tempscaling(d.temp)
+        //   let color = new THREE.Color(rgb);
+        //   // console.log(color)
+        //   colors.push(color.r, color.g, color.b);
+        // })
+        // console.log(positions)
+
+      //   setTimeout(() => {
+      //     data.forEach(function(d){ 
+      //       positions.push(d.x, d.y, d.z)
+      //     //   geometry.vertices.push(new Float32Array([d.x, d.y, d.z]));
+      //       let rgb = tempscaling(d.temp)
+      //       let color = new THREE.Color(rgb);
+      //       // console.log(color)
+      //       colors.push(color.r, color.g, color.b);
+      //     })              
+      // }, 5000);
+
+
+        // console.log(positions)
         geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
         geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
         geometry.computeBoundingSphere();
@@ -208,10 +238,10 @@ class Projection extends React.Component {
         this.requestID = window.requestAnimationFrame(this.startAnimationLoop);
       };
     
-      handleWindowResize = (containerName) => {
-        const width = d3.select(containerName).node().clientWidth
+      handleWindowResize = () => {
+        const width = d3.select(this.props.parentId).node().clientWidth
         // console.log(width)
-        const height = d3.select(containerName).node().clientHeight;
+        const height = d3.select(this.props.parentId).node().clientHeight;
     
         this.renderer.setSize(width, height);
         this.camera.aspect = width / height;
@@ -221,9 +251,19 @@ class Projection extends React.Component {
         this.camera.updateProjectionMatrix();
       };
 
-      widnowResizeHandler = (containerName) => {
-        window.addEventListener("resize", this.handleWindowResize(containerName));
+      widnowResizeHandler = () => {
+        window.addEventListener("resize", this.handleWindowResize(this.props.parentId));
       }
+
+
+      render(){
+        return(
+          <div ref={this.canvas}></div>
+        )
+      }
+
     }
+
+    
 
 export default Projection;
