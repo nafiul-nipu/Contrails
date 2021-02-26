@@ -64,7 +64,7 @@ class InputParametersPanel extends React.Component {
             <div style={{color:"grey", marginTop:"5%"}}>Turbulence Model</div>
             <Form  >
                 <Form.Check inline  type="checkbox" id="turbulence-T1" label="T1" onChange={this.handleButton}/>
-                <svg class="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#ffd400" xmlns="http://www.w3.org/2000/svg">
+                <svg class="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#F1B900" xmlns="http://www.w3.org/2000/svg">
                     <rect width="8" height="8" rx="1" />
                 </svg>
                 <Form.Check inline  type="checkbox" id="turbulence-T2" label="T2" onChange={this.handleButton}/>

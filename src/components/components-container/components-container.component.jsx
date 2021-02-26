@@ -263,22 +263,29 @@ class ComponentsContainer extends React.Component {
 
 render() {
     return (
-        <Container fluid >
+        <Container fluid style={{overflow:'hidden'}}>
             <Row xs={12}>
                 <Col style={{ backgroundColor: '#31393f', height: '100vh', "padding": "0", }}>
-                    <QueryPanel clusterMembers={this.handleClusteringChange} inputFilters={this.handleInputFilters} outputFilters={this.handleOutputFilters} />
+                    <QueryPanel  inputFilters={this.handleInputFilters} outputFilters={this.handleOutputFilters} />
                 </Col>
-                <Col xs={7} style={{ backgroundColor: '#31393f', 'borderStyle': 'solid', 'borderWidth': '.5px', borderColor: "#05ecec" }}>
+                <Col style={{ minWidth: "30%", backgroundColor: '#31393f', height: '100vh', "padding": "0", overflow: 'hidden' }}>
+                    <ParametersPlot elements={this.state.filtered_data} />
+                </Col>
+                <Col xs={7} style={{ backgroundColor: '#31393f', 'markerEndmargin': '0'}}>
                     <ProjectionContainer renderArea={'top'} />
                     <ProjectionContainer renderArea={'bottom'} />
-                    <Col xs={12} style={{ height: '45vh' }}>
-                        <Row style={{ width: "50%", height: "100%" }}>
-                            <Clusters clusteringParams={this.state.clusteringParams} dataRegistry={this.state.filtered_data} />
+
+                    <Col xs={12} style={{ height: '45vh',  'margin': '0', 'padding': '0', marginRight:'-20px'}}>
+                        <Row style={{ width: "100%"}}>
+                            <Col style={{ width: "50%", height: "100%" }}>
+                                <div></div>
+                            </Col>
+                            <Col style={{  height: "100%" }}>
+                            <Clusters clusteringParams={this.state.clusteringParams} dataRegistry={this.state.filtered_data} clusterMembers={this.handleClusteringChange}/>
+                            </Col>
+                            
                         </Row>
                     </Col>
-                </Col>
-                <Col style={{ minWidth: "30%", backgroundColor: '#31393f', height: '100vh', "padding": "0", 'borderStyle': 'solid', 'borderWidth': '.5px', borderColor: "#05ecec", overflow: 'hidden' }}>
-                    <ParametersPlot elements={this.state.filtered_data} />
                 </Col>
             </Row>
         </Container>
