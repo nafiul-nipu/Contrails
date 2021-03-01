@@ -6,7 +6,6 @@ import './dropdown-panel.style.css'
 
 import dataRegistry from '../data-component/dataRegistry.json'
 
-import ProjectionContainer from '../projection-container/projection-container.component'
 
 // let slider;
 class DropdownPanel extends React.Component {
@@ -74,8 +73,8 @@ class DropdownPanel extends React.Component {
         d3.select(id).append('button')
                         .attr('class', `btn${this.props.renderArea}`)
                         .attr('id', "play-pause-btn")
-                        .attr('value', 'pause')
-                        .text('Pause')
+                        .attr('value', 'play')
+                        .text('Play')
 
         this.createSlider(list, memberNumber)
 

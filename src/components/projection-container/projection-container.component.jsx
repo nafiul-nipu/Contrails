@@ -5,8 +5,6 @@ import * as THREE from "three";
 import Projection from '../projection-3d/projection.component'
 import DropdownPanel from '../dropdown-panel/dropdown-panel.component';
 
-import Scatter from '../projection-2d/projection-2d-d3.component'
-
 
 import './projection-container.style.css';
 import Row from 'react-bootstrap/Row';
@@ -14,15 +12,6 @@ import Col from 'react-bootstrap/Col';
 
 import dataRegistry from '../data-component/dataRegistry.json'
 
-//creating objects at the very first
-let dropdownObject1 = new DropdownPanel();
-let dropdownObject2 = new DropdownPanel();
-let idName1 = 'firstDropdown'
-let idName2 = 'secondDropdown'
-let threeObject1 = new Projection();
-let threeObject2 = new Projection();
-let scatterObject1 = new Scatter();
-let scatterObject2 = new Scatter();
 
 class ProjectionContainer extends React.Component {
     constructor(props){
@@ -74,16 +63,12 @@ class ProjectionContainer extends React.Component {
                 let list = dataRegistry[folder-1].timeSteps
                 let index =  list.indexOf(list[0])
                 self.updateSlider(list[0], folder);
-                self.updateScatterPlot(index)
             })  
             }, 5000);  
         console.log("i am dropdown update")
         
     }
 
-    updateScatterPlot = (index) => {
-        this.scatterPlot.scatterplot(index)
-    }
     updateSlider = (file, folder) =>{
         // console.log("I am slider update")
         // console.log(file, folder)
@@ -244,9 +229,9 @@ class ProjectionContainer extends React.Component {
             return(
                 <Row xs={3}> 
                     {/* 3d view and the dropdown */}
-                    <Col xs={6}>
+                    <Col xs={12}>
                         <Row xs={2}>
-                            <Col xs={12} style={{height:'5vh', backgroundColor:'#31393F'}} >
+                            <Col xs={12} style={{height:'10vh', backgroundColor:'#31393F'}} >
                                 <DropdownPanel
                                     data={this.state}   
                                     renderArea={this.props.renderArea}
@@ -257,7 +242,7 @@ class ProjectionContainer extends React.Component {
                             </Col>
                         </Row>
                         <Row xs={10}>
-                            <Col xs={12} style={{height:'22vh', backgroundColor:'#31393F'}} className={"threeContainer"}>
+                            <Col xs={12} style={{height:'55vh', backgroundColor:'#31393F'}} className={"threeContainer"}>
                             {/* <div ref = {this.firstCanvas}></div> */}
                                 <Projection
                                     parentId={".threeContainer"} 
@@ -268,15 +253,14 @@ class ProjectionContainer extends React.Component {
                         </Row>
                     </Col>
                     {/* 2d view */}
-                    <Col xs={6} style={{backgroundColor: '#636363',height:'25vh'}} className={"scatterContainer"}>
+                    {/* <Col xs={6} style={{backgroundColor: '#636363',height:'25vh'}} className={"scatterContainer"}>
                         <Scatter 
                             parentId={".scatterContainer"} 
                             renderArea={this.props.renderArea}
                             data={this.state}
                             ref={(cd) => this.scatterPlot = cd}
                         />
-                        {/* <div ref = {this.firstScatter}></div> */}
-                    </Col>
+                    </Col> */}
                 </Row>
             )
 

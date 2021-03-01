@@ -272,20 +272,26 @@ render() {
                     <ParametersPlot elements={this.state.filtered_data} />
                 </Col>
                 <Col xs={7} style={{ backgroundColor: '#31393f', 'markerEndmargin': '0'}}>
-                    <ProjectionContainer renderArea={'top'} />
-                    <ProjectionContainer renderArea={'bottom'} />
+                    <Row  style={{height: '65vh' }}>
+                        <Col xs={6}>
+                            <ProjectionContainer renderArea={'top'} />
+                        </Col>
+                        <Col xs={6}>
+                            <ProjectionContainer renderArea={'bottom'} />
+                        </Col>
+                    </Row>
 
-                    <Col xs={12} style={{ height: '45vh',  'margin': '0', 'padding': '0', marginRight:'-20px'}}>
-                        <Row style={{ width: "100%"}}>
-                            <Col style={{ width: "50%", height: "100%" }}>
-                                <div></div>
-                            </Col>
-                            <Col style={{  height: "100%" }}>
-                            <Clusters clusteringParams={this.state.clusteringParams} dataRegistry={this.state.filtered_data} clusterMembers={this.handleClusteringChange}/>
-                            </Col>
-                            
-                        </Row>
-                    </Col>
+                    {/* <Col xs={12} style={{ height: '45vh',  'margin': '0', 'padding': '0', marginRight:'-20px'}}> */}
+                    <Row style={{ width: "100%"}}>
+                        <Col style={{ width: "50%", height: "100%" }}>
+                            <div></div>
+                        </Col>
+                        <Col style={{  height: "100%" }}>
+                        <Clusters clusteringParams={this.state.clusteringParams} dataRegistry={this.state.filtered_data} clusterMembers={this.handleClusteringChange}/>
+                        </Col>
+                        
+                    </Row>
+                    {/* </Col> */}
                 </Col>
             </Row>
         </Container>

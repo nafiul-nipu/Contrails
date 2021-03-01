@@ -5,10 +5,6 @@ import dataRegistry from '../data-component/dataRegistry.json'
 import Stats from 'stats.js';
 import * as d3 from 'd3'
 
-import {vertexColors} from 'three'
-import { render } from '@testing-library/react';
-
-
 
 const style = {
     height: 240 // we can control scene size by setting container dimensions
@@ -31,6 +27,7 @@ class Projection extends React.Component {
     componentDidMount(){
       // console.log(this.props.data)
       // console.log(d3.select(this.props.parentId).node().clientWidth)
+      console.log(new Image())
       this.sceneSetup();
       this.addCustomSceneObjects(this.props.data.state_three_positions[0], this.props.data.state_colors[0], 1); 
       
@@ -89,6 +86,7 @@ class Projection extends React.Component {
         // this.controls.target.set(4,0,40);
 
         // this.controls.update()
+        // console.log(document.getElementById('canvas').getContext('webgl2'))
 
         this.canvas.current.appendChild(this.renderer.domElement); // mount using React ref
 
