@@ -8,7 +8,7 @@ class OutputParameters extends React.Component {
        
     constructor(props){
         super(props);
-        
+        this.chartin = React.createRef()
         this.state = {
 
         }
@@ -16,23 +16,22 @@ class OutputParameters extends React.Component {
     }
 
     componentDidMount(){
-        this.setState({chart: new OutputParametersD3(this.refs.chartoutput,statistics, this.props.elements)}) 
-
+        this.setState({chartoutput: new OutputParametersD3(this.chartin.current, this.props.outputelements)}) 
     }
 
-    shouldComponentUpdate(){
-        return false
-    }
+    // shouldComponentUpdate(){
+    //     return false
+    // }
 
     componentWillReceiveProps(nextProps){
-        this.state.chart.update(nextProps.elements)
+        this.state.chartoutput.update(nextProps.outputelements)
 
     }
 
     render(){
         return(
             <div >
-            <div ref="chartoutput"></div>
+            <div ref={this.chartin}></div>
 
 
             </div>

@@ -4,6 +4,7 @@ import OutputParameters from './output-parameters.component';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import './parameters-plot.styles.css'
 
 class ParametersPlot extends React.Component {
     constructor(props) {
@@ -19,11 +20,11 @@ class ParametersPlot extends React.Component {
         return (
             <Container fluid>
                 <Row >
-                    <Col xs={6} style={{ margin: "0px" }}>
-                        <InputParameters />
+                    <Col xs={6} style={{ margin: "0px", overflowY: 'auto',overflowX: 'hidden', height: '100vh'}} className="airplane-container">
+                        <InputParameters elements={this.props.elements} />
                     </Col>
-                    <Col xs={5} style={{ margin: "0px" }}>
-                        <OutputParameters style={{ margin: "0px" }} elements={this.props.elements} />
+                    <Col xs={6} style={{ margin: "0px" }}>
+                        <OutputParameters style={{ margin: "0px" }} outputelements={this.props.elements} />
                     </Col>
                 </Row>
             </Container>

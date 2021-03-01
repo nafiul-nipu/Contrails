@@ -27,13 +27,13 @@ class ClusteringParametersPanel extends React.Component {
             // <div>Query panel and val is {this.state.currentVal}</div>
             <div className="mx-auto">
                 <h6>Clustering Parameters</h6>
-                <div style={{textAlign: 'left'}}>
+                <div >
                 <div style={{"color":"#BEBEBE", marginTop: "5%"}}>Simulation Runs:</div>
-                <Form style={{textAlign: 'left'}}>
+                <Form style={{textAlign: 'left', marginLeft:"30%"}}>
                 <Form.Check type="checkbox" label="solution" />
                 </Form>
                 <div style={{"color":"#BEBEBE", marginTop: "5%"}}>Lagrangian Attr:</div>
-                <Form style={{textAlign: 'left'}}>
+                <Form style={{textAlign: 'left', marginLeft:"30%"}}>
                 <Form.Check type="checkbox" label="T" id="T_lag_avg" onChange= {this.handleFilterChange}/>
                 <Form.Check type="checkbox" label="U"  id="U_lag_avg" />
                 <Form.Check type="checkbox" label="rho"  id="rho_lag_avg" onChange= {this.handleFilterChange}/>

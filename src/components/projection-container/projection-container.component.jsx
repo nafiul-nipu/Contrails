@@ -40,6 +40,8 @@ class ProjectionContainer extends React.Component {
     
     }
 
+
+
     componentDidMount(){ 
         // console.log(dataRegistry[1].timeSteps[0])
         // data registry is a json file manually added the member and data names
