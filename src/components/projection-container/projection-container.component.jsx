@@ -15,18 +15,10 @@ class ProjectionContainer extends React.Component {
         super();
 
         this.state = {
-            state_all_data : null,
-            state_all_tempDomain : null,
-            state_all_xDomain : null,
-            state_all_yDomain : null,
-
-            state_three_positions : null,
-            state_colors : null
+            density : null,
         }
     
     }
-
-
 
     componentDidMount(){ 
         // console.log(dataRegistry[1].timeSteps[0])
@@ -80,7 +72,23 @@ class ProjectionContainer extends React.Component {
     }
 
     forPromise = (folder, file) =>{
-        return Promise.resolve(this.dataLoader(folder, file))
+        return Promise.resolve(this.testData(folder, file))
+
+    }
+
+    testData = (folder, file) =>{
+        let url = "https://github.com/CarlaFloricel/Contrails/blob/nafiul-testing/src/data/volume_data/2.4_gaus_temp.csv";
+        let dataBuffer = []
+	    let positions = []
+        d3.csv(url, data => {
+            		
+            positions.push((parseFloat(data['Density'])));
+    
+        }).then(function() {
+            dataBuffer = new Uint8Array(positions)
+            console.log(dataBuffer)	
+
+        })
 
     }
 
@@ -127,52 +135,19 @@ class ProjectionContainer extends React.Component {
                 all_xDomain[i] = {}
                 all_yDomain[i] = {}
                 value.forEach(d => {
-                    // particle_limit = particle_limit + 1;
-                    // if(particle_limit % 10 == 0){
                         all_data[i].push({
                             x: parseFloat(d['Points:0']),
                             y: parseFloat(d['Points:1']),
                             z: parseFloat(d['Points:2']),
                             temp: parseFloat(d['T'])
                         });
-    
-                    // }
                     
-                    all_tempDomain[i].min = Math.min(all_tempDomain[i].min || Infinity, parseFloat(d['T']));
-                    all_tempDomain[i].max = Math.max(all_tempDomain[i].max || -Infinity, parseFloat(d['T']));
-    
-                    all_xDomain[i].min = Math.min(all_xDomain[i].min || Infinity, parseFloat(d['Points:0']));
-                    all_xDomain[i].max = Math.max(all_xDomain[i].max || -Infinity, parseFloat(d['Points:0']));
-    
-                    all_yDomain[i].min = Math.min(all_yDomain[i].min || Infinity, parseFloat(d['Points:1']));
-                    all_yDomain[i].max = Math.max(all_yDomain[i].max || -Infinity, parseFloat(d['Points:1']));
-                })
-            });
-
-            files.forEach(function (value, i) {
-                // console.log('%d: %s', i, value);
-                three_positions[i] = []
-                colors[i] = []
-                tempscaling.domain([all_tempDomain[i].min, all_tempDomain[i].max])
-                // console.log(value)
-                value.forEach(d => {
-                    three_positions[i].push(parseFloat(d['Points:0']), parseFloat(d['Points:1']), parseFloat(d['Points:2']))
-                    //   geometry.vertices.push(new Float32Array([d.x, d.y, d.z]));                    
-                    let rgb = tempscaling(parseFloat(d['T']));
-                    let color = new THREE.Color(rgb);
-                    // console.log(color)
-                    colors[i].push(color.r, color.g, color.b);
+                    
                 })
             });
 
             self.setState({
-                state_all_data : all_data,
-                state_all_tempDomain : all_tempDomain,
-                state_all_xDomain : all_xDomain,
-                state_all_yDomain : all_yDomain,
-
-                state_three_positions : three_positions,
-                state_colors : colors
+                density : all_data,
 
             })
             console.log("data")
@@ -184,7 +159,7 @@ class ProjectionContainer extends React.Component {
 
     render(){
         // console.log(this.state.state_colors)
-        if(!this.state.state_colors){
+        if(!this.state.density){
             return(
                 <div>Loading ...</div>
             )
