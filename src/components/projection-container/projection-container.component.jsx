@@ -2,13 +2,10 @@ import React from 'react';
 import * as d3 from 'd3'
 import * as THREE from "three";
 
-import Projection from '../projection-3d/projection.component'
-import DropdownPanel from '../dropdown-panel/dropdown-panel.component';
-
+import ThreeDComponent from '../threeD-plot/threeD.component'
 
 import './projection-container.style.css';
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
 import dataRegistry from '../data-component/dataRegistry.json'
 
@@ -151,10 +148,6 @@ class ProjectionContainer extends React.Component {
                     all_yDomain[i].max = Math.max(all_yDomain[i].max || -Infinity, parseFloat(d['Points:1']));
                 })
             });
-            // console.log(all_data)
-            // console.log(all_tempDomain)
-            // console.log(all_xDomain)
-            // console.log(all_yDomain)
 
             files.forEach(function (value, i) {
                 // console.log('%d: %s', i, value);
@@ -182,38 +175,8 @@ class ProjectionContainer extends React.Component {
                 state_colors : colors
 
             })
-
-            // console.log(self.state)
-
-            // files[index].forEach(d => {
-            //     particle_limit = particle_limit + 1;
-            //     if(particle_limit % 10 == 0){
-            //         data.push({
-            //             x: parseFloat(d['Points:0']),
-            //             y: parseFloat(d['Points:1']),
-            //             z: parseFloat(d['Points:2']),
-            //             temp: parseFloat(d['T'])
-            //         });
-
-            //     }
-                
-            //     tempDomain.min = Math.min(tempDomain.min || Infinity, parseFloat(d['T']));
-            //     tempDomain.max = Math.max(tempDomain.max || -Infinity, parseFloat(d['T']));
-
-            //     xDomain.min = Math.min(xDomain.min || Infinity, parseFloat(d['Points:0']));
-            //     xDomain.max = Math.max(xDomain.max || -Infinity, parseFloat(d['Points:0']));
-
-            //     yDomain.min = Math.min(yDomain.min || Infinity, parseFloat(d['Points:1']));
-            //     yDomain.max = Math.max(yDomain.max || -Infinity, parseFloat(d['Points:1']));
-            // })
             console.log("data")
-            // console.log(data)
-            // console.log(tempDomain)
-            // console.log(divName)
-            // console.log(three)
-            // three.addCustomSceneObjects(data, tempDomain);        
-            // three.widnowResizeHandler(divName)
-            // self.updateThreeScatter(object, divName, objectForScatter, divForScatter, file, folder)            
+                      
         })     
                
 
@@ -227,40 +190,8 @@ class ProjectionContainer extends React.Component {
             )
         }else{
             return(
-                <Row xs={3}> 
-                    {/* 3d view and the dropdown */}
-                    <Col xs={12}>
-                        <Row xs={2}>
-                            <Col xs={12} style={{height:'10vh', backgroundColor:'#31393F'}} >
-                                <DropdownPanel
-                                    data={this.state}   
-                                    renderArea={this.props.renderArea}
-                                    dropdownUpdate = {this.updateDropdown}
-                                    sliderUpdate = {this.updateSlider}
-                                    />
-                                {/* <div ref={this.firstDropdown} ></div> */}
-                            </Col>
-                        </Row>
-                        <Row xs={10}>
-                            <Col xs={12} style={{height:'55vh', backgroundColor:'#31393F'}} className={"threeContainer"}>
-                            {/* <div ref = {this.firstCanvas}></div> */}
-                                <Projection
-                                    parentId={".threeContainer"} 
-                                    data={this.state}
-                                    ref={(cd) => this.threePlot = cd}
-                                    />
-                            </Col>                                    
-                        </Row>
-                    </Col>
-                    {/* 2d view */}
-                    {/* <Col xs={6} style={{backgroundColor: '#636363',height:'25vh'}} className={"scatterContainer"}>
-                        <Scatter 
-                            parentId={".scatterContainer"} 
-                            renderArea={this.props.renderArea}
-                            data={this.state}
-                            ref={(cd) => this.scatterPlot = cd}
-                        />
-                    </Col> */}
+                <Row> 
+                    <ThreeDComponent area={this.props.renderArea}/>
                 </Row>
             )
 
