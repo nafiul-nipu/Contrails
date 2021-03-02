@@ -1,6 +1,6 @@
 'use strict';
 
-import {vec3, vec4, mat3, mat4, quat} from 'gl-matrix'
+import {vec2,vec3, vec4, mat3, mat4, quat} from 'gl-matrix'
 // Compute the view frustum in world space from the provided
 // column major projection * view matrix
 var Frustum = function(projView) {
@@ -602,4 +602,4 @@ Controller.prototype.registerForCanvas = function(canvas) {
     canvas.addEventListener("touchend", touchEnd);
 }
 
-export {Shader,ArcballCamera,clamp,Buffer,Controller}
+export {Shader,ArcballCamera,clamp,Buffer,Controller, hexToRGB, hexToRGBf}

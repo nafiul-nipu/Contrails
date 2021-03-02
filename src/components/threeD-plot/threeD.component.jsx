@@ -34,6 +34,7 @@ class ThreeDComponent extends React.Component {
                         <VolumeRendering 
                             parentId=".threeContainer"
                             area={this.props.area}
+                            data={this.props.data}
                         />
                     </Col>                                    
                 </Row>

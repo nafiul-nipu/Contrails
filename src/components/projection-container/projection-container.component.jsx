@@ -77,7 +77,8 @@ class ProjectionContainer extends React.Component {
     }
 
     testData = (folder, file) =>{
-        let url = "https://github.com/CarlaFloricel/Contrails/blob/nafiul-testing/src/data/volume_data/2.4_gaus_temp.csv";
+        const self = this;
+        let url = "https://raw.githubusercontent.com/CarlaFloricel/Contrails/nafiul-testing/src/data/volume_data/2.4_gaus_temp.csv";
         let dataBuffer = []
 	    let positions = []
         d3.csv(url, data => {
@@ -86,7 +87,11 @@ class ProjectionContainer extends React.Component {
     
         }).then(function() {
             dataBuffer = new Uint8Array(positions)
-            console.log(dataBuffer)	
+            // console.log(dataBuffer)	
+            self.setState({
+                density : dataBuffer,
+
+            })
 
         })
 
@@ -166,7 +171,10 @@ class ProjectionContainer extends React.Component {
         }else{
             return(
                 <Row> 
-                    <ThreeDComponent area={this.props.renderArea}/>
+                    <ThreeDComponent 
+                        area={this.props.renderArea}
+                        data={this.state.density}
+                    />
                 </Row>
             )
 

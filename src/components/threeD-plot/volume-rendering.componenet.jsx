@@ -1,11 +1,11 @@
 import React from 'react';
 import * as d3 from 'd3'
 
-import {vec3, mat4} from 'gl-matrix'
+import {vec2, vec3, mat4} from 'gl-matrix'
 
 import {vertShader, fragShader} from "./shader-srcs.js"
 
-import {Shader,ArcballCamera,clamp,Buffer,Controller} from "./webgl-util.js"
+import {Shader,ArcballCamera,Controller} from "./webgl-util.js"
 
 import coolWarm from './colormaps/cool-warm-paraview.png'
 
@@ -46,7 +46,7 @@ class VolumeRendering extends React.Component {
         this.WIDTH = 640;
         this.HEIGHT = 480;
 
-        this.defaultEye = vec3.set(vec3.create(), 0.5, 0.5, 1.5);
+        this.defaultEye = vec3.set(vec3.create(), 0.5, 0.5, 1.7);
         this.center = vec3.set(vec3.create(), 0.5, 0.5, 0.5);
         this.up = vec3.set(vec3.create(), 0.0, 1.0, 0.0);
 
@@ -55,10 +55,12 @@ class VolumeRendering extends React.Component {
     
     componentDidMount(){
       this.onLoad()
+      this.selectVolume()
       
     }
 
     onLoad = () =>{
+      const self = this;
       // get container dimensions and use them for scene sizing
       const width = d3.select(this.props.parentId).node().clientWidth;
       const height = d3.select(this.props.parentId).node().clientHeight;
@@ -79,10 +81,11 @@ class VolumeRendering extends React.Component {
       this.WIDTH = this.canvas.getAttribute("width");
       this.HEIGHT = this.canvas.getAttribute("height");
 
-      console.log(this.WIDTH, this.HEIGHT)
+      // console.log(this.WIDTH, this.HEIGHT)
 
       this.proj = mat4.perspective(mat4.create(), 60 * Math.PI / 180.0,
         this.WIDTH / this.HEIGHT, 0.1, 100);
+      console.log(this.proj)
 
       this.camera = new ArcballCamera(this.defaultEye, this.center, this.up, 2, [this.WIDTH, this.HEIGHT]);
       this.projView = mat4.create();
@@ -91,13 +94,13 @@ class VolumeRendering extends React.Component {
       let controller = new Controller();
       controller.mousemove = function(prev, cur, evt) {
         if (evt.buttons == 1) {
-          this.camera.rotate(prev, cur);
+          self.camera.rotate(prev, cur);
 
         } else if (evt.buttons == 2) {
-          this.camera.pan([cur[0] - prev[0], prev[1] - cur[1]]);
+          self.camera.pan([cur[0] - prev[0], prev[1] - cur[1]]);
         }
       };
-      controller.wheel = function(amt) { this.camera.zoom(amt); };
+      controller.wheel = function(amt) { self.camera.zoom(amt); };
       controller.pinch = controller.wheel;
       controller.twoFingerDrag = function(drag) { this.camera.pan(drag); };
 
@@ -142,20 +145,100 @@ class VolumeRendering extends React.Component {
       // load the default volume.
       let colormapImage = new Image();
       colormapImage.onload = function() {
-        let colormap = this.gl.createTexture();
-        this.gl.activeTexture(this.gl.TEXTURE1);
-        this.gl.bindTexture(this.gl.TEXTURE_2D, colormap);
-        this.gl.texStorage2D(this.gl.TEXTURE_2D, 1, this.gl.SRGB8_ALPHA8, 180, 1);
-        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MIN_FILTER, this.gl.LINEAR);
-        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_R, this.gl.CLAMP_TO_EDGE);
-        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.CLAMP_TO_EDGE);
-        this.gl.texSubImage2D(this.gl.TEXTURE_2D, 0, 0, 0, 180, 1,
-          this.gl.RGBA, this.gl.UNSIGNED_BYTE, colormapImage);
+        // console.log("colormapImage")
+        let colormap = self.gl.createTexture();
+        self.gl.activeTexture(self.gl.TEXTURE1);
+        self.gl.bindTexture(self.gl.TEXTURE_2D, colormap);
+        self.gl.texStorage2D(self.gl.TEXTURE_2D, 1, self.gl.SRGB8_ALPHA8, 180, 1);
+        self.gl.texParameteri(self.gl.TEXTURE_2D, self.gl.TEXTURE_MIN_FILTER, self.gl.LINEAR);
+        self.gl.texParameteri(self.gl.TEXTURE_2D, self.gl.TEXTURE_WRAP_R, self.gl.CLAMP_TO_EDGE);
+        self.gl.texParameteri(self.gl.TEXTURE_2D, self.gl.TEXTURE_WRAP_S, self.gl.CLAMP_TO_EDGE);
+        self.gl.texSubImage2D(self.gl.TEXTURE_2D, 0, 0, 0, 180, 1,
+          self.gl.RGBA, self.gl.UNSIGNED_BYTE, colormapImage);
 
-        // selectVolume();
+        // self.selectVolume();
       };
-      colormapImage.src = 'https://github.com/CarlaFloricel/Contrails/blob/nafiul-testing/src/components/threeD-plot/colormaps/cool-warm-paraview.png';
 
+      colormapImage.crossOrigin = "anonymous";
+      colormapImage.src = 'https://raw.githubusercontent.com/CarlaFloricel/Contrails/nafiul-testing/src/components/threeD-plot/colormaps/cool-warm-paraview.png';
+
+      // console.log(colormapImage)
+
+    }
+
+    selectVolume = () =>{
+      // console.log(this.props.data)
+      const self = this;
+      let dataBuffer = this.props.data;
+
+      //our data dimension is 100 can change later
+      let volDims = [100,100,100];
+
+      let tex = this.gl.createTexture();
+      this.gl.activeTexture(this.gl.TEXTURE0);
+      this.gl.bindTexture(this.gl.TEXTURE_3D, tex);
+      this.gl.texStorage3D(this.gl.TEXTURE_3D, 1, this.gl.R8, volDims[0], volDims[1], volDims[2]);
+      this.gl.texParameteri(this.gl.TEXTURE_3D, this.gl.TEXTURE_MIN_FILTER, this.gl.LINEAR);
+      this.gl.texParameteri(this.gl.TEXTURE_3D, this.gl.TEXTURE_WRAP_R, this.gl.CLAMP_TO_EDGE);
+      this.gl.texParameteri(this.gl.TEXTURE_3D, this.gl.TEXTURE_WRAP_S, this.gl.CLAMP_TO_EDGE);
+      this.gl.texParameteri(this.gl.TEXTURE_3D, this.gl.TEXTURE_WRAP_T, this.gl.CLAMP_TO_EDGE);
+      this.gl.texSubImage3D(this.gl.TEXTURE_3D, 0, 0, 0, 0,
+        volDims[0], volDims[1], volDims[2],
+        this.gl.RED, this.gl.UNSIGNED_BYTE, dataBuffer);
+
+      let longestAxis = Math.max(volDims[0], Math.max(volDims[1], volDims[2]));
+      let volScale = [volDims[0] / longestAxis, volDims[1] / longestAxis,
+        volDims[2] / longestAxis];
+
+      this.gl.uniform3iv(this.shader.uniforms["volume_dims"], volDims);
+      this.gl.uniform3fv(this.shader.uniforms["volume_scale"], volScale);
+
+      this.newVolumeUpload = true;
+      if (!this.volumeTexture) {
+        this.volumeTexture = tex;
+        setInterval(function() {
+          // Save them some battery if they're not viewing the tab
+          if (document.hidden) {
+            return;
+          }
+          var startTime = performance.now();
+          self.gl.clearColor(0.192, 0.223, 0.247, 1.0);
+          self.gl.clear(self.gl.COLOR_BUFFER_BIT);
+
+          // Reset the sampling rate and camera for new volumes
+          if (self.newVolumeUpload) {
+            self.camera = new ArcballCamera(self.defaultEye, self.center, self.up, 2, [self.WIDTH, self.HEIGHT]);
+            self.samplingRate = 1.0;
+            self.gl.uniform1f(self.shader.uniforms["dt_scale"], self.samplingRate);
+          }
+          self.projView = mat4.mul(self.projView, self.proj, self.camera.camera);
+          self.gl.uniformMatrix4fv(self.shader.uniforms["proj_view"], false, self.projView);
+
+          let eye = [self.camera.invCamera[12], self.camera.invCamera[13], self.camera.invCamera[14]];
+          self.gl.uniform3fv(self.shader.uniforms["eye_pos"], eye);
+
+          self.gl.drawArrays(self.gl.TRIANGLE_STRIP, 0, self.cubeStrip.length / 3);
+          // Wait for rendering to actually finish
+          self.gl.finish();
+          let endTime = performance.now();
+          let renderTime = endTime - startTime;
+          let targetSamplingRate = renderTime / self.targetFrameTime;
+
+
+          // If we're dropping frames, decrease the sampling rate
+          if (!self.newVolumeUpload && targetSamplingRate > self.samplingRate) {
+            self.samplingRate = 0.8 * self.samplingRate + 0.2 * targetSamplingRate;
+            self.gl.uniform1f(self.shader.uniforms["dt_scale"], self.samplingRate);
+          }
+
+          self.newVolumeUpload = false;
+          startTime = endTime;
+        }, self.targetFrameTime);
+      
+      } else {
+        this.gl.deleteTexture(this.volumeTexture);
+        this.volumeTexture = tex;
+      }
 
     }
 
