@@ -154,8 +154,7 @@ class VolumeRendering extends React.Component {
 
         // selectVolume();
       };
-      console.log(coolWarm)
-      colormapImage.src = './colormaps/cool-warm-paraview.png';
+      colormapImage.src = 'https://github.com/CarlaFloricel/Contrails/blob/nafiul-testing/src/components/threeD-plot/colormaps/cool-warm-paraview.png';
 
 
     }
