@@ -243,6 +243,88 @@
             }
         }
 
+    },
+    {
+        "id": 7,
+        "name": "HeavyMesh",
+        "ensembleMember": 7,
+        "timeSteps": [1.51, 1.53, 1.55, 1.57, 1.59, 1.61, 1.63],
+        "position":{"x": 77,   "y": 11, "z": 170},
+        "output-parameters":{
+            "T_lag_avg":422.1646571,
+            "rho_lag_avg":1000,
+            "d_lag_avg": 0.00001,
+            "Ygas_lag_avg":0,
+            "T_eul_avg":322.422628,
+            "rho_eul_avg":0.3456328,
+            "p_eul_avg":29292.8771,
+            "k_eul_avg":91.0317314,
+            "T_lag_avg_timepoints":[654.7868, 504.5244, 425.2149, 379.5465, 349.1589, 326.7885, 315.1326],
+            "rho_lag_avg_timepoints":[1000, 1000, 1000, 1000, 1000, 1000,1000],
+            "d_lag_avg_timepoints":[0.00001, 0.00001, 0.00001, 0.00001, 0.00001, 0.00001,0.00001],
+            "Ygas_lag_avg_timepoints":[0,0,0,0,0,0,0],
+            "T_eul_avg_timepoints":[322.423, 322.423, 322.4226, 322.4226, 322.4224, 322.4222, 322.4226],
+            "rho_eul_avg_timepoints":[0.345907, 0.345727, 0.345579, 0.34556,0.345573, 0.345549, 0.345535], 
+            "p_eul_avg_timepoints":[29315.44, 29303.35, 29287.93, 29285.6, 29288.72, 29285.66, 29283.44],
+            "k_eul_avg_timepoints":[91.01908, 91.03149, 91.03541, 91.03296, 91.03438, 91.03569, 91.03311]
+        },
+        "input-parameters":{
+            "aircraft-engine":"two",
+            "geometry":"nozzle",
+            "scope":"nozzle",
+            "grid":"coarse",
+            "solution":"uncoupled",
+            "turbulence":"T2",
+            "boundary-conditions":{
+                "T":["farfield", "engine", "inlet", "nozzle", "outlet", "turbine"],
+                "U":["inlet", "nozzle", "outlet"],
+                "p":["nozzle"],
+                "k":["inlet", "nozzle"],
+                "rho":["nozzle"]
+            }
+        }
+
+    },
+    {
+        "id": 8,
+        "name": "HeavyMesh2",
+        "ensembleMember": 8,
+        "timeSteps": [1.52,1.54,1.56,1.58,1.6,1.62,1.64],
+        "position":{"x": 77,   "y": 11, "z": 170},
+        "output-parameters":{
+            "T_lag_avg":422.1646571,
+            "rho_lag_avg":1000,
+            "d_lag_avg": 0.00001,
+            "Ygas_lag_avg":0,
+            "T_eul_avg":322.422628,
+            "rho_eul_avg":0.3456328,
+            "p_eul_avg":29292.8771,
+            "k_eul_avg":91.0317314,
+            "T_lag_avg_timepoints":[654.7868, 504.5244, 425.2149, 379.5465, 349.1589, 326.7885, 315.1326],
+            "rho_lag_avg_timepoints":[1000, 1000, 1000, 1000, 1000, 1000,1000],
+            "d_lag_avg_timepoints":[0.00001, 0.00001, 0.00001, 0.00001, 0.00001, 0.00001,0.00001],
+            "Ygas_lag_avg_timepoints":[0,0,0,0,0,0,0],
+            "T_eul_avg_timepoints":[322.423, 322.423, 322.4226, 322.4226, 322.4224, 322.4222, 322.4226],
+            "rho_eul_avg_timepoints":[0.345907, 0.345727, 0.345579, 0.34556,0.345573, 0.345549, 0.345535], 
+            "p_eul_avg_timepoints":[29315.44, 29303.35, 29287.93, 29285.6, 29288.72, 29285.66, 29283.44],
+            "k_eul_avg_timepoints":[91.01908, 91.03149, 91.03541, 91.03296, 91.03438, 91.03569, 91.03311]
+        },
+        "input-parameters":{
+            "aircraft-engine":"two",
+            "geometry":"nozzle",
+            "scope":"nozzle",
+            "grid":"coarse",
+            "solution":"uncoupled",
+            "turbulence":"T2",
+            "boundary-conditions":{
+                "T":["farfield", "engine", "inlet", "nozzle", "outlet", "turbine"],
+                "U":["inlet", "nozzle", "outlet"],
+                "p":["nozzle"],
+                "k":["inlet", "nozzle"],
+                "rho":["nozzle"]
+            }
+        }
+
 
     }
 ]

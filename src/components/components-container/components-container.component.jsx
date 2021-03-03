@@ -272,7 +272,7 @@ render() {
                     <ParametersPlot elements={this.state.filtered_data} />
                 </Col>
                 <Col xs={7} style={{ backgroundColor: '#31393f', 'markerEndmargin': '0'}}>
-                    <Row  style={{height: '65vh' }}>
+                    <Row  style={{height: '75vh' }}>
                         <Col xs={6}>
                             <ProjectionContainer renderArea={'top'} />
                         </Col>

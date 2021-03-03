@@ -1,8 +1,7 @@
 import React from 'react';
 import * as d3 from 'd3'
-import * as THREE from "three";
 
-import ThreeDComponent from '../threeD-plot/threeD.component'
+import VolumeRendering from '../threeD-plot/volume-rendering.componenet'
 
 import './projection-container.style.css';
 import Row from 'react-bootstrap/Row';
@@ -171,7 +170,7 @@ class ProjectionContainer extends React.Component {
         }else{
             return(
                 <Row> 
-                    <ThreeDComponent 
+                    <VolumeRendering 
                         area={this.props.renderArea}
                         data={this.state.density}
                     />

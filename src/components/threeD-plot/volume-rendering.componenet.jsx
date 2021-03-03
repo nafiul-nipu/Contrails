@@ -7,7 +7,10 @@ import {vertShader, fragShader} from "./shader-srcs.js"
 
 import {Shader,ArcballCamera,Controller} from "./webgl-util.js"
 
-import coolWarm from './colormaps/cool-warm-paraview.png'
+import DropDowns from './dropdowns.component'
+
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col'
 
 class VolumeRendering extends React.Component {
     constructor(){
@@ -50,6 +53,16 @@ class VolumeRendering extends React.Component {
         this.center = vec3.set(vec3.create(), 0.5, 0.5, 0.5);
         this.up = vec3.set(vec3.create(), 0.0, 1.0, 0.0);
 
+
+        this.colormaps = {
+          "Cool_Warm": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/cool-warm-paraview.png",
+          "Matplotlib_Plasma": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/matplotlib-plasma.png",
+          "Matplotlib_Virdis": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/matplotlib-virdis.png",
+          "Rainbow": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/rainbow.png",
+          "Samsel_Linear_Green": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/samsel-linear-green.png",
+          "Samsel_Linear_YGB_1211G": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/samsel-linear-ygb-1211g.png",
+        };
+
         this.canvas = React.createRef();
     }  
     
@@ -62,10 +75,10 @@ class VolumeRendering extends React.Component {
     onLoad = () =>{
       const self = this;
       // get container dimensions and use them for scene sizing
-      const width = d3.select(this.props.parentId).node().clientWidth;
-      const height = d3.select(this.props.parentId).node().clientHeight;
+      const width = d3.select(`.threeContainer${this.props.area}`).node().clientWidth;
+      const height = d3.select(`.threeContainer${this.props.area}`).node().clientHeight;
 
-      d3.select(`.${this.props.area}`).append('canvas')
+      d3.select(`.threeContainer${this.props.area}`).append('canvas')
                             .attr('width', width)
                             .attr('height', height)
                             .attr('id', `glcanvas${this.props.area}`)
@@ -85,7 +98,7 @@ class VolumeRendering extends React.Component {
 
       this.proj = mat4.perspective(mat4.create(), 60 * Math.PI / 180.0,
         this.WIDTH / this.HEIGHT, 0.1, 100);
-      console.log(this.proj)
+      // console.log(this.proj)
 
       this.camera = new ArcballCamera(this.defaultEye, this.center, this.up, 2, [this.WIDTH, this.HEIGHT]);
       this.projView = mat4.create();
@@ -242,9 +255,33 @@ class VolumeRendering extends React.Component {
 
     }
 
+    selectColormap = (selection) => {
+      const self = this;
+      let colormapImage = new Image();
+      colormapImage.onload = function() {
+        self.gl.activeTexture(self.gl.TEXTURE1);
+        self.gl.texSubImage2D(self.gl.TEXTURE_2D, 0, 0, 0, 180, 1,
+        self.gl.RGBA, self.gl.UNSIGNED_BYTE, colormapImage);
+      };
+      colormapImage.crossOrigin = "anonymous";
+      colormapImage.src = self.colormaps[selection];
+    }
+
       render(){
         return(
-            <div className={this.props.area}></div>
+          <Col xs={12}>
+            <Row>
+              <DropDowns
+                area={this.props.area}
+                colormaps={this.colormaps}
+                selectColormap={this.selectColormap}
+              /> 
+            </Row>
+            <Row>
+                <Col xs={12} style={{height:'55vh', backgroundColor:'#31393F'}} className={`threeContainer${this.props.area}`}>
+                </Col>                                    
+            </Row>
+        </Col>
         )
       }
 
