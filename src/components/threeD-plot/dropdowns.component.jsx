@@ -18,7 +18,11 @@ class DropDowns extends React.Component {
     }  
     
     componentDidMount(){
-      this.createDropDown(1)
+      if(this.props.area === 'top'){
+        this.createDropDown(1)
+      }else if(this.props.area === 'bottom'){
+        this.createDropDown(8)
+      }
       
     }
 
@@ -44,9 +48,9 @@ class DropDowns extends React.Component {
                         .attr('class', "members")
                         .attr("id", `member${this.props.area}`)
                         .on('change', function(){
-                            // let folder = this.value
-                            // let list = dataRegistry[(folder - 1)].timeSteps
-                            // self.updateDropdown( folder, list)
+                            let member = this.value
+                            self.updateDropdown(member)
+                            // console.log(member)
                         })
                         .selectAll('option')
                         .data(dataRegistry)
@@ -75,9 +79,8 @@ class DropDowns extends React.Component {
                     .attr('class', "members")
                     .attr("id", `filter${this.props.area}`)
                     .on('change', function(){
-                        // let folder = this.value
-                        // let list = dataRegistry[(folder - 1)].timeSteps
-                        // self.updateDropdown( folder, list)
+                        let member = this.value
+                        console.log(member)
                     })
                     .selectAll('option')
                     .data(this.filter)
@@ -87,27 +90,13 @@ class DropDowns extends React.Component {
                     .attr("value", function(d){return d})
                     .text((d) => {return d})
 
-      // Range
-      let sliderRange = sliderHorizontal()
-                      .min(200)
-                      .max(400)
-                      .width(150)
-                      .tickFormat(d3.format('0.2f'))
-                      .ticks(5)
-                      .default([200, 400])
-                      .fill('#2196f3')
-                      .on('onchange', val => {
-                        // d3.select('p#value-range').text(val.map(d3.format('.2%')).join('-'));
-                      });
+      
 
-      d3.select(lowerID).append('svg')
+      d3.select(lowerID).append('div')
                       .attr('class', 'slider-svg')
                       .attr("id", `rangeslider${this.props.area}`)
-                      .attr('width', 200 )
-                      .attr('height', 70)
-                      .append('g')
-                      .attr('transform', 'translate(30, 30)')
-                      .call(sliderRange)
+
+      self.createRangeSlider()         
 
       let keys = Object.keys(this.props.colormaps)
       d3.select(lowerID).append('select')
@@ -126,6 +115,33 @@ class DropDowns extends React.Component {
                       .attr('id', function(d){ return d})
                       .attr("value", function(d){return d})
                       .text((d) => {return d})
+    }
+
+    createRangeSlider = () =>{
+      // Range
+      const self = this;
+      let min = d3.min(this.props.data)
+      let max = d3.max(this.props.data)
+      let sliderRange = sliderHorizontal()
+                      .min(min)
+                      .max(max)
+                      .width(150)
+                      .tickFormat(d3.format('0.2f'))
+                      .ticks(5)
+                      .default([min, max])
+                      .fill('#2196f3')
+                      .on('onchange', val => {
+                        // d3.select('p#value-range').text(val.map(d3.format('.2%')).join('-'));
+                      });
+
+      d3.select(`#rangeslider${this.props.area}`)
+                      .append('svg')
+                      .attr('width', 200 )
+                      .attr('height', 70)
+                      .append('g')
+                      .attr('transform', 'translate(30, 30)')
+                      .call(sliderRange)
+
     }
 
     createSlider = (member) =>{
@@ -191,9 +207,16 @@ class DropDowns extends React.Component {
 
   updateDropdown = ( member) => {
       const self= this
-      // console.log(folder, list)
+      let list = dataRegistry[member - 1].timeSteps;
       d3.select(`#slider${self.props.area}`).remove()
       this.createSlider(member)
+
+      d3.select(`#rangeslider${this.props.area}`).select('svg').remove()
+      this.createRangeSlider()
+      this.props.dataLoader(member, list[0], 'temp').then(function(){
+        console.log(self.props.data)
+        self.props.volumeRender(self.props.data)
+      })
 
   }
 

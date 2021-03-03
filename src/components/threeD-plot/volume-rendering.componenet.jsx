@@ -68,7 +68,7 @@ class VolumeRendering extends React.Component {
     
     componentDidMount(){
       this.onLoad()
-      this.selectVolume()
+      this.selectVolume(this.props.data)
       
     }
 
@@ -179,10 +179,10 @@ class VolumeRendering extends React.Component {
 
     }
 
-    selectVolume = () =>{
+    selectVolume = (data) =>{
       // console.log(this.props.data)
       const self = this;
-      let dataBuffer = this.props.data;
+      let dataBuffer = data;
 
       //our data dimension is 100 can change later
       let volDims = [100,100,100];
@@ -275,6 +275,9 @@ class VolumeRendering extends React.Component {
                 area={this.props.area}
                 colormaps={this.colormaps}
                 selectColormap={this.selectColormap}
+                data={this.props.data}
+                dataLoader={this.props.dataloader}
+                volumeRender={this.selectVolume}
               /> 
             </Row>
             <Row>

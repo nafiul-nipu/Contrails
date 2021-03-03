@@ -27,12 +27,12 @@ class ProjectionContainer extends React.Component {
         // console.log(this.test)
         const self = this;
         if(this.props.renderArea === "top"){
-            this.forPromise(1, 2.31).then(function(){
+            this.forPromise(1, 2.31, 'temp').then(function(){
                 // <Projection id = {self.firstDropdown.current} data={self.state}/>
                 console.log('done top')
             })
         }else if(this.props.renderArea === 'bottom'){
-            this.forPromise(6, 0.1).then(function(){
+            this.forPromise(8, 1.52, 'temp').then(function(){
                 // <Projection id = {self.firstDropdown.current} data={self.state}/>
                 console.log('done bottom')
             })
@@ -70,23 +70,23 @@ class ProjectionContainer extends React.Component {
 
     }
 
-    forPromise = (folder, file) =>{
-        return Promise.resolve(this.testData(folder, file))
+    forPromise = (folder, file, filter) =>{
+        return Promise.resolve(this.testData(folder, file, filter))
 
     }
 
-    testData = (folder, file) =>{
+    testData = (folder, file, filter) =>{
         const self = this;
-        let url = "https://raw.githubusercontent.com/CarlaFloricel/Contrails/nafiul-testing/src/data/volume_data/2.4_gaus_temp.csv";
+        let url = `https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/data/volume_data/${folder}/${file}.csv`;
         let dataBuffer = []
 	    let positions = []
         d3.csv(url, data => {
             		
-            positions.push((parseFloat(data['Density'])));
+            positions.push((parseFloat(data[filter])));
     
         }).then(function() {
             dataBuffer = new Uint8Array(positions)
-            // console.log(dataBuffer)	
+            console.log(dataBuffer)	
             self.setState({
                 density : dataBuffer,
 
@@ -173,6 +173,7 @@ class ProjectionContainer extends React.Component {
                     <VolumeRendering 
                         area={this.props.renderArea}
                         data={this.state.density}
+                        dataloader={this.forPromise}
                     />
                 </Row>
             )
