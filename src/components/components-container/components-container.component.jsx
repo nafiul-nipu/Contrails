@@ -3,7 +3,7 @@ import dataRegistry from '../data-component/dataRegistry.json'
 import QueryPanel from '../query-panel/query-panel.component';
 import ParametersPlot from '../parameters-plot/parameters-plot.component';
 import Clusters from '../clusters/clusters.component';
-import ProjectionContainer from '../projection-container/projection-container.component';
+import VolumeRendering from '../threeD-plot/volume-rendering.componenet';
 
 
 import './components-container.styles.css';
@@ -274,10 +274,10 @@ render() {
                 <Col xs={7} style={{ backgroundColor: '#31393f', 'markerEndmargin': '0'}}>
                     <Row  style={{height: '75vh' }}>
                         <Col xs={6}>
-                            <ProjectionContainer renderArea={'top'} />
+                            <VolumeRendering renderArea={'top'} />
                         </Col>
                         <Col xs={6}>
-                            <ProjectionContainer renderArea={'bottom'} />
+                            <VolumeRendering renderArea={'bottom'} />
                         </Col>
                     </Row>
 

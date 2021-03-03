@@ -7,6 +7,8 @@ import {vertShader, fragShader} from "./shader-srcs.js"
 
 import {Shader,ArcballCamera,Controller} from "./webgl-util.js"
 
+import {getData, loader} from './dataHandler.js'
+
 import DropDowns from './dropdowns.component'
 
 import Row from 'react-bootstrap/Row';
@@ -64,26 +66,47 @@ class VolumeRendering extends React.Component {
         };
 
         this.canvas = React.createRef();
+
+        this.data = []
     }  
     
     componentDidMount(){
-      this.onLoad()
-      this.selectVolume(this.props.data)
+      // console.log(this.props.renderArea)
+      const self = this
+
+      if(this.props.renderArea === 'top'){
+        loader(1, 2.31, 'temp').then(function(){
+          console.log("data loaded")
+          self.data = getData();
+
+          self.onLoad()
+          self.selectVolume(self.data)
+        })
+      }else if (this.props.renderArea === 'bottom'){
+        loader(8, 1.52, 'temp').then(function(){
+          console.log("data loaded")
+          self.data = getData();
+
+          self.onLoad()
+          self.selectVolume(self.data)
+        })
+
+      }
       
     }
 
     onLoad = () =>{
       const self = this;
       // get container dimensions and use them for scene sizing
-      const width = d3.select(`.threeContainer${this.props.area}`).node().clientWidth;
-      const height = d3.select(`.threeContainer${this.props.area}`).node().clientHeight;
+      const width = d3.select(`.threeContainer${this.props.renderArea}`).node().clientWidth;
+      const height = d3.select(`.threeContainer${this.props.renderArea}`).node().clientHeight;
 
-      d3.select(`.threeContainer${this.props.area}`).append('canvas')
+      d3.select(`.threeContainer${this.props.renderArea}`).append('canvas')
                             .attr('width', width)
                             .attr('height', height)
-                            .attr('id', `glcanvas${this.props.area}`)
+                            .attr('id', `glcanvas${this.props.renderArea}`)
 
-      this.canvas = document.getElementById(`glcanvas${this.props.area}`)
+      this.canvas = document.getElementById(`glcanvas${this.props.renderArea}`)
       this.gl = this.canvas.getContext("webgl2")
 
       if(!this.gl){
@@ -268,24 +291,33 @@ class VolumeRendering extends React.Component {
     }
 
       render(){
-        return(
-          <Col xs={12}>
+        if(!this.data){
+          return(
+            <div>data loading</div>
+          )
+        }else{
+          return(
             <Row>
-              <DropDowns
-                area={this.props.area}
-                colormaps={this.colormaps}
-                selectColormap={this.selectColormap}
-                data={this.props.data}
-                dataLoader={this.props.dataloader}
-                volumeRender={this.selectVolume}
-              /> 
-            </Row>
-            <Row>
-                <Col xs={12} style={{height:'55vh', backgroundColor:'#31393F'}} className={`threeContainer${this.props.area}`}>
-                </Col>                                    
-            </Row>
-        </Col>
-        )
+              <Col xs={12}>
+                <Row>
+                  <DropDowns
+                    area={this.props.renderArea}
+                    colormaps={this.colormaps}
+                    data={this.data}
+                    selectColormap={this.selectColormap}
+                    volumeRender={this.selectVolume}
+                  /> 
+                </Row>
+                <Row>
+                    <Col xs={12} style={{height:'55vh', backgroundColor:'#31393F'}} className={`threeContainer${this.props.renderArea}`}>
+                    </Col>                                    
+                </Row>
+            </Col>
+          </Row>
+          )
+
+        }
+        
       }
 
     }

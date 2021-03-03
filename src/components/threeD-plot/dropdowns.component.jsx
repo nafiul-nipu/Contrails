@@ -8,6 +8,8 @@ import Col from 'react-bootstrap/Col'
 
 import dataRegistry from '../data-component/dataRegistry.json'
 
+import {loader, getMin, getMax} from "./dataHandler.js"
+
 
 class DropDowns extends React.Component {
 
@@ -18,10 +20,22 @@ class DropDowns extends React.Component {
     }  
     
     componentDidMount(){
+      const self = this
       if(this.props.area === 'top'){
-        this.createDropDown(1)
-      }else if(this.props.area === 'bottom'){
-        this.createDropDown(8)
+        loader(1, 2.31, 'temp').then(function(){
+          // console.log("data loaded")
+          // self.data = getData();
+
+          self.createDropDown(1)
+        })
+      }else if (this.props.area === 'bottom'){
+        loader(8, 1.52, 'temp').then(function(){
+          // console.log("data loaded")
+          // self.data = getData();
+
+          self.createDropDown(8)
+        })
+
       }
       
     }
@@ -120,8 +134,8 @@ class DropDowns extends React.Component {
     createRangeSlider = () =>{
       // Range
       const self = this;
-      let min = d3.min(this.props.data)
-      let max = d3.max(this.props.data)
+      let min = getMin()
+      let max = getMax()
       let sliderRange = sliderHorizontal()
                       .min(min)
                       .max(max)
