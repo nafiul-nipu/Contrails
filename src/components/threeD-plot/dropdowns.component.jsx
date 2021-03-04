@@ -179,13 +179,10 @@ class DropDowns extends React.Component {
                       .tickPadding(0)
                       .width(width - 50)
                       .on('onchange', function(){
-                          // let file = +(d3.format('.2f')(slider.value()));
-                          // let folder = +($(`#member${self.props.renderArea}`).val());
-                          // // console.log(file, folder)
-                          // setTimeout(() => {  
-                          //     self.props.sliderUpdate(file, folder);
-                          //     self.animation(slider);             
-                          // }, 3000);
+                          let file = +(d3.format('.2f')(slider.value()));
+                          let folder = +($(`#member${self.props.area}`).val());
+                          // console.log(file, folder)
+                          self.updateSlider(file, folder);
                           
                       })
 
@@ -234,6 +231,24 @@ class DropDowns extends React.Component {
       })  
 
   }
+
+
+  updateSlider = (file, folder) =>{
+    const self = this;
+    // console.log(file, folder)
+
+    let filter = $(`#filter${self.props.area}`).val()
+    // console.log(filter)
+
+    loader(folder, file, filter).then(function(){
+      let data = getData();
+      self.props.volumeRender(data)
+      
+    })  
+
+  }
+
+
 
   animation = (slider) =>{
       const self = this
