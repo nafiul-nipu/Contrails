@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/Col'
 
 import dataRegistry from '../data-component/dataRegistry.json'
 
-import {loader, getMin, getMax} from "./dataHandler.js"
+import {loader, getMin, getMax, getData} from "./dataHandler.js"
 
 
 class DropDowns extends React.Component {
@@ -225,12 +225,13 @@ class DropDowns extends React.Component {
       d3.select(`#slider${self.props.area}`).remove()
       this.createSlider(member)
 
-      d3.select(`#rangeslider${this.props.area}`).select('svg').remove()
-      this.createRangeSlider()
-      this.props.dataLoader(member, list[0], 'temp').then(function(){
-        console.log(self.props.data)
-        self.props.volumeRender(self.props.data)
-      })
+      loader(member, list[0], 'temp').then(function(){
+        let data = getData();
+        self.props.volumeRender(data)
+        d3.select(`#rangeslider${self.props.area}`).select('svg').remove()
+        self.createRangeSlider()
+        
+      })  
 
   }
 
