@@ -3,6 +3,7 @@ import * as d3 from 'd3'
 import dataRegistry from '../data-component/dataRegistry.json'
 
 let data = []
+let rawData = []
 
 const loader = (folder, file, filter) =>{
     return new Promise((resolve, reject) => {
@@ -17,6 +18,7 @@ const loader = (folder, file, filter) =>{
             positions.push((parseFloat(data[filter])));
 
         }).then(function() {
+            rawData = positions
             dataBuffer = new Uint8Array(positions)
             data = dataBuffer
             resolve()
@@ -30,12 +32,16 @@ const getData = () => {
     return data
 }
 
+const getRawData = () => {
+    return rawData
+}
+
 const getMin = () => {
-    return d3.min(data)
+    return d3.min(rawData)
 }
 
 const getMax = () => {
-    return d3.max(data)
+    return d3.max(rawData)
 }
 
 const dataLoader = (folder, file) =>{
@@ -103,5 +109,5 @@ const dataLoader = (folder, file) =>{
 
 }
 
-export {getData, loader, getMin, getMax}
+export {getData, loader, getMin, getMax, getRawData}
 

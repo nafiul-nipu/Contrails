@@ -283,7 +283,7 @@ render() {
 
                     {/* <Col xs={12} style={{ height: '45vh',  'margin': '0', 'padding': '0', marginRight:'-20px'}}> */}
                     <Row style={{ width: "100%"}}>
-                        <Col style={{ width: "50%", height: "100%" }}>
+                        <Col style={{ width: "100%", height: "100%" }}>
                             <div></div>
                         </Col>
                         <Col style={{  height: "100%" }}>

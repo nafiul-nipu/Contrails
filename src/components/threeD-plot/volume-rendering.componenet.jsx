@@ -203,7 +203,7 @@ class VolumeRendering extends React.Component {
     }
 
     selectVolume = (data) =>{
-      // console.log(this.props.data)
+      console.log("volume rendering started")
       const self = this;
       let dataBuffer = data;
 
@@ -235,6 +235,7 @@ class VolumeRendering extends React.Component {
         setInterval(function() {
           // Save them some battery if they're not viewing the tab
           if (document.hidden) {
+            console.log('document is hidden')
             return;
           }
           var startTime = performance.now();
@@ -275,6 +276,8 @@ class VolumeRendering extends React.Component {
         this.gl.deleteTexture(this.volumeTexture);
         this.volumeTexture = tex;
       }
+
+      console.log('volume rendering finished')
 
     }
 
