@@ -1,6 +1,6 @@
 import React from 'react';
 import * as d3 from 'd3';
-import $ from 'jquery'
+import $, { get } from 'jquery'
 import {sliderHorizontal} from 'd3-simple-slider'
 import './dropdown-panel.style.css'
 
@@ -8,13 +8,14 @@ import Col from 'react-bootstrap/Col'
 
 import dataRegistry from '../data-component/dataRegistry.json'
 
-import {loader, getMin, getMax, getData} from "./dataHandler.js"
+import {loader, getMin, getMax, getData, getRawData} from "./dataHandler.js"
 
 
 class DropDowns extends React.Component {
 
     constructor(){
         super();
+        this.slider = []
 
         this.filter = ["temp", 'water_vapor', "contrails"]
     }  
@@ -89,29 +90,6 @@ class DropDowns extends React.Component {
 
       self.createSlider(member)
 
-      d3.select(lowerID).append('select')
-                    .attr('class', "members")
-                    .attr("id", `filter${this.props.area}`)
-                    .on('change', function(){
-                        let member = this.value
-                        console.log(member)
-                    })
-                    .selectAll('option')
-                    .data(this.filter)
-                    .enter()
-                    .append('option')
-                    .attr('id', function(d){ return d})
-                    .attr("value", function(d){return d})
-                    .text((d) => {return d})
-
-      
-
-      d3.select(lowerID).append('div')
-                      .attr('class', 'slider-svg')
-                      .attr("id", `rangeslider${this.props.area}`)
-
-      self.createRangeSlider()         
-
       let keys = Object.keys(this.props.colormaps)
       d3.select(lowerID).append('select')
                       .attr('class', "members")
@@ -129,6 +107,31 @@ class DropDowns extends React.Component {
                       .attr('id', function(d){ return d})
                       .attr("value", function(d){return d})
                       .text((d) => {return d})
+
+
+      d3.select(lowerID).append('select')
+                      .attr('class', "members")
+                      .attr("id", `filter${this.props.area}`)
+                      .on('change', function(){
+                          let member = this.value
+                          console.log(member)
+                      })
+                      .selectAll('option')
+                      .data(this.filter)
+                      .enter()
+                      .append('option')
+                      .attr('id', function(d){ return d})
+                      .attr("value", function(d){return d})
+                      .text((d) => {return d})
+
+      
+
+      d3.select(lowerID).append('div')
+                      .attr('class', 'slider-svg')
+                      .attr("id", `rangeslider${this.props.area}`)
+
+      self.createRangeSlider()   
+
     }
 
     createRangeSlider = () =>{
@@ -136,12 +139,13 @@ class DropDowns extends React.Component {
       const self = this;
       let min = getMin()
       let max = getMax()
+      // console.log(min, max)
       let sliderRange = sliderHorizontal()
                       .min(min)
                       .max(max)
-                      .width(150)
+                      .width(100)
                       .tickFormat(d3.format('0.2f'))
-                      .ticks(5)
+                      .ticks(3)
                       .default([min, max])
                       .fill('#2196f3')
                       .on('onchange', val => {
@@ -151,12 +155,47 @@ class DropDowns extends React.Component {
 
       d3.select(`#rangeslider${this.props.area}`)
                       .append('svg')
-                      .attr('width', 200 )
+                      .attr('width', 150 )
                       .attr('height', 70)
                       .append('g')
                       .attr('transform', 'translate(30, 30)')
                       .call(sliderRange)
 
+      d3.select(`#lower${self.props.area}`).append('button')
+                      .attr('class', `filter${this.props.area}`)
+                      .attr('id', "play-pause-btn")
+                      .attr('value', 'filter')
+                      .text('Filter')
+                      .on('click', function(){
+                        
+                        let range = sliderRange.value();
+                        // console.log(range)
+                        let timestep = +(d3.format('.2f')(self.slider.value()));
+                        // console.log(timestep)
+                        let member = +($(`#member${self.props.area}`).val());
+                        // console.log(member)
+                        let filter = $(`#filter${self.props.area}`).val()
+                        // console.log(filter)
+                       
+                        loader(member, timestep, filter).then(function(){
+                          let rawData = getRawData()
+                          let rawFilteredData = []
+                          console.log(d3.min(rawData), d3.max(rawData))   
+                          rawData.forEach(d =>{
+                          // console.log(d)
+                            if(d >= range[0] && d <= range[1]){
+                              // console.log(d)
+                              rawFilteredData.push(d)
+                              // count++
+                            }else{
+                              rawFilteredData.push(0)
+                            }
+                          })
+                          let filteredData = new Uint8Array(rawFilteredData)
+                          self.props.volumeRender(filteredData)                       
+                          
+                        })                         
+                      })
 
     }
 
@@ -165,13 +204,13 @@ class DropDowns extends React.Component {
       const self = this
       let container = d3.select(`#${this.props.area}`).node().parentNode.clientWidth;
       let select = d3.select(`#member${self.props.area}`).node().clientWidth;
-      let button = d3.select('#play-pause-btn').node().clientWidth;
+      let button = d3.select(`.btn${this.props.area}`).node().clientWidth;
       let margin = select + button
       let width = container - margin * 1.75
 
       let list = dataRegistry[(member - 1)].timeSteps;
 
-      let slider = sliderHorizontal()
+      self.slider = sliderHorizontal()
                       .min(d3.min(list))
                       .max(d3.max(list))
                       .default(list[0])
@@ -181,12 +220,12 @@ class DropDowns extends React.Component {
                       .tickPadding(0)
                       .width(width - 50)
                       .on('onchange', function(){
-                          let file = +(d3.format('.2f')(slider.value()));
+                          let file = +(d3.format('.2f')(self.slider.value()));
                           let folder = +($(`#member${self.props.area}`).val());
                           // console.log(file, folder)
                           self.updateSlider(file, folder);
                           setTimeout(() => {
-                            self.animation(slider)
+                            self.animation(self.slider)
                         }, 2000);
                           
                           
@@ -197,7 +236,7 @@ class DropDowns extends React.Component {
                   d3.select(`.btn${self.props.area}`).attr('value', 'pause')
                                       .text('Pause')
                   setTimeout(() => {
-                      self.animation(slider);                
+                      self.animation(self.slider);                
                   }, 2000);
               }else if(this.value === 'pause'){
                   d3.select(`.btn${self.props.area}`).attr('value', 'play')
@@ -213,7 +252,7 @@ class DropDowns extends React.Component {
                           .attr('height', 70)
                           .append('g')
                           .attr('transform', 'translate(30, 30)')
-                          .call(slider)
+                          .call(self.slider)
           
       
       }
@@ -224,10 +263,15 @@ class DropDowns extends React.Component {
       d3.select(`#slider${self.props.area}`).remove()
       this.createSlider(member)
 
+      d3.select(`.btn${self.props.area}`).attr('value', 'play')
+                                      .text('Play')
+
       loader(member, list[0], 'temp').then(function(){
         let data = getData();
+        // self.data = data;
         self.props.volumeRender(data)
         d3.select(`#rangeslider${self.props.area}`).select('svg').remove()
+        d3.select(`#lower${self.props.area}`).select('button').remove()
         self.createRangeSlider()
         
       })  
@@ -244,16 +288,21 @@ class DropDowns extends React.Component {
 
     loader(folder, file, filter).then(function(){
       let data = getData();
+      // self.data = data;
       self.props.volumeRender(data)
+      // console.log(getMax(), getMin())
+      d3.select(`#rangeslider${self.props.area}`).select('svg').remove()
+      d3.select(`#lower${self.props.area}`).select('button').remove()
+      self.createRangeSlider()
       
-    })  
+    })
 
   }
 
 
 
   animation = (slider) =>{
-    console.log('animation slider is called')
+    // console.log('animation slider is called')
       const self = this
       if( $(`.btn${self.props.area}`).val() === 'pause'){
           // setTimeout(() => {
