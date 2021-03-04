@@ -183,6 +183,10 @@ class DropDowns extends React.Component {
                           let folder = +($(`#member${self.props.area}`).val());
                           // console.log(file, folder)
                           self.updateSlider(file, folder);
+                          setTimeout(() => {
+                            self.animation(slider)
+                        }, 2000);
+                          
                           
                       })
 
@@ -192,7 +196,7 @@ class DropDowns extends React.Component {
                                       .text('Pause')
                   setTimeout(() => {
                       self.animation(slider);                
-                  }, 3000);
+                  }, 2000);
               }else if(this.value === 'pause'){
                   d3.select(`.btn${self.props.area}`).attr('value', 'play')
                                       .text('Play')
@@ -208,10 +212,6 @@ class DropDowns extends React.Component {
                           .append('g')
                           .attr('transform', 'translate(30, 30)')
                           .call(slider)
-
-      setTimeout(() => {
-          self.animation(slider);                
-      }, 3000);
           
       
       }
@@ -251,6 +251,7 @@ class DropDowns extends React.Component {
 
 
   animation = (slider) =>{
+    console.log('animation slider is called')
       const self = this
       if( $(`.btn${self.props.area}`).val() === 'pause'){
           // setTimeout(() => {

@@ -3,35 +3,6 @@ import * as d3 from 'd3'
 import dataRegistry from '../data-component/dataRegistry.json'
 
 let data = []
-const updateDropdown = (folder, list) =>{
-    // this.ref.childCall.test_scatter()
-    const self = this
-    // console.log(folder, list)
-    setTimeout(() => {
-            self.forPromise(folder, list[0]).then(function(){
-            // <Projection id = {self.firstDropdown.current} data={self.state}/>
-            // console.log('done bottom')
-            let list = dataRegistry[folder-1].timeSteps
-            let index =  list.indexOf(list[0])
-            self.updateSlider(list[0], folder);
-        })  
-        }, 5000);  
-    console.log("i am dropdown update")
-    
-}
-
-const updateSlider = (file, folder) =>{
-    // console.log("I am slider update")
-    // console.log(file, folder)
-    let list = dataRegistry[folder-1].timeSteps
-    let index =  list.indexOf(file)
-    // console.log(index)
-    // position data colors and member
-    // this.scatterPlot.test()
-    this.threePlot.addCustomSceneObjects(this.state.state_three_positions[index], this.state.state_colors[index], folder); 
-    // this.scatterPlot.scatterplot(index)
-
-}
 
 const loader = (folder, file, filter) =>{
     return new Promise((resolve, reject) => {
