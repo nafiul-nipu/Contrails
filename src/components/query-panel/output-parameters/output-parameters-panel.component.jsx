@@ -168,7 +168,7 @@ class OutputParametersPanel extends React.Component {
                                 <Form style={{ textAlign: 'left', marginLeft: "10%" }}>
                                     <Form.Check type="checkbox" checked={this.state.T_eul} label="T" id="T_eul" onChange={this.handleButton} />
                                     <Form.Check type="checkbox" cheched={this.state.rho_eul} label="rho" id="rho_eul" onChange={this.handleButton} />
-                                    <Form.Check type="checkbox" checkec={this.state.p_eul} label="p" id="p_eul" onChange={this.handleButton} />
+                                    <Form.Check type="checkbox" checked={this.state.p_eul} label="p" id="p_eul" onChange={this.handleButton} />
                                     <Form.Check type="checkbox" checked={this.state.k_eul} label="k" id="k_eul" onChange={this.handleButton} />
                                 </Form>
 

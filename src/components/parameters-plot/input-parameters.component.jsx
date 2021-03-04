@@ -22,7 +22,7 @@ class InputParameters extends React.Component {
     // }
 
     componentWillReceiveProps(nextProps){
-        console.log(nextProps.elements)
+
         this.state.chartinput.update(nextProps.elements)
 
     }

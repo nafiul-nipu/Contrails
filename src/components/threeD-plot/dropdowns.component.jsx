@@ -146,6 +146,7 @@ class DropDowns extends React.Component {
                       .fill('#2196f3')
                       .on('onchange', val => {
                         // d3.select('p#value-range').text(val.map(d3.format('.2%')).join('-'));
+                        console.log(val)
                       });
 
       d3.select(`#rangeslider${this.props.area}`)
@@ -155,6 +156,7 @@ class DropDowns extends React.Component {
                       .append('g')
                       .attr('transform', 'translate(30, 30)')
                       .call(sliderRange)
+
 
     }
 

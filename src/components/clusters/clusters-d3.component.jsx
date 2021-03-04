@@ -8,7 +8,7 @@ export default class ClustersD3 {
         d3.select(element).select('svg').remove()
 
         const width = 350;
-        const height = 350
+        const height = 250
 
         const svg = d3.select(element)
                     .append("svg")
@@ -16,7 +16,7 @@ export default class ClustersD3 {
                     .attr("width",width)
                     .attr("height",height)
       svg.append("text").text("Members positioned based on similarity")
-      .attr('transform', `translate(${20 },20)`)
+      .attr('transform', `translate(20,10)`)
       .attr("fill", '#05ecec')
                     
         const g = svg.append('g')

@@ -27,63 +27,63 @@ class InputParametersPanel extends React.Component {
             <div style={{color:"grey", marginTop:"5%"}}>Aircraft Engine -Steams</div>
             <Form  >
                 <Form.Check inline  type="checkbox"  id="aircraft-engine-one" label="one" onChange={this.handleButton} className="airplane-one"/>
-                <svg class="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#b2182b" xmlns="http://www.w3.org/2000/svg">
+                <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#b2182b" xmlns="http://www.w3.org/2000/svg">
                     <rect width="8" height="8" rx="1" />
                 </svg>
                 <Form.Check inline  type="checkbox"  id="aircraft-engine-two" label="two" onChange={this.handleButton}/>
-                <svg class="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#d6604d" xmlns="http://www.w3.org/2000/svg">
+                <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#d6604d" xmlns="http://www.w3.org/2000/svg">
                     <rect width="8" height="8" rx="1" />
                 </svg>
             </Form>
             <div style={{color:"grey", marginTop:"5%"}}>Geometry</div>
             <Form  >
                 <Form.Check inline  type="checkbox" id="geometry-short" label="short" onChange={this.handleButton}/>
-                <svg class="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#1a9850" xmlns="http://www.w3.org/2000/svg">
+                <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#1a9850" xmlns="http://www.w3.org/2000/svg">
                     <rect width="8" height="8" rx="1" />
                 </svg>
                 <Form.Check inline  type="checkbox" id="geometry-cowl" label="cowl" onChange={this.handleButton}/>
-                <svg class="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#66bd63" xmlns="http://www.w3.org/2000/svg">
+                <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#66bd63" xmlns="http://www.w3.org/2000/svg">
                     <rect width="8" height="8" rx="1" />
                 </svg>
                 <Form.Check inline  type="checkbox" id="geometry-nozzle" label="nozzle" onChange={this.handleButton}/>
-                <svg class="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#a6d96a" xmlns="http://www.w3.org/2000/svg">
+                <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#a6d96a" xmlns="http://www.w3.org/2000/svg">
                     <rect width="8" height="8" rx="1" />
                 </svg>
             </Form>
             <div style={{color:"grey", marginTop:"5%"}}>Scope</div>
             <Form  >
                 <Form.Check inline  type="checkbox" id="scope-nozzle" label="nozzle" onChange={this.handleButton}/>
-                <svg class="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#542788" xmlns="http://www.w3.org/2000/svg">
+                <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#542788" xmlns="http://www.w3.org/2000/svg">
                     <rect width="8" height="8" rx="1" />
                 </svg>
                 <Form.Check inline  type="checkbox" id="scope-whole" label="whole" onChange={this.handleButton}/>
-                <svg class="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#8073ac" xmlns="http://www.w3.org/2000/svg">
+                <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#8073ac" xmlns="http://www.w3.org/2000/svg">
                     <rect width="8" height="8" rx="1" />
                 </svg>
             </Form>
             <div style={{color:"grey", marginTop:"5%"}}>Turbulence Model</div>
             <Form  >
                 <Form.Check inline  type="checkbox" id="turbulence-T1" label="T1" onChange={this.handleButton}/>
-                <svg class="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#F1B900" xmlns="http://www.w3.org/2000/svg">
+                <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#F1B900" xmlns="http://www.w3.org/2000/svg">
                     <rect width="8" height="8" rx="1" />
                 </svg>
                 <Form.Check inline  type="checkbox" id="turbulence-T2" label="T2" onChange={this.handleButton}/>
-                <svg class="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#fee08b" xmlns="http://www.w3.org/2000/svg">
+                <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#fee08b" xmlns="http://www.w3.org/2000/svg">
                     <rect width="8" height="8" rx="1" />
                 </svg>
                 </Form>
             <div style={{color:"grey", marginTop:"5%"}}>Grid Resolution</div>
             <Form  >
                 <Form.Check inline  type="checkbox" id="grid-coarse" label="coarse" onChange={this.handleButton}/>
-                <svg class="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#92c5de" xmlns="http://www.w3.org/2000/svg">
+                <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#92c5de" xmlns="http://www.w3.org/2000/svg">
                     <rect width="8" height="8" rx="1" />
                 </svg>
                 <Form.Check inline  type="checkbox" id="grid-medium" label="medium" onChange={this.handleButton}/>
-                <svg class="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#4393c3" xmlns="http://www.w3.org/2000/svg">
+                <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#4393c3" xmlns="http://www.w3.org/2000/svg">
                     <rect width="8" height="8" rx="1" />
                 </svg>
                 <Form.Check inline  type="checkbox" id="grid-fine" label="fine" onChange={this.handleButton}/>
-                <svg class="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#2166ac" xmlns="http://www.w3.org/2000/svg">
+                <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#2166ac" xmlns="http://www.w3.org/2000/svg">
                     <rect width="8" height="8" rx="1" />
                 </svg>
             </Form>

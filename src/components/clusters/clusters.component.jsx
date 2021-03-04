@@ -122,13 +122,13 @@ class Clusters extends React.Component {
 
     render() {
         return (
-            <Container style={{margin:'0', padding:'0'}}>
-                <Row style={{ "height": '100%',overflowY: "auto" }} >
-                    <Col xs={8} style={{ "width": '70%', }} >
-                        <div style={{ "width": '70%', }} ref="chart_cluster"></div>
+            <Container style={{margin:'0', padding:'0', width:"100%"}}>
+                <Row style={{ "height": '100%',overflowY: "auto", width:"100%" }} >
+                    <Col xs={10} >
+                        <div ref="chart_cluster"></div>
                     </Col >
-                    <Col style={{margin:'0', padding:'0'}}>
-                    <ClusteringParametersPanel  style={{ marginLeft:"-50px", }} onClusteringSelectChange={this.handleClusteringChange} />
+                    <Col style={{ padding:'0','borderStyle': 'solid', 'borderWidth': '.5px', 'borderColor': '#05ecec' }}>
+                    <ClusteringParametersPanel  style={{ marginRight:"0px",}} onClusteringSelectChange={this.handleClusteringChange} />
                     </Col >
                     
                         
