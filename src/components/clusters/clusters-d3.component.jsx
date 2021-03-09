@@ -6,9 +6,10 @@ import $ from 'jquery'
 export default class ClustersD3 {
     constructor (element, data) {
         d3.select(element).select('svg').remove()
-
-        const width = 350;
-        const height = 350
+        
+        // console.log(d3.select(element).node().clientWidth)
+        const width = d3.select(element).node().clientWidth;
+        const height = d3.select(element).node().parentNode.clientHeight
 
         const svg = d3.select(element)
                     .append("svg")
