@@ -8,7 +8,7 @@ export default class ClustersD3 {
         d3.select(element).select('svg').remove()
         
         // console.log(d3.select(element).node().clientWidth)
-        const width = d3.select(element).node().clientWidth;
+        const width = d3.select(element).node().clientWidth - 10;
         const height = d3.select(element).node().parentNode.clientHeight
 
         const svg = d3.select(element)
