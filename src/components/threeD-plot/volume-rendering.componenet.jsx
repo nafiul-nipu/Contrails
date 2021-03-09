@@ -1,5 +1,6 @@
 import React from 'react';
 import * as d3 from 'd3'
+import $ from 'jquery'
 
 import {vec2, vec3, mat4} from 'gl-matrix'
 
@@ -208,7 +209,15 @@ class VolumeRendering extends React.Component {
       let dataBuffer = data;
 
       //our data dimension is 100 can change later
-      let volDims = [100,100,100];
+      let member = +($(`#member${self.props.renderArea}`).val());
+      console.log(member)
+      let volDims = [];
+      if(member === 2 || member === 3){
+        volDims = [128,128,4];
+      }else{
+        volDims = [100,100,100];
+      }
+      
 
       let tex = this.gl.createTexture();
       this.gl.activeTexture(this.gl.TEXTURE0);
