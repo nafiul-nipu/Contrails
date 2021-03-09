@@ -282,12 +282,9 @@ render() {
                     </Row>
 
                     {/* <Col xs={12} style={{ height: '45vh',  'margin': '0', 'padding': '0', marginRight:'-20px'}}> */}
-                    <Row style={{ minWidth: "100%", height: '24vh', margin:'0' }}>
-                        <Col style={{  height: "100%" }}>
-                        <Clusters clusteringParams={this.state.clusteringParams} dataRegistry={this.state.filtered_data} clusterMembers={this.handleClusteringChange}/>
-                        </Col>
-                        
-                    </Row>
+                    {/* <Row style={{height:'25vh'}}> */}
+                    <Clusters clusteringParams={this.state.clusteringParams} dataRegistry={this.state.filtered_data} clusterMembers={this.handleClusteringChange}/>                        
+                    {/* </Row> */}
                     {/* </Col> */}
                 </Col>
             </Row>

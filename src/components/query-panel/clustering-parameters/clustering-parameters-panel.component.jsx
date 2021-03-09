@@ -2,6 +2,7 @@ import React from 'react';
 import Form from 'react-bootstrap/Form'
 
 import '../query-panel.styles.css';
+import Col from 'react-bootstrap/Col'
 
 class ClusteringParametersPanel extends React.Component {
     constructor(props){
@@ -25,23 +26,23 @@ class ClusteringParametersPanel extends React.Component {
     render(){
         return(
             // <div>Query panel and val is {this.state.currentVal}</div>
-            <div className="mx-auto">
-                <h6>Clustering Parameters</h6>
-                <div >
-                <div style={{"color":"#BEBEBE", marginTop: "5%"}}>Simulation Runs:</div>
-                <Form style={{textAlign: 'left', marginLeft:"30%"}}>
-                <Form.Check type="checkbox" label="solution" />
-                </Form>
-                <div style={{"color":"#BEBEBE", marginTop: "5%"}}>Lagrangian Attr:</div>
-                <Form style={{textAlign: 'left', marginLeft:"30%"}}>
-                <Form.Check type="checkbox" label="T" id="T_lag_avg" onChange= {this.handleFilterChange}/>
-                <Form.Check type="checkbox" label="U"  id="U_lag_avg" />
-                <Form.Check type="checkbox" label="rho"  id="rho_lag_avg" onChange= {this.handleFilterChange}/>
-                <Form.Check type="checkbox" label="d"  id="d_lag_avg" onChange= {this.handleFilterChange}/>
-                <Form.Check type="checkbox" label="Ygas"  id="Ygas_lag_avg" onChange= {this.handleFilterChange}/>
-                </Form>
+            <Col xs={4}>
+                <h6 style={{marginTop:"0", marginBottom:"0"}}>Clustering Parameters</h6>
+                <div style={{fontSize:"0.8em"}}>
+                    <div style={{"color":"#BEBEBE"}}>Simulation Runs:</div>
+                    <Form style={{textAlign: 'left', marginLeft:"37%"}}>
+                    <Form.Check type="checkbox" label="solution" />
+                    </Form>
+                    <div style={{"color":"#BEBEBE"}}>Lagrangian Attr:</div>
+                    <Form style={{textAlign: 'left', marginLeft:"37%"}}>
+                    <Form.Check type="checkbox" label="T" id="T_lag_avg" onChange= {this.handleFilterChange}/>
+                    <Form.Check type="checkbox" label="U"  id="U_lag_avg" />
+                    <Form.Check type="checkbox" label="rho"  id="rho_lag_avg" onChange= {this.handleFilterChange}/>
+                    <Form.Check type="checkbox" label="d"  id="d_lag_avg" onChange= {this.handleFilterChange}/>
+                    <Form.Check type="checkbox" label="Ygas"  id="Ygas_lag_avg" onChange= {this.handleFilterChange}/>
+                    </Form>
                 </div>
-            </div>
+            </Col>
 
         )
     }
