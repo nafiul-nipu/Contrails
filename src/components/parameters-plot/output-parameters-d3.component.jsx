@@ -17,7 +17,7 @@ export default class OutputParametersD3 {
       }
 
       draw_tendrils(element, data_registry) {
-            console.log(d3.select(element).node().clientWidth)
+            // console.log(d3.select(element).node().clientWidth)
             const dataRegistry = data_registry
 
             const line = d3.line()

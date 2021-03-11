@@ -191,7 +191,7 @@ export default class InputParametersD3 {
 
     }
     function draw_turbulence(x, y, data, id) {
-      const color = data == "T1" ? '#F1B900' : "#fee08b"
+      const color = data == "kOmegaSST" ? '#F1B900' : "#fee08b"
       group.append('rect')
         .attr("x", x)
         .attr("y", y)

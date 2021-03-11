@@ -16,6 +16,7 @@ class InputParametersPanel extends React.Component {
     handleButton(param) {
         var new_param = param.target.id.toString()
         this.props.onInputSelectChange(new_param)
+        // console.log(this.props.onInputSelectChange(new_param))
       }
 
 
@@ -63,14 +64,14 @@ class InputParametersPanel extends React.Component {
             </Form>
             <div style={{color:"grey", marginTop:"5%"}}>Turbulence Model</div>
             <Form  >
-                <Form.Check inline  type="checkbox" id="turbulence-T1" label="T1" onChange={this.handleButton}/>
+                <Form.Check inline  type="checkbox" id="turbulence-kOmegaSST" label="kOmegaSST" onChange={this.handleButton}/>
                 <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#F1B900" xmlns="http://www.w3.org/2000/svg">
                     <rect width="8" height="8" rx="1" />
                 </svg>
-                <Form.Check inline  type="checkbox" id="turbulence-T2" label="T2" onChange={this.handleButton}/>
+                {/* <Form.Check inline  type="checkbox" id="turbulence-T2" label="T2" onChange={this.handleButton}/>
                 <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#fee08b" xmlns="http://www.w3.org/2000/svg">
                     <rect width="8" height="8" rx="1" />
-                </svg>
+                </svg> */}
                 </Form>
             <div style={{color:"grey", marginTop:"5%"}}>Grid Resolution</div>
             <Form  >

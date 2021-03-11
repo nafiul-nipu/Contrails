@@ -176,6 +176,7 @@ class QueryPanel extends React.Component {
             else{
              new_el.push(el)
             }
+            // console.log(new_el)
             this.setState({turbulence: new_el})
         }
         if (param.includes('boundary')) {

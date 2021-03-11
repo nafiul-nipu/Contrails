@@ -68,8 +68,8 @@
             "geometry":"cowl",
             "scope":"nozzle",
             "grid":"coarse",
-            "solution":"coupled",
-            "turbulence":"T1",
+            "solution":"uncoupled",
+            "turbulence":"kOmegaSST",
             "boundary-conditions":{
                 "T":["farfield", "engine", "inlet", "nozzle", "outlet", "turbine"],
                 "U":["inlet", "nozzle", "outlet"],
@@ -108,8 +108,8 @@
             "geometry":"cowl",
             "scope":"nozzle",
             "grid":"coarse",
-            "solution":"coupled",
-            "turbulence":"T1",
+            "solution":"uncoupled",
+            "turbulence":"kOmegaSST",
             "boundary-conditions":{
                 "T":["farfield", "engine", "inlet", "nozzle", "outlet", "turbine"],
                 "U":["inlet", "nozzle", "outlet"],
@@ -189,7 +189,7 @@
             "scope":"nozzle",
             "grid":"coarse",
             "solution":"uncoupled",
-            "turbulence":"T2",
+            "turbulence":"kOmegaSST",
             "boundary-conditions":{
                 "T":["inlet",  "outlet"],
                 "U":["outlet"],
@@ -229,7 +229,7 @@
             "scope":"nozzle",
             "grid":"coarse",
             "solution":"uncoupled",
-            "turbulence":"T2",
+            "turbulence":"kOmegaSST",
             "boundary-conditions":{
                 "T":["inlet",  "outlet"],
                 "U":["outlet"],
