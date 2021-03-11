@@ -113,7 +113,7 @@ export default class OutputParametersD3 {
                         for (var k = 1; k < data[i].length; k++) {
                               var dif = normalized_data[k] - normalized_data[k - 1]
                               var angle = (dif * 50) * angleRange
-                              const val = rotate(0, 0, 0, 20, angle);
+                              const val = rotate(0, 0, 0, 16, angle);
                               prevX[i] = val[0] + prevX[i];
                               prevY[i] = val[1] + prevY[i];
                               p.push({ x: prevX[i], y: prevY[i] })
@@ -206,13 +206,13 @@ export default class OutputParametersD3 {
             // create_tendril_plot(p_euls, 50, 830, [{ x: 50, y: 830 }], 'p_eul_avg', ids, '#4393c3')
 
             
-            create_tendril_plot(T_lags, 50, 100, [{ x: 50, y: 100 }], 'T_lag_avg', ids, '#FF6F61')
-            create_tendril_plot(T_euls, 50, 220, [{ x: 50, y: 220 }], 'T_eul_avg', ids, '#FF6F61')
-            create_tendril_plot(d_lags, 50, 340, [{ x: 50, y: 340 }], 'd_lag_avg', ids, '#FF6F61')
-            create_tendril_plot(rho_lags, 50, 460, [{ x: 50, y: 460 }], 'rho_lag_avg', ids, '#FF6F61')
-            // create_tendril_plot(rho_euls, 50, 580, [{ x: 50, y: 580 }], 'rho_eul_avg', ids, '#FF6F61')
-            create_tendril_plot(k_euls, 50, 580, [{ x: 50, y: 580 }], 'k_eul_avg', ids, '#FF6F61')
-            create_tendril_plot(p_euls, 50, 700, [{ x: 50, y: 700 }], 'p_eul_avg', ids, '#FF6F61')
+            create_tendril_plot(T_lags, 15, 100, [{ x: 15, y: 100 }], 'T_lag_avg', ids, '#FF6F61')
+            create_tendril_plot(T_euls, 15, 220, [{ x: 15, y: 220 }], 'T_eul_avg', ids, '#FF6F61')
+            create_tendril_plot(d_lags, 15, 340, [{ x: 15, y: 340 }], 'd_lag_avg', ids, '#FF6F61')
+            create_tendril_plot(rho_lags, 15, 460, [{ x: 15, y: 460 }], 'rho_lag_avg', ids, '#FF6F61')
+            // create_tendril_plot(rho_euls, 15, 580, [{ x: 15, y: 580 }], 'rho_eul_avg', ids, '#FF6F61')
+            create_tendril_plot(k_euls, 15, 580, [{ x: 15, y: 580 }], 'k_eul_avg', ids, '#FF6F61')
+            create_tendril_plot(p_euls, 15, 700, [{ x: 15, y: 700 }], 'p_eul_avg', ids, '#FF6F61')
 
            
       }
