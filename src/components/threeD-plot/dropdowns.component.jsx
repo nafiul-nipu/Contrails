@@ -30,7 +30,7 @@ class DropDowns extends React.Component {
           self.createDropDown(1)
         })
       }else if (this.props.area === 'bottom'){
-        loader(8, 1.52, 'temp').then(function(){
+        loader(6, 1.52, 'temp').then(function(){
           // console.log("data loaded")
           // self.data = getData();
 
@@ -95,7 +95,7 @@ class DropDowns extends React.Component {
       d3.select(lowerID).append('select')
                       .attr('class', "members")
                       .attr("id", `color${this.props.area}`)
-                      .on('onchange', function(d){
+                      .on('change', function(d){
                         // console.log(this.value)
                         // console.log(self.props.selectColormap)
                         self.props.selectColormap(this.value)

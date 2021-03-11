@@ -84,7 +84,7 @@ class VolumeRendering extends React.Component {
           self.selectVolume(self.data)
         })
       }else if (this.props.renderArea === 'bottom'){
-        loader(8, 1.52, 'temp').then(function(){
+        loader(6, 1.52, 'temp').then(function(){
           console.log("data loaded")
           self.data = getData();
 
@@ -291,6 +291,7 @@ class VolumeRendering extends React.Component {
     }
 
     selectColormap = (selection) => {
+      // console.log("color map")
       const self = this;
       let colormapImage = new Image();
       colormapImage.onload = function() {
