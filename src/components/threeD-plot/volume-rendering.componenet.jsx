@@ -210,7 +210,7 @@ class VolumeRendering extends React.Component {
 
       //our data dimension is 100 can change later
       let member = +($(`#member${self.props.renderArea}`).val());
-      console.log(member)
+      // console.log(member)
       let volDims = [];
       if(member === 2 || member === 3){
         volDims = [128,128,4];

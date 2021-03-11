@@ -65,7 +65,7 @@ class DropDowns extends React.Component {
                         .on('change', function(){
                             let member = this.value
                             self.updateDropdown(member)
-                            // console.log(member)
+                            console.log("i am triggered")
                         })
                         .selectAll('option')
                         .data(dataRegistry)
@@ -81,6 +81,7 @@ class DropDowns extends React.Component {
                             }
                         })
                         .text((d) => {return "Member : "+d.ensembleMember})
+      // console.log($(`#member${this.props.area}`))
 
       d3.select(upperID).append('button')
                         .attr('class', `btn${this.props.area}`)
@@ -94,7 +95,7 @@ class DropDowns extends React.Component {
       d3.select(lowerID).append('select')
                       .attr('class', "members")
                       .attr("id", `color${this.props.area}`)
-                      .on('change', function(d){
+                      .on('onchange', function(d){
                         // console.log(this.value)
                         // console.log(self.props.selectColormap)
                         self.props.selectColormap(this.value)

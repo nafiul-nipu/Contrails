@@ -3,6 +3,10 @@ import * as d3 from 'd3';
 import './clusters.style.css';
 import $ from 'jquery'
 
+let top = 'top'
+let bottom = 'bottom'
+let renderArea = ''
+let shouldRender = false
 export default class ClustersD3 {
     constructor (element, data) {
         d3.select(element).select('svg').remove()
@@ -90,6 +94,28 @@ export default class ClustersD3 {
             $('.circles').css("opacity", '0.65')
             // $(`.cluster_airplane_${element['id']}`).css("fill", 'white')
             d3.selectAll('title').remove()
+          })
+          .on('click', function(d){
+            let topMember = +$(`#member${top}`).val()
+            let bottomMember = +$(`#member${bottom}`).val()
+            let thisMember = element['id']
+            if(thisMember != topMember && thisMember != bottomMember){
+              if(renderArea === 'top'){
+                renderArea = 'bottom'
+              }else{
+                renderArea = 'top'
+              }
+              shouldRender = true
+            }else{
+              // console.log('one member is equal to this member')
+              shouldRender = false
+            }
+            // console.log(`top member = ${topMember}, bottom member = ${bottomMember}, this member = ${thisMember}, render area = ${renderArea}, should render? ${shouldRender}`)
+            if(shouldRender){
+              // console.log($(`#member${renderArea}`).val(thisMember).trigger('change'))
+              // $(`#member${renderArea}`).val(thisMember).trigger('onchange');
+              // $(`#member${renderArea}`).val(thisMember)
+            }
 
           })
         })
