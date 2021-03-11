@@ -32,8 +32,8 @@ class InputParameters extends React.Component {
 
     render(){
         return(
-            <div >
-            <div ref={this.chart}></div>
+            <div ref={this.chart} >
+            {/* <div ref={this.chart}></div> */}
 
             </div>
         )

@@ -15,15 +15,15 @@ export default class InputParametersD3 {
 
   draw_airplane(element, new_data) {
     const data = new_data
-    const width = 100
+    const width = d3.select(element).node().parentNode.clientWidth
     const height = 170
     const svg = d3.select(element)
       .append("svg")
-      .attr("width", 300)
+      .attr("width", d3.select(element).node().parentNode.clientWidth)
       .attr("height", data.length* height)
 
     svg.append("text").text("Members' Input Parameters")
-      .attr('transform', `translate(${width / 4},20)`)
+      .attr('transform', `translate(${width /15},20)`)
       .attr("fill", '#05ecec')
 
     const group = svg.append('g')

@@ -30,8 +30,8 @@ class OutputParameters extends React.Component {
 
     render(){
         return(
-            <div >
-            <div ref={this.chartin}></div>
+            <div ref={this.chartin}>
+            {/* <div ref={this.chartin}></div> */}
 
 
             </div>

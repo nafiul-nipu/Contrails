@@ -17,20 +17,21 @@ export default class OutputParametersD3 {
       }
 
       draw_tendrils(element, data_registry) {
+            console.log(d3.select(element).node().clientWidth)
             const dataRegistry = data_registry
 
             const line = d3.line()
                   .x((d) => (d.x))
                   .y((d) => (d.y))
                   .curve(d3.curveCardinal.tension(0.5));
-            const width = 100
+            const width = d3.select(element).node().parentNode.clientWidth
             const height = 100
             const svg = d3.select(element)
                   .append("svg")
-                  .attr("width", 300)
-                  .attr("height", window.innerHeight)
+                  .attr("width", width)
+                  .attr("height", window.innerHeight - 50)
             svg.append("text").text("Members' Output Parameters")
-            .attr('transform', `translate(${width /4},20)`)
+            .attr('transform', `translate(${width /35},20)`)
             .attr("fill", '#05ecec')
 
 
@@ -93,6 +94,7 @@ export default class OutputParametersD3 {
             }
 
             function create_tendril_plot(data, prevX_first, prevY_first, points, title, ids, color) {
+                  // console.log(prevX_first)
                   svg.append("text").text(title)
                         .attr('transform', `translate(${prevX_first + 30},${prevY_first - 35})`)
                         .attr('fill', 'white')
@@ -178,10 +180,10 @@ export default class OutputParametersD3 {
                   var e = el['output-parameters']
                   return e['d_lag_avg_timepoints']
             })
-            const rho_euls = dataRegistry.map(el => {
-                  var e = el['output-parameters']
-                  return e['rho_eul_avg_timepoints']
-            })
+            // const rho_euls = dataRegistry.map(el => {
+            //       var e = el['output-parameters']
+            //       return e['rho_eul_avg_timepoints']
+            // })
             const rho_lags = dataRegistry.map(el => {
                   var e = el['output-parameters']
                   return e['rho_lag_avg_timepoints']
@@ -208,9 +210,9 @@ export default class OutputParametersD3 {
             create_tendril_plot(T_euls, 50, 220, [{ x: 50, y: 220 }], 'T_eul_avg', ids, '#FF6F61')
             create_tendril_plot(d_lags, 50, 340, [{ x: 50, y: 340 }], 'd_lag_avg', ids, '#FF6F61')
             create_tendril_plot(rho_lags, 50, 460, [{ x: 50, y: 460 }], 'rho_lag_avg', ids, '#FF6F61')
-            create_tendril_plot(rho_euls, 50, 580, [{ x: 50, y: 580 }], 'rho_eul_avg', ids, '#FF6F61')
-            create_tendril_plot(k_euls, 50, 700, [{ x: 50, y: 700 }], 'k_eul_avg', ids, '#FF6F61')
-            create_tendril_plot(p_euls, 50, 830, [{ x: 50, y: 830 }], 'p_eul_avg', ids, '#FF6F61')
+            // create_tendril_plot(rho_euls, 50, 580, [{ x: 50, y: 580 }], 'rho_eul_avg', ids, '#FF6F61')
+            create_tendril_plot(k_euls, 50, 580, [{ x: 50, y: 580 }], 'k_eul_avg', ids, '#FF6F61')
+            create_tendril_plot(p_euls, 50, 700, [{ x: 50, y: 700 }], 'p_eul_avg', ids, '#FF6F61')
 
            
       }
