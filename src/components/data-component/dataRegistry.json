@@ -25,17 +25,17 @@
         },
         "input-parameters":{
             "aircraft-engine":"one",
-            "geometry":"short",
+            "geometry":"cowl",
             "scope":"nozzle",
             "grid":"coarse",
-            "solution":"coupled",
-            "turbulence":"T1",
+            "solution":"uncoupled",
+            "turbulence":"kOmegaSST",
             "boundary-conditions":{
-                "T":[ "turbine"],
-                "U":["inlet",  "outlet"],
-                "p":["nozzle", "outlet"],
-                "k":["inlet", "nozzle"],
-                "rho":["nozzle"]
+                "T":[ "N/A"],
+                "U":["N/A",  "N/A"],
+                "p":["N/A", "N/A"],
+                "k":["N/A", "N/A"],
+                "rho":["N/A"]
             }
         }
     },
@@ -65,17 +65,17 @@
         },
         "input-parameters":{
             "aircraft-engine":"one",
-            "geometry":"short",
+            "geometry":"cowl",
             "scope":"nozzle",
             "grid":"coarse",
             "solution":"coupled",
             "turbulence":"T1",
             "boundary-conditions":{
-                "T":["farfield"],
-                "U":["inlet",  "outlet"],
-                "p":["nozzle", "outlet"],
-                "k":["inlet" ],
-                "rho":[]
+                "T":["farfield", "engine", "inlet", "nozzle", "outlet", "turbine"],
+                "U":["inlet", "nozzle", "outlet"],
+                "p":["wall", "wedgeFront", "wedgeBack"],
+                "k":["inlet", "nozzle"],
+                "rho":["inlet"]
             }
         }
     },
@@ -105,7 +105,7 @@
         },
         "input-parameters":{
             "aircraft-engine":"one",
-            "geometry":"short",
+            "geometry":"cowl",
             "scope":"nozzle",
             "grid":"coarse",
             "solution":"coupled",
@@ -113,9 +113,9 @@
             "boundary-conditions":{
                 "T":["farfield", "engine", "inlet", "nozzle", "outlet", "turbine"],
                 "U":["inlet", "nozzle", "outlet"],
-                "p":["nozzle", "outlet"],
+                "p":["wall", "wedgeFront", "wedgeBack"],
                 "k":["inlet", "nozzle"],
-                "rho":[]
+                "rho":["inlet"]
             }
         }
 
@@ -148,14 +148,14 @@
             "geometry":"cowl",
             "scope":"nozzle",
             "grid":"coarse",
-            "solution":"coupled",
-            "turbulence":"T1",
+            "solution":"uncoupled",
+            "turbulence":"kOmegaSST",
             "boundary-conditions":{
-                "T":["farfield", "turbine"],
-                "U":["inlet" ],
-                "p":["nozzle" ],
-                "k":[ "nozzle"],
-                "rho":["nozzle"]
+                "T":["engine","farfield","inlet", "nozzle", "outlet", "turbine"],
+                "U":["turbine" ],
+                "p":["inlet", "turbine" ],
+                "k":[ "inlet", "turbine"],
+                "rho":["inlet", "turbine"]
             }
         }
 
@@ -184,18 +184,18 @@
             "k_eul_avg_timepoints":[1043.856223,1044.539545,1042.799088,1038.602889,1043.627394,1049.070620,1058.670706]
         },
         "input-parameters":{
-            "aircraft-engine":"two",
-            "geometry":"nozzle",
+            "aircraft-engine":"one",
+            "geometry":"cowl",
             "scope":"nozzle",
             "grid":"coarse",
             "solution":"uncoupled",
             "turbulence":"T2",
             "boundary-conditions":{
-                "T":["farfield", "engine", "inlet", "nozzle", "outlet", "turbine"],
-                "U":["inlet", "nozzle", "outlet"],
-                "p":["nozzle"],
-                "k":["inlet", "nozzle"],
-                "rho":["nozzle"]
+                "T":["inlet",  "outlet"],
+                "U":["outlet"],
+                "p":["outlet"],
+                "k":["inlet", "outlet"],
+                "rho":["outlet"]
             }
         }
 
@@ -224,18 +224,18 @@
             "k_eul_avg_timepoints":[1046.761489,1043.362024,1041.684922,1041.221636,1045.985388,1053.654202,1063.078222]
         },
         "input-parameters":{
-            "aircraft-engine":"two",
-            "geometry":"nozzle",
+            "aircraft-engine":"one",
+            "geometry":"cowl",
             "scope":"nozzle",
             "grid":"coarse",
             "solution":"uncoupled",
             "turbulence":"T2",
             "boundary-conditions":{
-                "T":["farfield", "engine", "inlet", "nozzle", "outlet", "turbine"],
-                "U":["inlet", "nozzle", "outlet"],
-                "p":["nozzle"],
-                "k":["inlet", "nozzle"],
-                "rho":["nozzle"]
+                "T":["inlet",  "outlet"],
+                "U":["outlet"],
+                "p":["outlet"],
+                "k":["inlet", "outlet"],
+                "rho":["outlet"]
             }
         }
 
