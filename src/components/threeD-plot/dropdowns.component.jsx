@@ -34,7 +34,7 @@ class DropDowns extends React.Component {
           // console.log("data loaded")
           // self.data = getData();
 
-          self.createDropDown(8)
+          self.createDropDown(6)
         })
 
       }
