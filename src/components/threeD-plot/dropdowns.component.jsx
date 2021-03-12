@@ -17,7 +17,7 @@ class DropDowns extends React.Component {
         super();
         this.slider = []
 
-        this.filter = ["temp", 'water_vapor', "contrails"]
+        this.filter = ["temp", 'ice', "contrails"]
     }  
     
     componentDidMount(){
