@@ -114,8 +114,10 @@ class DropDowns extends React.Component {
                       .attr('class', "members")
                       .attr("id", `filter${this.props.area}`)
                       .on('change', function(){
-                          let member = this.value
-                          console.log(member)
+                        let file = +(d3.format('.2f')(self.slider.value()));
+                        let folder = +($(`#member${self.props.area}`).val());
+                        // console.log(file, folder)
+                        self.updateSlider(file, folder);
                       })
                       .selectAll('option')
                       .data(this.filter)
@@ -151,7 +153,7 @@ class DropDowns extends React.Component {
                       .fill('#2196f3')
                       .on('onchange', val => {
                         // d3.select('p#value-range').text(val.map(d3.format('.2%')).join('-'));
-                        console.log(val)
+                        // console.log(val)
                       });
 
       d3.select(`#rangeslider${this.props.area}`)
