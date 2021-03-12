@@ -13,8 +13,10 @@ const loader = (folder, file, filter) =>{
         let url = `https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/data/volume_data/${folder}/${file}.csv`;
         let dataBuffer = []
         let positions = []
+        // console.log(url)
         d3.csv(url, data => {
                     
+            // console.log(url)
             positions.push((parseFloat(data[filter])));
 
         }).then(function() {

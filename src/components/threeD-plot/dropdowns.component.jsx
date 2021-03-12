@@ -221,6 +221,8 @@ class DropDowns extends React.Component {
                       .tickPadding(0)
                       .width(width - 50)
                       .on('onchange', function(){
+                          // let number = self.slider.value().toString()
+                          // console.log(number)
                           let file = +(d3.format('.2f')(self.slider.value()));
                           let folder = +($(`#member${self.props.area}`).val());
                           // console.log(file, folder)
