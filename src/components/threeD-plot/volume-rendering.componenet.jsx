@@ -61,9 +61,11 @@ class VolumeRendering extends React.Component {
           "Cool_Warm": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/cool-warm-paraview.png",
           "Matplotlib_Plasma": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/matplotlib-plasma.png",
           "Matplotlib_Virdis": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/matplotlib-virdis.png",
-          "Rainbow": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/rainbow.png",
-          "Samsel_Linear_Green": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/samsel-linear-green.png",
-          "Samsel_Linear_YGB_1211G": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/samsel-linear-ygb-1211g.png",
+          // "Rainbow": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/rainbow.png",
+          // "Samsel_Linear_Green": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/samsel-linear-green.png",
+          // "Samsel_Linear_YGB_1211G": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/samsel-linear-ygb-1211g.png",
+          "cm_gray": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/cm_gray.png",
+          "cm_virdis": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/cm_viridis.png",
         };
 
         this.canvas = React.createRef();
@@ -102,6 +104,16 @@ class VolumeRendering extends React.Component {
       const width = d3.select(`.threeContainer${this.props.renderArea}`).node().clientWidth;
       const height = d3.select(`.threeContainer${this.props.renderArea}`).node().clientHeight;
 
+      // d3.select(`.threeContainer${this.props.renderArea}`).append('svg')
+      //                             .attr('width', 10)
+      //                             .attr("height", 10)
+      //                             .append('rect')
+      //                             .attr('width', 5)
+      //                             .attr('height', 5)
+      //                             .attr("x", 0)
+      //                             .attr('y', 0)
+      //                             .attr('fill', 'blue')
+
       d3.select(`.threeContainer${this.props.renderArea}`).append('canvas')
                             .attr('width', width)
                             .attr('height', height)
@@ -109,6 +121,13 @@ class VolumeRendering extends React.Component {
 
       this.canvas = document.getElementById(`glcanvas${this.props.renderArea}`)
       this.gl = this.canvas.getContext("webgl2")
+      console.log(this.gl)
+      // // Get the 'context'
+      // let ctx = document.getElementById(`glcanvas${this.props.renderArea}`).getContext('2d');
+
+      // // // Build a rectangle
+      // ctx.fillStyle = '#69b3a2'; // rectangle color
+      // ctx.fillRect(20, 20, 50, 50);
 
       if(!this.gl){
         console.log("Unable to initialize WebGL2. Your browser may not support it");
@@ -267,6 +286,8 @@ class VolumeRendering extends React.Component {
           self.gl.uniform3fv(self.shader.uniforms["eye_pos"], eye);
 
           self.gl.drawArrays(self.gl.TRIANGLE_STRIP, 0, self.cubeStrip.length / 3);
+
+
           // Wait for rendering to actually finish
           self.gl.finish();
           let endTime = performance.now();
@@ -290,6 +311,7 @@ class VolumeRendering extends React.Component {
       }
 
       console.log('volume rendering finished')
+
 
     }
 
