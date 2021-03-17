@@ -687,10 +687,10 @@ export default class InputParametersD3 {
       draw_solution(155, height * i + height / 2 - 10, data[i]['input-parameters']['solution'], data[i]['id'])
       draw_turbulence(113, height * i + height / 2 - 10, data[i]['input-parameters']['turbulence'], data[i]['id'])
 
-      draw_boundary_T(70, (height * i) + height / 2 + 11, data[i]['input-parameters']['boundary-conditions']['T'], data[i]['id'])
-      draw_boundary_U(90, (height * i) + height / 2 + 11, data[i]['input-parameters']['boundary-conditions']['U'], data[i]['id'])
-      draw_boundary_p(70, (height * i) + height / 2 - 11, data[i]['input-parameters']['boundary-conditions']['p'], data[i]['id'])
-      draw_boundary_k(90, (height * i) + height / 2 - 11, data[i]['input-parameters']['boundary-conditions']['k'], data[i]['id'])
+      draw_boundary_T(52, (height * i) + height / 2 + 11, data[i]['input-parameters']['boundary-conditions']['T'], data[i]['id'])
+      draw_boundary_U(96, (height * i) + height / 2 + 11, data[i]['input-parameters']['boundary-conditions']['U'], data[i]['id'])
+      draw_boundary_p(75, (height * i) + height / 2 - 11, data[i]['input-parameters']['boundary-conditions']['p'], data[i]['id'])
+      draw_boundary_k(117, (height * i) + height / 2 - 11, data[i]['input-parameters']['boundary-conditions']['k'], data[i]['id'])
       // draw_boundary_rho(110, height * i + height / 2 - 11, data[i]['input-parameters']['boundary-conditions']['rho'], data[i]['id'])
 
 
