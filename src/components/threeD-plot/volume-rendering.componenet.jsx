@@ -242,18 +242,23 @@ class VolumeRendering extends React.Component {
       const self = this;
       let dataBuffer = data;
       const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
-      console.log(data)
-      console.log(countOccurrences(dataBuffer, 0));
+      // console.log(data)
+      // console.log(countOccurrences(dataBuffer, 0));
       //our data dimension is 100 can change later
+      // console.log(($(`#member${self.props.renderArea}`).val()))
       let member = +($(`#member${self.props.renderArea}`).val());
-      let volDims;
-      if(member === undefined && self.props.renderArea === 'top'){
-        volDims = [100,100,100]
-      }else if (member === undefined && self.props.renderArea === 'bottom'){
-        volDims = [100,100,100]
-      }else{
-        volDims = dataRegistry[member - 1].volume_dimensions;
+      // console.log(member)
+      
+      if(isNaN(member) && self.props.renderArea === 'top'){
+        console.log("top condition")
+        member = 1
+        // volDims = [100,100,100]
+      }else if (isNaN(member) && self.props.renderArea === 'bottom'){
+        console.log('bottom condiion')
+        member = 6
+        // volDims = [100,100,100]
       }
+      let volDims = dataRegistry[member - 1].volume_dimensions;
       // console.log(member)
       // console.log(volDims)
       
