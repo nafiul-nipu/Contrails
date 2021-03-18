@@ -15,6 +15,13 @@ import DropDowns from './dropdowns.component'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col'
 
+import axes from '../../data/axes.png'
+
+import { WebGLUtils } from 'three/src/renderers/webgl/WebGLUtils';
+
+import * as THREE from 'three'
+import { renderIntoDocument } from 'react-dom/test-utils';
+
 class VolumeRendering extends React.Component {
     constructor(){
         super();
@@ -121,7 +128,7 @@ class VolumeRendering extends React.Component {
 
       this.canvas = document.getElementById(`glcanvas${this.props.renderArea}`)
       this.gl = this.canvas.getContext("webgl2")
-      console.log(this.gl)
+      // console.log(this.gl)
       // // Get the 'context'
       // let ctx = document.getElementById(`glcanvas${this.props.renderArea}`).getContext('2d');
 
@@ -287,7 +294,6 @@ class VolumeRendering extends React.Component {
 
           self.gl.drawArrays(self.gl.TRIANGLE_STRIP, 0, self.cubeStrip.length / 3);
 
-
           // Wait for rendering to actually finish
           self.gl.finish();
           let endTime = performance.now();
@@ -309,6 +315,21 @@ class VolumeRendering extends React.Component {
         this.gl.deleteTexture(this.volumeTexture);
         this.volumeTexture = tex;
       }
+
+      const img = new Image();
+      img.onload = function(){
+        self.gl.activeTexture(self.gl.TEXTURE0);
+        const tex = this.gl.createTexture();
+        self.gl.bindTexture(self.TEXTURE_2D, tex)
+        self.gl.texImage2D(self.gl.TEXTURE_2D, 0, self.gl.RGB, self.gl.RGB, self.gl.UNSIGNED_BYTE, img);
+        self.gl.generateMipmap(self.gl.TEXTURE_2D);
+        const texLoc = gl.getUniformLocation(prog, "tex");
+        self.gl.uniform1i(texLoc, 0);
+
+        self.gl.drawArrays(self.gl.TRIANGLE_FAN, 0, 4);
+      }
+
+      // img.src = 
 
       console.log('volume rendering finished')
 
@@ -348,6 +369,7 @@ class VolumeRendering extends React.Component {
                 </Row>
                 <Row>
                     <Col xs={12} style={{height:'55vh', backgroundColor:'#31393F'}} className={`threeContainer${this.props.renderArea}`}>
+                    {/* <img src={axes} /> */}
                     </Col>                                    
                 </Row>
             </Col>
