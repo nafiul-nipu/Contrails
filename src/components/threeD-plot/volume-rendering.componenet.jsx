@@ -231,7 +231,7 @@ class VolumeRendering extends React.Component {
       };
 
       colormapImage.crossOrigin = "anonymous";
-      colormapImage.src = 'https://raw.githubusercontent.com/CarlaFloricel/Contrails/nafiul-testing/src/components/threeD-plot/colormaps/cool-warm-paraview.png';
+      colormapImage.src = 'https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/cool-warm-paraview.png';
 
       // console.log(colormapImage)
 
