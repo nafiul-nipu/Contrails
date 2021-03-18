@@ -12,6 +12,8 @@ import {getData, loader} from './dataHandler.js'
 
 import DropDowns from './dropdowns.component'
 
+import dataRegistry from '../data-component/dataRegistry.json'
+
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col'
 
@@ -239,19 +241,21 @@ class VolumeRendering extends React.Component {
       console.log("volume rendering started")
       const self = this;
       let dataBuffer = data;
-
+      const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
+      console.log(data)
+      console.log(countOccurrences(dataBuffer, 0));
       //our data dimension is 100 can change later
       let member = +($(`#member${self.props.renderArea}`).val());
+      let volDims;
+      if(member === undefined && self.props.renderArea === 'top'){
+        volDims = [100,100,100]
+      }else if (member === undefined && self.props.renderArea === 'bottom'){
+        volDims = [100,100,100]
+      }else{
+        volDims = dataRegistry[member - 1].volume_dimensions;
+      }
       // console.log(member)
-      let volDims = [];
-      if(member === 2 || member === 3 ){
-        volDims = [128,128,4];
-      }else if(member === 7 || member === 8 || member === 9){
-        volDims = [184,128,4];
-      }
-      else{
-        volDims = [100,100,100];
-      }
+      // console.log(volDims)
       
 
       let tex = this.gl.createTexture();
