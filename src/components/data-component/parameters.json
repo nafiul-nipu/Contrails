@@ -1,0 +1,13 @@
+{
+    "input":{
+        "aircraft-engine":["one", "two"],
+        "geometry":["short-cowl-nozzle"],
+        "scope":["nozzle", "whole"],
+        "grid":["coarse", "fine", "medium"],
+        "solution":["coupled","uncoupled"],
+        "turbulence":["kOmegaSST"]
+    },
+    "colorDomain" : ["one", "two", "short-cowl-nozzle",
+         "nozzle", "whole", "coarse", "fine", "medium",
+         "coupled","uncoupled", "kOmegaSST" ]
+}

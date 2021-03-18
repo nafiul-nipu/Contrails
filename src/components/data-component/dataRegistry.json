@@ -37,6 +37,14 @@
                 "k":["N/A", "N/A"],
                 "rho":["N/A"]
             }
+        },
+        "input":{
+            "aircraft-engine":"one",
+            "geometry":"short-cowl-nozzle",
+            "scope":"nozzle",
+            "grid":"coarse",
+            "solution":"uncoupled",
+            "turbulence":"kOmegaSST"
         }
     },
     {
@@ -77,6 +85,14 @@
                 "k":["inlet", "nozzle"],
                 "rho":["inlet"]
             }
+        },
+        "input":{
+            "aircraft-engine":"one",
+            "geometry":"short-cowl-nozzle",
+            "scope":"nozzle",
+            "grid":"coarse",
+            "solution":"uncoupled",
+            "turbulence":"kOmegaSST"
         }
     },
     {
@@ -117,6 +133,14 @@
                 "k":["inlet", "nozzle"],
                 "rho":["inlet"]
             }
+        },
+        "input":{
+            "aircraft-engine":"one",
+            "geometry":"short-cowl-nozzle",
+            "scope":"nozzle",
+            "grid":"coarse",
+            "solution":"uncoupled",
+            "turbulence":"kOmegaSST"
         }
 
     },
@@ -157,6 +181,14 @@
                 "k":[ "inlet", "turbine"],
                 "rho":["inlet", "turbine"]
             }
+        },
+        "input":{
+            "aircraft-engine":"one",
+            "geometry":"short-cowl-nozzle",
+            "scope":"nozzle",
+            "grid":"coarse",
+            "solution":"uncoupled",
+            "turbulence":"kOmegaSST"
         }
 
     },
@@ -197,6 +229,14 @@
                 "k":["inlet", "outlet"],
                 "rho":["outlet"]
             }
+        },
+        "input":{
+            "aircraft-engine":"one",
+            "geometry":"short-cowl-nozzle",
+            "scope":"nozzle",
+            "grid":"coarse",
+            "solution":"uncoupled",
+            "turbulence":"kOmegaSST"
         }
 
     },
@@ -237,6 +277,14 @@
                 "k":["inlet", "outlet"],
                 "rho":["outlet"]
             }
+        },
+        "input":{
+            "aircraft-engine":"one",
+            "geometry":"short-cowl-nozzle",
+            "scope":"nozzle",
+            "grid":"coarse",
+            "solution":"uncoupled",
+            "turbulence":"kOmegaSST"
         }
 
 
@@ -266,7 +314,7 @@
         },
         "input-parameters":{
             "aircraft-engine":"one",
-            "geometry":"cowl",
+            "geometry":"short-cowl-nozzle",
             "scope":"nozzle",
             "grid":"coarse",
             "solution":"uncoupled",
@@ -278,6 +326,14 @@
                 "k":["inlet", "outlet"],
                 "rho":["outlet"]
             }
+        },
+        "input":{
+            "aircraft-engine":"one",
+            "geometry":"short-cowl-nozzle",
+            "scope":"nozzle",
+            "grid":"coarse",
+            "solution":"uncoupled",
+            "turbulence":"kOmegaSST"
         }
 
 
@@ -307,7 +363,7 @@
         },
         "input-parameters":{
             "aircraft-engine":"one",
-            "geometry":"cowl",
+            "geometry":"short-cowl-nozzle",
             "scope":"nozzle",
             "grid":"coarse",
             "solution":"uncoupled",
@@ -319,6 +375,14 @@
                 "k":["inlet", "outlet"],
                 "rho":["outlet"]
             }
+        },
+        "input":{
+            "aircraft-engine":"one",
+            "geometry":"short-cowl-nozzle",
+            "scope":"nozzle",
+            "grid":"coarse",
+            "solution":"uncoupled",
+            "turbulence":"kOmegaSST"
         }
 
 
@@ -348,7 +412,7 @@
         },
         "input-parameters":{
             "aircraft-engine":"one",
-            "geometry":"cowl",
+            "geometry":"short-cowl-nozzle",
             "scope":"nozzle",
             "grid":"coarse",
             "solution":"uncoupled",
@@ -360,6 +424,14 @@
                 "k":["inlet", "outlet"],
                 "rho":["outlet"]
             }
+        },
+        "input":{
+            "aircraft-engine":"one",
+            "geometry":"short-cowl-nozzle",
+            "scope":"nozzle",
+            "grid":"coarse",
+            "solution":"uncoupled",
+            "turbulence":"kOmegaSST"
         }
 
 
@@ -389,7 +461,7 @@
         },
         "input-parameters":{
             "aircraft-engine":"one",
-            "geometry":"cowl",
+            "geometry":"short-cowl-nozzle",
             "scope":"nozzle",
             "grid":"coarse",
             "solution":"uncoupled",
@@ -401,6 +473,14 @@
                 "k":["inlet", "outlet"],
                 "rho":["outlet"]
             }
+        },
+        "input":{
+            "aircraft-engine":"one",
+            "geometry":"short-cowl-nozzle",
+            "scope":"nozzle",
+            "grid":"fine",
+            "solution":"uncoupled",
+            "turbulence":"kOmegaSST"
         }
 
 
@@ -430,7 +510,7 @@
         },
         "input-parameters":{
             "aircraft-engine":"one",
-            "geometry":"cowl",
+            "geometry":"short-cowl-nozzle",
             "scope":"nozzle",
             "grid":"coarse",
             "solution":"uncoupled",
@@ -442,6 +522,14 @@
                 "k":["inlet", "outlet"],
                 "rho":["outlet"]
             }
+        },
+        "input":{
+            "aircraft-engine":"one",
+            "geometry":"short-cowl-nozzle",
+            "scope":"nozzle",
+            "grid":"coarse",
+            "solution":"uncoupled",
+            "turbulence":"kOmegaSST"
         }
 
 
@@ -471,7 +559,7 @@
         },
         "input-parameters":{
             "aircraft-engine":"one",
-            "geometry":"cowl",
+            "geometry":"short-cowl-nozzle",
             "scope":"nozzle",
             "grid":"coarse",
             "solution":"uncoupled",
@@ -483,6 +571,14 @@
                 "k":["inlet", "outlet"],
                 "rho":["outlet"]
             }
+        },
+        "input":{
+            "aircraft-engine":"one",
+            "geometry":"short-cowl-nozzle",
+            "scope":"nozzle",
+            "grid":"coarse",
+            "solution":"uncoupled",
+            "turbulence":"kOmegaSST"
         }
 
 
