@@ -363,5 +363,128 @@
         }
 
 
+    },
+    {
+        "id": 10,
+        "name": "test4",
+        "ensembleMember": 10,
+        "timeSteps": [0.11,0.12,0.13,0.14,0.15,0.16],
+        "position":{"x": 77,   "y": 11, "z": 170},
+        "output-parameters":{
+            "T_lag_avg":477.2161372857143,
+            "rho_lag_avg":1000,
+            "d_lag_avg": 0.00074,
+            "Ygas_lag_avg":0,
+            "T_eul_avg":317.0254178571429,
+           
+            "p_eul_avg":25537.066601571427,
+            "k_eul_avg":1047.9639832857142,
+            "T_lag_avg_timepoints":[445.393, 507.099244, 517.785323, 499.651745, 477.430948,456.160359,436.992342],
+            "rho_lag_avg_timepoints":[1000, 1000,1000,1000,1000,1000, 1000],
+            "d_lag_avg_timepoints":[0.00074, 0.000074, 0.000074,0.000074,0.000074,0.000074,0.000074],
+            "Ygas_lag_avg_timepoints":[0,0,0,0,0,0,0],
+            "T_eul_avg_timepoints":[317.880685,317.584501,317.324905,317.087287,316.739381,316.391935,316.169231], 
+            "p_eul_avg_timepoints":[25817.445068,25785.507468,25670.489963,25406.128325,25352.078929,25367.339255,25360.477203],
+            "k_eul_avg_timepoints":[1046.761489,1043.362024,1041.684922,1041.221636,1045.985388,1053.654202,1063.078222]
+        },
+        "input-parameters":{
+            "aircraft-engine":"one",
+            "geometry":"cowl",
+            "scope":"nozzle",
+            "grid":"coarse",
+            "solution":"uncoupled",
+            "turbulence":"kOmegaSST",
+            "boundary-conditions":{
+                "T":["inlet",  "outlet"],
+                "U":["outlet"],
+                "p":["outlet"],
+                "k":["inlet", "outlet"],
+                "rho":["outlet"]
+            }
+        }
+
+
+    },
+    {
+        "id": 11,
+        "name": "test5",
+        "ensembleMember": 11,
+        "timeSteps": [0.11,0.12,0.13,0.14,0.15,0.16],
+        "position":{"x": 77,   "y": 11, "z": 170},
+        "output-parameters":{
+            "T_lag_avg":477.2161372857143,
+            "rho_lag_avg":1000,
+            "d_lag_avg": 0.00074,
+            "Ygas_lag_avg":0,
+            "T_eul_avg":317.0254178571429,
+           
+            "p_eul_avg":25537.066601571427,
+            "k_eul_avg":1047.9639832857142,
+            "T_lag_avg_timepoints":[445.393, 507.099244, 517.785323, 499.651745, 477.430948,456.160359,436.992342],
+            "rho_lag_avg_timepoints":[1000, 1000,1000,1000,1000,1000, 1000],
+            "d_lag_avg_timepoints":[0.00074, 0.000074, 0.000074,0.000074,0.000074,0.000074,0.000074],
+            "Ygas_lag_avg_timepoints":[0,0,0,0,0,0,0],
+            "T_eul_avg_timepoints":[317.880685,317.584501,317.324905,317.087287,316.739381,316.391935,316.169231], 
+            "p_eul_avg_timepoints":[25817.445068,25785.507468,25670.489963,25406.128325,25352.078929,25367.339255,25360.477203],
+            "k_eul_avg_timepoints":[1046.761489,1043.362024,1041.684922,1041.221636,1045.985388,1053.654202,1063.078222]
+        },
+        "input-parameters":{
+            "aircraft-engine":"one",
+            "geometry":"cowl",
+            "scope":"nozzle",
+            "grid":"coarse",
+            "solution":"uncoupled",
+            "turbulence":"kOmegaSST",
+            "boundary-conditions":{
+                "T":["inlet",  "outlet"],
+                "U":["outlet"],
+                "p":["outlet"],
+                "k":["inlet", "outlet"],
+                "rho":["outlet"]
+            }
+        }
+
+
+    },
+    {
+        "id": 12,
+        "name": "test6",
+        "ensembleMember": 12,
+        "timeSteps": [0.11,0.12,0.13,0.14,0.15,0.16],
+        "position":{"x": 77,   "y": 11, "z": 170},
+        "output-parameters":{
+            "T_lag_avg":477.2161372857143,
+            "rho_lag_avg":1000,
+            "d_lag_avg": 0.00074,
+            "Ygas_lag_avg":0,
+            "T_eul_avg":317.0254178571429,
+           
+            "p_eul_avg":25537.066601571427,
+            "k_eul_avg":1047.9639832857142,
+            "T_lag_avg_timepoints":[445.393, 507.099244, 517.785323, 499.651745, 477.430948,456.160359,436.992342],
+            "rho_lag_avg_timepoints":[1000, 1000,1000,1000,1000,1000, 1000],
+            "d_lag_avg_timepoints":[0.00074, 0.000074, 0.000074,0.000074,0.000074,0.000074,0.000074],
+            "Ygas_lag_avg_timepoints":[0,0,0,0,0,0,0],
+            "T_eul_avg_timepoints":[317.880685,317.584501,317.324905,317.087287,316.739381,316.391935,316.169231], 
+            "p_eul_avg_timepoints":[25817.445068,25785.507468,25670.489963,25406.128325,25352.078929,25367.339255,25360.477203],
+            "k_eul_avg_timepoints":[1046.761489,1043.362024,1041.684922,1041.221636,1045.985388,1053.654202,1063.078222]
+        },
+        "input-parameters":{
+            "aircraft-engine":"one",
+            "geometry":"cowl",
+            "scope":"nozzle",
+            "grid":"coarse",
+            "solution":"uncoupled",
+            "turbulence":"kOmegaSST",
+            "boundary-conditions":{
+                "T":["inlet",  "outlet"],
+                "U":["outlet"],
+                "p":["outlet"],
+                "k":["inlet", "outlet"],
+                "rho":["outlet"]
+            }
+        }
+
+
     }
 ]

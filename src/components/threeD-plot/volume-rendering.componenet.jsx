@@ -16,8 +16,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col'
 
 import axes from '../../data/axes.png'
-
-import { WebGLUtils } from 'three/src/renderers/webgl/WebGLUtils';
+import {vertexShader2d, fragmentShader2d} from "./shader-srcs-2d.js"
 
 import * as THREE from 'three'
 import { renderIntoDocument } from 'react-dom/test-utils';
@@ -126,15 +125,22 @@ class VolumeRendering extends React.Component {
                             .attr('height', height)
                             .attr('id', `glcanvas${this.props.renderArea}`)
 
+      // d3.select(`.threeContainer${this.props.renderArea}`).append('canvas')
+      //                       .attr('width', 250)
+      //                       .attr('height', 250)
+      //                       .attr('id', `svgcanvas${this.props.renderArea}`)
+
       this.canvas = document.getElementById(`glcanvas${this.props.renderArea}`)
       this.gl = this.canvas.getContext("webgl2")
-      // console.log(this.gl)
-      // // Get the 'context'
-      // let ctx = document.getElementById(`glcanvas${this.props.renderArea}`).getContext('2d');
 
-      // // // Build a rectangle
-      // ctx.fillStyle = '#69b3a2'; // rectangle color
-      // ctx.fillRect(20, 20, 50, 50);
+      // let svgC = document.getElementById(`svgcanvas${this.props.renderArea}`)
+      // let ctx = svgC.getContext('2d')
+      // var img = new Image();
+      // img.onload = function() {
+      //   ctx.drawImage(img, 0, 0);
+      // }
+      // img.crossOrigin = "anonymous"
+      // img.src = "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/data/axes.png";
 
       if(!this.gl){
         console.log("Unable to initialize WebGL2. Your browser may not support it");
@@ -315,21 +321,6 @@ class VolumeRendering extends React.Component {
         this.gl.deleteTexture(this.volumeTexture);
         this.volumeTexture = tex;
       }
-
-      const img = new Image();
-      img.onload = function(){
-        self.gl.activeTexture(self.gl.TEXTURE0);
-        const tex = this.gl.createTexture();
-        self.gl.bindTexture(self.TEXTURE_2D, tex)
-        self.gl.texImage2D(self.gl.TEXTURE_2D, 0, self.gl.RGB, self.gl.RGB, self.gl.UNSIGNED_BYTE, img);
-        self.gl.generateMipmap(self.gl.TEXTURE_2D);
-        const texLoc = gl.getUniformLocation(prog, "tex");
-        self.gl.uniform1i(texLoc, 0);
-
-        self.gl.drawArrays(self.gl.TRIANGLE_FAN, 0, 4);
-      }
-
-      // img.src = 
 
       console.log('volume rendering finished')
 
