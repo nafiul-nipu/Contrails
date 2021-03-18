@@ -309,6 +309,8 @@ class VolumeRendering extends React.Component {
 
           self.gl.drawArrays(self.gl.TRIANGLE_STRIP, 0, self.cubeStrip.length / 3);
 
+          self.gl.drawArrays(self.gl.LINES, 0, 6);
+
           // Wait for rendering to actually finish
           self.gl.finish();
           let endTime = performance.now();
@@ -331,6 +333,7 @@ class VolumeRendering extends React.Component {
         this.volumeTexture = tex;
       }
 
+      
       console.log('volume rendering finished')
 
 
