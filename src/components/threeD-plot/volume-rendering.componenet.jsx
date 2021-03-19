@@ -23,6 +23,8 @@ import {vertexShader2d, fragmentShader2d} from "./shader-srcs-2d.js"
 import * as THREE from 'three'
 import { renderIntoDocument } from 'react-dom/test-utils';
 
+import './volume-rendering.css'
+
 class VolumeRendering extends React.Component {
     constructor(){
         super();
@@ -112,15 +114,52 @@ class VolumeRendering extends React.Component {
       const width = d3.select(`.threeContainer${this.props.renderArea}`).node().clientWidth;
       const height = d3.select(`.threeContainer${this.props.renderArea}`).node().clientHeight;
 
-      // d3.select(`.threeContainer${this.props.renderArea}`).append('svg')
-      //                             .attr('width', 10)
-      //                             .attr("height", 10)
-      //                             .append('rect')
-      //                             .attr('width', 5)
-      //                             .attr('height', 5)
-      //                             .attr("x", 0)
-      //                             .attr('y', 0)
-      //                             .attr('fill', 'blue')
+      const svg = d3.select(`.threeContainer${this.props.renderArea}`).append('svg')
+                                  .attr('id', "axesSVG")
+                                  .attr('width', 200)
+                                  .attr("height", 200)
+      svg.append('line')
+          .style("stroke", "green")
+          .style("stroke-width", 3)
+          .attr("x1", 100)
+          .attr("y1", 50)
+          .attr("x2", 60)
+          .attr("y2", 75)
+      svg.append('text')
+          .attr('x', 70)
+          .attr("y", 85)
+          .text('Z')
+          .attr("fill", '#05ecec')
+
+      svg.append('line')
+          .style("stroke", "red")
+          .style("stroke-width", 2)
+          .attr("x1", 100)
+          .attr("y1", 50)
+          .attr("x2", 100)
+          .attr("y2", 0)
+
+          svg.append('text')
+          .attr('x', 155)
+          .attr("y", 50)
+          .text('X')
+          .attr("fill", '#05ecec')
+
+
+      svg.append('line')
+          .style("stroke", "yellow")
+          .style("stroke-width", 2)
+          .attr("x1", 100)
+          .attr("y1", 50)
+          .attr("x2", 150)
+          .attr("y2", 50)
+
+          svg.append('text')
+          .attr('x', 110)
+          .attr("y", 10)
+          .text('Y')
+          .attr("fill", '#05ecec')
+
 
       d3.select(`.threeContainer${this.props.renderArea}`).append('canvas')
                             .attr('width', width)
@@ -309,7 +348,7 @@ class VolumeRendering extends React.Component {
 
           self.gl.drawArrays(self.gl.TRIANGLE_STRIP, 0, self.cubeStrip.length / 3);
 
-          self.gl.drawArrays(self.gl.LINES, 0, 6);
+          // self.gl.drawArrays(self.gl.LINES, 0, 6);
 
           // Wait for rendering to actually finish
           self.gl.finish();
