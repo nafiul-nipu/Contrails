@@ -45,6 +45,12 @@
             "grid":"coarse",
             "solution":"uncoupled",
             "turbulence":"kOmegaSST"
+        },
+        "boundary-conditions":{
+            "T":["N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"],
+            "U":["N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"],
+            "p":["N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"],
+            "k":["N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"]
         }
     },
     {
@@ -93,6 +99,12 @@
             "grid":"coarse",
             "solution":"uncoupled",
             "turbulence":"kOmegaSST"
+        },
+        "boundary-conditions":{
+            "T":["N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"],
+            "U":["N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"],
+            "p":["N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"],
+            "k":["N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"]
         }
     },
     {
@@ -141,6 +153,12 @@
             "grid":"coarse",
             "solution":"uncoupled",
             "turbulence":"kOmegaSST"
+        },
+        "boundary-conditions":{
+            "T":["N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"],
+            "U":["N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"],
+            "p":["N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"],
+            "k":["N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"]
         }
 
     },
@@ -189,6 +207,12 @@
             "grid":"coarse",
             "solution":"uncoupled",
             "turbulence":"kOmegaSST"
+        },
+        "boundary-conditions":{
+            "T":["totalTemperature","zeroGradient","zeroGradient","inletOutlet","zeroGradient","zeroGradient","totalTemperature"],
+            "U":["zeroGradient","noSlip","inletOutlet","freestream","noSlip","inletOutlet","zeroGradient"],
+            "p":["totalPressure","zeroGradient","waveTransmissive","freestreamPressure","zeroGradient","waveTransmissive","totalPressure"],
+            "k":["turbulentIntensityKineticEnergyInlet","kqRWallFunction","inletOutlet","inletOutlet","kqRWallFunction","inletOutlet","turbulentIntensityKineticEnergyInlet"]
         }
 
     },
@@ -237,6 +261,12 @@
             "grid":"coarse",
             "solution":"uncoupled",
             "turbulence":"kOmegaSST"
+        },
+        "boundary-conditions":{
+            "T":["N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"],
+            "U":["N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"],
+            "p":["N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"],
+            "k":["N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"]
         }
 
     },
@@ -285,6 +315,12 @@
             "grid":"coarse",
             "solution":"uncoupled",
             "turbulence":"kOmegaSST"
+        },
+        "boundary-conditions":{
+            "T":["N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"],
+            "U":["N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"],
+            "p":["N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"],
+            "k":["N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"]
         }
 
 
@@ -328,12 +364,18 @@
             }
         },
         "input":{
-            "aircraft-engine":"one",
+            "aircraft-engine":"two",
             "geometry":"short-cowl-nozzle",
             "scope":"nozzle",
             "grid":"coarse",
             "solution":"uncoupled",
             "turbulence":"kOmegaSST"
+        },
+        "boundary-conditions":{
+            "T":["totalTemperature","zeroGradient","zeroGradient","inletOutlet","zeroGradient","zeroGradient","totalTemperature"],
+            "U":["zeroGradient","noSlip","inletOutlet","inletOutlet","noSlip","inletOutlet","zeroGradient"],
+            "p":["totalPressure","zeroGradient","waveTransmissive","inletOutlet","zeroGradient","waveTransmissive","totalPressure"],
+            "k":["turbulentIntensityKineticEnergyInlet","kqRWallFunction","inletOutlet","inletOutlet","kqRWallFunction","inletOutlet","turbulentIntensityKineticEnergyInlet"]
         }
 
 
@@ -377,12 +419,18 @@
             }
         },
         "input":{
-            "aircraft-engine":"one",
+            "aircraft-engine":"two",
             "geometry":"short-cowl-nozzle",
             "scope":"nozzle",
             "grid":"coarse",
             "solution":"uncoupled",
             "turbulence":"kOmegaSST"
+        },
+        "boundary-conditions":{
+            "T":["totalTemperature","zeroGradient","zeroGradient","inletOutlet","zeroGradient","zeroGradient","totalTemperature"],
+            "U":["zeroGradient","noSlip","inletOutlet","inletOutlet","noSlip","inletOutlet","zeroGradient"],
+            "p":["totalPressure","zeroGradient","waveTransmissive","inletOutlet","zeroGradient","waveTransmissive","totalPressure"],
+            "k":["turbulentIntensityKineticEnergyInlet","kqRWallFunction","inletOutlet","inletOutlet","kqRWallFunction","inletOutlet","turbulentIntensityKineticEnergyInlet"]
         }
 
 
@@ -426,12 +474,18 @@
             }
         },
         "input":{
-            "aircraft-engine":"one",
+            "aircraft-engine":"two",
             "geometry":"short-cowl-nozzle",
             "scope":"nozzle",
             "grid":"coarse",
             "solution":"uncoupled",
             "turbulence":"kOmegaSST"
+        },
+        "boundary-conditions":{
+            "T":["totalTemperature","zeroGradient","zeroGradient","inletOutlet","zeroGradient","zeroGradient","totalTemperature"],
+            "U":["zeroGradient","noSlip","inletOutlet","inletOutlet","noSlip","inletOutlet","zeroGradient"],
+            "p":["totalPressure","zeroGradient","waveTransmissive","inletOutlet","zeroGradient","waveTransmissive","totalPressure"],
+            "k":["turbulentIntensityKineticEnergyInlet","kqRWallFunction","inletOutlet","inletOutlet","kqRWallFunction","inletOutlet","turbulentIntensityKineticEnergyInlet"]
         }
 
 
@@ -475,12 +529,18 @@
             }
         },
         "input":{
-            "aircraft-engine":"one",
+            "aircraft-engine":"two",
             "geometry":"short-cowl-nozzle",
             "scope":"nozzle",
             "grid":"fine",
             "solution":"uncoupled",
             "turbulence":"kOmegaSST"
+        },
+        "boundary-conditions":{
+            "T":["totalTemperature","zeroGradient","zeroGradient","inletOutlet","zeroGradient","zeroGradient","totalTemperature"],
+            "U":["zeroGradient","noSlip","inletOutlet","inletOutlet","noSlip","inletOutlet","zeroGradient"],
+            "p":["totalPressure","zeroGradient","waveTransmissive","inletOutlet","zeroGradient","waveTransmissive","totalPressure"],
+            "k":["turbulentIntensityKineticEnergyInlet","kqRWallFunction","inletOutlet","inletOutlet","kqRWallFunction","inletOutlet","turbulentIntensityKineticEnergyInlet"]
         }
 
 
@@ -524,12 +584,18 @@
             }
         },
         "input":{
-            "aircraft-engine":"one",
+            "aircraft-engine":"two",
             "geometry":"short-cowl-nozzle",
             "scope":"nozzle",
             "grid":"coarse",
             "solution":"uncoupled",
             "turbulence":"kOmegaSST"
+        },
+        "boundary-conditions":{
+            "T":["totalTemperature","zeroGradient","zeroGradient","inletOutlet","zeroGradient","zeroGradient","totalTemperature"],
+            "U":["zeroGradient","noSlip","inletOutlet","inletOutlet","noSlip","inletOutlet","zeroGradient"],
+            "p":["totalPressure","zeroGradient","waveTransmissive","inletOutlet","zeroGradient","waveTransmissive","totalPressure"],
+            "k":["turbulentIntensityKineticEnergyInlet","kqRWallFunction","inletOutlet","inletOutlet","kqRWallFunction","inletOutlet","turbulentIntensityKineticEnergyInlet"]
         }
 
 
@@ -573,12 +639,18 @@
             }
         },
         "input":{
-            "aircraft-engine":"one",
+            "aircraft-engine":"two",
             "geometry":"short-cowl-nozzle",
             "scope":"nozzle",
             "grid":"coarse",
             "solution":"uncoupled",
             "turbulence":"kOmegaSST"
+        },
+        "boundary-conditions":{
+            "T":["totalTemperature","zeroGradient","zeroGradient","inletOutlet","zeroGradient","zeroGradient","totalTemperature"],
+            "U":["zeroGradient","noSlip","inletOutlet","inletOutlet","noSlip","inletOutlet","zeroGradient"],
+            "p":["totalPressure","zeroGradient","waveTransmissive","inletOutlet","zeroGradient","waveTransmissive","totalPressure"],
+            "k":["turbulentIntensityKineticEnergyInlet","kqRWallFunction","inletOutlet","inletOutlet","kqRWallFunction","inletOutlet","turbulentIntensityKineticEnergyInlet"]
         }
 
 

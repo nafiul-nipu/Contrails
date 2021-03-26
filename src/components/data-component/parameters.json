@@ -1,13 +1,32 @@
 {
-    "input":{
-        "aircraft-engine":["one", "two"],
-        "geometry":["short-cowl-nozzle"],
-        "scope":["nozzle", "whole"],
-        "grid":["coarse", "fine", "medium"],
-        "solution":["coupled","uncoupled"],
-        "turbulence":["kOmegaSST"]
+    "aircraft-engine":{
+        "domain": ["one", "two"],
+        "range": ["#b2182b", "#d6604d"]
     },
-    "colorDomain" : ["one", "two", "short-cowl-nozzle",
-         "nozzle", "whole", "coarse", "fine", "medium",
-         "coupled","uncoupled", "kOmegaSST" ]
+    "geometry": {
+        "domain": ["short-cowl-nozzle"],
+        "range": ["#66bd63"]
+    },
+    "scope": {
+        "domain": ["nozzle", "whole"],
+        "range": ["#542788" , "#8073ac"]
+    },
+    "solution":{
+        "domain": ["coupled","uncoupled"],
+        "range": ["#bebebe" , "#bebebe"]
+    },
+    "turbulence":{
+        "domain": ["kOmegaSST"],
+        "range": ["#F1B900"]
+    },
+    "grid":{
+        "domain": ["coarse", "medium", "fine"],
+        "range": ["#92c5de", "#4393c3", "#2166ac"]
+    },
+    "boundary-conditions":{
+        "domain": ["N/A", "totalTemperature","zeroGradient","inletOutlet","noSlip","freestream","totalPressure","waveTransmissive","freestreamPressure","turbulentIntensityKineticEnergyInlet","kqRWallFunction"],
+        "range": ["#7f3b08","#b35806","#e08214","#fdb863","#fee0b6","#f7f7f7","#d8daeb","#b2abd2","#8073ac","#542788","#2d004b"]
+    }
+
+
 }

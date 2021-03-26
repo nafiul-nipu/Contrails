@@ -14,10 +14,9 @@ export default class InputParametersD3 {
   constructor(element, data) {
     this.element = element
     this.data = data
-    this.color = d3.scaleOrdinal(d3.schemePaired)
-    this.inputs = inputDomain.input
-    this.draw_airplane(element, data)
-    // this.draw_inputs(element, data)
+    this.color = d3.scaleOrdinal()
+    // this.draw_airplane(element, data)
+    this.draw_inputs(element, data)
   }
 
   draw_inputs(element, new_data){
@@ -26,14 +25,16 @@ export default class InputParametersD3 {
     const data = new_data;
     const width = d3.select(element).node().parentNode.clientWidth
     const height = 170
+    
+    // console.log(inputDomain["aircraft-engine"])
 
-    console.log(inputDomain.colorDomain)
-    this.color.domain(inputDomain.colorDomain)
+    // console.log(inputDomain.colorDomain)
+    // this.color.domain(inputDomain.colorDomain)
 
     const svg = d3.select(element)
       .append("svg")
       .attr("width", d3.select(element).node().parentNode.clientWidth)
-      .attr("height", data.length* height)
+      .attr("height", (data.length + 1) * height)
 
     svg.append("text").text("Members' Input Parameters")
       .attr('transform', `translate(${width /15},20)`)
@@ -43,10 +44,10 @@ export default class InputParametersD3 {
 
     for (let i = 0; i<data.length; i++){
       let inputValues = data[i]["input"]
-      console.log(inputValues)
+      // console.log(inputValues)
       group.append('rect')
-        .attr("x", 40* (i+1))
-        .attr("y", 40 * (i+1))
+        .attr("x", 0)
+        .attr("y", (height * i) + 30)
         .attr("class", "highlight_"+data[i]['id'])
         .attr("width", width - 20)
         .attr("height", height - 20)
@@ -54,19 +55,42 @@ export default class InputParametersD3 {
         .attr('opacity', 0)
         .attr('rx', '15')
       
-      let keys = Object.keys(this.inputs)
+      let keys = Object.keys(inputValues)
+      // console.log(keys)
       for(let k = 0; k <keys.length; k++){
-        console.log(inputValues[keys[k]])
-        // this.color.domain(this.inputs[keys[k]])
+        // console.log(k)
+        this.color.domain(inputDomain[keys[k]].domain)
+                  .range(inputDomain[keys[k]].range)
         group.append('rect')
               .attr("x", 20*k)
-              .attr('y', 50* (i+1)+40)
+              .attr('y', (height * i) + 30 + 60)
               .attr('width', 20)
               .attr('height', 20)
               .attr('fill', ()=> {return this.color(inputValues[keys[k]])})
       }
-      // console.log(keys)
-
+      
+      let boundaryValues = data[i]["boundary-conditions"]
+      this.color.domain(inputDomain["boundary-conditions"].domain)
+                .range(inputDomain["boundary-conditions"].range)
+      let boundaryAttributeKeys = Object.keys(boundaryValues)
+      // console.log(boundaryValues)
+      //boundaryAttributeKeys.length
+      for(let bak = 0; bak < boundaryAttributeKeys.length; bak++){
+        
+        let singleAttributeValues = boundaryValues[boundaryAttributeKeys[bak]];
+        console.log(20*singleAttributeValues.length)
+        for(let sav = 0; sav < singleAttributeValues.length; sav++){
+          // console.log(singleAttributeValues[sav])
+          group.append('rect')
+              .attr("x",  (keys.length * 20) + 20*bak)
+              .attr('y',  (height * i) + 30 + 20*sav )
+              .attr('width', 20)
+              .attr('height', 20)
+              .style("stroke", "black")
+              .style("stroke-width", 1)
+              .attr('fill', ()=> {return this.color(singleAttributeValues[sav])})
+        }
+      }
       
     }
 
@@ -169,7 +193,7 @@ export default class InputParametersD3 {
     }
 
     function draw_grid(x, y, data, id) {
-      const color = data == "coase" ? '#92c5de' : data == "medium" ? "#4393c3" : "#2166ac"
+      const color = data == "coarse" ? '#92c5de' : data == "medium" ? "#4393c3" : "#2166ac"
       group.append('rect')
         .attr("x", x)
         .attr("y", y)
