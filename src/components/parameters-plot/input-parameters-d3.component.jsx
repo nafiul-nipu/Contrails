@@ -3,6 +3,9 @@ import { getDefaultNormalizer } from '@testing-library/react';
 import * as d3 from 'd3';
 import $ from 'jquery'
 
+import d3Tip from 'd3-tip'
+import "./parameters-plot.styles.css"
+
 import inputDomain from '../data-component/parameters.json'
 // import * as colorScheme from 'd3-scale-chromatic'
 
@@ -15,11 +18,13 @@ export default class InputParametersD3 {
     this.element = element
     this.data = data
     this.color = d3.scaleOrdinal()
+    this.boundaries = ["bypassInlet","engine","farfield","inlet","nozzle","outlet","turbine"]
     // this.draw_airplane(element, data)
     this.draw_inputs(element, data)
   }
 
   draw_inputs(element, new_data){
+    const self = this;
     // console.log(new_data)
     // console.log(d3.select(element).node().parentNode.clientHeight)
     const data = new_data;
@@ -58,6 +63,13 @@ export default class InputParametersD3 {
       let keys = Object.keys(inputValues)
       // console.log(keys)
       for(let k = 0; k <keys.length; k++){
+        let inputValueTip = d3Tip().attr().attr('class', 'd3-tip')
+                                  .html(function(){
+                                    let tip = `Member: ${i + 1} <br>
+                                    ${keys[k]} : ${inputValues[keys[k]]}`
+                                    return tip
+                                  })
+        svg.call(inputValueTip)
         // console.log(k)
         this.color.domain(inputDomain[keys[k]].domain)
                   .range(inputDomain[keys[k]].range)
@@ -67,20 +79,33 @@ export default class InputParametersD3 {
               .attr('width', 20)
               .attr('height', 20)
               .attr('fill', ()=> {return this.color(inputValues[keys[k]])})
+              .on('mouseover', inputValueTip.show)
+              .on('mouseout', inputValueTip.hide)
       }
       
       let boundaryValues = data[i]["boundary-conditions"]
       this.color.domain(inputDomain["boundary-conditions"].domain)
                 .range(inputDomain["boundary-conditions"].range)
       let boundaryAttributeKeys = Object.keys(boundaryValues)
-      // console.log(boundaryValues)
+      console.log(boundaryValues)
       //boundaryAttributeKeys.length
       for(let bak = 0; bak < boundaryAttributeKeys.length; bak++){
         
         let singleAttributeValues = boundaryValues[boundaryAttributeKeys[bak]];
-        console.log(20*singleAttributeValues.length)
+        console.log(singleAttributeValues)
+
         for(let sav = 0; sav < singleAttributeValues.length; sav++){
           // console.log(singleAttributeValues[sav])
+          let boundaryValueTip = d3Tip().attr().attr('class', 'd3-tip')
+                                  .html(function(){
+                                    let tip = `Member: ${i + 1} <br>
+                                    Boundary Attribute : ${boundaryAttributeKeys[bak]} <br>
+                                    ${self.boundaries[sav]} : ${singleAttributeValues[sav]}
+                                    `
+                                    return tip
+                                  })
+          svg.call(boundaryValueTip)
+
           group.append('rect')
               .attr("x",  (keys.length * 20) + 20*bak)
               .attr('y',  (height * i) + 30 + 20*sav )
@@ -89,6 +114,8 @@ export default class InputParametersD3 {
               .style("stroke", "black")
               .style("stroke-width", 1)
               .attr('fill', ()=> {return this.color(singleAttributeValues[sav])})
+              .on('mouseover', boundaryValueTip.show)
+              .on('mouseout', boundaryValueTip.hide)
         }
       }
       
