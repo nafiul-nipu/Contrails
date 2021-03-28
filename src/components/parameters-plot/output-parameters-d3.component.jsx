@@ -4,6 +4,9 @@ import * as d3 from 'd3';
 // const $ = require( "jquery" )( window );
 import $ from 'jquery'
 
+import d3Tip from 'd3-tip'
+import "./parameters-plot.styles.css"
+
 
 const height = window.innerHeight
 // const url ="https://github.com/CarlaFloricel/Contrails/blob/master/src/data/test_input_output_param/statistics.csv"
@@ -51,21 +54,21 @@ export default class OutputParametersD3 {
                   return [nx, ny];
             }
 
-            const eul_T_max = 322.423
-            const eul_P_max = 29315.44
-            const eul_rho_max = 0.345907
-            const eul_k_max = 91.03569
-            const lag_T_max = 654.7868
+            // const eul_T_max = 322.423
+            // const eul_P_max = 29315.44
+            // const eul_rho_max = 0.345907
+            // const eul_k_max = 91.03569
+            // const lag_T_max = 654.7868
 
-            const eul_T_min = 322.4222
-            const eul_P_min = 29283.44
-            const eul_rho_min = 0.345535
-            const eul_k_min = 91.01908
-            const lag_T_min = 315.1326
+            // const eul_T_min = 322.4222
+            // const eul_P_min = 29283.44
+            // const eul_rho_min = 0.345535
+            // const eul_k_min = 91.01908
+            // const lag_T_min = 315.1326
 
-            const lag_d_max = 0.00001
-            const lag_rho_max = 10000
-            const lag_Ygas_max = 0
+            // const lag_d_max = 0.00001
+            // const lag_rho_max = 10000
+            // const lag_Ygas_max = 0
 
 
 
@@ -84,17 +87,17 @@ export default class OutputParametersD3 {
                   return normalized_data
             }
 
-            function timepoints_tooltip(data) {
-                  var rez = "Timepoints: ["
-                  for (var i = 0; i < data.length - 1; i++) {
-                        rez = rez + "T" + i + ": " + data[i] + ", "
-                  }
-                  rez = rez + "T" + i + ": " + data[data.length - 1] + "]"
-                  return rez
-            }
+            // function timepoints_tooltip(data) {
+            //       var rez = "Timepoints: ["
+            //       for (var i = 0; i < data.length - 1; i++) {
+            //             rez = rez + "T" + i + ": " + data[i] + ", "
+            //       }
+            //       rez = rez + "T" + i + ": " + data[data.length - 1] + "]"
+            //       return rez
+            // }
 
             function create_tendril_plot(data, prevX_first, prevY_first, points, title, ids, color) {
-                  // console.log(prevX_first)
+                  console.log(data)
                   svg.append("text").text(title)
                         .attr('transform', `translate(${prevX_first + 30},${prevY_first - 50})`)
                         .attr('fill', 'white')
@@ -105,6 +108,20 @@ export default class OutputParametersD3 {
                         const title_id = ids[i]
                         const values = data[i]
                         var p = Object.assign([], points)
+
+
+                        let tendrilTip = d3Tip().attr().attr('class', 'd3-tip')
+                                          .html(function(){
+                                                console.log(data)
+                                                let tip = `Member: ${title_id} <br>
+                                                Time Points : ${data[title_id - 1]}
+                                                `
+                                                return tip
+                                          })
+                         svg.call(tendrilTip)
+                        //  console.log(tendrilTip)
+
+
 
                         var normalized_data = normalize_data(data[i])
                         prevX[i] = prevX_first
@@ -136,6 +153,7 @@ export default class OutputParametersD3 {
                               .attr("opacity", 1)
                               .attr('d', line(p))
                               .on('mouseover', function () {
+                                    tendrilTip.show(this)
                                     const el_id = this.id.replace("path_","")
                                     const el_idfinal = el_id.replace("_",'')
                                     $('.tendrils').css("opacity", '0.2')
@@ -143,9 +161,9 @@ export default class OutputParametersD3 {
                                     $(`.${this.id}`).css("stroke-width", '2.8')
                                           .css('opacity', 1)
                                     $(`.circle_${this.id}`).css("opacity", '1')
-                                    d3.select(this)
-                                          .append("title")
-                                          .text("Member " + title_id + "\n" + timepoints_tooltip(values))
+                                    // d3.select(this)
+                                    //       .append("title")
+                                    //       .text("Member " + title_id + "\n" + timepoints_tooltip(values))
                                     $(`.highlight_${el_idfinal}`).css("opacity", '0.7')
                                     $(`.cluster_airplane_${el_idfinal}`).css("fill", '#05ecec')
                               })
@@ -156,7 +174,8 @@ export default class OutputParametersD3 {
                                     $(`.${this.id}`).css("stroke-width", '2.5')
                                     $('.tendrils').css("opacity", '1')
                                     $('.circles').css("opacity", '0.65')
-                                    d3.selectAll('title').remove()
+                                    // d3.selectAll('title').remove()
+                                    tendrilTip.hide(this)
                                     $(`.highlight_${el_idfinal}`).css("opacity", '0')
                                     $(`.cluster_airplane_${el_idfinal}`).css("fill", 'white')
                               })

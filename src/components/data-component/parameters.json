@@ -25,7 +25,7 @@
     },
     "boundary-conditions":{
         "domain": ["N/A", "totalTemperature","zeroGradient","inletOutlet","noSlip","freestream","totalPressure","waveTransmissive","freestreamPressure","turbulentIntensityKineticEnergyInlet","kqRWallFunction"],
-        "range": ["#7f3b08","#b35806","#e08214","#fdb863","#fee0b6","#f7f7f7","#d8daeb","#b2abd2","#8073ac","#542788","#2d004b"]
+        "range": ["#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5"]
     }
 
 

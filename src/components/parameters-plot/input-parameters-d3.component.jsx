@@ -75,7 +75,7 @@ export default class InputParametersD3 {
                   .range(inputDomain[keys[k]].range)
         group.append('rect')
               .attr("x", 20*k)
-              .attr('y', (height * i) + 30 + 60)
+              .attr('y', (height * i) + 35 + 60)
               .attr('width', 20)
               .attr('height', 20)
               .attr('fill', ()=> {return this.color(inputValues[keys[k]])})
@@ -87,12 +87,12 @@ export default class InputParametersD3 {
       this.color.domain(inputDomain["boundary-conditions"].domain)
                 .range(inputDomain["boundary-conditions"].range)
       let boundaryAttributeKeys = Object.keys(boundaryValues)
-      console.log(boundaryValues)
+      // console.log(boundaryValues)
       //boundaryAttributeKeys.length
       for(let bak = 0; bak < boundaryAttributeKeys.length; bak++){
         
         let singleAttributeValues = boundaryValues[boundaryAttributeKeys[bak]];
-        console.log(singleAttributeValues)
+        // console.log(singleAttributeValues)
 
         for(let sav = 0; sav < singleAttributeValues.length; sav++){
           // console.log(singleAttributeValues[sav])
@@ -108,7 +108,7 @@ export default class InputParametersD3 {
 
           group.append('rect')
               .attr("x",  (keys.length * 20) + 20*bak)
-              .attr('y',  (height * i) + 30 + 20*sav )
+              .attr('y',  (height * i) + 35 + 20*sav )
               .attr('width', 20)
               .attr('height', 20)
               .style("stroke", "black")
