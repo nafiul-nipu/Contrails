@@ -12,8 +12,18 @@ import {getData, loader} from './dataHandler.js'
 
 import DropDowns from './dropdowns.component'
 
+import dataRegistry from '../data-component/dataRegistry.json'
+
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col'
+
+import axes from '../../data/axes.png'
+import {vertexShader2d, fragmentShader2d} from "./shader-srcs-2d.js"
+
+import * as THREE from 'three'
+import { renderIntoDocument } from 'react-dom/test-utils';
+
+import './volume-rendering.css'
 
 class VolumeRendering extends React.Component {
     constructor(){
@@ -61,9 +71,11 @@ class VolumeRendering extends React.Component {
           "Cool_Warm": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/cool-warm-paraview.png",
           "Matplotlib_Plasma": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/matplotlib-plasma.png",
           "Matplotlib_Virdis": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/matplotlib-virdis.png",
-          "Rainbow": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/rainbow.png",
-          "Samsel_Linear_Green": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/samsel-linear-green.png",
-          "Samsel_Linear_YGB_1211G": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/samsel-linear-ygb-1211g.png",
+          // "Rainbow": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/rainbow.png",
+          // "Samsel_Linear_Green": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/samsel-linear-green.png",
+          // "Samsel_Linear_YGB_1211G": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/samsel-linear-ygb-1211g.png",
+          "cm_gray": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/cm_gray.png",
+          "cm_virdis": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/cm_viridis.png",
         };
 
         this.canvas = React.createRef();
@@ -102,13 +114,74 @@ class VolumeRendering extends React.Component {
       const width = d3.select(`.threeContainer${this.props.renderArea}`).node().clientWidth;
       const height = d3.select(`.threeContainer${this.props.renderArea}`).node().clientHeight;
 
+      const svg = d3.select(`.threeContainer${this.props.renderArea}`).append('svg')
+                                  .attr('id', "axesSVG")
+                                  .attr('width', 200)
+                                  .attr("height", 200)
+      svg.append('line')
+          .style("stroke", "green")
+          .style("stroke-width", 3)
+          .attr("x1", 100)
+          .attr("y1", 50)
+          .attr("x2", 60)
+          .attr("y2", 75)
+      svg.append('text')
+          .attr('x', 70)
+          .attr("y", 85)
+          .text('Z')
+          .attr("fill", '#05ecec')
+
+      svg.append('line')
+          .style("stroke", "red")
+          .style("stroke-width", 2)
+          .attr("x1", 100)
+          .attr("y1", 50)
+          .attr("x2", 100)
+          .attr("y2", 0)
+
+          svg.append('text')
+          .attr('x', 155)
+          .attr("y", 50)
+          .text('X')
+          .attr("fill", '#05ecec')
+
+
+      svg.append('line')
+          .style("stroke", "yellow")
+          .style("stroke-width", 2)
+          .attr("x1", 100)
+          .attr("y1", 50)
+          .attr("x2", 150)
+          .attr("y2", 50)
+
+          svg.append('text')
+          .attr('x', 110)
+          .attr("y", 10)
+          .text('Y')
+          .attr("fill", '#05ecec')
+
+
       d3.select(`.threeContainer${this.props.renderArea}`).append('canvas')
                             .attr('width', width)
                             .attr('height', height)
                             .attr('id', `glcanvas${this.props.renderArea}`)
 
+      // d3.select(`.threeContainer${this.props.renderArea}`).append('canvas')
+      //                       .attr('width', 250)
+      //                       .attr('height', 250)
+      //                       .attr('id', `svgcanvas${this.props.renderArea}`)
+
       this.canvas = document.getElementById(`glcanvas${this.props.renderArea}`)
       this.gl = this.canvas.getContext("webgl2")
+
+      // let svgC = document.getElementById(`svgcanvas${this.props.renderArea}`)
+      // let ctx = svgC.getContext('2d')
+      // var img = new Image();
+      // img.onload = function() {
+      //   ctx.drawImage(img, 0, 0);
+      // }
+      // img.crossOrigin = "anonymous"
+      // img.src = "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/data/axes.png";
 
       if(!this.gl){
         console.log("Unable to initialize WebGL2. Your browser may not support it");
@@ -197,7 +270,7 @@ class VolumeRendering extends React.Component {
       };
 
       colormapImage.crossOrigin = "anonymous";
-      colormapImage.src = 'https://raw.githubusercontent.com/CarlaFloricel/Contrails/nafiul-testing/src/components/threeD-plot/colormaps/cool-warm-paraview.png';
+      colormapImage.src = 'https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/cool-warm-paraview.png';
 
       // console.log(colormapImage)
 
@@ -207,19 +280,26 @@ class VolumeRendering extends React.Component {
       console.log("volume rendering started")
       const self = this;
       let dataBuffer = data;
-
+      const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
+      // console.log(data)
+      // console.log(countOccurrences(dataBuffer, 0));
       //our data dimension is 100 can change later
+      // console.log(($(`#member${self.props.renderArea}`).val()))
       let member = +($(`#member${self.props.renderArea}`).val());
       // console.log(member)
-      let volDims = [];
-      if(member === 2 || member === 3 ){
-        volDims = [128,128,4];
-      }else if(member === 7 || member === 8 || member === 9){
-        volDims = [184,128,4];
+      
+      if(isNaN(member) && self.props.renderArea === 'top'){
+        console.log("top condition")
+        member = 1
+        // volDims = [100,100,100]
+      }else if (isNaN(member) && self.props.renderArea === 'bottom'){
+        console.log('bottom condiion')
+        member = 6
+        // volDims = [100,100,100]
       }
-      else{
-        volDims = [100,100,100];
-      }
+      let volDims = dataRegistry[member - 1].volume_dimensions;
+      // console.log(member)
+      // console.log(volDims)
       
 
       let tex = this.gl.createTexture();
@@ -267,6 +347,9 @@ class VolumeRendering extends React.Component {
           self.gl.uniform3fv(self.shader.uniforms["eye_pos"], eye);
 
           self.gl.drawArrays(self.gl.TRIANGLE_STRIP, 0, self.cubeStrip.length / 3);
+
+          // self.gl.drawArrays(self.gl.LINES, 0, 6);
+
           // Wait for rendering to actually finish
           self.gl.finish();
           let endTime = performance.now();
@@ -289,7 +372,9 @@ class VolumeRendering extends React.Component {
         this.volumeTexture = tex;
       }
 
+      
       console.log('volume rendering finished')
+
 
     }
 
@@ -326,6 +411,7 @@ class VolumeRendering extends React.Component {
                 </Row>
                 <Row>
                     <Col xs={12} style={{height:'55vh', backgroundColor:'#31393F'}} className={`threeContainer${this.props.renderArea}`}>
+                    {/* <img src={axes} /> */}
                     </Col>                                    
                 </Row>
             </Col>

@@ -25,7 +25,7 @@ class InputParametersPanel extends React.Component {
             <div className="mx-auto" >
             <h6 >Input Parameters</h6>
             <div style={{textAlign: 'left', marginLeft:"7%"}}>
-            <div style={{color:"grey", marginTop:"5%"}}>Aircraft Engine -Steams</div>
+            <div style={{color:"grey", marginTop:"5%"}}>Aircraft Engine -Streams</div>
             <Form  >
                 <Form.Check inline  type="checkbox"  id="aircraft-engine-one" label="one" onChange={this.handleButton} className="airplane-one"/>
                 <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#b2182b" xmlns="http://www.w3.org/2000/svg">
@@ -38,18 +38,18 @@ class InputParametersPanel extends React.Component {
             </Form>
             <div style={{color:"grey", marginTop:"5%"}}>Geometry</div>
             <Form  >
-                <Form.Check inline  type="checkbox" id="geometry-short" label="short" onChange={this.handleButton}/>
+                <Form.Check inline  type="checkbox" id="geometry-short" label="short-cowl-nozzle" onChange={this.handleButton}/>
                 <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#1a9850" xmlns="http://www.w3.org/2000/svg">
                     <rect width="8" height="8" rx="1" />
                 </svg>
-                <Form.Check inline  type="checkbox" id="geometry-cowl" label="cowl" onChange={this.handleButton}/>
+                {/* <Form.Check inline  type="checkbox" id="geometry-cowl" label="cowl" onChange={this.handleButton}/>
                 <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#66bd63" xmlns="http://www.w3.org/2000/svg">
                     <rect width="8" height="8" rx="1" />
                 </svg>
                 <Form.Check inline  type="checkbox" id="geometry-nozzle" label="nozzle" onChange={this.handleButton}/>
                 <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#a6d96a" xmlns="http://www.w3.org/2000/svg">
                     <rect width="8" height="8" rx="1" />
-                </svg>
+                </svg> */}
             </Form>
             <div style={{color:"grey", marginTop:"5%"}}>Scope</div>
             <Form  >
@@ -73,7 +73,7 @@ class InputParametersPanel extends React.Component {
                     <rect width="8" height="8" rx="1" />
                 </svg> */}
                 </Form>
-            <div style={{color:"grey", marginTop:"5%"}}>Grid Resolution</div>
+            {/* <div style={{color:"grey", marginTop:"5%"}}>Grid Resolution</div>
             <Form  >
                 <Form.Check inline  type="checkbox" id="grid-coarse" label="coarse" onChange={this.handleButton}/>
                 <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#92c5de" xmlns="http://www.w3.org/2000/svg">
@@ -87,8 +87,8 @@ class InputParametersPanel extends React.Component {
                 <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#2166ac" xmlns="http://www.w3.org/2000/svg">
                     <rect width="8" height="8" rx="1" />
                 </svg>
-            </Form>
-            <div style={{color:"grey", marginTop:"5%"}}>Solution -coupled</div>
+            </Form> */}
+            <div style={{color:"grey", marginTop:"5%"}}>Solution - coupled</div>
             <Form  >
                 <Form.Check inline  type="checkbox" id="solution-coupled" label="true" onChange={this.handleButton}/>
                 <Form.Check inline  type="checkbox" id="solution-uncoupled" label="false" onChange={this.handleButton}/>
