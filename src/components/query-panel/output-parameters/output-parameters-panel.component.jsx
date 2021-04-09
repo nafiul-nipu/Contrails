@@ -181,10 +181,10 @@ class OutputParametersPanel extends React.Component {
                                     <Form style={{ "padding": "2px" }} onChange={this.handleOutputFilterChange} className={this.state.T_lag == true ? 'show' : 'hidden'} >
                                         <Form.Control as="select" value={this.state.T_lag_avg} className="form-control-sm interior-form" id="T_lag_avg_dropdown" style={{ backgroundColor: '#636363', color: 'white' }}>
                                             <option value="" >T_avg</option>
-                                            <option value="420">420</option>
-                                            <option value="490">490</option>
-                                            <option value="530">530</option>
-                                            <option value="590">590</option>
+                                            <option value="472">472</option>
+                                            <option value="459">459</option>
+                                            <option value="422">422</option>
+                                            <option value="292">292</option>
                                         </Form.Control>
                                     </Form>
 
@@ -192,18 +192,18 @@ class OutputParametersPanel extends React.Component {
                                         <Form.Control as="select" value={this.state.rho_lag_avg} className="form-control-sm interior-form" id="rho_lag_avg_dropdown" style={{ backgroundColor: '#636363', color: 'white' }}>
                                             <option value="">rho_avg</option>
                                             <option value="1000">1000</option>
-                                            <option value="2000">2000</option>
+                                            {/* <option value="2000">2000</option>
                                             <option value="3000">3000</option>
-                                            <option value="4000">4000</option>
+                                            <option value="4000">4000</option> */}
                                         </Form.Control>
                                     </Form>
                                     <Form style={{ "padding": "2px" }} onChange={this.handleOutputFilterChange} className={this.state.d_lag == true ? 'show' : 'hidden'}>
                                         <Form.Control as="select" value={this.state.d_lag_avg} className="form-control-sm interior-form" id="d_lag_avg_dropdown" style={{ backgroundColor: '#636363', color: 'white' }}>
                                             <option value="">d_avg</option>
                                             <option value="0.00001">0.00001</option>
-                                            <option value="0.0002">0.0002</option>
-                                            <option value="0.08">0.08</option>
-                                            <option value="0.2">0.2</option>
+                                            <option value="0.00074">0.00074</option>
+                                            {/* <option value="0.08">0.08</option>
+                                            <option value="0.2">0.2</option> */}
                                         </Form.Control>
                                     </Form>
 
@@ -218,38 +218,39 @@ class OutputParametersPanel extends React.Component {
                                     <Form style={{ "padding": "2px" }} onChange={this.handleOutputFilterChange} className={this.state.T_eul == true ? 'show' : 'hidden'}>
                                         <Form.Control as="select" value={this.state.T_eul_avg} className="form-control-sm interior-form" id="T_eul_avg_dropdown" style={{ backgroundColor: '#636363', color: 'white' }}>
                                             <option value="">T_avg</option>
+                                            <option value="343">343</option>
+                                            <option value="0">0</option>
                                             <option value="322">322</option>
-                                            <option value="360">360</option>
-                                            <option value="363">363</option>
-                                            <option value="425">425</option>
+                                            {/* <option value="425">425</option> */}
                                         </Form.Control>
                                     </Form>
 
                                     <Form style={{ "padding": "2px" }} onChange={this.handleOutputFilterChange} className={this.state.rho_eul == true ? 'show' : 'hidden'}>
                                         <Form.Control as="select" value={this.state.rho_eul_avg} className="form-control-sm interior-form" id="rho_eul_avg_dropdown" style={{ backgroundColor: '#636363', color: 'white' }}>
                                             <option value="">rho_avg</option>
-                                            <option value="0.2">0.2</option>
+                                            {/* <option value="0.2">0.2</option>
                                             <option value="0.3">0.3</option>
-                                            <option value="300.400">0.4</option>
+                                            <option value="300.400">0.4</option> */}
                                         </Form.Control>
                                     </Form>
                                     <Form style={{ "padding": "2px" }} onChange={this.handleOutputFilterChange} className={this.state.p_eul == true ? 'show' : 'hidden'}>
                                         <Form.Control as="select" value={this.state.p_eul_avg} className="form-control-sm interior-form" id="p_eul_avg_dropdown" style={{ backgroundColor: '#636363', color: 'white' }}>
                                             <option value="">p_avg</option>
-                                            <option value="28472">28472</option>
+                                            <option value="25537">25537</option>
+                                            <option value="21846">21846</option>
                                             <option value="29292">29292</option>
-                                            <option value="39357">39357</option>
-                                            <option value="45900">45900</option>
+                                            <option value="25603">25603</option>
+                                            <option value="0">0</option>
                                         </Form.Control>
                                     </Form>
 
                                     <Form style={{ "padding": "2px" }} onChange={this.handleOutputFilterChange} className={this.state.k_eul == true ? 'show' : 'hidden'}>
                                         <Form.Control as="select" value={this.state.k_eul_avg} className="form-control-sm interior-form" id="k_eul_avg_dropdown" style={{ backgroundColor: '#636363', color: 'white' }}>
                                             <option value="">k_avg</option>
-                                            <option value="100">83</option>
-                                            <option value="200">86</option>
-                                            <option value="300">91</option>
-                                            <option value="400">94</option>
+                                            <option value="1092">1092</option>
+                                            <option value="1116">1116</option>
+                                            <option value="91">91</option>
+                                            <option value="1045">1045</option>
                                         </Form.Control>
                                     </Form>
                                 </div>

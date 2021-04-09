@@ -187,7 +187,7 @@ class ComponentsContainer extends React.Component {
             data = data.filter(el => {
                 var e = []
                 e.push(el['output-parameters']['rho_lag_avg'])
-                var result = e.some(r => (filter_params2['rho_lag_avg'] >= r - 10) && (filter_params2['rho_lag_avg'] <= r+ 10))
+                var result = e.some(r => (filter_params2['rho_lag_avg'] >= r - 10) && (filter_params2['rho_lag_avg'] <= r+10))
                 return result
 
             })
@@ -196,7 +196,7 @@ class ComponentsContainer extends React.Component {
             data = data.filter(el => {
                 var e = []
                 e.push(el['output-parameters']['rho_eul_avg'])
-                var result = e.some(r => (filter_params2['rho_eul_avg'] >= r -0.05 ) && (filter_params2['rho_eul_avg'] <= r+ 0.05))
+                var result = e.some(r => (filter_params2['rho_eul_avg'] >= r -0.0001 ) && (filter_params2['rho_eul_avg'] <= r+ 0.0001))
                 return result
 
             })
@@ -215,7 +215,7 @@ class ComponentsContainer extends React.Component {
             data = data.filter(el => {
                 var e = []
                 e.push(el['output-parameters']['p_eul_avg'])
-                var result = e.some(r => (filter_params2['p_eul_avg'] >= r - 10) && (filter_params2['p_eul_avg'] <= r+ 10))
+                var result = e.some(r => (filter_params2['p_eul_avg'] >= r - 800) && (filter_params2['p_eul_avg'] <= r+ 800))
                 return result
 
             })
@@ -235,7 +235,7 @@ class ComponentsContainer extends React.Component {
             data = data.filter(el => {
                 var e = []
                 e.push(el['output-parameters']['k_eul_avg'])
-                var result = e.some(r => (filter_params2['k_eul_avg'] >= r - 2) && (filter_params2['k_eul_avg'] <= r+ 2))
+                var result = e.some(r => (filter_params2['k_eul_avg'] >= r - 10) && (filter_params2['k_eul_avg'] <= r+ 10))
                 return result
 
             })

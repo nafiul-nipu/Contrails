@@ -26,9 +26,9 @@ class ClusteringParametersPanel extends React.Component {
     render(){
         return(
             // <div>Query panel and val is {this.state.currentVal}</div>
-            <Col xs={4} style={{ borderStyle: "solid", borderWidth: "0.5px", borderColor: "rgb(5, 236, 236)"}}>
+            <Col  style={{ borderStyle: "solid", borderWidth: "0.5px", borderColor: "rgb(5, 236, 236)", marginLeft:"200px"}}>
                 <h6 style={{marginTop:"0", marginBottom:"0"}}>Clustering Parameters</h6>
-                <div style={{fontSize:"0.8em"}}>
+                <div >
                     <div style={{"color":"#BEBEBE"}}>Simulation Runs:</div>
                     <Form style={{textAlign: 'left', marginLeft:"37%"}}>
                     <Form.Check type="checkbox" label="solution" />
