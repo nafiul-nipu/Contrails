@@ -9,7 +9,6 @@ import "./parameters-plot.styles.css"
 
 
 const height = window.innerHeight
-// const url ="https://github.com/CarlaFloricel/Contrails/blob/master/src/data/test_input_output_param/statistics.csv"
 export default class OutputParametersD3 {
 
 
@@ -19,8 +18,7 @@ export default class OutputParametersD3 {
             this.draw_tendrils(element, data_registry)
       }
 
-      draw_tendrils(element, data_registry) {
-            // console.log(d3.select(element).node().clientWidth)
+      draw_tendrils(element, data_registry, split) {
             const dataRegistry = data_registry
 
             const line = d3.line()
@@ -54,24 +52,6 @@ export default class OutputParametersD3 {
                   return [nx, ny];
             }
 
-            // const eul_T_max = 322.423
-            // const eul_P_max = 29315.44
-            // const eul_rho_max = 0.345907
-            // const eul_k_max = 91.03569
-            // const lag_T_max = 654.7868
-
-            // const eul_T_min = 322.4222
-            // const eul_P_min = 29283.44
-            // const eul_rho_min = 0.345535
-            // const eul_k_min = 91.01908
-            // const lag_T_min = 315.1326
-
-            // const lag_d_max = 0.00001
-            // const lag_rho_max = 10000
-            // const lag_Ygas_max = 0
-
-
-
             function normalize_data(el) {
                   const normalized_data = []
                   const min_el = Math.min(...el)
@@ -87,23 +67,25 @@ export default class OutputParametersD3 {
                   return normalized_data
             }
 
-            // function timepoints_tooltip(data) {
-            //       var rez = "Timepoints: ["
-            //       for (var i = 0; i < data.length - 1; i++) {
-            //             rez = rez + "T" + i + ": " + data[i] + ", "
-            //       }
-            //       rez = rez + "T" + i + ": " + data[data.length - 1] + "]"
-            //       return rez
-            // }
+            function get_mean_attr_val(data){
+                  var total_sum =0
+                  for(var i = 0; i< data.length; i++){
+                        const normalized_data = normalize_data(data[i])
+                        const el_avg = normalized_data.reduce((a,b) => a+b, 0)/data[i].length
+                        total_sum+=el_avg
+                  }
+                  return total_sum/data.length
+            }
 
-            function create_tendril_plot(data, prevX_first, prevY_first, points, title, ids, color) {
-                  console.log(data)
+
+            function create_tendril_plot(data, prevX_first, prevY_first, points, title, ids, avg_val) {
                   svg.append("text").text(title)
                         .attr('transform', `translate(${prevX_first + 30},${prevY_first - 50})`)
                         .attr('fill', 'white')
 
                   var prevX = new Array(data.length)
                   var prevY = new Array(data.length)
+
                   for (var i = 0; i < data.length; i++) {
                         const title_id = ids[i]
                         const values = data[i]
@@ -112,21 +94,29 @@ export default class OutputParametersD3 {
 
                         let tendrilTip = d3Tip().attr().attr('class', 'd3-tip')
                                           .html(function(){
-                                                console.log(data)
                                                 let tip = `Member: ${title_id} <br>
                                                 Time Points : ${data[title_id - 1]}
                                                 `
                                                 return tip
                                           })
                          svg.call(tendrilTip)
-                        //  console.log(tendrilTip)
-
 
 
                         var normalized_data = normalize_data(data[i])
-                        prevX[i] = prevX_first
-                        prevY[i] = prevY_first
+                        if(split){
+                              var dif_first = normalized_data[0] -  avg_val
+                              var angle_first = (dif_first * 50) * angleRange
+                              const val_first = rotate(0,0,0,16, angle_first)
+      
+                              prevX[i] = prevX_first + val_first[0]
+                              prevY[i] = prevY_first + val_first[1]
+                              p.push({ x: prevX[i], y: prevY[i] })
+                        }
+                        else{
 
+                              prevX[i] = prevX_first 
+                              prevY[i] = prevY_first 
+                        }
                         for (var k = 1; k < data[i].length; k++) {
                               var dif = normalized_data[k] - normalized_data[k - 1]
                               var angle = (dif * 50) * angleRange
@@ -140,13 +130,13 @@ export default class OutputParametersD3 {
                                     .attr('cy', prevY[i])
                                     .attr('r', 4)
                                     .attr('fill-opacity', 0.65)
-                                    .attr('fill', color)
+                                    .attr('fill', '#FF6F61')
 
                         }
 
                         g.append('path')
                               .attr('fill', 'none')
-                              .attr('stroke', color)
+                              .attr('stroke', '#FF6F61')
                               .attr("class", "tendrils path_" + title_id + "_")
                               .attr('stroke-width', '2.5px')
                               .attr('id', "path_" + title_id + "_")
@@ -216,31 +206,24 @@ export default class OutputParametersD3 {
                   return e['k_eul_avg_timepoints']
             })
 
-            // create_tendril_plot(T_lags, 50, 100, [{ x: 50, y: 100 }], 'T_lag_avg', ids, '#b2182b')
-            // create_tendril_plot(T_euls, 50, 220, [{ x: 50, y: 220 }], 'T_eul_avg', ids, '#d6404d')
-            // create_tendril_plot(d_lags, 50, 340, [{ x: 50, y: 340 }], 'd_lag_avg', ids, '#f4a582')
-            // create_tendril_plot(rho_lags, 50, 460, [{ x: 50, y: 460 }], 'rho_lag_avg', ids, '#fddbc7')
-            // create_tendril_plot(rho_euls, 50, 580, [{ x: 50, y: 580 }], 'rho_eul_avg', ids, '#d1e5f0')
-            // create_tendril_plot(k_euls, 50, 700, [{ x: 50, y: 700 }], 'k_eul_avg', ids, '#92c5de')
-            // create_tendril_plot(p_euls, 50, 830, [{ x: 50, y: 830 }], 'p_eul_avg', ids, '#4393c3')
 
-            
-            create_tendril_plot(T_lags, 15, 100, [{ x: 15, y: 100 }], 'T_lag_avg', ids, '#FF6F61')
-            create_tendril_plot(T_euls, 15, 200, [{ x: 15, y: 200 }], 'T_eul_avg', ids, '#FF6F61')
-            create_tendril_plot(d_lags, 15, 320, [{ x: 15, y: 320 }], 'd_lag_avg', ids, '#FF6F61')
-            create_tendril_plot(rho_lags, 15, 440, [{ x: 15, y: 440 }], 'rho_lag_avg', ids, '#FF6F61')
-            // create_tendril_plot(rho_euls, 15, 580, [{ x: 15, y: 580 }], 'rho_eul_avg', ids, '#FF6F61')
-            create_tendril_plot(k_euls, 15, 560, [{ x: 15, y: 560 }], 'k_eul_avg', ids, '#FF6F61')
-            create_tendril_plot(p_euls, 15, 680, [{ x: 15, y: 680 }], 'p_eul_avg', ids, '#FF6F61')
+
+            create_tendril_plot(T_lags, 15, 100, [{ x: 15, y: 100 }], 'T_lag_avg', ids, get_mean_attr_val(T_lags))
+            create_tendril_plot(T_euls, 15, 200, [{ x: 15, y: 200 }], 'T_eul_avg', ids, get_mean_attr_val(T_euls))
+            create_tendril_plot(d_lags, 15, 320, [{ x: 15, y: 320 }], 'd_lag_avg', ids, get_mean_attr_val(d_lags))
+            create_tendril_plot(rho_lags, 15, 440, [{ x: 15, y: 440 }], 'rho_lag_avg', ids, get_mean_attr_val(rho_lags))
+            // create_tendril_plot(rho_euls, 15, 580, [{ x: 15, y: 580 }], 'rho_eul_avg', ids, get_mean_attr_val(rho_euls))
+            create_tendril_plot(k_euls, 15, 560, [{ x: 15, y: 560 }], 'k_eul_avg', ids, get_mean_attr_val(k_euls))
+            create_tendril_plot(p_euls, 15, 680, [{ x: 15, y: 680 }], 'p_eul_avg', ids, get_mean_attr_val(p_euls))
 
            
       }
 
-      update(data) {
+      update(data, split) {
             let el = this
             d3.select(el.element).select('svg').remove()
 
-            this.draw_tendrils(el.element, data)
+            this.draw_tendrils(el.element, data, split)
 
       }
 

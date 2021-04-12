@@ -35,7 +35,6 @@ def get_value():
        for i, el in enumerate(d):
            if el['id'] in filters:
                d_filtered.append(el)
-       print('lsls')
        return {"PCAdata": d_filtered}
 
 

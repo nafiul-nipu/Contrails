@@ -89,7 +89,6 @@ class VolumeRendering extends React.Component {
 
       if(this.props.renderArea === 'top'){
         loader(1, 2.31, 'temp').then(function(){
-          console.log("data loaded")
           self.data = getData();
 
           self.onLoad()
@@ -97,7 +96,6 @@ class VolumeRendering extends React.Component {
         })
       }else if (this.props.renderArea === 'bottom'){
         loader(6, 1.52, 'temp').then(function(){
-          console.log("data loaded")
           self.data = getData();
 
           self.onLoad()
@@ -277,7 +275,6 @@ class VolumeRendering extends React.Component {
     }
 
     selectVolume = (data) =>{
-      console.log("volume rendering started")
       const self = this;
       let dataBuffer = data;
       const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
@@ -289,11 +286,9 @@ class VolumeRendering extends React.Component {
       // console.log(member)
       
       if(isNaN(member) && self.props.renderArea === 'top'){
-        console.log("top condition")
         member = 1
         // volDims = [100,100,100]
       }else if (isNaN(member) && self.props.renderArea === 'bottom'){
-        console.log('bottom condiion')
         member = 6
         // volDims = [100,100,100]
       }
@@ -327,7 +322,6 @@ class VolumeRendering extends React.Component {
         setInterval(function() {
           // Save them some battery if they're not viewing the tab
           if (document.hidden) {
-            console.log('document is hidden')
             return;
           }
           var startTime = performance.now();
@@ -372,8 +366,6 @@ class VolumeRendering extends React.Component {
         this.volumeTexture = tex;
       }
 
-      
-      console.log('volume rendering finished')
 
 
     }

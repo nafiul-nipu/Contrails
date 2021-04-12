@@ -280,12 +280,7 @@ render() {
                             <VolumeRendering renderArea={'bottom'} />
                         </Col>
                     </Row>
-
-                    {/* <Col xs={12} style={{ height: '45vh',  'margin': '0', 'padding': '0', marginRight:'-20px'}}> */}
-                    {/* <Row style={{height:'25vh'}}> */}
                     <Clusters clusteringParams={this.state.clusteringParams} dataRegistry={this.state.filtered_data} clusterMembers={this.handleClusteringChange}/>                        
-                    {/* </Row> */}
-                    {/* </Col> */}
                 </Col>
             </Row>
         </Container>
