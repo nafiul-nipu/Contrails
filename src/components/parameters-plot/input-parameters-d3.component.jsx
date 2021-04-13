@@ -76,11 +76,12 @@ export default class InputParametersD3 {
         //previous 20*k
         group.append('rect')
               .attr("x", function(){
-                if(k === keys.length - 1){
-                  return (36*k)
-                }else{
-                  return (40*k)
-                }
+                // if(k === keys.length - 1){
+                //   return (36*k)
+                // }else{
+                //   return (40*k)
+                // }
+                return 20*k
               })
               .attr('y', (height * i) + 35 + 60)
               .attr('width', 20)
@@ -115,10 +116,24 @@ export default class InputParametersD3 {
 
           // previous (keys.length * 20) + 20*bak)
           group.append('rect')
-              .attr("x",  20+40*bak)
-              .attr('y',  (height * i) + 35 + 20*sav )
-              .attr('width', 20)
-              .attr('height', 20)
+              .attr("x",  function(){
+                if(bak <= 1){
+                  return 25+16*bak
+                }else{
+                  return 15*bak*1.1
+                }
+                // return 25+15*bak                
+                })
+              .attr('y',  function(){
+                if(bak <= 1){
+                  return (height * i) + 25   + 10*sav
+                }else{
+                  return (height * i) + 115   + 10*sav
+                }
+                
+              } )
+              .attr('width', 10)
+              .attr('height', 10)
               .style("stroke", "black")
               .style("stroke-width", 1)
               .attr('fill', ()=> {return this.color(singleAttributeValues[sav])})
