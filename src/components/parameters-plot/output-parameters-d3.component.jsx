@@ -71,7 +71,7 @@ export default class OutputParametersD3 {
                   var total_sum =0
                   for(var i = 0; i< data.length; i++){
                         const normalized_data = normalize_data(data[i])
-                        const el_avg = normalized_data.reduce((a,b) => a+b, 0)/data[i].length
+                        const el_avg = normalized_data[0]
                         total_sum+=el_avg
                   }
                   return total_sum/data.length
@@ -116,6 +116,7 @@ export default class OutputParametersD3 {
 
                               prevX[i] = prevX_first 
                               prevY[i] = prevY_first 
+
                         }
                         for (var k = 1; k < data[i].length; k++) {
                               var dif = normalized_data[k] - normalized_data[k - 1]
