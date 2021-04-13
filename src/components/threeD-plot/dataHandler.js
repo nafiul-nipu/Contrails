@@ -39,7 +39,13 @@ const getRawData = () => {
 }
 
 const getMin = () => {
-    return d3.min(rawData)
+    var min = Infinity; 
+    rawData.forEach(function(data){
+        if(data < min && data != 0 ){
+            min = data; 
+        }
+    })
+    return min
 }
 
 const getMax = () => {
