@@ -19,7 +19,8 @@ class ComponentsContainer extends React.Component {
             inputFilters: null,
             filtered_data: dataRegistry,
             outputFilters: null,
-            split_tendrils:false
+            split_tendrils:false,
+            all_members: dataRegistry
 
         }
         this.handleClusteringChange = this.handleClusteringChange.bind(this)
@@ -528,7 +529,7 @@ render() {
                             <VolumeRendering renderArea={'bottom'} />
                         </Col>
                     </Row>
-                    <Clusters clusteringParams={this.state.clusteringParams} dataRegistry={this.state.filtered_data} clusterMembers={this.handleClusteringChange}/>                        
+                    <Clusters clusteringParams={this.state.clusteringParams} dataRegistry={this.state.filtered_data} clusterMembers={this.handleClusteringChange} all_members={this.state.all_members}/>                        
                 </Col>
             </Row>
         </Container>

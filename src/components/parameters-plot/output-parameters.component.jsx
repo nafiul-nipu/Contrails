@@ -1,8 +1,5 @@
 import React from 'react';
 import OutputParametersD3 from './output-parameters-d3.component';
-import statistics from '../data-component/statistics.json';
-import dataRegistry from '../data-component/dataRegistry.json'
-import Form from 'react-bootstrap/Form'
 class OutputParameters extends React.Component {
 
 

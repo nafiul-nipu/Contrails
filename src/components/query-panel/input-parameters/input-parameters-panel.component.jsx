@@ -40,7 +40,7 @@ class InputParametersPanel extends React.Component {
                     </Form>
                     <div style={{ color: "grey", marginTop: "5%" }}>Geometry</div>
                     <Form  >
-                        <Form.Check inline type="checkbox" id="geometry-short" label="short-cowl-nozzle" onChange={this.handleButton} />
+                        <Form.Check inline type="checkbox" id="geometry-short-cowl-nozzle" label="short-cowl-nozzle" onChange={this.handleButton} />
                         <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#1a9850" xmlns="http://www.w3.org/2000/svg">
                             <rect width="8" height="8" rx="1" />
                         </svg>

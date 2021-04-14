@@ -15,6 +15,7 @@ class Clusters extends React.Component {
             rho_lag_cluster: false,
             d_lag_cluster: false,
             dataRegistry: this.props.dataRegistry,
+            all_data:null,
             clusteringParams: this.props.clusteringParams,
             
 
@@ -34,11 +35,12 @@ class Clusters extends React.Component {
             return data.PCAdata
         })
         if (data_for_child) {
-            new ClustersD3(this.refs.chart_cluster, data_for_child)
+            new ClustersD3(this.refs.chart_cluster, [], data_for_child)
             // new ClustersD3(this.refs.chart_cluster, null)
         }
         this.setState({ clusteringParams: this.props.clusteringParams })
         this.setState({ dataRegistry: this.props.dataRegistry })
+        this.setState({all_data:data_for_child})
 
     }
 
@@ -49,13 +51,15 @@ class Clusters extends React.Component {
             this.setState({ clusteringParams: this.props.clusteringParams })
         }
         if (this.state.clusteringParams == this.props.clusteringParams)
-            var send_data = [this.props.dataRegistry, this.props.clusteringParams]
+            var send_data = [this.state.all_data, this.props.clusteringParams]
         const data_for_child = await fetch('/backendscript', { method: "POST", mode: 'cors', cache: "no-cache", headers: { "content_type": "application/json" }, body: JSON.stringify(send_data) }).then(res => res.json()).then(data => {
 
             return data.PCAdata
         })
         if (data_for_child) {
-            new ClustersD3(this.refs.chart_cluster, data_for_child)
+            const ids = this.props.dataRegistry.map(d => d['id'])
+            new ClustersD3(this.refs.chart_cluster, ids, data_for_child)
+            // this.setState({all_data: data_for_child})
         }
     }
 
