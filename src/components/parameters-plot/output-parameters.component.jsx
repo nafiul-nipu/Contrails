@@ -10,36 +10,23 @@ class OutputParameters extends React.Component {
         super(props);
         this.chartin = React.createRef()
         this.state = {
-            split_tendrils: false
-
         }
-        this.handleButton = this.handleButton.bind(this)
     }
 
     componentDidMount() {
-        this.setState({ chartoutput: new OutputParametersD3(this.chartin.current, this.props.outputelements, false) })
+        this.setState({ chartoutput: new OutputParametersD3(this.chartin.current, this.props.outputelements, this.props.split_tendrils) })
     }
 
-    handleButton(event) {
-        this.state.chartoutput.update(this.props.outputelements, !this.state.split_tendrils)
-        this.setState({split_tendrils: !this.state.split_tendrils})
-       
-}
 
     componentWillReceiveProps(nextProps) {
-        this.state.chartoutput.update(nextProps.outputelements, this.state.split_tendrils)
+        this.state.chartoutput.update(nextProps.outputelements, !this.props.split_tendrils)
 
     }
 
     render() {
         return (
-            <div>
-                <Form style={{ textAlign: 'left', marginLeft: "10%" }}>
-                    <Form.Check type="checkbox" checked={this.state.split_tendrils} id="split_tendrils" label="Split tendrils" onChange={this.handleButton} />
-                </Form>
                 <div ref={this.chartin}></div>
 
-            </div>
         )
     }
 }

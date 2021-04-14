@@ -13,7 +13,7 @@
     },
     "solution":{
         "domain": ["coupled","uncoupled"],
-        "range": ["#bebebe" , "#bebebe"]
+        "range": ["#d3a27f" , "#964b00"]
     },
     "turbulence":{
         "domain": ["kOmegaSST"],

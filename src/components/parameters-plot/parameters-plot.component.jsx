@@ -24,7 +24,7 @@ class ParametersPlot extends React.Component {
                         <InputParameters elements={this.props.elements} />
                     </Col>
                     <Col xs={6} style={{ margin: "0px" }}>
-                        <OutputParameters style={{ margin: "0px" }} outputelements={this.props.elements} />
+                        <OutputParameters style={{ margin: "0px" }} outputelements={this.props.elements} split_tendrils={this.props.split_tendrils}/>
                     </Col>
                 </Row>
             </Container>

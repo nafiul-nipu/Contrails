@@ -7,9 +7,9 @@ import d3Tip from 'd3-tip'
 import "./parameters-plot.styles.css"
 
 import inputDomain from '../data-component/parameters.json'
-// import * as colorScheme from 'd3-scale-chromatic'
+import { ConeBufferGeometry } from 'three';
 
-const height = 900
+// const height = 900
 const url = "https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/2_TwoNum.csv"
 export default class InputParametersD3 {
 
@@ -18,131 +18,166 @@ export default class InputParametersD3 {
     this.element = element
     this.data = data
     this.color = d3.scaleOrdinal()
-    this.boundaries = ["bypassInlet","engine","farfield","inlet","nozzle","outlet","turbine"]
-    // this.draw_airplane(element, data)
+    this.boundaries = ["bypassInlet", "engine", "farfield", "inlet", "nozzle", "outlet", "turbine"]
     this.draw_inputs(element, data)
   }
 
-  draw_inputs(element, new_data){
+  draw_inputs(element, new_data) {
     const self = this;
-    // console.log(new_data)
-    // console.log(d3.select(element).node().parentNode.clientHeight)
     const data = new_data;
     const width = d3.select(element).node().parentNode.clientWidth
-    const height = 170
-    
-    // console.log(inputDomain["aircraft-engine"])
+    const height = 180
 
-    // console.log(inputDomain.colorDomain)
-    // this.color.domain(inputDomain.colorDomain)
+    function check_member_similarity(m1, m2) {
+      const atr11_1 = m1['boundary-conditions']['T']
+      const atr11_2 = m2['boundary-conditions']['T']
+      const atr12_1 = m1['boundary-conditions']['U']
+      const atr12_2 = m2['boundary-conditions']['U']
+      const atr13_1 = m1['boundary-conditions']['p']
+      const atr13_2 = m2['boundary-conditions']['p']
+      const atr14_1 = m1['boundary-conditions']['k']
+      const atr14_2 = m2['boundary-conditions']['k']
+      const atr2_1 = m1['input']
+      const atr2_2 = m2['input']
+      var result = true
+      result = result && 
+        Object.keys(atr2_1).every(key => atr2_2.hasOwnProperty(key) && atr2_2[key] === atr2_1[key]) && 
+        Object.keys(atr11_1).every(key => atr11_2.hasOwnProperty(key)&& atr11_2[key] === atr11_1[key]) && 
+        Object.keys(atr12_1).every(key => atr12_2.hasOwnProperty(key) && atr12_2[key] === atr12_1[key]) && 
+        Object.keys(atr13_1).every(key => atr13_2.hasOwnProperty(key) && atr13_2[key] === atr13_1[key]) && 
+        Object.keys(atr14_1).every(key => atr14_2.hasOwnProperty(key) && atr14_2[key] === atr14_1[key])
+      return result;
+    }
+
+    var ids = data.map(d => d['id'])
+    var members_dict = new Object()
+
+    while(ids.length >0){
+      const el1 = ids[0]
+      var similar_members = []
+      similar_members.push(el1)
+      const member1 = data.filter(d => d['id'] == el1)[0]
+      ids.shift()
+      if(ids.length >0){
+
+      
+      for(var i = 0; i < ids.length; i++){
+        const member2 = data.filter(d=> d['id'] == ids[i])[0]
+        if(check_member_similarity(member1, member2)){
+          similar_members.push(ids[i])
+        }
+      }
+    }
+      members_dict[el1] = similar_members
+      ids = ids.filter(d => !similar_members.includes(d))
+   
+    }
 
     const svg = d3.select(element)
       .append("svg")
       .attr("width", d3.select(element).node().parentNode.clientWidth)
-      .attr("height", (data.length + 1) * height)
+      .attr("height", (Object.keys(members_dict).length ) * (height +42))
 
     svg.append("text").text("Members' Input Parameters")
-      .attr('transform', `translate(${width /15},20)`)
+      .attr('transform', `translate(${width / 15},20)`)
       .attr("fill", '#05ecec')
 
-    const group = svg.append('g')
+    const group = svg.append('g').attr('transform', `translate(0, 40)`)
 
-    for (let i = 0; i<data.length; i++){
-      let inputValues = data[i]["input"]
-      // console.log(inputValues)
+    var i = 0
+    Object.keys(members_dict).forEach( el => {
+      var member = data.filter(d => d['id'] == el)[0]
+      var highlight_class_name = ""
+      for(var j = 0; j < members_dict[el].length; j++){
+        highlight_class_name = highlight_class_name + "highlight_" + members_dict[el][j] + " "
+      }
+
+      let inputValues = member["input"]
+
+      group.append("text").text(`Members: ${members_dict[el]} `)
+      .attr('transform', `translate(${width - 290}, ${(height+40)* i + 20})`)
+      .attr("fill", 'white')
+
       group.append('rect')
         .attr("x", 0)
-        .attr("y", (height * i) + 30)
-        .attr("class", "highlight_"+data[i]['id'])
-        .attr("width", width - 20)
+        .attr("y", ((height+40) * i) + 25)
+        .attr("class", highlight_class_name)
+        .attr("width", width - 150)
         .attr("height", height - 20)
         .attr("fill", 'grey')
         .attr('opacity', 0)
         .attr('rx', '15')
-      
-      let keys = Object.keys(inputValues)
-      // console.log(keys)
-      for(let k = 0; k <keys.length; k++){
-        let inputValueTip = d3Tip().attr().attr('class', 'd3-tip')
-                                  .html(function(){
-                                    let tip = `Member: ${i + 1} <br>
-                                    ${keys[k]} : ${inputValues[keys[k]]}`
-                                    return tip
-                                  })
-        svg.call(inputValueTip)
-        // console.log(k)
-        this.color.domain(inputDomain[keys[k]].domain)
-                  .range(inputDomain[keys[k]].range)
-        //previous 20*k
-        group.append('rect')
-              .attr("x", function(){
-                // if(k === keys.length - 1){
-                //   return (36*k)
-                // }else{
-                //   return (40*k)
-                // }
-                return 20*k
-              })
-              .attr('y', (height * i) + 35 + 60)
-              .attr('width', 20)
-              .attr('height', 20)
-              .attr('fill', ()=> {return this.color(inputValues[keys[k]])})
-              .on('mouseover', inputValueTip.show)
-              .on('mouseout', inputValueTip.hide)
-      }
-      
-      let boundaryValues = data[i]["boundary-conditions"]
-      this.color.domain(inputDomain["boundary-conditions"].domain)
-                .range(inputDomain["boundary-conditions"].range)
-      let boundaryAttributeKeys = Object.keys(boundaryValues)
-      // console.log(boundaryValues)
-      //boundaryAttributeKeys.length
-      for(let bak = 0; bak < boundaryAttributeKeys.length; bak++){
-        
-        let singleAttributeValues = boundaryValues[boundaryAttributeKeys[bak]];
-        // console.log(singleAttributeValues)
 
-        for(let sav = 0; sav < singleAttributeValues.length; sav++){
-          // console.log(singleAttributeValues[sav])
+      let keys = Object.keys(inputValues)
+      const id = member['id']
+      for (let k = 0; k < keys.length; k++) {
+        let inputValueTip = d3Tip().attr().attr('class', 'd3-tip')
+          .html(function () {
+            let tip = `Member: ${members_dict[el]} <br>
+                                    ${keys[k]} : ${inputValues[keys[k]]}`
+            return tip
+          })
+        svg.call(inputValueTip)
+        this.color.domain(inputDomain[keys[k]].domain)
+          .range(inputDomain[keys[k]].range)
+        group.append('rect')
+          .attr("x", function () {
+            return 5 + 21 * k
+          })
+          .attr('y', ((height +40) * i) + 35 + 60)
+          .attr('width', 20)
+          .attr('height', 20)
+          .attr('fill', () => { return this.color(inputValues[keys[k]]) })
+          .on('mouseover', inputValueTip.show)
+          .on('mouseout', inputValueTip.hide)
+      }
+
+      let boundaryValues =member["boundary-conditions"]
+
+      this.color.domain(inputDomain["boundary-conditions"].domain)
+        .range(inputDomain["boundary-conditions"].range)
+      let boundaryAttributeKeys = Object.keys(boundaryValues)
+      for (let bak = 0; bak < boundaryAttributeKeys.length; bak++) {
+
+        let singleAttributeValues = boundaryValues[boundaryAttributeKeys[bak]];
+        for (let sav = 0; sav < singleAttributeValues.length; sav++) {
           let boundaryValueTip = d3Tip().attr().attr('class', 'd3-tip')
-                                  .html(function(){
-                                    let tip = `Member: ${i + 1} <br>
+            .html(function () {
+              let tip = `Member: ${members_dict[el]} <br>
                                     Boundary Attribute : ${boundaryAttributeKeys[bak]} <br>
                                     ${self.boundaries[sav]} : ${singleAttributeValues[sav]}
                                     `
-                                    return tip
-                                  })
+              return tip
+            })
           svg.call(boundaryValueTip)
 
-          // previous (keys.length * 20) + 20*bak)
           group.append('rect')
-              .attr("x",  function(){
-                if(bak <= 1){
-                  return 25+16*bak
-                }else{
-                  return 15*bak*1.1
-                }
-                // return 25+15*bak                
-                })
-              .attr('y',  function(){
-                if(bak <= 1){
-                  return (height * i) + 25   + 10*sav
-                }else{
-                  return (height * i) + 115   + 10*sav
-                }
-                
-              } )
-              .attr('width', 10)
-              .attr('height', 10)
-              .style("stroke", "black")
-              .style("stroke-width", 1)
-              .attr('fill', ()=> {return this.color(singleAttributeValues[sav])})
-              .on('mouseover', boundaryValueTip.show)
-              .on('mouseout', boundaryValueTip.hide)
+            .attr("x", function () {
+              if (bak <= 1) {
+                return 23 + 15 * bak
+              } else {
+                return 15 * bak
+              }             
+            })
+            .attr('y', function () {
+              if (bak <= 1) {
+                return ((height +40) * i) + 27 + 9.5 * sav
+              } else {
+                return ((height +40) * i) + 116 + 9.5 * sav
+              }
+
+            })
+            .attr('width', 10)
+            .attr('height', 10)
+            .style("stroke", "black")
+            .style("stroke-width", 1)
+            .attr('fill', () => { return this.color(singleAttributeValues[sav]) })
+            .on('mouseover', boundaryValueTip.show)
+            .on('mouseout', boundaryValueTip.hide)
         }
       }
-      
-    }
+    i = i+1
+    })
 
   }
   // draw_airplane(element, new_data) {
@@ -312,7 +347,7 @@ export default class InputParametersD3 {
   //         d3.select(this)
   //           .append("title")
   //           .text("Solution: " + data)
-            
+
   //       })
   //       .on('mouseout', function () {
   //         d3.selectAll('title').remove()
@@ -402,7 +437,7 @@ export default class InputParametersD3 {
   //         d3.select(this)
   //           .append("title")
   //           .text("Boundary Condition T: " + data)
-            
+
   //       })
   //       .on('mouseout', function () {
   //         d3.selectAll('title').remove()
@@ -428,7 +463,7 @@ export default class InputParametersD3 {
   //         d3.select(this)
   //           .append("title")
   //           .text("Boundary Condition T: " + data)
-            
+
   //       })
   //       .on('mouseout', function () {
   //         d3.selectAll('title').remove()
@@ -454,7 +489,7 @@ export default class InputParametersD3 {
   //         d3.select(this)
   //           .append("title")
   //           .text("Boundary Condition T: " + data)
-            
+
   //       })
   //       .on('mouseout', function () {
   //         d3.selectAll('title').remove()
@@ -480,7 +515,7 @@ export default class InputParametersD3 {
   //         d3.select(this)
   //           .append("title")
   //           .text("Boundary Condition T: " + data)
-            
+
   //       })
   //       .on('mouseout', function () {
   //         d3.selectAll('title').remove()
@@ -506,7 +541,7 @@ export default class InputParametersD3 {
   //         d3.select(this)
   //           .append("title")
   //           .text("Boundary Condition T: " + data)
-            
+
   //       })
   //       .on('mouseout', function () {
   //         d3.selectAll('title').remove()
@@ -558,7 +593,7 @@ export default class InputParametersD3 {
   //         d3.select(this)
   //           .append("title")
   //           .text("Boundary Condition U: " + data)
-            
+
   //       })
   //       .on('mouseout', function () {
   //         d3.selectAll('title').remove()
@@ -584,7 +619,7 @@ export default class InputParametersD3 {
   //         d3.select(this)
   //           .append("title")
   //           .text("Boundary Condition U: " + data)
-            
+
   //       })
   //       .on('mouseout', function () {
   //         d3.selectAll('title').remove()
@@ -610,7 +645,7 @@ export default class InputParametersD3 {
   //         d3.select(this)
   //           .append("title")
   //           .text("Boundary Condition U: " + data)
-            
+
   //       })
   //       .on('mouseout', function () {
   //         d3.selectAll('title').remove()
@@ -654,7 +689,7 @@ export default class InputParametersD3 {
   //         d3.select(this)
   //           .append("title")
   //           .text("Boundary Condition p: " + data)
-            
+
   //       })
   //       .on('mouseout', function () {
   //         d3.selectAll('title').remove()
@@ -680,7 +715,7 @@ export default class InputParametersD3 {
   //         d3.select(this)
   //           .append("title")
   //           .text("Boundary Condition p: " + data)
-            
+
   //       })
   //       .on('mouseout', function () {
   //         d3.selectAll('title').remove()
@@ -727,7 +762,7 @@ export default class InputParametersD3 {
   //         d3.select(this)
   //           .append("title")
   //           .text("Boundary Condition k: " + data)
-            
+
   //       })
   //       .on('mouseout', function () {
   //         d3.selectAll('title').remove()
@@ -753,7 +788,7 @@ export default class InputParametersD3 {
   //         d3.select(this)
   //           .append("title")
   //           .text("Boundary Condition k: " + data)
-            
+
   //       })
   //       .on('mouseout', function () {
   //         d3.selectAll('title').remove()
@@ -789,8 +824,8 @@ export default class InputParametersD3 {
   //         d3.select(this)
   //           .append("title")
   //           .text("Boundary Condition rho: " + data)
-            
-            
+
+
   //       })
   //       .on('mouseout', function () {
   //         d3.selectAll('title').remove()

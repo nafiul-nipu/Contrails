@@ -28,12 +28,20 @@ class OutputParametersPanel extends React.Component {
             rho_eul_avg: "",
             p_eul_avg: "",
             k_eul_avg: "",
+            split_tendrils: false
 
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleButton = this.handleButton.bind(this);
         this.handleOutputFilterChange = this.handleOutputFilterChange.bind(this);
+        this.handleSplitButton = this.handleSplitButton.bind(this);
     }
+
+    handleSplitButton(event) {
+        this.props.onSplitTendrilsChange(!this.state.split_tendrils)
+        this.setState({split_tendrils: !this.state.split_tendrils})
+       
+}
 
     handleChange(event) {
         this.setState({ paramType: event.target.value });
@@ -181,10 +189,12 @@ class OutputParametersPanel extends React.Component {
                                     <Form style={{ "padding": "2px" }} onChange={this.handleOutputFilterChange} className={this.state.T_lag == true ? 'show' : 'hidden'} >
                                         <Form.Control as="select" value={this.state.T_lag_avg} className="form-control-sm interior-form" id="T_lag_avg_dropdown" style={{ backgroundColor: '#636363', color: 'white' }}>
                                             <option value="" >T_avg</option>
-                                            <option value="472">472</option>
-                                            <option value="459">459</option>
-                                            <option value="422">422</option>
-                                            <option value="292">292</option>
+                                            <option value="290">290</option>
+                                            <option value="360">360</option>
+                                            <option value="420">420</option>
+                                            <option value="430">430</option>
+                                            <option value="460">460</option>
+                                            <option value="470">470</option>
                                         </Form.Control>
                                     </Form>
 
@@ -192,9 +202,6 @@ class OutputParametersPanel extends React.Component {
                                         <Form.Control as="select" value={this.state.rho_lag_avg} className="form-control-sm interior-form" id="rho_lag_avg_dropdown" style={{ backgroundColor: '#636363', color: 'white' }}>
                                             <option value="">rho_avg</option>
                                             <option value="1000">1000</option>
-                                            {/* <option value="2000">2000</option>
-                                            <option value="3000">3000</option>
-                                            <option value="4000">4000</option> */}
                                         </Form.Control>
                                     </Form>
                                     <Form style={{ "padding": "2px" }} onChange={this.handleOutputFilterChange} className={this.state.d_lag == true ? 'show' : 'hidden'}>
@@ -202,8 +209,7 @@ class OutputParametersPanel extends React.Component {
                                             <option value="">d_avg</option>
                                             <option value="0.00001">0.00001</option>
                                             <option value="0.00074">0.00074</option>
-                                            {/* <option value="0.08">0.08</option>
-                                            <option value="0.2">0.2</option> */}
+
                                         </Form.Control>
                                     </Form>
 
@@ -218,10 +224,12 @@ class OutputParametersPanel extends React.Component {
                                     <Form style={{ "padding": "2px" }} onChange={this.handleOutputFilterChange} className={this.state.T_eul == true ? 'show' : 'hidden'}>
                                         <Form.Control as="select" value={this.state.T_eul_avg} className="form-control-sm interior-form" id="T_eul_avg_dropdown" style={{ backgroundColor: '#636363', color: 'white' }}>
                                             <option value="">T_avg</option>
-                                            <option value="343">343</option>
                                             <option value="0">0</option>
-                                            <option value="322">322</option>
-                                            {/* <option value="425">425</option> */}
+                                            <option value="250">250</option>
+                                            <option value="260">260</option>
+                                            <option value="320">320</option>
+                                            <option value="343">343</option>
+                                            
                                         </Form.Control>
                                     </Form>
 
@@ -236,26 +244,30 @@ class OutputParametersPanel extends React.Component {
                                     <Form style={{ "padding": "2px" }} onChange={this.handleOutputFilterChange} className={this.state.p_eul == true ? 'show' : 'hidden'}>
                                         <Form.Control as="select" value={this.state.p_eul_avg} className="form-control-sm interior-form" id="p_eul_avg_dropdown" style={{ backgroundColor: '#636363', color: 'white' }}>
                                             <option value="">p_avg</option>
-                                            <option value="25537">25537</option>
-                                            <option value="21846">21846</option>
-                                            <option value="29292">29292</option>
-                                            <option value="25603">25603</option>
-                                            <option value="0">0</option>
+                                            <option value="21800">21800</option>
+                                            <option value="25600">25600</option>
+                                            <option value="29200">29200</option>
                                         </Form.Control>
                                     </Form>
 
                                     <Form style={{ "padding": "2px" }} onChange={this.handleOutputFilterChange} className={this.state.k_eul == true ? 'show' : 'hidden'}>
                                         <Form.Control as="select" value={this.state.k_eul_avg} className="form-control-sm interior-form" id="k_eul_avg_dropdown" style={{ backgroundColor: '#636363', color: 'white' }}>
                                             <option value="">k_avg</option>
-                                            <option value="1092">1092</option>
-                                            <option value="1116">1116</option>
-                                            <option value="91">91</option>
-                                            <option value="1045">1045</option>
+                                            <option value="0">0</option>
+                                            <option value="10">10</option>
+                                            <option value="90">90</option>
+                                            <option value="110">110</option>
+                                            <option value="1040">1040</option>
+                                            <option value="1090">1090</option>
+                                            <option value="1110">1110</option>
                                         </Form.Control>
                                     </Form>
                                 </div>
                             }
                         </Col>
+                        <Form style={{ textAlign: 'left', marginLeft: "10%" }}>
+                    <Form.Check type="checkbox" checked={this.state.split_tendrils} id="split_tendrils" label="Split tendrils" onChange={this.handleSplitButton} />
+                </Form>
                     </Row>
                 </Container>
 
