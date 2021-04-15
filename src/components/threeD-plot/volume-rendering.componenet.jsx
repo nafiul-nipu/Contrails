@@ -391,7 +391,7 @@ class VolumeRendering extends React.Component {
         }else{
           return(
             <Row>
-              <Col xs={12}>
+              <Col xs={12} style={{paddingTop:'10px'}}>
                 <Row>
                   <DropDowns
                     area={this.props.renderArea}

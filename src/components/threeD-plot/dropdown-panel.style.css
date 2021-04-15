@@ -45,3 +45,17 @@
   /* .slider text {
     fill: green;
   } */
+
+  .btn{
+      background-color: grey;
+      color:white
+  }
+
+  .form-control{
+    background-color: grey;
+    color:white
+  }
+
+  track{
+      color: grey;
+  }

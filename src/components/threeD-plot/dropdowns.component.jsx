@@ -60,7 +60,7 @@ class DropDowns extends React.Component {
       let lowerID = `#lower${self.props.area}`
 
       d3.select(upperID).append('select')
-                        .attr('class', "members")
+                        .attr('class', "members form-control-sm form-control")
                         .attr("id", `member${this.props.area}`)
                         .on('change', function(){
                             let member = this.value
@@ -84,7 +84,8 @@ class DropDowns extends React.Component {
       // console.log($(`#member${this.props.area}`))
 
       d3.select(upperID).append('button')
-                        .attr('class', `btn${this.props.area}`)
+                        .attr('class', `btn${this.props.area} btn btn-light btn-sm`)
+                        .attr("style","margin-left:5px" )
                         .attr('id', "play-pause-btn")
                         .attr('value', 'play')
                         .text('Play')
@@ -93,7 +94,7 @@ class DropDowns extends React.Component {
 
       let keys = Object.keys(this.props.colormaps)
       d3.select(lowerID).append('select')
-                      .attr('class', "members")
+                      .attr('class', "members form-control-sm form-control")
                       .attr("id", `color${this.props.area}`)
                       .on('change', function(d){
                         // console.log(this.value)
@@ -111,8 +112,9 @@ class DropDowns extends React.Component {
 
 
       d3.select(lowerID).append('select')
-                      .attr('class', "members")
+                      .attr('class', "members form-control-sm form-control")
                       .attr("id", `filter${this.props.area}`)
+                      .attr("style","margin-left:5px" )
                       .on('change', function(){
                         let file = +(d3.format('.2f')(self.slider.value()));
                         let folder = +($(`#member${self.props.area}`).val());
@@ -165,7 +167,7 @@ class DropDowns extends React.Component {
                       .call(sliderRange)
 
       d3.select(`#lower${self.props.area}`).append('button')
-                      .attr('class', `filter${this.props.area}`)
+                      .attr('class', `filter${this.props.area} btn btn-light btn-sm`)
                       .attr('id', "play-pause-btn")
                       .attr('value', 'filter')
                       .text('Filter')
