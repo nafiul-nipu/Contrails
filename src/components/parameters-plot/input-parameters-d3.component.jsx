@@ -94,12 +94,12 @@ export default class InputParametersD3 {
 
       let inputValues = member["input"]
 
-      group.append("text").text(`Members: ${members_dict[el]} `)
-      .attr('transform', `translate(${width - 290}, ${(height+40)* i + 20})`)
+      group.append("text").text(`Member: ${members_dict[el]} `)
+      .attr('transform', `translate(${width - 270}, ${(height+40)* i + 20})`)
       .attr("fill", 'white')
 
       group.append('rect')
-        .attr("x", 0)
+        .attr("x", 30)
         .attr("y", ((height+40) * i) + 25)
         .attr("class", highlight_class_name)
         .attr("width", width - 150)
@@ -122,7 +122,7 @@ export default class InputParametersD3 {
           .range(inputDomain[keys[k]].range)
         group.append('rect')
           .attr("x", function () {
-            return 5 + 21 * k
+            return 35 + 21 * k
           })
           .attr('y', ((height +40) * i) + 35 + 60)
           .attr('width', 20)
@@ -154,9 +154,9 @@ export default class InputParametersD3 {
           group.append('rect')
             .attr("x", function () {
               if (bak <= 1) {
-                return 23 + 15 * bak
+                return 53 + 15 * bak
               } else {
-                return 15 * bak
+                return 30 + 15 * bak
               }             
             })
             .attr('y', function () {

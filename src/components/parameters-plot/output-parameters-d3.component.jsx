@@ -75,6 +75,7 @@ export default class OutputParametersD3 {
                         total_sum+=el_avg
                   }
                   return total_sum/data.length
+                  
             }
 
 
@@ -87,10 +88,11 @@ export default class OutputParametersD3 {
                   var prevY = new Array(data.length)
 
                   for (var i = 0; i < data.length; i++) {
+                        // if(ids[i] == 5 || ids[i] == 6){
+                              if(true){
                         const title_id = ids[i]
                         const values = data[i]
                         var p = Object.assign([], points)
-
 
                         let tendrilTip = d3Tip().attr().attr('class', 'd3-tip')
                                           .html(function(){
@@ -101,23 +103,20 @@ export default class OutputParametersD3 {
                                           })
                          svg.call(tendrilTip)
 
-
                         var normalized_data = normalize_data(data[i])
                         if(split){
-                              var dif_first = normalized_data[0] -  avg_val
+                              var dif_first = avg_val - normalized_data[0] 
                               var angle_first = (dif_first * 50) * angleRange
                               const val_first = rotate(0,0,0,16, angle_first)
-      
                               prevX[i] = prevX_first + val_first[0]
                               prevY[i] = prevY_first + val_first[1]
                               p.push({ x: prevX[i], y: prevY[i] })
                         }
                         else{
-
                               prevX[i] = prevX_first 
                               prevY[i] = prevY_first 
-
                         }
+
                         for (var k = 1; k < data[i].length; k++) {
                               var dif = normalized_data[k] - normalized_data[k - 1]
                               var angle = (dif * 50) * angleRange
@@ -132,9 +131,7 @@ export default class OutputParametersD3 {
                                     .attr('r', 4)
                                     .attr('fill-opacity', 0.65)
                                     .attr('fill', '#FF6F61')
-
                         }
-
                         g.append('path')
                               .attr('fill', 'none')
                               .attr('stroke', '#FF6F61')
@@ -147,14 +144,11 @@ export default class OutputParametersD3 {
                                     tendrilTip.show(this)
                                     const el_id = this.id.replace("path_","")
                                     const el_idfinal = el_id.replace("_",'')
-                                    $('.tendrils').css("opacity", '0.2')
-                                    $('.circles').css("opacity", '0.2')
+                                    $('.tendrils').css("opacity", '0.1')
+                                    $('.circles').css("opacity", '0.1')
                                     $(`.${this.id}`).css("stroke-width", '2.8')
                                           .css('opacity', 1)
                                     $(`.circle_${this.id}`).css("opacity", '1')
-                                    // d3.select(this)
-                                    //       .append("title")
-                                    //       .text("Member " + title_id + "\n" + timepoints_tooltip(values))
                                     $(`.highlight_${el_idfinal}`).css("opacity", '0.7')
                                     $(`.cluster_airplane_${el_idfinal}`).css("fill", '#05ecec')
                               })
@@ -165,13 +159,13 @@ export default class OutputParametersD3 {
                                     $(`.${this.id}`).css("stroke-width", '2.5')
                                     $('.tendrils').css("opacity", '1')
                                     $('.circles').css("opacity", '0.65')
-                                    // d3.selectAll('title').remove()
                                     tendrilTip.hide(this)
                                     $(`.highlight_${el_idfinal}`).css("opacity", '0')
                                     $(`.cluster_airplane_${el_idfinal}`).css("fill", 'white')
                               })
 
                   }
+            }
 
             }
 

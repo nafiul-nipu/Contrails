@@ -129,9 +129,9 @@ class Clusters extends React.Component {
 
             <Row style={{height:'25vh'}}>
                 <Col xs={8} ref={'chart_cluster'}></Col>
-                {/* <Col xs={4}>  */}
-                <ClusteringParametersPanel  onClusteringSelectChange={this.handleClusteringChange} />
-                {/* </Col>                     */}
+                <Col>
+                <ClusteringParametersPanel  onClusteringSelectChange={this.handleClusteringChange} />                 
+                </Col>
             </Row>
             
 
