@@ -15,9 +15,7 @@ class InputParametersPanel extends React.Component {
 
     handleButton(param) {
         var new_param = param.target.id.toString()
-        console.log(new_param)
         this.props.onInputSelectChange(new_param)
-        // console.log(this.props.onInputSelectChange(new_param))
     }
 
 

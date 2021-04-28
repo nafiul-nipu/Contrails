@@ -14,7 +14,7 @@ class InputParameters extends React.Component {
     }
 
     componentDidMount(){
-        this.setState({chartinput: new InputParametersD3(this.chart.current, this.props.elements)}) 
+        this.setState({chartinput: new InputParametersD3(this.chart.current, this.props.elements, true)}) 
     }
 
     // shouldComponentUpdate(){

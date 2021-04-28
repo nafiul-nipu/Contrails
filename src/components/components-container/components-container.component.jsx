@@ -1,5 +1,5 @@
 import React from 'react';
-import dataRegistry from '../data-component/dataRegistry.json'
+import dataRegistryjson from '../data-component/dataRegistry.json'
 import QueryPanel from '../query-panel/query-panel.component';
 import ParametersPlot from '../parameters-plot/parameters-plot.component';
 import Clusters from '../clusters/clusters.component';
@@ -18,10 +18,10 @@ class ComponentsContainer extends React.Component {
         this.state = {
             clusteringParams: [],
             inputFilters: null,
-            filtered_data: dataRegistry,
+            filtered_data: dataRegistryjson,
             outputFilters: null,
             split_tendrils: false,
-            all_members: dataRegistry
+            all_members: dataRegistryjson
 
         }
         this.handleClusteringChange = this.handleClusteringChange.bind(this)
@@ -38,7 +38,6 @@ class ComponentsContainer extends React.Component {
 
     handle_split_tendrils(params) {
         this.setState({ split_tendrils: params })
-        console.log(params)
     }
 
     handleClusteringChange(params) {
@@ -55,7 +54,6 @@ class ComponentsContainer extends React.Component {
 
     handleOutputFilters(params) {
         this.setState({ outputFilters: params }, () => {
-
             this.handleInputAndOuputFilters()
         })
 
@@ -65,12 +63,10 @@ class ComponentsContainer extends React.Component {
     handleInputAndOuputFilters() {
         var filters_param = this.state.inputFilters
         var filter_params2 = this.state.outputFilters
-        var data = dataRegistry
+        let data = dataRegistryjson
 
         if (filters_param) {
-            console.log(filters_param)
-
-            if (filters_param['aircraft_engine'].length > 0) {
+            if (filters_param['aircraft_engine'].length > 0 && data.length > 0) {
                 data = data.filter(el => {
                     var e = []
                     e.push(el['input']['aircraft-engine'])
@@ -126,7 +122,6 @@ class ComponentsContainer extends React.Component {
                 })
             }
             if (filters_param['boundary-T-bypassInlet'].length > 0 && data.length > 0) {
-                console.log(data)
                 data = data.filter(el => {
                     var aux = el['boundary-conditions']
                     var e = aux['T'][0]
@@ -136,7 +131,6 @@ class ComponentsContainer extends React.Component {
                 })
             }
             if (filters_param['boundary-T-engine'].length > 0 && data.length > 0) {
-                console.log(data)
                 data = data.filter(el => {
                     var aux = el['boundary-conditions']
                     var e = aux['T'][1]
@@ -146,7 +140,6 @@ class ComponentsContainer extends React.Component {
                 })
             }
             if (filters_param['boundary-T-farfield'].length > 0 && data.length > 0) {
-                console.log(data)
                 data = data.filter(el => {
                     var aux = el['boundary-conditions']
                     var e = aux['T'][2]
@@ -156,7 +149,6 @@ class ComponentsContainer extends React.Component {
                 })
             }
             if (filters_param['boundary-T-inlet'].length > 0 && data.length > 0) {
-                console.log(data)
                 data = data.filter(el => {
                     var aux = el['boundary-conditions']
                     var e = aux['T'][3]
@@ -166,7 +158,7 @@ class ComponentsContainer extends React.Component {
                 })
             }
             if (filters_param['boundary-T-nozzle'].length > 0 && data.length > 0) {
-                console.log(data)
+
                 data = data.filter(el => {
                     var aux = el['boundary-conditions']
                     var e = aux['T'][4]
@@ -176,7 +168,6 @@ class ComponentsContainer extends React.Component {
                 })
             }
             if (filters_param['boundary-T-outlet'].length > 0 && data.length > 0) {
-                console.log(data)
                 data = data.filter(el => {
                     var aux = el['boundary-conditions']
                     var e = aux['T'][5]
@@ -186,7 +177,6 @@ class ComponentsContainer extends React.Component {
                 })
             }
             if (filters_param['boundary-T-turbine'].length > 0 && data.length > 0) {
-                console.log(data)
                 data = data.filter(el => {
                     var aux = el['boundary-conditions']
                     var e = aux['T'][6]
@@ -197,7 +187,6 @@ class ComponentsContainer extends React.Component {
             }
 
             if (filters_param['boundary-U-bypassInlet'].length > 0 && data.length > 0) {
-                console.log(data)
                 data = data.filter(el => {
                     var aux = el['boundary-conditions']
                     var e = aux['U'][0]
@@ -207,7 +196,6 @@ class ComponentsContainer extends React.Component {
                 })
             }
             if (filters_param['boundary-U-engine'].length > 0 && data.length > 0) {
-                console.log(data)
                 data = data.filter(el => {
                     var aux = el['boundary-conditions']
                     var e = aux['U'][1]
@@ -217,7 +205,6 @@ class ComponentsContainer extends React.Component {
                 })
             }
             if (filters_param['boundary-U-farfield'].length > 0 && data.length > 0) {
-                console.log(data)
                 data = data.filter(el => {
                     var aux = el['boundary-conditions']
                     var e = aux['U'][2]
@@ -227,7 +214,6 @@ class ComponentsContainer extends React.Component {
                 })
             }
             if (filters_param['boundary-U-inlet'].length > 0 && data.length > 0) {
-                console.log(data)
                 data = data.filter(el => {
                     var aux = el['boundary-conditions']
                     var e = aux['U'][3]
@@ -237,7 +223,6 @@ class ComponentsContainer extends React.Component {
                 })
             }
             if (filters_param['boundary-U-nozzle'].length > 0 && data.length > 0) {
-                console.log(data)
                 data = data.filter(el => {
                     var aux = el['boundary-conditions']
                     var e = aux['U'][4]
@@ -247,7 +232,6 @@ class ComponentsContainer extends React.Component {
                 })
             }
             if (filters_param['boundary-U-outlet'].length > 0 && data.length > 0) {
-                console.log(data)
                 data = data.filter(el => {
                     var aux = el['boundary-conditions']
                     var e = aux['U'][5]
@@ -257,7 +241,6 @@ class ComponentsContainer extends React.Component {
                 })
             }
             if (filters_param['boundary-U-turbine'].length > 0 && data.length > 0) {
-                console.log(data)
                 data = data.filter(el => {
                     var aux = el['boundary-conditions']
                     var e = aux['U'][6]
@@ -267,7 +250,7 @@ class ComponentsContainer extends React.Component {
                 })
             }
             if (filters_param['boundary-p-bypassInlet'].length > 0 && data.length > 0) {
-                console.log(data)
+
                 data = data.filter(el => {
                     var aux = el['boundary-conditions']
                     var e = aux['p'][0]
@@ -277,7 +260,6 @@ class ComponentsContainer extends React.Component {
                 })
             }
             if (filters_param['boundary-p-engine'].length > 0 && data.length > 0) {
-                console.log(data)
                 data = data.filter(el => {
                     var aux = el['boundary-conditions']
                     var e = aux['p'][1]
@@ -287,7 +269,6 @@ class ComponentsContainer extends React.Component {
                 })
             }
             if (filters_param['boundary-p-farfield'].length > 0 && data.length > 0) {
-                console.log(data)
                 data = data.filter(el => {
                     var aux = el['boundary-conditions']
                     var e = aux['p'][2]
@@ -297,7 +278,6 @@ class ComponentsContainer extends React.Component {
                 })
             }
             if (filters_param['boundary-p-inlet'].length > 0 && data.length > 0) {
-                console.log(data)
                 data = data.filter(el => {
                     var aux = el['boundary-conditions']
                     var e = aux['p'][3]
@@ -307,7 +287,6 @@ class ComponentsContainer extends React.Component {
                 })
             }
             if (filters_param['boundary-p-nozzle'].length > 0 && data.length > 0) {
-                console.log(data)
                 data = data.filter(el => {
                     var aux = el['boundary-conditions']
                     var e = aux['p'][4]
@@ -317,7 +296,6 @@ class ComponentsContainer extends React.Component {
                 })
             }
             if (filters_param['boundary-p-outlet'].length > 0 && data.length > 0) {
-                console.log(data)
                 data = data.filter(el => {
                     var aux = el['boundary-conditions']
                     var e = aux['p'][5]
@@ -327,7 +305,6 @@ class ComponentsContainer extends React.Component {
                 })
             }
             if (filters_param['boundary-p-turbine'].length > 0 && data.length > 0) {
-                console.log(data)
                 data = data.filter(el => {
                     var aux = el['boundary-conditions']
                     var e = aux['p'][6]
@@ -338,7 +315,6 @@ class ComponentsContainer extends React.Component {
             }
 
             if (filters_param['boundary-k-bypassInlet'].length > 0 && data.length > 0) {
-                console.log(data)
                 data = data.filter(el => {
                     var aux = el['boundary-conditions']
                     var e = aux['k'][0]
@@ -348,7 +324,6 @@ class ComponentsContainer extends React.Component {
                 })
             }
             if (filters_param['boundary-k-engine'].length > 0 && data.length > 0) {
-                console.log(data)
                 data = data.filter(el => {
                     var aux = el['boundary-conditions']
                     var e = aux['k'][1]
@@ -358,7 +333,6 @@ class ComponentsContainer extends React.Component {
                 })
             }
             if (filters_param['boundary-k-farfield'].length > 0 && data.length > 0) {
-                console.log(data)
                 data = data.filter(el => {
                     var aux = el['boundary-conditions']
                     var e = aux['k'][2]
@@ -368,7 +342,6 @@ class ComponentsContainer extends React.Component {
                 })
             }
             if (filters_param['boundary-k-inlet'].length > 0 && data.length > 0) {
-                console.log(data)
                 data = data.filter(el => {
                     var aux = el['boundary-conditions']
                     var e = aux['k'][3]
@@ -378,7 +351,6 @@ class ComponentsContainer extends React.Component {
                 })
             }
             if (filters_param['boundary-k-nozzle'].length > 0 && data.length > 0) {
-                console.log(data)
                 data = data.filter(el => {
                     var aux = el['boundary-conditions']
                     var e = aux['k'][4]
@@ -388,7 +360,6 @@ class ComponentsContainer extends React.Component {
                 })
             }
             if (filters_param['boundary-k-outlet'].length > 0 && data.length > 0) {
-                console.log(data)
                 data = data.filter(el => {
                     var aux = el['boundary-conditions']
                     var e = aux['k'][5]
@@ -398,7 +369,6 @@ class ComponentsContainer extends React.Component {
                 })
             }
             if (filters_param['boundary-k-turbine'].length > 0 && data.length > 0) {
-                console.log(data)
                 data = data.filter(el => {
                     var aux = el['boundary-conditions']
                     var e = aux['k'][6]
@@ -495,7 +465,6 @@ class ComponentsContainer extends React.Component {
 
 
         }
-
         this.setState({ filtered_data: data })
 
     }
