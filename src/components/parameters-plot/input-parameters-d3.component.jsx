@@ -192,7 +192,7 @@ export default class InputParametersD3 {
       let dif_input = dif_memeber['input']
 
       group.append("text").text(`Member: ${members_dict[el]} `)
-        .attr('transform', `translate(${width - 270}, ${(height + 40) * i + 20})`)
+        .attr('transform', `translate(${width - 245}, ${(height + 40) * i + 20})`)
         .attr("fill", 'white')
 
       group.append('rect')
