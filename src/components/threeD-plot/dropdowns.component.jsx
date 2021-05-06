@@ -185,12 +185,15 @@ class DropDowns extends React.Component {
                         loader(member, timestep, filter).then(function(){
                           let rawData = getRawData()
                           let rawFilteredData = []
+                          let create8bit = d3.scaleLinear()
+                                            .range([0,255])
+                                            .domain([d3.min(rawData), d3.max(rawData)])
                           console.log(d3.min(rawData), d3.max(rawData))   
                           rawData.forEach(d =>{
                           // console.log(d)
                             if(d >= range[0] && d <= range[1]){
                               // console.log(d)
-                              rawFilteredData.push(d)
+                              rawFilteredData.push(create8bit(d))
                               // count++
                             }else{
                               rawFilteredData.push(0)

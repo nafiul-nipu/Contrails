@@ -4,7 +4,8 @@ import dataRegistry from '../data-component/dataRegistry.json'
 
 let data = []
 let rawData = []
-
+let create8bit = d3.scaleLinear()
+                    .range([0,255])
 const loader = (folder, file, filter) =>{
     return new Promise((resolve, reject) => {
         if(!folder || !file || !filter){
@@ -21,8 +22,12 @@ const loader = (folder, file, filter) =>{
 
         }).then(function() {
             rawData = positions
-            dataBuffer = new Uint8Array(positions)
-            data = dataBuffer
+            create8bit.domain([d3.min(rawData), d3.max(rawData)])
+            // dataBuffer = new Uint8Array(positions)
+            rawData.forEach(element => {
+                dataBuffer.push(create8bit(element))
+            })
+            data = new Uint8Array(dataBuffer)
             resolve()
         })
 
