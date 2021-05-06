@@ -654,5 +654,60 @@
         }
 
 
+    },
+    {
+        "id": 13,
+        "name": "contrails1_0.01",
+        "ensembleMember": 13,
+        "timeSteps": [0.06,0.07,0.08,0.07,0.10,0.11,0.12,0.13,0.14,0.15,0.16,0.17,0.18,0.19,0.20],
+        "volume_dimensions":[184,124,4],
+        "output-parameters":{
+            "T_lag_avg":368.1543528333333,
+            "rho_lag_avg":1000,
+            "d_lag_avg": 0.000010,
+            "Ygas_lag_avg":0,
+            "T_eul_avg":249.48135883333333,
+           
+            "p_eul_avg":25675.697360166665,
+            "k_eul_avg":87.8676005,
+            "T_lag_avg_timepoints":[453.088017, 407.409364, 367.499738, 340.043096, 321.424128, 319.461774],
+            "rho_lag_avg_timepoints":[1000, 1000,1000,1000,1000,1000],
+            "d_lag_avg_timepoints":[0.000010, 0.000010,0.000010,0.000010,0.000010,0.000010],
+            "Ygas_lag_avg_timepoints":[0,0,0,0,0,0],
+            "T_eul_avg_timepoints":[249.481361, 249.481360, 249.481359, 249.481358, 249.481358, 249.481357], 
+            "p_eul_avg_timepoints":[25675.787909, 25675.805384, 25675.713240, 25675.642942, 25675.624055, 25675.610631],
+            "k_eul_avg_timepoints":[87.867586, 87.867591, 87.867600, 87.867605, 87.867609, 87.867612]
+        },
+        "input-parameters":{
+            "aircraft-engine":"two",
+            "geometry":"cowl",
+            "scope":"nozzle",
+            "grid":"coarse",
+            "solution":"uncoupled",
+            "turbulence":"kOmegaSST",
+            "boundary-conditions":{
+                "T":["inlet",  "outlet"],
+                "U":["outlet"],
+                "p":["outlet"],
+                "k":["inlet", "outlet"],
+                "rho":["outlet"]
+            }
+        },
+        "input":{
+            "aircraft-engine":"two",
+            "geometry":"short-cowl-nozzle",
+            "scope":"nozzle",
+            "grid":"coarse",
+            "solution":"uncoupled",
+            "turbulence":"kOmegaSST"
+        },
+        "boundary-conditions":{
+            "T":["totalTemperature","zeroGradient","zeroGradient","inletOutlet","zeroGradient","zeroGradient","totalTemperature"],
+            "U":["zeroGradient","noSlip","inletOutlet","inletOutlet","noSlip","inletOutlet","zeroGradient"],
+            "p":["totalPressure","zeroGradient","waveTransmissive","inletOutlet","zeroGradient","waveTransmissive","totalPressure"],
+            "k":["turbulentIntensityKineticEnergyInlet","kqRWallFunction","inletOutlet","inletOutlet","kqRWallFunction","inletOutlet","turbulentIntensityKineticEnergyInlet"]
+        }
+
+
     }
 ]

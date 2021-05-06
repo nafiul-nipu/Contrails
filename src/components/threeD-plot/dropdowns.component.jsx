@@ -188,7 +188,11 @@ class DropDowns extends React.Component {
                           let create8bit = d3.scaleLinear()
                                             .range([0,255])
                                             .domain([d3.min(rawData), d3.max(rawData)])
-                          console.log(d3.min(rawData), d3.max(rawData))   
+                          // console.log(d3.min(rawData), d3.max(rawData)) 
+                          let test = d3.scaleLinear()
+                                            .range([0,255])
+                                            .domain([0.000007,0.000025])  
+                          console.log(test(0.000018))
                           rawData.forEach(d =>{
                           // console.log(d)
                             if(d >= range[0] && d <= range[1]){
