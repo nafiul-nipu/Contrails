@@ -2,6 +2,8 @@ import * as d3 from 'd3'
 
 import dataRegistry from '../data-component/dataRegistry.json'
 
+import attributeRange from '../data-component/attributeRange.json'
+
 let data = []
 let rawData = []
 let create8bit = d3.scaleLinear()
@@ -55,6 +57,10 @@ const getMin = () => {
 
 const getMax = () => {
     return d3.max(rawData)
+}
+
+const getRangeData = (member, time, filter) =>{
+    return attributeRange[member][filter][time]
 }
 
 const dataLoader = (folder, file) =>{
@@ -122,5 +128,5 @@ const dataLoader = (folder, file) =>{
 
 }
 
-export {getData, loader, getMin, getMax, getRawData}
+export {getData, loader, getMin, getMax, getRawData, getRangeData}
 

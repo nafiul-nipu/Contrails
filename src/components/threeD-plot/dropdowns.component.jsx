@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/Col'
 
 import dataRegistry from '../data-component/dataRegistry.json'
 
-import {loader, getMin, getMax, getData, getRawData} from "./dataHandler.js"
+import {loader, getMin, getMax, getData, getRawData, getRangeData} from "./dataHandler.js"
 
 
 class DropDowns extends React.Component {
@@ -143,16 +143,25 @@ class DropDowns extends React.Component {
     createRangeSlider = () =>{
       // Range
       const self = this;
-      let min = getMin()
-      let max = getMax()
+      let member = +($(`#member${self.props.area}`).val());
+      let timestep = +(d3.format('.2f')(self.slider.value()));
+      let filter = $(`#filter${self.props.area}`).val();
+      let dataRange;
+      if(member === 14){
+        dataRange = getRangeData(member, timestep, filter);
+      }else{
+        dataRange = [getMin(), getMax()];
+      }
+      // let min = getMin()
+      // let max = getMax()
       // console.log(min, max)
       let sliderRange = sliderHorizontal()
-                      .min(min)
-                      .max(max)
+                      .min(dataRange[0])
+                      .max(dataRange[1])
                       .width(100)
                       .tickFormat(d3.format('0.2f'))
                       .ticks(3)
-                      .default([min, max])
+                      .default([dataRange[0], dataRange[1]])
                       .fill('#2196f3')
                       .on('onchange', val => {
                         // d3.select('p#value-range').text(val.map(d3.format('.2%')).join('-'));
@@ -175,7 +184,7 @@ class DropDowns extends React.Component {
                       .on('click', function(){
                         
                         let range = sliderRange.value();
-                        // console.log(range)
+                        console.log(range)
                         let timestep = +(d3.format('.2f')(self.slider.value()));
                         // console.log(timestep)
                         let member = +($(`#member${self.props.area}`).val());
@@ -190,13 +199,14 @@ class DropDowns extends React.Component {
                                             .range([0,255])
                                             .domain([d3.min(rawData), d3.max(rawData)])
                           // console.log(d3.min(rawData), d3.max(rawData)) 
-                          let test = d3.scaleLinear()
-                                            .range([0,255])
-                                            .domain([0.000007,0.000025])  
-                          console.log(test(0.000018))
+
+                          let converRangeToRawData = d3.scaleLinear()
+                                                        .range([d3.min(rawData), d3.max(rawData)])
+                                                        .domain(dataRange)
+                          // console.log(converRangeToRawData(range[0]), converRangeToRawData(range[1]))
                           rawData.forEach(d =>{
                           // console.log(d)
-                            if(d >= range[0] && d <= range[1]){
+                            if(d >= converRangeToRawData(range[0]) && d <= converRangeToRawData(range[1])){
                               // console.log(d)
                               rawFilteredData.push(create8bit(d))
                               // count++
