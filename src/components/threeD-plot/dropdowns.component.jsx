@@ -17,7 +17,7 @@ class DropDowns extends React.Component {
         super();
         this.slider = []
 
-        this.filter = ["temp", 'ice', "contrails"]
+        this.filter = ["temp", 'ice', "d", "ice_d"]
         // diameter is 10^9
     }  
     
