@@ -439,7 +439,7 @@
         "id": 9,
         "name": "test3_0.02",
         "ensembleMember": 9,
-        "timeSteps": [0.11,0.12,0.13,0.14,0.15,0.16, 0.17, 0.18],
+        "timeSteps": [0.11,0.12,0.13,0.14,0.15,0.16],
         "volume_dimensions":[184,128,4],
         "output-parameters":{
             "T_lag_avg":437.56642216666665,
@@ -604,7 +604,7 @@
         "id": 12,
         "name": "test6",
         "ensembleMember": 12,
-        "timeSteps": [0.11,0.12,0.13,0.14,0.15,0.16],
+        "timeSteps": [0.11,0.12,0.13,0.14,0.15,0.16, 0.17, 0.18],
         "volume_dimensions":[184,124,4],
         "output-parameters":{
             "T_lag_avg":368.1543528333333,
