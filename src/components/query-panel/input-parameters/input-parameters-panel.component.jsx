@@ -23,7 +23,7 @@ class InputParametersPanel extends React.Component {
         return (
             <div className="mx-auto" >
 
-                <h6 >Input Parameters</h6>
+                <h6 >Input Params</h6>
                 <div style={{ textAlign: 'left', marginLeft: "5%" }}>
                     <div style={{ color: "grey", marginTop: "5%" }}>Aircraft Engine -Streams</div>
                     <Form  >

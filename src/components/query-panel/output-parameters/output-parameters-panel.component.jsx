@@ -156,7 +156,7 @@ class OutputParametersPanel extends React.Component {
             <div className="mx-auto">
 
                 <Container>
-                    <h6>Output Parameters</h6>
+                    <h6>Output Params</h6>
                     <Form onChange={this.handleChange}>
                         <Form.Control as="select" className="form-control-sm" style={{ backgroundColor: 'grey', color: 'white' }}>
                             <option value="lagrangian">Lagrangian</option>

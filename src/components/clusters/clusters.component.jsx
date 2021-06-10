@@ -35,8 +35,9 @@ class Clusters extends React.Component {
             return data.PCAdata
         })
         if (data_for_child) {
+            console.log("I am rendering")
             new ClustersD3(this.refs.chart_cluster, [], data_for_child)
-            // new ClustersD3(this.refs.chart_cluster, null)
+            
         }
         this.setState({ clusteringParams: this.props.clusteringParams })
         this.setState({ dataRegistry: this.props.dataRegistry })
@@ -58,6 +59,7 @@ class Clusters extends React.Component {
         })
         if (data_for_child) {
             const ids = this.props.dataRegistry.map(d => d['id'])
+            console.log("I am also here")
             new ClustersD3(this.refs.chart_cluster, ids, data_for_child)
             // this.setState({all_data: data_for_child})
         }
@@ -128,7 +130,7 @@ class Clusters extends React.Component {
         return (
 
             <Row style={{height:'25vh'}}>
-                <Col xs={8} ref={'chart_cluster'}></Col>
+                <Col xs={9} ref={'chart_cluster'}></Col>
                 <Col>
                 <ClusteringParametersPanel  onClusteringSelectChange={this.handleClusteringChange} />                 
                 </Col>

@@ -27,13 +27,13 @@ class ClusteringParametersPanel extends React.Component {
         return(
             // <div>Query panel and val is {this.state.currentVal}</div>
             <Col  style={{ borderStyle: "solid", borderWidth: "0.5px", borderColor: "rgb(5, 236, 236)"}}>
-                <h6 style={{marginTop:"0", marginBottom:"0"}}>Similarity Parameters</h6>
+                <h6 style={{marginTop:"10", marginBottom:"15px", marginLeft:"-3px"}}>Similarity Params</h6>
                 <div >
                     <div style={{"color":"#BEBEBE"}}>Simulation Runs:</div>
                     <Form style={{textAlign: 'left', marginLeft:"37%"}}>
                     <Form.Check type="checkbox" label="solution" />
                     </Form>
-                    <div style={{"color":"#BEBEBE"}}>Lagrangian Attr:</div>
+                    <div style={{"color":"#BEBEBE", marginTop:'10px'}}>Lagrangian Attr:</div>
                     <Form style={{textAlign: 'left', marginLeft:"37%"}}>
                     <Form.Check type="checkbox" label="T" id="T_lag_avg" onChange= {this.handleFilterChange}/>
                     <Form.Check type="checkbox" label="U"  id="U_lag_avg" />

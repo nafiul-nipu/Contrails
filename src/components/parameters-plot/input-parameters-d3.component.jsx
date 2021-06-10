@@ -41,6 +41,7 @@ export default class InputParametersD3 {
       const atr2_1 = m1['input']
       const atr2_2 = m2['input']
       var result = true
+    
       result = result &&
         Object.keys(atr2_1).every(key => atr2_2.hasOwnProperty(key) && atr2_2[key] === atr2_1[key]) &&
         Object.keys(atr11_1).every(key => atr11_2.hasOwnProperty(key) && atr11_2[key] === atr11_1[key]) &&
@@ -56,9 +57,10 @@ export default class InputParametersD3 {
       const aircraft_engine = new Set(members_list.map(m => m['input']['aircraft-engine'])).size
       const geometry = new Set(members_list.map(m => m['input']['geometry'])).size
       const scope = new Set(members_list.map(m => m['input']['scope'])).size
+      const grid = new Set(members_list.map(m => m['input']['grid'])).size
       const solution = new Set(members_list.map(m => m['input']['solution'])).size
       const turbulence = new Set(members_list.map(m => m['input']['turbulence'])).size
-      const grid = new Set(members_list.map(m => m['input']['grid'])).size
+      
 
       const t_0 = new Set(members_list.map(m => m['boundary-conditions']['T'][0]).filter(el => el != 'N/A')).size
       const t_1 = new Set(members_list.map(m => m['boundary-conditions']['T'][1]).filter(el => el != 'N/A')).size
@@ -97,7 +99,7 @@ export default class InputParametersD3 {
        result_member['input']['scope'] = scope < 2 ? false : true
        result_member['input']['solution'] = solution < 2 ? false : true
        result_member['input']['turbulence'] = turbulence < 2 ? false : true
-       result_member['input']['grid'] = grid > 1 ? false : true
+       result_member['input']['grid'] = grid <2 ? false : true
        result_member['boundary-conditions']['T'][0] = t_0 < 2 ? false : true
        result_member['boundary-conditions']['T'][1] = t_1 < 2 ? false : true
        result_member['boundary-conditions']['T'][2] = t_2 < 2 ? false : true
@@ -161,8 +163,8 @@ export default class InputParametersD3 {
       .attr("width", d3.select(element).node().parentNode.clientWidth)
       .attr("height", members_dict ? (Object.keys(members_dict).length) * (height + 42) : 10)
 
-    svg.append("text").text("Members' Input Parameters")
-      .attr('transform', `translate(${width / 15},20)`)
+    svg.append("text").text("Members' Input Params")
+      .attr('transform', `translate(0,20)`)
       .attr("fill", '#05ecec')
 
     const group = svg.append('g').attr('transform', `translate(0, 40)`)
@@ -192,7 +194,7 @@ export default class InputParametersD3 {
       let dif_input = dif_memeber['input']
 
       group.append("text").text(`Member: ${members_dict[el]} `)
-        .attr('transform', `translate(${width - 245}, ${(height + 40) * i + 20})`)
+        .attr('transform', `translate(${width - 240}, ${(height + 40) * i + 20})`)
         .attr("fill", 'white')
 
       group.append('rect')

@@ -31,7 +31,7 @@ export default class OutputParametersD3 {
                   .append("svg")
                   .attr("width", width)
                   .attr("height", window.innerHeight - 10)
-            svg.append("text").text("Members' Output Parameters")
+            svg.append("text").text("Members' Output Params")
             .attr('transform', `translate(${width /35},20)`)
             .attr("fill", '#05ecec')
 
