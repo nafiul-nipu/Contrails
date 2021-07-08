@@ -147,7 +147,8 @@ class DropDowns extends React.Component {
       let timestep = +(d3.format('.2f')(self.slider.value()));
       let filter = $(`#filter${self.props.area}`).val();
       let dataRange;
-      if(member === 14 || member === 15 || member === 16){
+      // change this line later
+      if(member === 14 || member === 15 || member === 16 || member === 17){
         dataRange = getRangeData(member, timestep, filter);
       }else{
         dataRange = [getMin(), getMax()];
