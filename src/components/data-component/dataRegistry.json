@@ -877,7 +877,7 @@
     },
     {
         "id": 17,
-        "name": "iceLabel for all",
+        "name": "iceLabel for all - formula=> (icelabel+1) * 125",
         "ensembleMember": 17,
         "timeSteps": [14.2, 15.2, 16.2],
         "volume_dimensions":[184,124,4],
