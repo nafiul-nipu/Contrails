@@ -932,9 +932,9 @@
     },
     {
         "id": 18,
-        "name": "test cases to make the volume smoother",
+        "name": "test cases to make the volume smoother 0.4 no ES",
         "ensembleMember": 18,
-        "timeSteps": [0.2],
+        "timeSteps": [0.2, 0.4],
         "volume_dimensions":[264,204,4],
         "output-parameters":{
             "T_lag_avg":353.5543072666667,
