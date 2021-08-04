@@ -152,6 +152,7 @@ class DropDowns extends React.Component {
         dataRange = getRangeData(member, timestep, filter);
       }else{
         dataRange = [getMin(), getMax()];
+        console.log(dataRange)
       }
       // let min = getMin()
       // let max = getMax()
