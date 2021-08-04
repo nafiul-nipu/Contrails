@@ -17,7 +17,7 @@ class DropDowns extends React.Component {
         super();
         this.slider = []
 
-        this.filter = ["temp", 'ice', "diameter", "ice_d"]
+        this.filter = ["temp", 'ice', "diameter", "ice_d", "contrails"]
         // diameter is 10^9
     }  
     
@@ -148,7 +148,7 @@ class DropDowns extends React.Component {
       let filter = $(`#filter${self.props.area}`).val();
       let dataRange;
       // change this line later
-      if(member === 14 || member === 15 || member === 16){
+      if(member === 14 || member === 15 || member === 16 || member === 17){
         dataRange = getRangeData(member, timestep, filter);
       }else{
         dataRange = [getMin(), getMax()];
