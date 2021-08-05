@@ -148,8 +148,9 @@ class DropDowns extends React.Component {
       let filter = $(`#filter${self.props.area}`).val();
       let dataRange;
       // change this line later
-      if(member === 14 || member === 15 || member === 16 || member === 17){
+      if(member === 14 || member === 15 || member === 16 || member === 17 || member === 18 || member === 19){
         dataRange = getRangeData(member, timestep, filter);
+        console.log(dataRange)
       }else{
         dataRange = [getMin(), getMax()];
         console.log(dataRange)

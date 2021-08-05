@@ -877,10 +877,120 @@
     },
     {
         "id": 17,
-        "name": "contrails1_0.001",
+        "name": "contrails13D_0.001-15",
         "ensembleMember": 17,
         "timeSteps": [0.06,0.07,0.08,0.09,0.10,0.11,0.12,0.13,0.14,0.15,0.16,0.17,0.18,0.19,0.20],
-        "volume_dimensions":[260,100,100],
+        "volume_dimensions":[128,64,64],
+        "output-parameters":{
+            "T_lag_avg":353.5543072666667,
+            "rho_lag_avg":1000,
+            "d_lag_avg": 0.000010,
+            "Ygas_lag_avg":0,
+            "T_eul_avg":254.95953333333333,
+           
+            "p_eul_avg":25666.6,
+            "k_eul_avg":95.96490666666666,
+            "T_lag_avg_timepoints":[601.784080, 456.710820, 385.368543, 348.247824, 323.242910, 318.090899, 317.223426, 318.837506, 319.947577, 320.231717, 318.308900, 319.684986, 318.651544, 318.169949, 318.813928],
+            "rho_lag_avg_timepoints":[1000, 1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000],
+            "d_lag_avg_timepoints":[0.000010, 0.000010, 0.000010, 0.000010, 0.000010, 0.000010, 0.000010, 0.000010, 0.000010, 0.000010, 0.000010, 0.000010, 0.000010, 0.000010, 0.000010],
+            "Ygas_lag_avg_timepoints":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            "T_eul_avg_timepoints":[254.905, 254.956, 254.964, 254.964, 254.964, 254.964, 254.964, 254.964, 254.964, 254.964, 254.964, 254.964, 254.964, 254.964, 254.964], 
+            "p_eul_avg_timepoints":[25667.1, 25667, 25666.5, 25666.5, 25666.5, 25666.5, 25666.5, 25666.5, 25666.5, 25666.5, 25666.5, 25666.6, 25666.6, 25666.6, 25666.6],
+            "k_eul_avg_timepoints":[95.9344, 95.9639, 95.9642, 95.9649, 95.9653, 95.9663, 95.9672, 95.9674, 95.9682, 95.9686, 95.9686, 95.9686, 95.9686, 95.9687, 95.9687]
+        },
+        "input-parameters":{
+            "aircraft-engine":"two",
+            "geometry":"cowl",
+            "scope":"nozzle",
+            "grid":"coarse",
+            "solution":"uncoupled",
+            "turbulence":"kOmegaSST",
+            "boundary-conditions":{
+                "T":["inlet",  "outlet"],
+                "U":["outlet"],
+                "p":["outlet"],
+                "k":["inlet", "outlet"],
+                "rho":["outlet"]
+            }
+        },
+        "input":{
+            "aircraft-engine":"two",
+            "geometry":"short-cowl-nozzle",
+            "scope":"nozzle",
+            "grid":"coarse",
+            "solution":"uncoupled",
+            "turbulence":"kOmegaSST"
+        },
+        "boundary-conditions":{
+            "T":["totalTemperature","zeroGradient","zeroGradient","inletOutlet","zeroGradient","zeroGradient","totalTemperature"],
+            "U":["zeroGradient","noSlip","inletOutlet","inletOutlet","noSlip","inletOutlet","zeroGradient"],
+            "p":["totalPressure","zeroGradient","waveTransmissive","inletOutlet","zeroGradient","waveTransmissive","totalPressure"],
+            "k":["turbulentIntensityKineticEnergyInlet","kqRWallFunction","inletOutlet","inletOutlet","kqRWallFunction","inletOutlet","turbulentIntensityKineticEnergyInlet"]
+        }
+
+
+    },
+    {
+        "id": 18,
+        "name": "contrails23D_0.001-15",
+        "ensembleMember": 18,
+        "timeSteps": [0.06,0.07,0.08,0.09,0.10,0.11,0.12,0.13,0.14,0.15,0.16,0.17,0.18,0.19,0.20],
+        "volume_dimensions":[128,64,64],
+        "output-parameters":{
+            "T_lag_avg":353.5543072666667,
+            "rho_lag_avg":1000,
+            "d_lag_avg": 0.000010,
+            "Ygas_lag_avg":0,
+            "T_eul_avg":254.95953333333333,
+           
+            "p_eul_avg":25666.6,
+            "k_eul_avg":95.96490666666666,
+            "T_lag_avg_timepoints":[601.784080, 456.710820, 385.368543, 348.247824, 323.242910, 318.090899, 317.223426, 318.837506, 319.947577, 320.231717, 318.308900, 319.684986, 318.651544, 318.169949, 318.813928],
+            "rho_lag_avg_timepoints":[1000, 1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000],
+            "d_lag_avg_timepoints":[0.000010, 0.000010, 0.000010, 0.000010, 0.000010, 0.000010, 0.000010, 0.000010, 0.000010, 0.000010, 0.000010, 0.000010, 0.000010, 0.000010, 0.000010],
+            "Ygas_lag_avg_timepoints":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            "T_eul_avg_timepoints":[254.905, 254.956, 254.964, 254.964, 254.964, 254.964, 254.964, 254.964, 254.964, 254.964, 254.964, 254.964, 254.964, 254.964, 254.964], 
+            "p_eul_avg_timepoints":[25667.1, 25667, 25666.5, 25666.5, 25666.5, 25666.5, 25666.5, 25666.5, 25666.5, 25666.5, 25666.5, 25666.6, 25666.6, 25666.6, 25666.6],
+            "k_eul_avg_timepoints":[95.9344, 95.9639, 95.9642, 95.9649, 95.9653, 95.9663, 95.9672, 95.9674, 95.9682, 95.9686, 95.9686, 95.9686, 95.9686, 95.9687, 95.9687]
+        },
+        "input-parameters":{
+            "aircraft-engine":"two",
+            "geometry":"cowl",
+            "scope":"nozzle",
+            "grid":"coarse",
+            "solution":"uncoupled",
+            "turbulence":"kOmegaSST",
+            "boundary-conditions":{
+                "T":["inlet",  "outlet"],
+                "U":["outlet"],
+                "p":["outlet"],
+                "k":["inlet", "outlet"],
+                "rho":["outlet"]
+            }
+        },
+        "input":{
+            "aircraft-engine":"two",
+            "geometry":"short-cowl-nozzle",
+            "scope":"nozzle",
+            "grid":"coarse",
+            "solution":"uncoupled",
+            "turbulence":"kOmegaSST"
+        },
+        "boundary-conditions":{
+            "T":["totalTemperature","zeroGradient","zeroGradient","inletOutlet","zeroGradient","zeroGradient","totalTemperature"],
+            "U":["zeroGradient","noSlip","inletOutlet","inletOutlet","noSlip","inletOutlet","zeroGradient"],
+            "p":["totalPressure","zeroGradient","waveTransmissive","inletOutlet","zeroGradient","waveTransmissive","totalPressure"],
+            "k":["turbulentIntensityKineticEnergyInlet","kqRWallFunction","inletOutlet","inletOutlet","kqRWallFunction","inletOutlet","turbulentIntensityKineticEnergyInlet"]
+        }
+
+
+    },
+    {
+        "id": 19,
+        "name": "contrails33D_0.001-15",
+        "ensembleMember": 19,
+        "timeSteps": [0.06,0.07,0.08,0.09,0.10,0.11,0.12,0.13,0.14,0.15,0.16,0.17,0.18,0.19,0.20],
+        "volume_dimensions":[128,64,64],
         "output-parameters":{
             "T_lag_avg":353.5543072666667,
             "rho_lag_avg":1000,
