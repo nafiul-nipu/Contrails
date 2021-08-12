@@ -87,9 +87,12 @@ void main(void) {
 		}
 		p += ray_dir * dt;
 	}
-    color.r = linear_to_srgb(color.r);
-    color.g = linear_to_srgb(color.g);
-    color.b = linear_to_srgb(color.b);
+    // color.r = linear_to_srgb(color.r);
+    // color.g = linear_to_srgb(color.g);
+    // color.b = linear_to_srgb(color.b);
+	color.r = color.r;
+    color.g = color.g;
+    color.b = color.b;
 }`;
 
 
