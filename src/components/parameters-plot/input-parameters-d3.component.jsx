@@ -193,18 +193,30 @@ export default class InputParametersD3 {
 
       let dif_input = dif_memeber['input']
 
+      console.log(members_dict[el])
       group.append("text").text(`Member: ${members_dict[el]} `)
         .attr('transform', `translate(${width - 240}, ${(height + 40) * i + 20})`)
-        .attr("fill", 'white')
+        .attr("fill", () => {
+         
+            return 'white'
+        })
+        .style('font-size', '0.75em')
 
       group.append('rect')
         .attr("x", 30)
         .attr("y", ((height + 40) * i) + 25)
         .attr("class", highlight_class_name)
-        .attr("width", width - 150)
+        .attr("width", width-100)
         .attr("height", height - 20)
         .attr("fill", 'grey')
-        .attr('opacity', 0)
+        .attr('opacity', ()=>{
+          if(highlight_class_name.includes('19')){
+            return 1
+          }else{
+            return 0
+          }
+
+        })
         .attr('rx', '15')
 
       let keys = Object.keys(inputValues)
