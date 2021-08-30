@@ -24,18 +24,18 @@ class DropDowns extends React.Component {
     componentDidMount(){
       const self = this
       if(this.props.area === 'top'){
-        loader(1, 2.31, 'temp').then(function(){
+        loader(17, 0.06, 'temp').then(function(){
           // console.log("data loaded")
           // self.data = getData();
 
-          self.createDropDown(1)
+          self.createDropDown(17)
         })
       }else if (this.props.area === 'bottom'){
-        loader(6, 1.52, 'temp').then(function(){
+        loader(19, 0.06, 'temp').then(function(){
           // console.log("data loaded")
           // self.data = getData();
 
-          self.createDropDown(6)
+          self.createDropDown(19)
         })
 
       }

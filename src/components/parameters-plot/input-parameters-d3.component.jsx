@@ -181,7 +181,7 @@ export default class InputParametersD3 {
     var dif_memeber = return_differences_member(copy_m)
 
     Object.keys(members_dict).forEach((el, index) => {
-      console.log(typeof(members_dict[el][0]))
+      // console.log(typeof(members_dict[el][0]))
 
       var member = m[index]
 
@@ -206,7 +206,7 @@ export default class InputParametersD3 {
       // HIGHLIGHTING THE CONTRAILS DATA ONLY
         // HARD CODED NOW WILL CHANGE LATER OR MAYBE NO NEED IN FUTURE
         if(members_dict[el].includes(19)){
-          console.log("19")
+          // console.log("19")
           group.append('rect')
             .attr("x", 30)
             .attr("y", ((height + 40) * i) + 25)

@@ -88,14 +88,14 @@ class VolumeRendering extends React.Component {
       const self = this
 
       if(this.props.renderArea === 'top'){
-        loader(1, 2.31, 'temp').then(function(){
+        loader(17, 0.06, 'temp').then(function(){
           self.data = getData();
 
           self.onLoad()
           self.selectVolume(self.data)
         })
       }else if (this.props.renderArea === 'bottom'){
-        loader(6, 1.52, 'temp').then(function(){
+        loader(19, 0.06, 'temp').then(function(){
           self.data = getData();
 
           self.onLoad()
