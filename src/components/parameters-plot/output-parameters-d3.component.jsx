@@ -87,7 +87,9 @@ export default class OutputParametersD3 {
                   var prevX = new Array(data.length)
                   var prevY = new Array(data.length)
 
-                  for (var i = 0; i < data.length; i++) {
+                  console.log(data.length)
+                  for (var i = (data.length - 1); i >=0; i--) {
+                        
                         // if(ids[i] == 5 || ids[i] == 6){
                               if(true){
                         const title_id = ids[i]
@@ -130,11 +132,25 @@ export default class OutputParametersD3 {
                                     .attr('cy', prevY[i])
                                     .attr('r', 4)
                                     .attr('fill-opacity', 0.65)
-                                    .attr('fill', '#FF6F61')
+                                    .attr('fill', () => {
+                                          if(title_id in [17,18,19]){
+                                                return 'black'
+                                          }else{
+                                                return '#FF6F61'
+                                          }
+                                         
+                                    })
                         }
                         g.append('path')
                               .attr('fill', 'none')
-                              .attr('stroke', '#FF6F61')
+                              .attr('stroke', () => {
+                                    if(title_id in [17,18,19]){
+                                          return 'black'
+                                    }else{
+                                          return '#FF6F61'
+                                    }
+                                   
+                              })
                               .attr("class", "tendrils path_" + title_id + "_")
                               .attr('stroke-width', '2.5px')
                               .attr('id', "path_" + title_id + "_")
