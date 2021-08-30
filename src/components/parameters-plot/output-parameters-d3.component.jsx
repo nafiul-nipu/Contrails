@@ -87,7 +87,7 @@ export default class OutputParametersD3 {
                   var prevX = new Array(data.length)
                   var prevY = new Array(data.length)
 
-                  console.log(data.length)
+                  // console.log(data.length)
                   for (var i = (data.length - 1); i >=0; i--) {
                         
                         // if(ids[i] == 5 || ids[i] == 6){
@@ -144,6 +144,7 @@ export default class OutputParametersD3 {
                         g.append('path')
                               .attr('fill', 'none')
                               .attr('stroke', () => {
+                                    // console.log(typeof(title_id), title_id in [17,18,19])
                                     if(title_id in [17,18,19]){
                                           return 'black'
                                     }else{

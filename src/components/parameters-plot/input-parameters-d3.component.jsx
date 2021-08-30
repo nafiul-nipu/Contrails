@@ -181,6 +181,7 @@ export default class InputParametersD3 {
     var dif_memeber = return_differences_member(copy_m)
 
     Object.keys(members_dict).forEach((el, index) => {
+      console.log(typeof(members_dict[el][0]))
 
       var member = m[index]
 
@@ -193,7 +194,7 @@ export default class InputParametersD3 {
 
       let dif_input = dif_memeber['input']
 
-      console.log(members_dict[el])
+      // console.log(members_dict[el])
       group.append("text").text(`Member: ${members_dict[el]} `)
         .attr('transform', `translate(${width - 240}, ${(height + 40) * i + 20})`)
         .attr("fill", () => {
@@ -202,6 +203,22 @@ export default class InputParametersD3 {
         })
         .style('font-size', '0.75em')
 
+      // HIGHLIGHTING THE CONTRAILS DATA ONLY
+        // HARD CODED NOW WILL CHANGE LATER OR MAYBE NO NEED IN FUTURE
+        if(members_dict[el].includes(19)){
+          console.log("19")
+          group.append('rect')
+            .attr("x", 30)
+            .attr("y", ((height + 40) * i) + 25)
+            .attr("class", "contrails-bar")
+            .attr("width", width-100)
+            .attr("height", height - 20)
+            .attr("fill", '#5a5a5a')
+            .attr('opacity', 1)
+            .attr('rx', '15')
+
+        }
+
       group.append('rect')
         .attr("x", 30)
         .attr("y", ((height + 40) * i) + 25)
@@ -209,15 +226,9 @@ export default class InputParametersD3 {
         .attr("width", width-100)
         .attr("height", height - 20)
         .attr("fill", 'grey')
-        .attr('opacity', ()=>{
-          if(highlight_class_name.includes('19')){
-            return 1
-          }else{
-            return 0
-          }
+        .attr('opacity', 0)
+        .attr('rx', '15')        
 
-        })
-        .attr('rx', '15')
 
       let keys = Object.keys(inputValues)
       const id = member['id']
