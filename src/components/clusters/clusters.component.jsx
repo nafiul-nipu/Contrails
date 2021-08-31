@@ -35,7 +35,7 @@ class Clusters extends React.Component {
             return data.PCAdata
         })
         if (data_for_child) {
-            console.log("I am rendering")
+            // console.log("I am rendering")
             new ClustersD3(this.refs.chart_cluster, [], data_for_child)
             
         }
@@ -59,7 +59,7 @@ class Clusters extends React.Component {
         })
         if (data_for_child) {
             const ids = this.props.dataRegistry.map(d => d['id'])
-            console.log("I am also here")
+            // console.log("I am also here")
             new ClustersD3(this.refs.chart_cluster, ids, data_for_child)
             // this.setState({all_data: data_for_child})
         }

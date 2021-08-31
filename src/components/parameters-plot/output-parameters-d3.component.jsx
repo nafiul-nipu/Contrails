@@ -88,7 +88,8 @@ export default class OutputParametersD3 {
                   var prevY = new Array(data.length)
 
                   // console.log(data.length)
-                  for (var i = (data.length - 1); i >=0; i--) {
+                  const contrailMembers = [17,18,19]
+                  for (var i = 0; i<data.length; i++) {
                         
                         // if(ids[i] == 5 || ids[i] == 6){
                               if(true){
@@ -133,7 +134,7 @@ export default class OutputParametersD3 {
                                     .attr('r', 4)
                                     .attr('fill-opacity', 0.65)
                                     .attr('fill', () => {
-                                          if(title_id in [17,18,19]){
+                                          if(contrailMembers.includes(title_id)){
                                                 return 'black'
                                           }else{
                                                 return '#FF6F61'
@@ -144,8 +145,8 @@ export default class OutputParametersD3 {
                         g.append('path')
                               .attr('fill', 'none')
                               .attr('stroke', () => {
-                                    // console.log(typeof(title_id), title_id in [17,18,19])
-                                    if(title_id in [17,18,19]){
+                                    // console.log(title_id)
+                                    if(contrailMembers.includes(title_id)){
                                           return 'black'
                                     }else{
                                           return '#FF6F61'

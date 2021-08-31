@@ -150,7 +150,7 @@ class DropDowns extends React.Component {
       // change this line later
       if(member === 14 || member === 15 || member === 16 || member === 17 || member === 18 || member === 19){
         dataRange = getRangeData(member, timestep, filter);
-        console.log(dataRange)
+        // console.log(dataRange)
       }else{
         dataRange = [getMin(), getMax()];
         console.log(dataRange)
