@@ -5,10 +5,13 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+import {post} from 'axios'
+
 const clusterData = `https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/data/test_cluster.csv`
 class Clusters extends React.Component {
     constructor(props) {
         super(props);
+        this.chart_cluster = React.createRef()
         this.state = {
             clusterFilters: [],
             T_lag_cluster: false,
@@ -31,12 +34,25 @@ class Clusters extends React.Component {
     async componentDidMount() {
 
         var send_data = [this.state.dataRegistry, this.state.clusteringParams]
+        console.log(send_data)
+
+        // post(
+        //     '/backendscript',
+        //     {send_data}
+        //   ).then((response) => {
+        //     console.log("connection created")
+        //     console.log(response.data)
+        //       setPrediction(response.data)
+        //   }).catch((error) => {
+        //     console.log(error)
+        //   });
+
         const data_for_child = await fetch('/backendscript', { method: "POST", mode: 'cors', cache: "no-cache", headers: { "content_type": "application/json" }, body: JSON.stringify(send_data) }).then(res => res.json()).then(data => {
             return data.PCAdata
         })
         if (data_for_child) {
             // console.log("I am rendering")
-            new ClustersD3(this.refs.chart_cluster, [], data_for_child)
+            new ClustersD3(this.chart_cluster.current, [], data_for_child)
             
         }
         this.setState({ clusteringParams: this.props.clusteringParams })
@@ -60,7 +76,7 @@ class Clusters extends React.Component {
         if (data_for_child) {
             const ids = this.props.dataRegistry.map(d => d['id'])
             // console.log("I am also here")
-            new ClustersD3(this.refs.chart_cluster, ids, data_for_child)
+            new ClustersD3(this.chart_cluster.current, ids, data_for_child)
             // this.setState({all_data: data_for_child})
         }
     }
@@ -130,7 +146,7 @@ class Clusters extends React.Component {
         return (
 
             <Row style={{height:'25vh'}}>
-                <Col xs={9} ref={'chart_cluster'}></Col>
+                <Col xs={9} ref={this.chart_cluster}></Col>
                 <Col>
                 <ClusteringParametersPanel  onClusteringSelectChange={this.handleClusteringChange} />                 
                 </Col>

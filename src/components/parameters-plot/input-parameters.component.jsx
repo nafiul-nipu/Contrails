@@ -8,24 +8,34 @@ class InputParameters extends React.Component {
         super(props);
         this.chart = React.createRef()
         this.state = {
-
+        
         }
     
     }
 
     componentDidMount(){
+        // console.log("inside component did mount")
         this.setState({chartinput: new InputParametersD3(this.chart.current, this.props.elements, true)}) 
     }
 
-    // shouldComponentUpdate(){
-    //     return false
-    // }
+    shouldComponentUpdate(nextProps){
+        // console.log("should update")
+        // console.log(this.state)
+        // console.log(nextProps)
+        // console.log(this.state.hasOwnProperty('chartinput'))
+        if(this.state.hasOwnProperty('chartinput')){
+            this.state.chartinput.update(nextProps.elements)
+        }
 
-    componentWillReceiveProps(nextProps){
-
-        this.state.chartinput.update(nextProps.elements)
-
+        return true
     }
+    
+    //  UNSAFE_componentWillReceiveProps(nextProps){
+    //      console.log('will receive called')
+
+    //     this.state.chartinput.update(nextProps.elements)
+
+    // }
 
 
 

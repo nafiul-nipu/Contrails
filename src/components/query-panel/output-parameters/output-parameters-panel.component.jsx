@@ -187,7 +187,7 @@ class OutputParametersPanel extends React.Component {
                                 <div>
 
                                     <Form style={{ "padding": "2px" }} onChange={this.handleOutputFilterChange} className={this.state.T_lag == true ? 'show' : 'hidden'} >
-                                        <Form.Control as="select" value={this.state.T_lag_avg} className="form-control-sm interior-form" id="T_lag_avg_dropdown" style={{ backgroundColor: '#636363', color: 'white' }}>
+                                        <Form.Control as="select" defaultValue={this.state.T_lag_avg} className="form-control-sm interior-form" id="T_lag_avg_dropdown" style={{ backgroundColor: '#636363', color: 'white' }}>
                                             <option value="" >T_avg</option>
                                             <option value="290">290</option>
                                             <option value="360">360</option>
@@ -199,13 +199,13 @@ class OutputParametersPanel extends React.Component {
                                     </Form>
 
                                     <Form style={{ "padding": "2px" }} onChange={this.handleOutputFilterChange} className={this.state.rho_lag == true ? 'show' : 'hidden'}>
-                                        <Form.Control as="select" value={this.state.rho_lag_avg} className="form-control-sm interior-form" id="rho_lag_avg_dropdown" style={{ backgroundColor: '#636363', color: 'white' }}>
+                                        <Form.Control as="select" defaultValue={this.state.rho_lag_avg} className="form-control-sm interior-form" id="rho_lag_avg_dropdown" style={{ backgroundColor: '#636363', color: 'white' }}>
                                             <option value="">rho_avg</option>
                                             <option value="1000">1000</option>
                                         </Form.Control>
                                     </Form>
                                     <Form style={{ "padding": "2px" }} onChange={this.handleOutputFilterChange} className={this.state.d_lag == true ? 'show' : 'hidden'}>
-                                        <Form.Control as="select" value={this.state.d_lag_avg} className="form-control-sm interior-form" id="d_lag_avg_dropdown" style={{ backgroundColor: '#636363', color: 'white' }}>
+                                        <Form.Control as="select" defaultValue={this.state.d_lag_avg} className="form-control-sm interior-form" id="d_lag_avg_dropdown" style={{ backgroundColor: '#636363', color: 'white' }}>
                                             <option value="">d_avg</option>
                                             <option value="0.00001">0.00001</option>
                                             <option value="0.00074">0.00074</option>
@@ -214,7 +214,7 @@ class OutputParametersPanel extends React.Component {
                                     </Form>
 
                                     <Form style={{ "padding": "2px" }} onChange={this.handleOutputFilterChange} className={this.state.Ygas_lag == true ? 'show' : 'hidden'}>
-                                        <Form.Control as="select" value={this.state.Ygas_lag_avg} className="form-control-sm interior-form" id="Ygas_lag_avg_dropdown" style={{ backgroundColor: '#636363', color: 'white' }}>
+                                        <Form.Control as="select" defaultValue={this.state.Ygas_lag_avg} className="form-control-sm interior-form" id="Ygas_lag_avg_dropdown" style={{ backgroundColor: '#636363', color: 'white' }}>
                                             <option value="">Ygas_avg</option>
                                             <option value="0">0</option>
                                         </Form.Control>
@@ -222,7 +222,7 @@ class OutputParametersPanel extends React.Component {
                                 </div> :
                                 <div>
                                     <Form style={{ "padding": "2px" }} onChange={this.handleOutputFilterChange} className={this.state.T_eul == true ? 'show' : 'hidden'}>
-                                        <Form.Control as="select" value={this.state.T_eul_avg} className="form-control-sm interior-form" id="T_eul_avg_dropdown" style={{ backgroundColor: '#636363', color: 'white' }}>
+                                        <Form.Control as="select" defaultValue={this.state.T_eul_avg} className="form-control-sm interior-form" id="T_eul_avg_dropdown" style={{ backgroundColor: '#636363', color: 'white' }}>
                                             <option value="">T_avg</option>
                                             <option value="0">0</option>
                                             <option value="250">250</option>
@@ -234,7 +234,7 @@ class OutputParametersPanel extends React.Component {
                                     </Form>
 
                                     <Form style={{ "padding": "2px" }} onChange={this.handleOutputFilterChange} className={this.state.rho_eul == true ? 'show' : 'hidden'}>
-                                        <Form.Control as="select" value={this.state.rho_eul_avg} className="form-control-sm interior-form" id="rho_eul_avg_dropdown" style={{ backgroundColor: '#636363', color: 'white' }}>
+                                        <Form.Control as="select" defaultValue={this.state.rho_eul_avg} className="form-control-sm interior-form" id="rho_eul_avg_dropdown" style={{ backgroundColor: '#636363', color: 'white' }}>
                                             <option value="">rho_avg</option>
                                             {/* <option value="0.2">0.2</option>
                                             <option value="0.3">0.3</option>
@@ -242,7 +242,7 @@ class OutputParametersPanel extends React.Component {
                                         </Form.Control>
                                     </Form>
                                     <Form style={{ "padding": "2px" }} onChange={this.handleOutputFilterChange} className={this.state.p_eul == true ? 'show' : 'hidden'}>
-                                        <Form.Control as="select" value={this.state.p_eul_avg} className="form-control-sm interior-form" id="p_eul_avg_dropdown" style={{ backgroundColor: '#636363', color: 'white' }}>
+                                        <Form.Control as="select" defaultValue={this.state.p_eul_avg} className="form-control-sm interior-form" id="p_eul_avg_dropdown" style={{ backgroundColor: '#636363', color: 'white' }}>
                                             <option value="">p_avg</option>
                                             <option value="21800">21800</option>
                                             <option value="25600">25600</option>
@@ -251,7 +251,7 @@ class OutputParametersPanel extends React.Component {
                                     </Form>
 
                                     <Form style={{ "padding": "2px" }} onChange={this.handleOutputFilterChange} className={this.state.k_eul == true ? 'show' : 'hidden'}>
-                                        <Form.Control as="select" value={this.state.k_eul_avg} className="form-control-sm interior-form" id="k_eul_avg_dropdown" style={{ backgroundColor: '#636363', color: 'white' }}>
+                                        <Form.Control as="select" defaultValue={this.state.k_eul_avg} className="form-control-sm interior-form" id="k_eul_avg_dropdown" style={{ backgroundColor: '#636363', color: 'white' }}>
                                             <option value="">k_avg</option>
                                             <option value="0">0</option>
                                             <option value="10">10</option>
