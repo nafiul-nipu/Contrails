@@ -235,5 +235,5 @@ void main(void) {
 }`;
 
 
-export {vertShader, fragShaderMIP as fragShader}
+export {vertShader, fragShaderStandard as fragShader}
 
