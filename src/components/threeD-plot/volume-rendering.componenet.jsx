@@ -58,7 +58,7 @@ class VolumeRendering extends React.Component {
         this.tabFocused = true;
         this.newVolumeUpload = true;
         this.targetFrameTime = 32;
-        this.samplingRate = 0.1;
+        this.samplingRate = 0.2;
         this.WIDTH = 640;
         this.HEIGHT = 480;
 
