@@ -58,7 +58,7 @@ class VolumeRendering extends React.Component {
         this.tabFocused = true;
         this.newVolumeUpload = true;
         this.targetFrameTime = 32;
-        this.samplingRate = 1.0;
+        this.samplingRate = 0.1;
         this.WIDTH = 640;
         this.HEIGHT = 480;
 
@@ -231,7 +231,7 @@ class VolumeRendering extends React.Component {
 
       this.gl.uniform1i(this.shader.uniforms["volume"], 0);
       this.gl.uniform1i(this.shader.uniforms["colormap"], 1);
-      this.gl.uniform1f(this.shader.uniforms["dt_scale"], 1.0);
+      this.gl.uniform1f(this.shader.uniforms["dt_scale"], this.samplingRate);
 
       // Setup required OpenGL state for drawing the back faces and
       // composting with the background color
@@ -324,14 +324,14 @@ class VolumeRendering extends React.Component {
           if (document.hidden) {
             return;
           }
-          var startTime = performance.now();
+          // var startTime = performance.now();
           self.gl.clearColor(0.192, 0.223, 0.247, 1.0);
           self.gl.clear(self.gl.COLOR_BUFFER_BIT);
 
           // Reset the sampling rate and camera for new volumes
           if (self.newVolumeUpload) {
             self.camera = new ArcballCamera(self.defaultEye, self.center, self.up, 2, [self.WIDTH, self.HEIGHT]);
-            self.samplingRate = 1.0;
+            // self.samplingRate = 0.2;
             self.gl.uniform1f(self.shader.uniforms["dt_scale"], self.samplingRate);
           }
           self.projView = mat4.mul(self.projView, self.proj, self.camera.camera);
@@ -346,19 +346,19 @@ class VolumeRendering extends React.Component {
 
           // Wait for rendering to actually finish
           self.gl.finish();
-          let endTime = performance.now();
-          let renderTime = endTime - startTime;
-          let targetSamplingRate = renderTime / self.targetFrameTime;
+          // let endTime = performance.now();
+          // let renderTime = endTime - startTime;
+          // let targetSamplingRate = renderTime / self.targetFrameTime;
 
 
           // If we're dropping frames, decrease the sampling rate
-          if (!self.newVolumeUpload && targetSamplingRate > self.samplingRate) {
-            self.samplingRate = 0.8 * self.samplingRate + 0.2 * targetSamplingRate;
-            self.gl.uniform1f(self.shader.uniforms["dt_scale"], self.samplingRate);
-          }
+          // if (!self.newVolumeUpload && targetSamplingRate > self.samplingRate) {
+          //   self.samplingRate = 0.8 * self.samplingRate + 0.2 * targetSamplingRate;
+          //   self.gl.uniform1f(self.shader.uniforms["dt_scale"], self.samplingRate);
+          // }
 
           self.newVolumeUpload = false;
-          startTime = endTime;
+          // startTime = endTime;
         }, self.targetFrameTime);
       
       } else {
