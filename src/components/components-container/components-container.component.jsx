@@ -553,6 +553,7 @@ class ComponentsContainer extends React.Component {
                                         renderArea={'top'}
                                         data={this.state.volumeDataTop}
                                         member={this.memberTop}
+                                        time={this.timeTop}
                                         handleVolumeChange={this.handleVolumeDataTop}
                                     />                                
                                 </Col>
@@ -561,6 +562,7 @@ class ComponentsContainer extends React.Component {
                                         renderArea={'bottom'} 
                                         data={this.state.volumeDataBottom}
                                         member={this.memberBottom}
+                                        time={this.timeTop}
                                         handleVolumeChange={this.handleVolumeDataBottom}
                                     />
                                 </Col>

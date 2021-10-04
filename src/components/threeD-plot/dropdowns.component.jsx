@@ -302,9 +302,9 @@ class DropDowns extends React.Component {
       //   let data = getData();
       //   // self.data = data;
       //   self.props.volumeRender(data)
-      //   d3.select(`#rangeslider${self.props.area}`).select('svg').remove()
-      //   d3.select(`#lower${self.props.area}`).select('button').remove()
-      //   self.createRangeSlider()
+        d3.select(`#rangeslider${self.props.area}`).select('svg').remove()
+        d3.select(`#lower${self.props.area}`).select('button').remove()
+        self.createRangeSlider()
         
       // })  
 
@@ -318,16 +318,22 @@ class DropDowns extends React.Component {
     let filter = $(`#filter${self.props.area}`).val()
     // console.log(filter)
 
-    loader(folder, file, filter).then(function(){
-      let data = getData();
-      // self.data = data;
-      self.props.volumeRender(data)
-      // console.log(getMax(), getMin())
-      d3.select(`#rangeslider${self.props.area}`).select('svg').remove()
-      d3.select(`#lower${self.props.area}`).select('button').remove()
-      self.createRangeSlider()
+    self.props.memberUpdate(folder, file, filter)
+    d3.select(`#rangeslider${self.props.area}`).select('svg').remove()
+    d3.select(`#lower${self.props.area}`).select('button').remove()
+    self.createRangeSlider()
+
+
+    // loader(folder, file, filter).then(function(){
+    //   let data = getData();
+    //   // self.data = data;
+    //   self.props.volumeRender(data)
+    //   // console.log(getMax(), getMin())
+    //   d3.select(`#rangeslider${self.props.area}`).select('svg').remove()
+    //   d3.select(`#lower${self.props.area}`).select('button').remove()
+    //   self.createRangeSlider()
       
-    })
+    // })
 
   }
 

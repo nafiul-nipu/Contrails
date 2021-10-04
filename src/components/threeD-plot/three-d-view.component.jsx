@@ -90,7 +90,12 @@ class ThreeDView extends React.Component {
 
     shouldComponentUpdate(nextProps, nextState){
         console.log(this.props.member, nextProps.member)
+        console.log(this.props.time, nextProps.time)
         if(this.props.member != nextProps.member){
+            this.selectVolume(nextProps.data, nextProps.member)
+            // console.log('member updated')
+            return true
+        }else if(this.props.time != nextProps.time){
             this.selectVolume(nextProps.data, nextProps.member)
             // console.log('member updated')
             return true
