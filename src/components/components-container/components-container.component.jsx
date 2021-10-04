@@ -23,30 +23,72 @@ class ComponentsContainer extends React.Component {
             outputFilters: null,
             split_tendrils: false,
             all_members: dataRegistryjson,
-            volumeDataTop:null,
-            volumeDataBottom:null
+            // volumeDataTop:null,
+            // memberTop:17,
+            // timeTop: 0.06,
+            // attributeTop: 'temp',
+            // volumeDataBottom:null,
+            // memberBottom:19,
+            // timeBottom: 0.06,
+            // attributeBottom:'temp'
 
         }
+
+        this.volumeDataTop = null
+        this.memberTop = 17
+        this.timeTop =  0.06
+        this.attributeTop =  'temp'
+        this.volumeDataBottom = null
+        this.memberBottom = 19
+        this.timeBottom =  0.06
+        this.attributeBottom = 'temp'
+
+
         this.handleClusteringChange = this.handleClusteringChange.bind(this)
         this.handleInputFilters = this.handleInputFilters.bind(this)
         this.handleOutputFilters = this.handleOutputFilters.bind(this)
         this.handleInputAndOuputFilters = this.handleInputAndOuputFilters.bind(this)
         this.handle_split_tendrils = this.handle_split_tendrils.bind(this)
+        this.handleVolumeDataTop = this.handleVolumeDataTop.bind(this)
+        this.handleVolumeDataBottom = this.handleVolumeDataBottom.bind(this)
 
     }
 
     componentDidMount() {
         console.log("component container component did mount")
         const self = this
-        loader(17, 0.06, 'temp').then(function(){
+        console.log(this.memberTop, this.timeTop, this.attributeTop)
+        loader(this.memberTop, this.timeTop, this.attributeTop).then(function(){
             // console.log(getData())
             self.setState({volumeDataTop : getData()})
 
         })
-        loader(19, 0.06, 'temp').then(function(){
+        loader(this.memberBottom, this.timeBottom, this.attributeBottom).then(function(){
             self.setState({volumeDataBottom: getData()})
         })
 
+    }
+
+    handleVolumeDataTop(member, timestep, attribute){
+        const self = this
+        loader(member, timestep, attribute).then(function(){
+            // console.log(getData())
+            self.memberTop = member;
+            self.timeTop = timestep;
+            self.attributeTop = attribute;
+            self.setState({volumeDataTop : getData()})
+
+        })
+    }
+
+    handleVolumeDataBottom(member, timestep, attribute){
+        const self = this
+        loader(member, timestep, attribute).then(function(){
+            self.memberBottom = member;
+            self.timeBottom = timestep;
+            self.attributeBottom = attribute;
+            self.setState({volumeDataBottom: getData()})
+        })
     }
 
     handle_split_tendrils(params) {
@@ -510,12 +552,16 @@ class ComponentsContainer extends React.Component {
                                     <ThreeDView
                                         renderArea={'top'}
                                         data={this.state.volumeDataTop}
+                                        member={this.memberTop}
+                                        handleVolumeChange={this.handleVolumeDataTop}
                                     />                                
                                 </Col>
                                 <Col xs={6}>
                                     <ThreeDView 
                                         renderArea={'bottom'} 
                                         data={this.state.volumeDataBottom}
+                                        member={this.memberBottom}
+                                        handleVolumeChange={this.handleVolumeDataBottom}
                                     />
                                 </Col>
                             </Row>

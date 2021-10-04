@@ -82,10 +82,16 @@ class ThreeDView extends React.Component {
     
     componentDidMount(){
         console.log("three d view component did mount")
-        console.log(this.props.data)
+        // console.log(this.props.data)
         this.onLoad()
-        this.selectVolume(this.props.data)
+        this.selectVolume(this.props.data, this.props.member)
         
+    }
+
+    shouldComponentUpdate(nextProps){
+        // console.log(nextProps)
+        this.selectVolume(nextProps.data, nextProps.member)
+        return true
     }
 
     onLoad = () =>{
@@ -257,7 +263,7 @@ class ThreeDView extends React.Component {
 
     }
 
-    selectVolume = (data) =>{
+    selectVolume = (data, member) =>{
         console.log("select volume")
         const self = this;
         let dataBuffer = data;
@@ -265,21 +271,24 @@ class ThreeDView extends React.Component {
         // console.log(countOccurrences(dataBuffer, 0));
         //our data dimension is 100 can change later
         // console.log(($(`#member${self.props.renderArea}`).val()))
-        let member = +($(`#member${self.props.renderArea}`).val());
+        // let member = +($(`#member${self.props.renderArea}`).val());
         // console.log(member)
         
-        if(isNaN(member) && self.props.renderArea === 'top'){
-            // console.log('in top')
-            member = 17
-            // volDims = [100,100,100]
-        }else if (isNaN(member) && self.props.renderArea === 'bottom'){
-            // console.log("in bottom")
-            member = 19
-            // volDims = [100,100,100]
-        }
+        // if(isNaN(member) && self.props.renderArea === 'top'){
+        //     // console.log('in top')
+        //     member = 17
+        //     // volDims = [100,100,100]
+        // }else if (isNaN(member) && self.props.renderArea === 'bottom'){
+        //     // console.log("in bottom")
+        //     member = 19
+        //     // volDims = [100,100,100]
+        // }
+
+        // let member = this.props.member;
+
         let volDims = dataRegistry[member - 1].volume_dimensions;
-        // console.log(member)
-        // console.log(volDims)
+        console.log(member)
+        console.log(volDims)
     
 
         let tex = this.gl.createTexture();
@@ -369,6 +378,8 @@ class ThreeDView extends React.Component {
         }
 
     render(){
+        // console.log(this.gl)
+        // this.selectVolume(this.props.data)
         return(
             <Row>
             <Col xs={12} style={{paddingTop:'10px'}}>
@@ -379,6 +390,8 @@ class ThreeDView extends React.Component {
                     data={this.data}
                     selectColormap={this.selectColormap}
                     volumeRender={this.selectVolume}
+                    member={this.props.member}
+                    memberUpdate={this.props.handleVolumeChange}
                 /> 
                 </Row>
                 <Row>

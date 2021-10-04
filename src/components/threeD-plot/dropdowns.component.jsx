@@ -23,22 +23,24 @@ class DropDowns extends React.Component {
     
     componentDidMount(){
       const self = this
-      if(this.props.area === 'top'){
-        loader(17, 0.06, 'temp').then(function(){
-          // console.log("data loaded")
-          // self.data = getData();
+      console.log(`dropdown - ${this.props.member}`)
+      // if(this.props.area === 'top'){
+      //   loader(17, 0.06, 'temp').then(function(){
+      //     // console.log("data loaded")
+      //     // self.data = getData();
 
-          self.createDropDown(17)
-        })
-      }else if (this.props.area === 'bottom'){
-        loader(19, 0.06, 'temp').then(function(){
-          // console.log("data loaded")
-          // self.data = getData();
+      //     self.createDropDown(17)
+      //   })
+      // }else if (this.props.area === 'bottom'){
+      //   loader(19, 0.06, 'temp').then(function(){
+      //     // console.log("data loaded")
+      //     // self.data = getData();
 
-          self.createDropDown(19)
-        })
+      //     self.createDropDown(19)
+      //   })
 
-      }
+      // }
+      this.createDropDown(this.props.member)
       
     }
 
@@ -66,6 +68,7 @@ class DropDowns extends React.Component {
                         .on('change', function(){
                             let member = this.value
                             self.updateDropdown(member)
+
                             console.log("i am triggered")
                         })
                         .selectAll('option')
@@ -294,15 +297,16 @@ class DropDowns extends React.Component {
       d3.select(`.btn${self.props.area}`).attr('value', 'play')
                                       .text('Play')
 
-      loader(member, list[0], 'temp').then(function(){
-        let data = getData();
-        // self.data = data;
-        self.props.volumeRender(data)
-        d3.select(`#rangeslider${self.props.area}`).select('svg').remove()
-        d3.select(`#lower${self.props.area}`).select('button').remove()
-        self.createRangeSlider()
+      self.props.memberUpdate(+member, list[0], 'temp')
+      // loader(member, list[0], 'temp').then(function(){
+      //   let data = getData();
+      //   // self.data = data;
+      //   self.props.volumeRender(data)
+      //   d3.select(`#rangeslider${self.props.area}`).select('svg').remove()
+      //   d3.select(`#lower${self.props.area}`).select('button').remove()
+      //   self.createRangeSlider()
         
-      })  
+      // })  
 
   }
 
