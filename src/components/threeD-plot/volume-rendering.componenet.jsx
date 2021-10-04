@@ -17,12 +17,6 @@ import dataRegistry from '../data-component/dataRegistry.json'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col'
 
-import axes from '../../data/axes.png'
-import {vertexShader2d, fragmentShader2d} from "./shader-srcs-2d.js"
-
-import * as THREE from 'three'
-import { renderIntoDocument } from 'react-dom/test-utils';
-
 import './volume-rendering.css'
 
 class VolumeRendering extends React.Component {

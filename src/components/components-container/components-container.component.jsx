@@ -3,8 +3,9 @@ import dataRegistryjson from '../data-component/dataRegistry.json'
 import QueryPanel from '../query-panel/query-panel.component';
 import ParametersPlot from '../parameters-plot/parameters-plot.component';
 import Clusters from '../clusters/clusters.component';
-import VolumeRendering from '../threeD-plot/volume-rendering.componenet';
-import ContrailsLinePlot from '../contrails/contrails.component'
+import ThreeDView from '../threeD-plot/three-d-view.component';
+
+import { loader, getMin, getMax, getData, getRawData, getRangeData } from '../threeD-plot/dataHandler';
 
 
 import './components-container.styles.css';
@@ -21,7 +22,9 @@ class ComponentsContainer extends React.Component {
             filtered_data: dataRegistryjson,
             outputFilters: null,
             split_tendrils: false,
-            all_members: dataRegistryjson
+            all_members: dataRegistryjson,
+            volumeDataTop:null,
+            volumeDataBottom:null
 
         }
         this.handleClusteringChange = this.handleClusteringChange.bind(this)
@@ -33,6 +36,16 @@ class ComponentsContainer extends React.Component {
     }
 
     componentDidMount() {
+        console.log("component container component did mount")
+        const self = this
+        loader(17, 0.06, 'temp').then(function(){
+            // console.log(getData())
+            self.setState({volumeDataTop : getData()})
+
+        })
+        loader(19, 0.06, 'temp').then(function(){
+            self.setState({volumeDataBottom: getData()})
+        })
 
     }
 
@@ -481,35 +494,48 @@ class ComponentsContainer extends React.Component {
 
 
     render() {
-        return (
-            <Container fluid style={{ overflow: 'hidden' }}>
-                <Row xs={12}>
-                    <Col style={{ backgroundColor: '#31393f', height: '100vh', "padding": "0", }}>
-                        <QueryPanel inputFilters={this.handleInputFilters} outputFilters={this.handleOutputFilters} split_tendrils={this.handle_split_tendrils} />
-                    </Col>
-                    <Col style={{ minWidth: "30%", backgroundColor: '#31393f', height: '100vh', "padding": "0", overflow: 'hidden' }}>
-                        <ParametersPlot elements={this.state.filtered_data} split_tendrils={this.state.split_tendrils} />
-                    </Col>
-                    <Col xs={7} style={{ backgroundColor: '#31393f', 'markerEndmargin': '0' }}>
-                        <Row style={{ height: '75vh' }}>
-                            <Col xs={6}>
-                                <VolumeRendering renderArea={'top'} />
-                            </Col>
-                            <Col xs={6}>
-                                <VolumeRendering renderArea={'bottom'} />
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col xs={4}>
-                            {/* <ContrailsLinePlot members={this.state.filtered_data}/> */}
-                            </Col>
-                            <Col>
-                                <Clusters clusteringParams={this.state.clusteringParams} dataRegistry={this.state.filtered_data} clusterMembers={this.handleClusteringChange} all_members={this.state.all_members} />
-                            </Col></Row>
-                    </Col>
-                </Row>
-            </Container>
-        )
+        if(this.state.volumeDataBottom){
+            return (
+                <Container fluid style={{ overflow: 'hidden' }}>
+                    <Row xs={12}>
+                        <Col style={{ backgroundColor: '#31393f', height: '100vh', "padding": "0", }}>
+                            <QueryPanel inputFilters={this.handleInputFilters} outputFilters={this.handleOutputFilters} split_tendrils={this.handle_split_tendrils} />
+                        </Col>
+                        <Col style={{ minWidth: "30%", backgroundColor: '#31393f', height: '100vh', "padding": "0", overflow: 'hidden' }}>
+                            <ParametersPlot elements={this.state.filtered_data} split_tendrils={this.state.split_tendrils} />
+                        </Col>
+                        <Col xs={7} style={{ backgroundColor: '#31393f', 'markerEndmargin': '0' }}>
+                            <Row style={{ height: '75vh' }}>
+                                <Col xs={6}>
+                                    <ThreeDView
+                                        renderArea={'top'}
+                                        data={this.state.volumeDataTop}
+                                    />                                
+                                </Col>
+                                <Col xs={6}>
+                                    <ThreeDView 
+                                        renderArea={'bottom'} 
+                                        data={this.state.volumeDataBottom}
+                                    />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col xs={4}>
+                                {/* <ContrailsLinePlot members={this.state.filtered_data}/> */}
+                                </Col>
+                                <Col>
+                                    <Clusters clusteringParams={this.state.clusteringParams} dataRegistry={this.state.filtered_data} clusterMembers={this.handleClusteringChange} all_members={this.state.all_members} />
+                                </Col></Row>
+                        </Col>
+                    </Row>
+                </Container>
+            )
+        }else{
+            return(
+                <div>Volume data loading</div>
+            )
+        }
+        
     }
 
 }
