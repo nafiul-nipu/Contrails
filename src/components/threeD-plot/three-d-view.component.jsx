@@ -88,10 +88,16 @@ class ThreeDView extends React.Component {
         
     }
 
-    shouldComponentUpdate(nextProps){
-        // console.log(nextProps)
-        this.selectVolume(nextProps.data, nextProps.member)
-        return true
+    shouldComponentUpdate(nextProps, nextState){
+        console.log(this.props.member, nextProps.member)
+        if(this.props.member != nextProps.member){
+            this.selectVolume(nextProps.data, nextProps.member)
+            // console.log('member updated')
+            return true
+        }else{
+            // console.log('member remained same')
+            return false
+        }
     }
 
     onLoad = () =>{
