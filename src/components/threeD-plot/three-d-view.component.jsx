@@ -19,6 +19,8 @@ import Col from 'react-bootstrap/Col'
 
 import './volume-rendering.css'
 
+import reds from './colormaps/reds.png'
+
 class ThreeDView extends React.Component {
     constructor(){
         super();
@@ -70,6 +72,7 @@ class ThreeDView extends React.Component {
             // "Samsel_Linear_YGB_1211G": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/samsel-linear-ygb-1211g.png",
             "Gray": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/cm_gray.png",
             "Virdis": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/cm_viridis.png",
+            "Red": reds,
         };
 
         this.canvas = React.createRef();
