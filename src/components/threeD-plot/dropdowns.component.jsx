@@ -99,7 +99,7 @@ class DropDowns extends React.Component {
 
       let keys = Object.keys(this.props.colormaps)
       d3.select(lowerID).append('select')
-                      .attr('class', "members form-control-sm form-control")
+                      .attr('class', "filters form-control-sm form-control")
                       .attr("id", `color${this.props.area}`)
                       .on('change', function(d){
                         // console.log(this.value)
