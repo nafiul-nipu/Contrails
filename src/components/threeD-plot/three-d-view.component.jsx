@@ -107,6 +107,7 @@ class ThreeDView extends React.Component {
             console.log(' time member updated')
             return true
         }else if(this.props.data != nextProps.data){
+            console.log("filter updated")
             this.selectVolume(nextProps.data, nextProps.member)
             return true
         }else{
