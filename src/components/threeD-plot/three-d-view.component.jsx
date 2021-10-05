@@ -4,7 +4,7 @@ import $ from 'jquery'
 
 import {vec2, vec3, mat4} from 'gl-matrix'
 
-import {vertShader, fragShader} from "./shader-srcs.js"
+import {vertShader, fragShaderbasic, fragShaderStandard, fragShaderMIP} from "./shader-srcs.js"
 
 import {Shader,ArcballCamera,Controller} from "./webgl-util.js"
 
@@ -236,12 +236,7 @@ class ThreeDView extends React.Component {
         this.gl.enableVertexAttribArray(0);
         this.gl.vertexAttribPointer(0, 3, this.gl.FLOAT, false, 0, 0);
 
-        this.shader = new Shader(this.gl, vertShader, fragShader);
-        this.shader.use(this.gl);
-
-        this.gl.uniform1i(this.shader.uniforms["volume"], 0);
-        this.gl.uniform1i(this.shader.uniforms["colormap"], 1);
-        this.gl.uniform1f(this.shader.uniforms["dt_scale"], this.samplingRate);
+        this.createShader(1)
 
         // Setup required OpenGL state for drawing the back faces and
         // composting with the background color
@@ -282,6 +277,28 @@ class ThreeDView extends React.Component {
 
         // console.log(colormapImage)
 
+    }
+
+    createShader = (shaderNumber) =>{
+        console.log("shader created")
+        if(shaderNumber === 1){  // basic
+            this.shader = new Shader(this.gl, vertShader, fragShaderbasic);
+        }else if(shaderNumber === 2){ //with light
+            this.shader = new Shader(this.gl, vertShader, fragShaderStandard);
+        }else if (shaderNumber === 3){ //MIP
+            this.shader = new Shader(this.gl, vertShader, fragShaderMIP);
+        }
+
+        this.shader.use(this.gl);
+        this.gl.uniform1i(this.shader.uniforms["volume"], 0);
+        this.gl.uniform1i(this.shader.uniforms["colormap"], 1);
+        this.gl.uniform1f(this.shader.uniforms["dt_scale"], this.samplingRate);
+
+    }
+
+    onShaderChange = (value) =>{
+        console.log("on shader change", value)
+        this.createShader(value)
     }
 
     selectVolume = (data, member) =>{
@@ -408,9 +425,9 @@ class ThreeDView extends React.Component {
                 <DropDowns
                     area={this.props.renderArea}
                     colormaps={this.colormaps}
-                    data={this.data}
+                    // data={this.data}
                     selectColormap={this.selectColormap}
-                    volumeRender={this.selectVolume}
+                    onShaderChange={this.onShaderChange}
                     member={this.props.member}
                     time={this.props.time}
                     memberUpdate={this.props.handleVolumeChange}

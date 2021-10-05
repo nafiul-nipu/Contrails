@@ -18,6 +18,7 @@ class DropDowns extends React.Component {
         this.slider = []
 
         this.filter = ["temp", 'ice', "diameter", "ice_d", "contrails"]
+        this.shader = ["Basic", "Light", "MIP"]
         // diameter is 10^9
     }  
     
@@ -114,6 +115,21 @@ class DropDowns extends React.Component {
                       .attr("value", function(d){return d})
                       .text((d) => {return d})
 
+      d3.select(lowerID).append('select')
+                      .attr('class', "members form-control-sm form-control")
+                      .attr("id", `shader${this.props.area}`)
+                      .on('change', function(d){
+                        console.log(this.value)
+                        self.props.onShaderChange(+this.value)
+                          
+                      })
+                      .selectAll('option')
+                      .data(this.shader)
+                      .enter()
+                      .append('option')
+                      .attr('id', function(d){ return d})
+                      .attr("value", function(d,i){return i+1})
+                      .text((d) => {return d})
 
       d3.select(lowerID).append('select')
                       .attr('class', "members form-control-sm form-control")
