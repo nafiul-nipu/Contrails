@@ -1,9 +1,12 @@
 import React from 'react';
+import * as d3 from 'd3'
+
 import dataRegistryjson from '../data-component/dataRegistry.json'
 import QueryPanel from '../query-panel/query-panel.component';
 import ParametersPlot from '../parameters-plot/parameters-plot.component';
 import Clusters from '../clusters/clusters.component';
 import ThreeDView from '../threeD-plot/three-d-view.component';
+
 
 import { loader, getMin, getMax, getData, getRawData, getRangeData } from '../threeD-plot/dataHandler';
 
@@ -38,10 +41,12 @@ class ComponentsContainer extends React.Component {
         this.memberTop = 17
         this.timeTop =  0.06
         this.attributeTop =  'temp'
+
         this.volumeDataBottom = null
         this.memberBottom = 19
         this.timeBottom =  0.06
         this.attributeBottom = 'temp'
+
 
 
         this.handleClusteringChange = this.handleClusteringChange.bind(this)
@@ -49,15 +54,18 @@ class ComponentsContainer extends React.Component {
         this.handleOutputFilters = this.handleOutputFilters.bind(this)
         this.handleInputAndOuputFilters = this.handleInputAndOuputFilters.bind(this)
         this.handle_split_tendrils = this.handle_split_tendrils.bind(this)
+        
         this.handleVolumeDataTop = this.handleVolumeDataTop.bind(this)
-        this.handleVolumeDataBottom = this.handleVolumeDataBottom.bind(this)
+        this.handleFilteringTop = this.handleFilteringTop.bind(this)
 
+        this.handleVolumeDataBottom = this.handleVolumeDataBottom.bind(this)
+        this.handleFilteringBottom = this.handleFilteringBottom.bind(this)
     }
 
     componentDidMount() {
         console.log("component container component did mount")
         const self = this
-        console.log(this.memberTop, this.timeTop, this.attributeTop)
+        // console.log(this.memberTop, this.timeTop, this.attributeTop)
         loader(this.memberTop, this.timeTop, this.attributeTop).then(function(){
             // console.log(getData())
             self.setState({volumeDataTop : getData()})
@@ -81,6 +89,37 @@ class ComponentsContainer extends React.Component {
         })
     }
 
+    handleFilteringTop(member, timestep, attribute, dataRange, range){
+        let rawData = getRawData()
+        let rawFilteredData = []
+        let create8bit = d3.scaleLinear()
+                        .range([0,255])
+                        .domain([d3.min(rawData), d3.max(rawData)])
+        // console.log(d3.min(rawData), d3.max(rawData)) 
+
+        let converRangeToRawData = d3.scaleLinear()
+                                    .range([d3.min(rawData), d3.max(rawData)])
+                                    .domain(dataRange)
+        // console.log(converRangeToRawData(range[0]), converRangeToRawData(range[1]))
+        rawData.forEach(d =>{
+        // console.log(d)
+            if(d >= converRangeToRawData(range[0]) && d <= converRangeToRawData(range[1])){
+                // console.log(d)
+                rawFilteredData.push(create8bit(d))
+                // count++
+            }else{
+                rawFilteredData.push(0)
+            }
+        })
+        let filteredData = new Uint8Array(rawFilteredData)
+
+        this.memberTop = member;
+        this.timeTop = timestep;
+        this.attributeTop = attribute;
+        this.setState({volumeDataTop : filteredData})
+    }
+
+
     handleVolumeDataBottom(member, timestep, attribute){
         const self = this
         loader(member, timestep, attribute).then(function(){
@@ -90,6 +129,37 @@ class ComponentsContainer extends React.Component {
             self.setState({volumeDataBottom: getData()})
         })
     }
+
+    handleFilteringBottom(member, timestep, attribute, dataRange, range){
+        let rawData = getRawData()
+        let rawFilteredData = []
+        let create8bit = d3.scaleLinear()
+                        .range([0,255])
+                        .domain([d3.min(rawData), d3.max(rawData)])
+        // console.log(d3.min(rawData), d3.max(rawData)) 
+
+        let converRangeToRawData = d3.scaleLinear()
+                                    .range([d3.min(rawData), d3.max(rawData)])
+                                    .domain(dataRange)
+        // console.log(converRangeToRawData(range[0]), converRangeToRawData(range[1]))
+        rawData.forEach(d =>{
+        // console.log(d)
+        if(d >= converRangeToRawData(range[0]) && d <= converRangeToRawData(range[1])){
+            // console.log(d)
+            rawFilteredData.push(create8bit(d))
+            // count++
+        }else{
+            rawFilteredData.push(0)
+        }
+        })
+        let filteredData = new Uint8Array(rawFilteredData)
+
+        this.memberBottom = member;
+        this.timeBottom = timestep;
+        this.attributeBottom = attribute;
+        this.setState({volumeDataBottom : filteredData})
+    }
+
 
     handle_split_tendrils(params) {
         this.setState({ split_tendrils: params })
@@ -555,6 +625,7 @@ class ComponentsContainer extends React.Component {
                                         member={this.memberTop}
                                         time={this.timeTop}
                                         handleVolumeChange={this.handleVolumeDataTop}
+                                        handleFiltering = {this.handleFilteringTop}
                                     />                                
                                 </Col>
                                 <Col xs={6}>
@@ -562,8 +633,9 @@ class ComponentsContainer extends React.Component {
                                         renderArea={'bottom'} 
                                         data={this.state.volumeDataBottom}
                                         member={this.memberBottom}
-                                        time={this.timeTop}
+                                        time={this.timeBottom}
                                         handleVolumeChange={this.handleVolumeDataBottom}
+                                        handleFiltering={this.handleFilteringBottom}
                                     />
                                 </Col>
                             </Row>

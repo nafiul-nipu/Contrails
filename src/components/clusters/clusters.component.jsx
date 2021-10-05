@@ -34,7 +34,7 @@ class Clusters extends React.Component {
     async componentDidMount() {
 
         var send_data = [this.state.dataRegistry, this.state.clusteringParams]
-        console.log(send_data)
+        // console.log(send_data)
 
         // post(
         //     '/backendscript',

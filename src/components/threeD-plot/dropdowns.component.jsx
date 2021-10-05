@@ -23,7 +23,7 @@ class DropDowns extends React.Component {
     
     componentDidMount(){
       const self = this
-      console.log(`dropdown - ${this.props.member}`)
+      // console.log(`dropdown - ${this.props.member}`)
       // if(this.props.area === 'top'){
       //   loader(17, 0.06, 'temp').then(function(){
       //     // console.log("data loaded")
@@ -156,7 +156,7 @@ class DropDowns extends React.Component {
         // console.log(dataRange)
       }else{
         dataRange = [getMin(), getMax()];
-        console.log(dataRange)
+        // console.log(dataRange)
       }
       // let min = getMin()
       // let max = getMax()
@@ -190,7 +190,7 @@ class DropDowns extends React.Component {
                       .on('click', function(){
                         
                         let range = sliderRange.value();
-                        console.log(range)
+                        // console.log(range)
                         let timestep = +(d3.format('.2f')(self.slider.value()));
                         // console.log(timestep)
                         let member = +($(`#member${self.props.area}`).val());
@@ -198,32 +198,33 @@ class DropDowns extends React.Component {
                         let filter = $(`#filter${self.props.area}`).val()
                         // console.log(filter)
                        
-                        loader(member, timestep, filter).then(function(){
-                          let rawData = getRawData()
-                          let rawFilteredData = []
-                          let create8bit = d3.scaleLinear()
-                                            .range([0,255])
-                                            .domain([d3.min(rawData), d3.max(rawData)])
-                          // console.log(d3.min(rawData), d3.max(rawData)) 
+                        self.props.filtering(member, timestep, filter, dataRange, range);
+                        // loader(member, timestep, filter).then(function(){
+                        //   let rawData = getRawData()
+                        //   let rawFilteredData = []
+                        //   let create8bit = d3.scaleLinear()
+                        //                     .range([0,255])
+                        //                     .domain([d3.min(rawData), d3.max(rawData)])
+                        //   // console.log(d3.min(rawData), d3.max(rawData)) 
 
-                          let converRangeToRawData = d3.scaleLinear()
-                                                        .range([d3.min(rawData), d3.max(rawData)])
-                                                        .domain(dataRange)
-                          // console.log(converRangeToRawData(range[0]), converRangeToRawData(range[1]))
-                          rawData.forEach(d =>{
-                          // console.log(d)
-                            if(d >= converRangeToRawData(range[0]) && d <= converRangeToRawData(range[1])){
-                              // console.log(d)
-                              rawFilteredData.push(create8bit(d))
-                              // count++
-                            }else{
-                              rawFilteredData.push(0)
-                            }
-                          })
-                          let filteredData = new Uint8Array(rawFilteredData)
-                          self.props.volumeRender(filteredData)                       
+                        //   let converRangeToRawData = d3.scaleLinear()
+                        //                                 .range([d3.min(rawData), d3.max(rawData)])
+                        //                                 .domain(dataRange)
+                        //   // console.log(converRangeToRawData(range[0]), converRangeToRawData(range[1]))
+                        //   rawData.forEach(d =>{
+                        //   // console.log(d)
+                        //     if(d >= converRangeToRawData(range[0]) && d <= converRangeToRawData(range[1])){
+                        //       // console.log(d)
+                        //       rawFilteredData.push(create8bit(d))
+                        //       // count++
+                        //     }else{
+                        //       rawFilteredData.push(0)
+                        //     }
+                        //   })
+                        //   let filteredData = new Uint8Array(rawFilteredData)
+                        //   self.props.volumeRender(filteredData)                       
                           
-                        })                         
+                        // })                         
                       })
 
     }
@@ -257,7 +258,7 @@ class DropDowns extends React.Component {
                           self.updateSlider(file, folder);
                           setTimeout(() => {
                             self.animation(self.slider)
-                        }, 2000);
+                        }, 3000);
                           
                           
                       })
@@ -268,7 +269,7 @@ class DropDowns extends React.Component {
                                       .text('Pause')
                   setTimeout(() => {
                       self.animation(self.slider);                
-                  }, 2000);
+                  }, 3000);
               }else if(this.value === 'pause'){
                   d3.select(`.btn${self.props.area}`).attr('value', 'play')
                                       .text('Play')

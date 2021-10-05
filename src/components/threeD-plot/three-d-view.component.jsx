@@ -89,18 +89,27 @@ class ThreeDView extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState){
-        console.log(this.props.member, nextProps.member)
-        console.log(this.props.time, nextProps.time)
+        // console.log("this.props " , this.props.member, this.props.time)        
+        // console.log(dataRegistry[this.props.member-1].timeSteps)
+        // console.log("nextProps ", nextProps.member, nextProps.time)
+        // console.log(dataRegistry[nextProps.member - 1])
+        // console.log("updated filter", this.props.shouldFilter)
+        // console.log(this.props)
+        // console.log(nextProps)
+        // console.log(this.props.data === nextProps.data)
+        let time = dataRegistry[this.props.member-1].timeSteps
         if(this.props.member != nextProps.member){
             this.selectVolume(nextProps.data, nextProps.member)
-            // console.log('member updated')
+            console.log('member updated')
             return true
-        }else if(this.props.time != nextProps.time){
+        }else if(this.props.member === nextProps.member && this.props.time != nextProps.time && time.includes(nextProps.time)){
             this.selectVolume(nextProps.data, nextProps.member)
-            // console.log('member updated')
+            console.log(' time member updated')
+            return true
+        }else if(this.props.data != nextProps.data){
+            this.selectVolume(nextProps.data, nextProps.member)
             return true
         }else{
-            // console.log('member remained same')
             return false
         }
     }
@@ -298,8 +307,8 @@ class ThreeDView extends React.Component {
         // let member = this.props.member;
 
         let volDims = dataRegistry[member - 1].volume_dimensions;
-        console.log(member)
-        console.log(volDims)
+        // console.log(member)
+        // console.log(volDims)
     
 
         let tex = this.gl.createTexture();
@@ -402,7 +411,9 @@ class ThreeDView extends React.Component {
                     selectColormap={this.selectColormap}
                     volumeRender={this.selectVolume}
                     member={this.props.member}
+                    time={this.props.time}
                     memberUpdate={this.props.handleVolumeChange}
+                    filtering ={this.props.handleFiltering}
                 /> 
                 </Row>
                 <Row>
