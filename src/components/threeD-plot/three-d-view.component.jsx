@@ -299,6 +299,7 @@ class ThreeDView extends React.Component {
     onShaderChange = (value) =>{
         console.log("on shader change", value)
         this.createShader(value)
+        this.selectVolume(this.props.data, this.props.member)
     }
 
     selectVolume = (data, member) =>{
