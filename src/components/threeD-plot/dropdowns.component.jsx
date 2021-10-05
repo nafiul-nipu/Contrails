@@ -116,7 +116,7 @@ class DropDowns extends React.Component {
                       .text((d) => {return d})
 
       d3.select(lowerID).append('select')
-                      .attr('class', "members form-control-sm form-control")
+                      .attr('class', "filters form-control-sm form-control")
                       .attr("id", `shader${this.props.area}`)
                       .on('change', function(d){
                         console.log(this.value)
@@ -132,7 +132,7 @@ class DropDowns extends React.Component {
                       .text((d) => {return d})
 
       d3.select(lowerID).append('select')
-                      .attr('class', "members form-control-sm form-control")
+                      .attr('class', "filters form-control-sm form-control")
                       .attr("id", `filter${this.props.area}`)
                       .attr("style","margin-left:5px" )
                       .on('change', function(){

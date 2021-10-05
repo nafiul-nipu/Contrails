@@ -33,6 +33,12 @@
     float: left;
 }
 
+.filters{
+    width: 14%;
+    height: 100%;
+    float: left;
+}
+
 #play-pause-btn{
     height: 100%;
     float: left;
