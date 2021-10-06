@@ -314,7 +314,9 @@ class DropDowns extends React.Component {
       d3.select(`.btn${self.props.area}`).attr('value', 'play')
                                       .text('Play')
 
-      self.props.memberUpdate(+member, list[0], 'temp')
+      let filter = $(`#filter${self.props.area}`).val();
+
+      self.props.memberUpdate(+member, list[0], filter)
       // loader(member, list[0], 'temp').then(function(){
       //   let data = getData();
       //   // self.data = data;
