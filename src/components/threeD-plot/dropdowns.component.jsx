@@ -16,7 +16,7 @@ class DropDowns extends React.Component {
     constructor(){
         super();
         this.slider = []
-        this.filter = ["temp", 'ice', "diameter", "ice_d", "contrails", "cluster", "noOutlierCluster"]
+        this.filter = ["temp", 'ice', "diameter", "ice_d", "contrails", "cluster"]
         this.shader = ["Basic", "Light", "MIP"]
         // diameter is 10^9
     }  
@@ -183,7 +183,7 @@ class DropDowns extends React.Component {
                       .tickFormat(d3.format('0.2f'))
                       .ticks(3)
                       .default([dataRange[0], dataRange[1]])
-                      // .step(dataRange[1] - dataRange[0])
+                      // .step(5)
                       .fill('#2196f3')
                       .on('onchange', val => {
                         // d3.select('p#value-range').text(val.map(d3.format('.2%')).join('-'));

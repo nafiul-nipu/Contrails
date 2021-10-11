@@ -90,7 +90,8 @@ class ComponentsContainer extends React.Component {
     }
 
     handleFilteringTop(member, timestep, attribute, dataRange, range){
-        let rawData = getRawData()
+        console.log(dataRange, range)
+        let rawData = getData()
         let rawFilteredData = []
         let create8bit = d3.scaleLinear()
                         .range([0,255])
