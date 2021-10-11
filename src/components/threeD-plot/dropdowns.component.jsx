@@ -166,9 +166,7 @@ class DropDowns extends React.Component {
       let filter = $(`#filter${self.props.area}`).val();
       let dataRange;
       // change this line later
-      if((member === 14 || member === 15 || member === 16 || member === 17 || member === 18 || member === 19)
-         && filter !== "cluster" && filter !== "noOutlierCluster"
-        ){
+      if((member === 14 || member === 15 || member === 16 || member === 17 || member === 18 || member === 19)){
         dataRange = getRangeData(member, timestep, filter);
         // console.log(dataRange)
       }else{
@@ -185,6 +183,7 @@ class DropDowns extends React.Component {
                       .tickFormat(d3.format('0.2f'))
                       .ticks(3)
                       .default([dataRange[0], dataRange[1]])
+                      // .step(dataRange[1] - dataRange[0])
                       .fill('#2196f3')
                       .on('onchange', val => {
                         // d3.select('p#value-range').text(val.map(d3.format('.2%')).join('-'));
@@ -215,33 +214,7 @@ class DropDowns extends React.Component {
                         let filter = $(`#filter${self.props.area}`).val()
                         // console.log(filter)
                        
-                        self.props.filtering(member, timestep, filter, dataRange, range);
-                        // loader(member, timestep, filter).then(function(){
-                        //   let rawData = getRawData()
-                        //   let rawFilteredData = []
-                        //   let create8bit = d3.scaleLinear()
-                        //                     .range([0,255])
-                        //                     .domain([d3.min(rawData), d3.max(rawData)])
-                        //   // console.log(d3.min(rawData), d3.max(rawData)) 
-
-                        //   let converRangeToRawData = d3.scaleLinear()
-                        //                                 .range([d3.min(rawData), d3.max(rawData)])
-                        //                                 .domain(dataRange)
-                        //   // console.log(converRangeToRawData(range[0]), converRangeToRawData(range[1]))
-                        //   rawData.forEach(d =>{
-                        //   // console.log(d)
-                        //     if(d >= converRangeToRawData(range[0]) && d <= converRangeToRawData(range[1])){
-                        //       // console.log(d)
-                        //       rawFilteredData.push(create8bit(d))
-                        //       // count++
-                        //     }else{
-                        //       rawFilteredData.push(0)
-                        //     }
-                        //   })
-                        //   let filteredData = new Uint8Array(rawFilteredData)
-                        //   self.props.volumeRender(filteredData)                       
-                          
-                        // })                         
+                        self.props.filtering(member, timestep, filter, dataRange, range);                       
                       })
 
     }
