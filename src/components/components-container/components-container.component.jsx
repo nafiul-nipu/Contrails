@@ -90,34 +90,40 @@ class ComponentsContainer extends React.Component {
     }
 
     handleFilteringTop(member, timestep, attribute, dataRange, range){
-        console.log(dataRange, range)
-        let rawData = getData()
-        let rawFilteredData = []
-        let create8bit = d3.scaleLinear()
-                        .range([0,255])
-                        .domain([d3.min(rawData), d3.max(rawData)])
-        // console.log(d3.min(rawData), d3.max(rawData)) 
+        // console.log(this.state.volumeDataTop)
 
-        let converRangeToRawData = d3.scaleLinear()
-                                    .range([d3.min(rawData), d3.max(rawData)])
-                                    .domain(dataRange)
-        // console.log(converRangeToRawData(range[0]), converRangeToRawData(range[1]))
-        rawData.forEach(d =>{
-        // console.log(d)
-            if(d >= converRangeToRawData(range[0]) && d <= converRangeToRawData(range[1])){
-                // console.log(d)
-                rawFilteredData.push(create8bit(d))
-                // count++
+        const self = this
+        loader(member, timestep, attribute).then(function(){
+            let rawData = getData()
+            let rawFilteredData = []
+            let create8bit = d3.scaleLinear()
+                            .range([0,255])
+    
+    
+            if(attribute === 'cluster'){
+                create8bit.domain([0, dataRange[1]])
             }else{
-                rawFilteredData.push(0)
+                create8bit.domain(dataRange)
             }
-        })
-        let filteredData = new Uint8Array(rawFilteredData)
+    
+            rawData.forEach(d =>{
+            // console.log(d)
+                if(d >= create8bit(range[0]) && d <= create8bit(range[1])){
+                    // console.log(d)
+                    rawFilteredData.push(d)
+                    // count++
+                }else{
+                    rawFilteredData.push(0)
+                }
+            })
+            let filteredData = new Uint8Array(rawFilteredData)
+    
+            self.memberTop = member;
+            self.timeTop = timestep;
+            self.attributeTop = attribute;
+            self.setState({volumeDataTop : filteredData})
 
-        this.memberTop = member;
-        this.timeTop = timestep;
-        this.attributeTop = attribute;
-        this.setState({volumeDataTop : filteredData})
+        })
     }
 
 
@@ -132,33 +138,39 @@ class ComponentsContainer extends React.Component {
     }
 
     handleFilteringBottom(member, timestep, attribute, dataRange, range){
-        let rawData = getRawData()
-        let rawFilteredData = []
-        let create8bit = d3.scaleLinear()
-                        .range([0,255])
-                        .domain([d3.min(rawData), d3.max(rawData)])
-        // console.log(d3.min(rawData), d3.max(rawData)) 
 
-        let converRangeToRawData = d3.scaleLinear()
-                                    .range([d3.min(rawData), d3.max(rawData)])
-                                    .domain(dataRange)
-        // console.log(converRangeToRawData(range[0]), converRangeToRawData(range[1]))
-        rawData.forEach(d =>{
-        // console.log(d)
-        if(d >= converRangeToRawData(range[0]) && d <= converRangeToRawData(range[1])){
+        const self = this
+        loader(member, timestep, attribute).then(function(){
+            let rawData = getData()
+            let rawFilteredData = []
+            let create8bit = d3.scaleLinear()
+                            .range([0,255])
+    
+    
+            if(attribute === 'cluster'){
+                create8bit.domain([0, dataRange[1]])
+            }else{
+                create8bit.domain(dataRange)
+            }
+    
+            rawData.forEach(d =>{
             // console.log(d)
-            rawFilteredData.push(create8bit(d))
-            // count++
-        }else{
-            rawFilteredData.push(0)
-        }
-        })
-        let filteredData = new Uint8Array(rawFilteredData)
+                if(d >= create8bit(range[0]) && d <= create8bit(range[1])){
+                    // console.log(d)
+                    rawFilteredData.push(d)
+                    // count++
+                }else{
+                    rawFilteredData.push(0)
+                }
+            })
+            let filteredData = new Uint8Array(rawFilteredData)
+    
+            self.memberBottom = member;
+            self.timeBottom = timestep;
+            self.attributeBottom = attribute;
+            self.setState({volumeDataBottom : filteredData})
 
-        this.memberBottom = member;
-        this.timeBottom = timestep;
-        this.attributeBottom = attribute;
-        this.setState({volumeDataBottom : filteredData})
+        })
     }
 
 
