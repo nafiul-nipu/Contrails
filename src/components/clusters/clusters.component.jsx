@@ -34,18 +34,18 @@ class Clusters extends React.Component {
     async componentDidMount() {
 
         var send_data = [this.state.dataRegistry, this.state.clusteringParams]
-        // console.log(send_data)
+        console.log(send_data)
 
-        // post(
-        //     '/backendscript',
-        //     {send_data}
-        //   ).then((response) => {
-        //     console.log("connection created")
-        //     console.log(response.data)
-        //       setPrediction(response.data)
-        //   }).catch((error) => {
-        //     console.log(error)
-        //   });
+        post(
+            '/backendscript',
+            {send_data}
+          ).then((response) => {
+            console.log("connection created")
+            console.log(response.data)
+              setPrediction(response.data)
+          }).catch((error) => {
+            console.log(error)
+          });
 
         const data_for_child = await fetch('/backendscript', { method: "POST", mode: 'cors', cache: "no-cache", headers: { "content_type": "application/json" }, body: JSON.stringify(send_data) }).then(res => res.json()).then(data => {
             return data.PCAdata
@@ -69,6 +69,7 @@ class Clusters extends React.Component {
         }
         if (this.state.clusteringParams == this.props.clusteringParams)
             var send_data = [this.state.all_data, this.props.clusteringParams]
+            console.log(send_data)
         const data_for_child = await fetch('/backendscript', { method: "POST", mode: 'cors', cache: "no-cache", headers: { "content_type": "application/json" }, body: JSON.stringify(send_data) }).then(res => res.json()).then(data => {
 
             return data.PCAdata

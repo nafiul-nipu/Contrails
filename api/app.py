@@ -9,16 +9,18 @@ import math
 import numpy as np
 from copy import deepcopy
 
-
 app = Flask(__name__)
+CORS(app)
 
-@app.route('/backendscript', methods=['POST'])
+@app.route('/backendscript', methods=['GET','POST'])
 @cross_origin()
 
 def get_value():
     data = request.json
-    d = data
-    d = deepcopy(data[0])
+    print("hello world")
+    print(data)
+    d = data.send_data[0]
+    # d = deepcopy(data[0])
     if len(data) >2:
         filter = deepcopy(data[2])
     if not data[0]:
@@ -105,4 +107,5 @@ def get_value():
     return jsonify({"PCAdata": d})
 
 if __name__ == '__main__':
-	app.run(debug=True)
+    app.debug = True
+    app.run(port=3000)
