@@ -6,7 +6,7 @@
     fill: #42A5B3;
   }
   
-  .pathCon{
+  #pathCon{
     fill: none;
     stroke: black;
     stroke-opacity: 0.5;
