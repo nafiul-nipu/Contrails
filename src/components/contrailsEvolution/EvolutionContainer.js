@@ -134,6 +134,6 @@ console.log(width, height)
         /> 
       )
   }else{
-      return(<div>Select between 17-19</div>)
+      return(<div style={{color:'white'}}>Select between 17-19</div>)
   }
 }
