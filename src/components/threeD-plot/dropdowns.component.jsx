@@ -226,7 +226,7 @@ class DropDowns extends React.Component {
       let select = d3.select(`#member${self.props.area}`).node().clientWidth;
       let button = d3.select(`.btn${this.props.area}`).node().clientWidth;
       let margin = select + button
-      let width = container - margin * 1.75
+      let width = container - margin * 1.25
 
       let list = dataRegistry[(member - 1)].timeSteps;
 

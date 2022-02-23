@@ -15,6 +15,7 @@ import './components-container.styles.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import {EvolutionContainer} from '../contrailsEvolution/EvolutionContainer';
 
 class ComponentsContainer extends React.Component {
     constructor() {
@@ -68,11 +69,11 @@ class ComponentsContainer extends React.Component {
         // console.log(this.memberTop, this.timeTop, this.attributeTop)
         loader(this.memberTop, this.timeTop, this.attributeTop).then(function(){
             // console.log(getData())
-            self.setState({volumeDataTop : getData()})
+            self.setState({volumeDataTop : getData(), memberTop: self.memberTop})
 
         })
         loader(this.memberBottom, this.timeBottom, this.attributeBottom).then(function(){
-            self.setState({volumeDataBottom: getData()})
+            self.setState({volumeDataBottom: getData(), memberBottom: self.memberBottom})
         })
 
     }
@@ -84,7 +85,7 @@ class ComponentsContainer extends React.Component {
             self.memberTop = member;
             self.timeTop = timestep;
             self.attributeTop = attribute;
-            self.setState({volumeDataTop : getData()})
+            self.setState({volumeDataTop : getData(), memberTop: self.memberTop})
 
         })
     }
@@ -133,7 +134,7 @@ class ComponentsContainer extends React.Component {
             self.memberBottom = member;
             self.timeBottom = timestep;
             self.attributeBottom = attribute;
-            self.setState({volumeDataBottom: getData()})
+            self.setState({volumeDataBottom: getData(), memberBottom: self.memberBottom})
         })
     }
 
@@ -630,7 +631,7 @@ class ComponentsContainer extends React.Component {
                             <ParametersPlot elements={this.state.filtered_data} split_tendrils={this.state.split_tendrils} />
                         </Col>
                         <Col xs={7} style={{ backgroundColor: '#31393f', 'markerEndmargin': '0' }}>
-                            <Row style={{ height: '75vh' }}>
+                            <Row style={{ height: '70vh' }}>
                                 <Col xs={6}>
                                     <ThreeDView
                                         renderArea={'top'}
@@ -652,13 +653,26 @@ class ComponentsContainer extends React.Component {
                                     />
                                 </Col>
                             </Row>
-                            <Row>
-                                <Col xs={4}>
-                                {/* <ContrailsLinePlot members={this.state.filtered_data}/> */}
+                            <Row style={{height: '30vh'}}>
+                                {/* commented out the backend thing */}
+                                {/* <Col xs={4}>
                                 </Col>
                                 <Col>
                                     <Clusters clusteringParams={this.state.clusteringParams} dataRegistry={this.state.filtered_data} clusterMembers={this.handleClusteringChange} all_members={this.state.all_members} />
-                                </Col></Row>
+                                </Col> */}
+                                {/* adding evolution of contrails */}
+                                <Col xs={6} id='evCon'>
+                                    {/* {this.state.memberTop} */}
+                                    <EvolutionContainer 
+                                        memberID={this.state.memberTop}
+                                    />
+                                </Col>
+                                <Col xs={6} >
+                                    <EvolutionContainer 
+                                        memberID={this.state.memberBottom}
+                                    />
+                                </Col>
+                            </Row>
                         </Col>
                     </Row>
                 </Container>
