@@ -29,6 +29,8 @@ class ComponentsContainer extends React.Component {
             outputFilters: null,
             split_tendrils: false,
             all_members: dataRegistryjson,
+            parameterDisplay: 'none',
+            shapeDisplay:'block'
             // volumeDataTop:null,
             // memberTop:17,
             // timeTop: 0.06,
@@ -181,13 +183,21 @@ class ComponentsContainer extends React.Component {
     handleRadioViewChange(event){
         console.log(event.target.value)
         if(event.target.value === 'parameterView'){
-            document.getElementById('parameterView').style.display = 'block';
-            document.getElementById('parameter2View').style.display = 'block';
-            document.getElementById('shapeView').style.display = 'none';
+            this.setState({
+                parameterDisplay: 'block',
+                shapeDisplay:'none'
+            })
+            // document.getElementById('parameterView').style.display = 'block';
+            // document.getElementById('parameter2View').style.display = 'block';
+            // document.getElementById('shapeView').style.display = 'none';
         }else{
-            document.getElementById('parameterView').style.display = 'none';
-            document.getElementById('parameter2View').style.display = 'none';
-            document.getElementById('shapeView').style.display = 'block';
+            this.setState({
+                parameterDisplay: 'none',
+                shapeDisplay:'block'
+            })
+            // document.getElementById('parameterView').style.display = 'none';
+            // document.getElementById('parameter2View').style.display = 'none';
+            // document.getElementById('shapeView').style.display = 'block';
         }
     }
 
@@ -673,14 +683,14 @@ class ComponentsContainer extends React.Component {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col xs={4} style={{ backgroundColor: '#31393f', height: '100vh', display:'none' }} id='parameterView'>
+                                <Col xs={4} style={{ backgroundColor: '#31393f', height: '100vh', display: `${this.state.parameterDisplay}` }} id='parameterView'>
                                     <QueryPanel inputFilters={this.handleInputFilters} outputFilters={this.handleOutputFilters} split_tendrils={this.handle_split_tendrils} />
                                 </Col>
-                                <Col xs={8} style={{ minWidth: "30%", backgroundColor: '#31393f', height: '100vh', overflow: 'hidden', display:'none' }} id='parameter2View'>
+                                <Col xs={8} style={{ minWidth: "30%", backgroundColor: '#31393f', height: '100vh', overflow: 'hidden', display:`${this.state.parameterDisplay}` }} id='parameter2View'>
                                     <ParametersPlot elements={this.state.filtered_data} split_tendrils={this.state.split_tendrils} />
                                 </Col>
 
-                                <Col style={{ backgroundColor: '#31393f', height: '100vh', "padding": "0", }} id='shapeView'>
+                                <Col style={{ backgroundColor: '#31393f', height: '100vh', "padding": "0", display:`${this.state.shapeDisplay}` }} id='shapeView'>
                                     <ShapeContainerComponent />
                                 </Col>
                             </Row>
