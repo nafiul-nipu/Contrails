@@ -13,7 +13,7 @@ const loader = (folder, file, filter) =>{
         if(!folder || !file || !filter){
             reject(new Error("Field Missing"))
         }
-        let url = `https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/data/volume_data/${folder}/${file}.csv`;
+        let url = `https://raw.githubusercontent.com/nafiul-nipu/Contrails/master/src/data/volume_data/${folder}/${file}.csv`;
         let dataBuffer = []
         let positions = []
         console.log(url)
@@ -72,7 +72,7 @@ const dataLoader = (folder, file) =>{
     // let url_checker = []
     let promises = []
     for(let i = 0; i< list.length; i++){
-        let url_checker = `https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/data/${folder}/${list[i]}.csv`
+        let url_checker = `https://raw.githubusercontent.com/nafiul-nipu/Contrails/master/src/data/${folder}/${list[i]}.csv`
         promises.push(d3.csv(url_checker))
 
     }
@@ -80,7 +80,7 @@ const dataLoader = (folder, file) =>{
     // console.log(promises)
     Promise.all(promises).then(function(files){
         // console.log(self.state)
-        // let url = `https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/data/${folder}/${file}.csv`
+        // let url = `https://raw.githubusercontent.com/nafiul-nipu/Contrails/master/src/data/${folder}/${file}.csv`
         let data = []
         let all_data = {}
         let all_tempDomain = {}

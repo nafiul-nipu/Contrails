@@ -62,14 +62,14 @@ class VolumeRendering extends React.Component {
 
 
         this.colormaps = {
-          "Cool_Warm": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/cool-warm-paraview.png",
-          "Matplotlib_Plasma": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/matplotlib-plasma.png",
-          "Matplotlib_Virdis": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/matplotlib-virdis.png",
-          // "Rainbow": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/rainbow.png",
-          // "Samsel_Linear_Green": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/samsel-linear-green.png",
-          // "Samsel_Linear_YGB_1211G": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/samsel-linear-ygb-1211g.png",
-          "cm_gray": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/cm_gray.png",
-          "cm_virdis": "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/cm_viridis.png",
+          "Cool_Warm": "https://raw.githubusercontent.com/nafiul-nipu/Contrails/master/src/components/threeD-plot/colormaps/cool-warm-paraview.png",
+          "Matplotlib_Plasma": "https://raw.githubusercontent.com/nafiul-nipu/Contrails/master/src/components/threeD-plot/colormaps/matplotlib-plasma.png",
+          "Matplotlib_Virdis": "https://raw.githubusercontent.com/nafiul-nipu/Contrails/master/src/components/threeD-plot/colormaps/matplotlib-virdis.png",
+          // "Rainbow": "https://raw.githubusercontent.com/nafiul-nipu/Contrails/master/src/components/threeD-plot/colormaps/rainbow.png",
+          // "Samsel_Linear_Green": "https://raw.githubusercontent.com/nafiul-nipu/Contrails/master/src/components/threeD-plot/colormaps/samsel-linear-green.png",
+          // "Samsel_Linear_YGB_1211G": "https://raw.githubusercontent.com/nafiul-nipu/Contrails/master/src/components/threeD-plot/colormaps/samsel-linear-ygb-1211g.png",
+          "cm_gray": "https://raw.githubusercontent.com/nafiul-nipu/Contrails/master/src/components/threeD-plot/colormaps/cm_gray.png",
+          "cm_virdis": "https://raw.githubusercontent.com/nafiul-nipu/Contrails/master/src/components/threeD-plot/colormaps/cm_viridis.png",
         };
 
         this.canvas = React.createRef();
@@ -173,7 +173,7 @@ class VolumeRendering extends React.Component {
       //   ctx.drawImage(img, 0, 0);
       // }
       // img.crossOrigin = "anonymous"
-      // img.src = "https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/data/axes.png";
+      // img.src = "https://raw.githubusercontent.com/nafiul-nipu/Contrails/master/src/data/axes.png";
 
       if(!this.gl){
         console.log("Unable to initialize WebGL2. Your browser may not support it");
@@ -262,7 +262,7 @@ class VolumeRendering extends React.Component {
       };
 
       colormapImage.crossOrigin = "anonymous";
-      colormapImage.src = 'https://raw.githubusercontent.com/CarlaFloricel/Contrails/master/src/components/threeD-plot/colormaps/cool-warm-paraview.png';
+      colormapImage.src = 'https://raw.githubusercontent.com/nafiul-nipu/Contrails/master/src/components/threeD-plot/colormaps/cool-warm-paraview.png';
 
       // console.log(colormapImage)
 
