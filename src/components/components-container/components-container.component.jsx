@@ -15,7 +15,9 @@ import './components-container.styles.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form'
 import {EvolutionContainer} from '../contrailsEvolution/EvolutionContainer';
+import ShapeContainerComponent from '../similarity-measure/shapeContainer';
 
 class ComponentsContainer extends React.Component {
     constructor() {
@@ -61,6 +63,8 @@ class ComponentsContainer extends React.Component {
 
         this.handleVolumeDataBottom = this.handleVolumeDataBottom.bind(this)
         this.handleFilteringBottom = this.handleFilteringBottom.bind(this)
+
+        this.handleRadioViewChange = this.handleRadioViewChange.bind(this)
     }
 
     componentDidMount() {
@@ -172,6 +176,19 @@ class ComponentsContainer extends React.Component {
             self.setState({volumeDataBottom : filteredData})
 
         })
+    }
+
+    handleRadioViewChange(event){
+        console.log(event.target.value)
+        if(event.target.value === 'parameterView'){
+            document.getElementById('parameterView').style.display = 'block';
+            document.getElementById('parameter2View').style.display = 'block';
+            document.getElementById('shapeView').style.display = 'none';
+        }else{
+            document.getElementById('parameterView').style.display = 'none';
+            document.getElementById('parameter2View').style.display = 'none';
+            document.getElementById('shapeView').style.display = 'block';
+        }
     }
 
 
@@ -624,11 +641,49 @@ class ComponentsContainer extends React.Component {
             return (
                 <Container fluid style={{ overflow: 'hidden' }}>
                     <Row xs={12}>
-                        <Col style={{ backgroundColor: '#31393f', height: '100vh', "padding": "0", }}>
-                            <QueryPanel inputFilters={this.handleInputFilters} outputFilters={this.handleOutputFilters} split_tendrils={this.handle_split_tendrils} />
-                        </Col>
-                        <Col style={{ minWidth: "30%", backgroundColor: '#31393f', height: '100vh', "padding": "0", overflow: 'hidden' }}>
-                            <ParametersPlot elements={this.state.filtered_data} split_tendrils={this.state.split_tendrils} />
+                        <Col xs={5} style={{ backgroundColor: '#31393f', height: '100vh', "padding": "0", }}>
+                            <Row>
+                                <Col>
+                                    <Form>
+                                    <Form.Group >
+                                        <Form.Label id='space'>Toggle between: </Form.Label>
+                                        <Form.Check
+                                        inline
+                                        label="Shape"
+                                        name="toggle"
+                                        type="radio"
+                                        id={`inline-radio-1`}
+                                        value="shapeView"
+                                        className='radin'
+                                        onChange={this.handleRadioViewChange}    
+                                        defaultChecked                                 
+                                        />
+                                        <Form.Check
+                                        inline
+                                        label="Parameter"
+                                        name="toggle"
+                                        type="radio"
+                                        id={`inline-radio-2`}
+                                        value="parameterView"
+                                        onChange={this.handleRadioViewChange}
+                                        // defaultChecked
+                                        />
+                                    </Form.Group>
+                                    </Form>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col xs={4} style={{ backgroundColor: '#31393f', height: '100vh', display:'none' }} id='parameterView'>
+                                    <QueryPanel inputFilters={this.handleInputFilters} outputFilters={this.handleOutputFilters} split_tendrils={this.handle_split_tendrils} />
+                                </Col>
+                                <Col xs={8} style={{ minWidth: "30%", backgroundColor: '#31393f', height: '100vh', overflow: 'hidden', display:'none' }} id='parameter2View'>
+                                    <ParametersPlot elements={this.state.filtered_data} split_tendrils={this.state.split_tendrils} />
+                                </Col>
+
+                                <Col style={{ backgroundColor: '#31393f', height: '100vh', "padding": "0", }} id='shapeView'>
+                                    <ShapeContainerComponent />
+                                </Col>
+                            </Row>
                         </Col>
                         <Col xs={7} style={{ backgroundColor: '#31393f', 'markerEndmargin': '0' }}>
                             <Row style={{ height: '70vh' }}>

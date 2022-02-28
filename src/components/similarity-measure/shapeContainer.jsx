@@ -5,7 +5,7 @@ import './shapeContainer.css'
 import Container from 'react-bootstrap/Container'
 import { Col, Row, Form} from 'react-bootstrap';
 
-import GenerateSimilarShapes from '../scatter/generateSimilarShapes';
+import GenerateSimilarShapes from './generateSimilarShapes';
 
 
 
@@ -59,7 +59,7 @@ class ShapeContainerComponent extends React.Component{
             return(
                 <Container fluid>
                     <Row xs={12} style={{height: '5vh'}}>
-                    <Col xs={4}>
+                    <Col xs={6}>
                     <Form>
                     <Form.Group >
                         <Form.Label id='space'>Simiarity based on : </Form.Label>
@@ -88,7 +88,7 @@ class ShapeContainerComponent extends React.Component{
                     </Form.Group>
                     </Form>
                         </Col>
-                        <Col xs={2}>
+                        <Col xs={6}>
                             <select id='selection' onChange={this.handleOnChange}>
                                 {/* <option value='contrails1'>contrails1</option> */}
                                 {

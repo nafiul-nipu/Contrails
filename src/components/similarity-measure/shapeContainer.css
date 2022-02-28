@@ -1,3 +1,19 @@
 .radin{
     padding-left: 7%;
 }
+
+.axes line{
+    stroke: #a2a3a3;
+}
+.axes path{
+    stroke: #a2a3a3;
+}
+
+.axes text{
+    fill: #a2a3a3;
+}
+
+#space{
+    color: #a2a3a3;
+}
+

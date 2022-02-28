@@ -30,16 +30,16 @@ class GenerateSimilarShapes extends React.Component{
         }
         return(
             <>
-            <Row xs={12} style={{height: '40vh'}}>
+            <Row xs={12} style={{height: '29.5vh'}}>
                 {
                     this.neighbors[this.props.value].map((el, i) => {
                         // console.log(el, i)
                         // let ft = el.split('_')
                         // let folder = ft[0]
                         // let time = ft[1]
-                        if(i < 3){
+                        if(i < 2){
                             return(
-                                <Col id='shape' xs={4} style={{height: '40vh'}} key={i}>
+                                <Col id='shape' xs={6} style={{height: '29.5vh'}} key={i}>
                                 <DrawShapes
                                     key = {`${el}`}
                                     folder ={this.props.folder}     
@@ -55,13 +55,34 @@ class GenerateSimilarShapes extends React.Component{
 
                 </Row>
 
-                <Row xs={12} style={{height: '40vh'}}>
+                <Row xs={12} style={{height: '29.5vh'}}>
                 {
                     this.neighbors[this.props.value].map((el, i) => {
                         // console.log(el, i)
-                        if(i > 2){
+                        if(i > 1 && i < 4){
                             return(
-                                <Col id='shape' xs={4} style={{height: '40vh'}} key={i}>
+                                <Col id='shape' xs={6} style={{height: '29.5vh'}} key={i}>
+                                <DrawShapes
+                                    key = {`${this.props.value}-${el}`}
+                                    folder ={this.props.folder}     
+                                    time={el}      
+                                    id={i}                    
+                                />                            
+                                </Col>
+                            ) 
+                        }
+                    })
+                } 
+
+                </Row>
+
+                <Row xs={12} style={{height: '29.5vh'}}>
+                {
+                    this.neighbors[this.props.value].map((el, i) => {
+                        // console.log(el, i)
+                        if(i > 3){
+                            return(
+                                <Col id='shape' xs={6} style={{height: '29.5vh'}} key={i}>
                                 <DrawShapes
                                     key = {`${this.props.value}-${el}`}
                                     folder ={this.props.folder}     

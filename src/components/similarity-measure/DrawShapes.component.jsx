@@ -17,7 +17,7 @@ class DrawShapes extends React.Component{
         // console.log(this.props.folder, this.props.time)
 
         // if(this.props.time === 0.2){
-            let url = `https://raw.githubusercontent.com/nafiul-nipu/contrails-scatter-tree-evolution-d3/master/src/data/particles/${this.props.folder}/${this.props.time}.json`
+            let url = `https://raw.githubusercontent.com/nafiul-nipu/Contrails/master/src/data/shpaeData/${this.props.folder}/${this.props.time}.json`
 
             let xDomain = {} ;
             let yDomain = {};
@@ -52,7 +52,7 @@ class DrawShapes extends React.Component{
                     yDomain = {min: -2, max: 2}
                 }
             
-                new LineD3(this.scatterId.current, data, xDomain, yDomain, this.props.id, this.props.time)
+                new LineD3(this.scatterId.current, data, xDomain, yDomain, this.props.id, this.props.time, this.props.folder)
                 
             })
 
@@ -62,7 +62,7 @@ class DrawShapes extends React.Component{
 
     render(){
         return(
-            <div ref={this.scatterId}>{`${this.props.folder}_${this.props.time}`}</div>
+            <div ref={this.scatterId}></div>
         )
     }
 }
