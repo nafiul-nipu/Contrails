@@ -11,11 +11,12 @@ class OutputParameters extends React.Component {
     }
 
     componentDidMount() {
+        // console.log('inside output view component did mount')
         this.setState({ chartoutput: new OutputParametersD3(this.chartin.current, this.props.outputelements, this.props.split_tendrils) })
     }
 
     shouldComponentUpdate(nextProps){
-        // console.log("should update")
+        // console.log("should update output view")
         // console.log(this.state)
         // console.log(nextProps)
         // console.log(this.state.hasOwnProperty('output'))

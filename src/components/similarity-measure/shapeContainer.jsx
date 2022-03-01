@@ -54,8 +54,8 @@ class ShapeContainerComponent extends React.Component{
     render(){
         // console.log(this.state)
         if(this.state.value){
-            console.log('container')
-            console.log(this.state)
+            console.log('shape-container')
+            // console.log(this.state)
             return(
                 <Container fluid>
                     <Row xs={12} style={{height: '5vh'}}>

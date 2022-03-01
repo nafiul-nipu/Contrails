@@ -27,7 +27,7 @@ if(select('#evCon').node() !== null){
      height = select('#evCon').node().parentNode.clientHeight;
 
 }
-console.log(width, height)
+// console.log(width, height)
 
 // console.log(select('#evCon').node())
 // console.log(select('#evCon').node())

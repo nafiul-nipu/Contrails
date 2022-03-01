@@ -28,7 +28,8 @@ export default class InputParametersD3 {
     const width = d3.select(element).node().parentNode.clientWidth
     const height = 180
 
-    // console.log(data)
+    // console.log('draw inputs')
+    // console.log(d3.select(element).node().parentNode)
     function check_member_similarity(m1, m2) {
       const atr11_1 = m1['boundary-conditions']['T']
       const atr11_2 = m2['boundary-conditions']['T']

@@ -203,6 +203,7 @@ class ComponentsContainer extends React.Component {
 
 
     handle_split_tendrils(params) {
+        // console.log(params)
         this.setState({ split_tendrils: params })
     }
 
@@ -687,7 +688,7 @@ class ComponentsContainer extends React.Component {
                                     <QueryPanel inputFilters={this.handleInputFilters} outputFilters={this.handleOutputFilters} split_tendrils={this.handle_split_tendrils} />
                                 </Col>
                                 <Col xs={8} style={{ minWidth: "30%", backgroundColor: '#31393f', height: '100vh', overflow: 'hidden', display:`${this.state.parameterDisplay}` }} id='parameter2View'>
-                                    <ParametersPlot elements={this.state.filtered_data} split_tendrils={this.state.split_tendrils} />
+                                    <ParametersPlot elements={this.state.filtered_data} split_tendrils={this.state.split_tendrils} key={this.state.parameterDisplay}/>
                                 </Col>
 
                                 <Col style={{ backgroundColor: '#31393f', height: '100vh', "padding": "0", display:`${this.state.shapeDisplay}` }} id='shapeView'>
