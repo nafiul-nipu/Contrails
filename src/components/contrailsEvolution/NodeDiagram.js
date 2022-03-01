@@ -3,6 +3,7 @@ export const NodeDiagram = ({nodes,name}) => {
 
   return nodes.map(node=>(
   <circle className="circleCon"
+    key={node.id}
     cx={node.x}
     cy={node.y}
     r={node.r}
