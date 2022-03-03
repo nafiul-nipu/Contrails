@@ -11,6 +11,7 @@ export const Evolution = ({
     clusterKey,
     clusterData,
     nodeLink,
+    sortdata,
     circleYScale,
     circleRadius,
     name
@@ -35,6 +36,7 @@ export const Evolution = ({
                 clusterKey={clusterKey}
                 clusterData={clusterData}
                 nodeLink={nodeLink}
+                sortdata={sortdata}
                 xScale={xScale}
                 circleYScale={circleYScale}
                 circleRadius={circleRadius}

@@ -5,6 +5,7 @@ export   const ContrailsEvolution = ({
     clusterKey, 
     clusterData, 
     nodeLink,
+    sortdata,
     xScale, 
     circleYScale, 
     circleRadius, 
@@ -15,7 +16,8 @@ export   const ContrailsEvolution = ({
       let evolutionData = {"nodes":[], "links":[]}
       clusterKey.forEach(clk => {
 
-        let cluster = Object.keys(clusterData[clk])
+        // let cluster = Object.keys(clusterData[clk])
+        let cluster = sortdata[clk]
         // console.log(cluster)
 
         circleYScale.domain([0, cluster.length])
@@ -48,6 +50,9 @@ export   const ContrailsEvolution = ({
         // console.log(link)
         // console.log(nodeLink[link].source)
         // console.log(evolutionData.nodes)
+        let sourceIndex = evolutionData.nodes.findIndex(x => x.id === nodeLink[link].source)
+        let targetIndex = evolutionData.nodes.findIndex(x => x.id === nodeLink[link].target)
+
         evolutionData.links.push(
           // this one is needed is we want d3.line
           // [
@@ -60,8 +65,8 @@ export   const ContrailsEvolution = ({
           {
             "id1": nodeLink[link].source,
             "id2": nodeLink[link].target,
-            "source": [evolutionData.nodes[nodeLink[link].source - 1].x, evolutionData.nodes[nodeLink[link].source - 1].y],
-            "target": [evolutionData.nodes[nodeLink[link].target - 1].x, evolutionData.nodes[nodeLink[link].target - 1].y]
+            "source": [evolutionData.nodes[sourceIndex].x, evolutionData.nodes[sourceIndex].y],
+            "target": [evolutionData.nodes[targetIndex].x, evolutionData.nodes[targetIndex].y]
           }
         )
 

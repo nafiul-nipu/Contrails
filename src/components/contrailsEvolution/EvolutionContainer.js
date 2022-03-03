@@ -5,13 +5,16 @@ import { scaleBand, scaleLinear, select} from 'd3';
 import { Evolution } from './Evolution';
 
 import cluster from "../data-component/evolutionData/contrails1-cluster.json";
-import network from"../data-component/evolutionData/contrails1-network.json"
+import network from"../data-component/evolutionData/contrails1-network.json";
+import sortList from "../data-component/evolutionData/contrails1-sort.json";
 
 import cluster2 from '../data-component/evolutionData/contrails2-cluster.json';
-import network2 from '../data-component/evolutionData/contrails2-network.json'
+import network2 from '../data-component/evolutionData/contrails2-network.json';
+import sortList2 from "../data-component/evolutionData/contrails2-sort.json";
 
 import cluster3 from "../data-component/evolutionData/contrails3-cluster.json";
-import network3 from"../data-component/evolutionData/contrails3-network.json"
+import network3 from"../data-component/evolutionData/contrails3-network.json";
+import sortList3 from "../data-component/evolutionData/contrails3-sort.json";
 
 
 let width = 450;
@@ -33,31 +36,37 @@ if(select('#evCon').node() !== null){
 // console.log(select('#evCon').node())
   const [clusterData, setClusterData] = useState(null)
   const [nodeLink, setnNodeLink] = useState(null)
+  const [sortlist, setsortlist] = useState(null)
 
   useEffect(() =>{
     // load data
     setClusterData(cluster)
     setnNodeLink(network)
-  }, [cluster, network]);
+    setsortlist(sortList)
+  }, [cluster, network, sortList]);
 
   const [clusterData2, setClusterData2] = useState(null)
   const [nodeLink2, setnNodeLink2] = useState(null)
+  const [sortlist2, setsortlist2] = useState(null)
 
   useEffect(() =>{
     // load data
     setClusterData2(cluster2)
     setnNodeLink2(network2)
-  }, [cluster2, network2]);
+    setsortlist2(sortList2)
+  }, [cluster2, network2, sortList2]);
 
 
   const [clusterData3, setClusterData3] = useState(null)
   const [nodeLink3, setnNodeLink3] = useState(null)
+  const [sortlist3, setsortlist3] = useState(null)
 
   useEffect(() =>{
     // load data
     setClusterData3(cluster3)
     setnNodeLink3(network3)
-  }, [cluster3, network3]);
+    setsortlist3(sortList3)
+  }, [cluster3, network3, sortList3]);
   
 
   // console.log(clusterData)
@@ -96,6 +105,7 @@ if(select('#evCon').node() !== null){
                 clusterKey = {clusterKey}
                 clusterData = {clusterData}
                 nodeLink = {nodeLink}
+                sortdata={sortlist}
                 circleYScale = {circleYScale}
                 circleRadius = {circleRadius}
                 name='c1'
@@ -112,6 +122,7 @@ if(select('#evCon').node() !== null){
             clusterKey = {clusterKey}
             clusterData = {clusterData2}
             nodeLink = {nodeLink2}
+            sortdata={sortlist2}
             circleYScale = {circleYScale}
             circleRadius = {circleRadius}
             name='c2'
@@ -128,6 +139,7 @@ if(select('#evCon').node() !== null){
             clusterKey = {clusterKey}
             clusterData = {clusterData3}
             nodeLink = {nodeLink3}
+            sortdata={sortlist3}
             circleYScale = {circleYScale}
             circleRadius = {circleRadius}
             name='c3'
