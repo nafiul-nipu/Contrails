@@ -181,7 +181,9 @@ export default class InputParametersD3 {
 
     var dif_memeber = return_differences_member(copy_m)
 
+    console.log(members_dict)
     Object.keys(members_dict).forEach((el, index) => {
+      console.log(el, index)
       // console.log(typeof(members_dict[el][0]))
 
       var member = m[index]
@@ -196,8 +198,17 @@ export default class InputParametersD3 {
       let dif_input = dif_memeber['input']
 
       // console.log(members_dict[el])
-      group.append("text").text(`Member: ${members_dict[el]} `)
-        .attr('transform', `translate(${width - 240}, ${(height + 40) * i + 20})`)
+      group.append("text").text( () => {
+        if(index === 0){
+          return `Members: 1 - 6`
+        }else if(index === 2){
+          return `Members: 7 - 9, 11 - 19`
+        }else{
+          return `Members: ${members_dict[el]} `
+        }
+        
+      })
+        .attr('transform', `translate(${width - 170}, ${(height + 40) * i + 20})`)
         .attr("fill", () => {
          
             return 'white'
@@ -209,10 +220,10 @@ export default class InputParametersD3 {
         if(members_dict[el].includes(19)){
           // console.log("19")
           group.append('rect')
-            .attr("x", 30)
+            .attr("x", 5)
             .attr("y", ((height + 40) * i) + 25)
             .attr("class", "contrails-bar")
-            .attr("width", width-100)
+            .attr("width", width - 30)
             .attr("height", height - 20)
             .attr("fill", '#5a5a5a')
             .attr('opacity', 1)
@@ -246,7 +257,7 @@ export default class InputParametersD3 {
           .range(inputDomain[keys[k]].range)
         group.append('rect')
           .attr("x", function () {
-            return 35 + 21 * k
+            return 10 + 21 * k
           })
           .attr('y', ((height + 40) * i) + 35 + 60)
           .attr('width', 20)
@@ -284,9 +295,9 @@ export default class InputParametersD3 {
           group.append('rect')
             .attr("x", function () {
               if (bak <= 1) {
-                return 53 + 15 * bak
+                return 33 + 15 * bak
               } else {
-                return 30 + 15 * bak
+                return 10 + 15 * bak
               }
             })
             .attr('y', function () {
