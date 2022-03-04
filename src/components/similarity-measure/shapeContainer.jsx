@@ -59,6 +59,16 @@ class ShapeContainerComponent extends React.Component{
             return(
                 <Container fluid>
                     <Row xs={12} style={{height: '5vh'}}>
+                    <Col xs={3}>
+                            <select id='selection' onChange={this.handleOnChange}>
+                                {/* <option value='contrails1'>contrails1</option> */}
+                                {
+                                    this.simulation.map((el, i) =>{
+                                        return <option value={`${el}`} key={i}>{el}</option>
+                                    })
+                                }
+                            </select>
+                        </Col>
                     <Col xs={6}>
                     <Form>
                     <Form.Group >
@@ -88,16 +98,7 @@ class ShapeContainerComponent extends React.Component{
                     </Form.Group>
                     </Form>
                         </Col>
-                        <Col xs={6}>
-                            <select id='selection' onChange={this.handleOnChange}>
-                                {/* <option value='contrails1'>contrails1</option> */}
-                                {
-                                    this.simulation.map((el, i) =>{
-                                        return <option value={`${el}`} key={i}>{el}</option>
-                                    })
-                                }
-                            </select>
-                        </Col>
+                        
                     </Row>
 
                     <GenerateSimilarShapes 
