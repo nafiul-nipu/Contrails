@@ -15,7 +15,12 @@ class InputParameters extends React.Component {
 
     componentDidMount(){
         // console.log("inside input view component did mount")
-        this.setState({chartinput: new InputParametersD3(this.chart.current, this.props.elements, true)}) 
+        // console.log(this.props.shouldRender)
+        if(this.props.shouldRender === "block"){
+            this.setState({chartinput: new InputParametersD3(this.chart.current, this.props.elements, true)}) 
+
+        }
+        
     }
 
     shouldComponentUpdate(nextProps){

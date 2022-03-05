@@ -36,6 +36,7 @@ export   const ContrailsEvolution = ({
           // console.log(cluster.indexOf(cl))
           evolutionData.nodes.push({
             "id": cl,
+            "particles": info[cl],
             "x": xScale(clk),
             "y":circleYScale(cluster.indexOf(cl)),
             "r":circleRadius(info[cl])
