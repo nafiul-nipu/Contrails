@@ -6,6 +6,7 @@ export   const ContrailsEvolution = ({
     clusterData, 
     nodeLink,
     sortdata,
+    attr,
     xScale, 
     circleYScale, 
     circleRadius, 
@@ -37,6 +38,9 @@ export   const ContrailsEvolution = ({
           evolutionData.nodes.push({
             "id": cl,
             "particles": info[cl],
+            "temp":attr[cl].temp,
+            "length":attr[cl].length,
+            "mass":attr[cl].mass.toFixed(5),
             "x": xScale(clk),
             "y":circleYScale(cluster.indexOf(cl)),
             "r":circleRadius(info[cl])

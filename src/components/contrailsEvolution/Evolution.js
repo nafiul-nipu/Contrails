@@ -12,11 +12,13 @@ export const Evolution = ({
     clusterData,
     nodeLink,
     sortdata,
+    attr,
     circleYScale,
     circleRadius,
     name
 }) => {
 
+    // console.log(attr[5])
 
     return(
         <svg width={width} height={height}>
@@ -37,6 +39,7 @@ export const Evolution = ({
                 clusterData={clusterData}
                 nodeLink={nodeLink}
                 sortdata={sortdata}
+                attr={attr}
                 xScale={xScale}
                 circleYScale={circleYScale}
                 circleRadius={circleRadius}

@@ -7,14 +7,17 @@ import { Evolution } from './Evolution';
 import cluster from "../data-component/evolutionData/contrails1-cluster.json";
 import network from"../data-component/evolutionData/contrails1-network.json";
 import sortList from "../data-component/evolutionData/contrails1-sort.json";
+import attr from "../data-component/evolutionData/contrails1-attr.json";
 
 import cluster2 from '../data-component/evolutionData/contrails2-cluster.json';
 import network2 from '../data-component/evolutionData/contrails2-network.json';
 import sortList2 from "../data-component/evolutionData/contrails2-sort.json";
+import attr2 from "../data-component/evolutionData/contrails2-attr.json";
 
 import cluster3 from "../data-component/evolutionData/contrails3-cluster.json";
 import network3 from"../data-component/evolutionData/contrails3-network.json";
 import sortList3 from "../data-component/evolutionData/contrails3-sort.json";
+import attr3 from "../data-component/evolutionData/contrails3-attr.json";
 
 
 let width = 450;
@@ -37,6 +40,7 @@ if(select('#evCon').node() !== null){
   const [clusterData, setClusterData] = useState(null)
   const [nodeLink, setnNodeLink] = useState(null)
   const [sortlist, setsortlist] = useState(null)
+  // const [attrL, setAttr] = useState(null)
 
   useEffect(() =>{
     // load data
@@ -106,6 +110,7 @@ if(select('#evCon').node() !== null){
                 clusterData = {clusterData}
                 nodeLink = {nodeLink}
                 sortdata={sortlist}
+                attr={attr}
                 circleYScale = {circleYScale}
                 circleRadius = {circleRadius}
                 name='c1'
@@ -123,6 +128,7 @@ if(select('#evCon').node() !== null){
             clusterData = {clusterData2}
             nodeLink = {nodeLink2}
             sortdata={sortlist2}
+            attr={attr2}
             circleYScale = {circleYScale}
             circleRadius = {circleRadius}
             name='c2'
@@ -140,6 +146,7 @@ if(select('#evCon').node() !== null){
             clusterData = {clusterData3}
             nodeLink = {nodeLink3}
             sortdata={sortlist3}
+            attr={attr3}
             circleYScale = {circleYScale}
             circleRadius = {circleRadius}
             name='c3'

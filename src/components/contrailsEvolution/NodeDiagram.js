@@ -40,7 +40,10 @@ export const NodeDiagram = ({nodes,name}) => {
         {(props) => (
           <Tooltip id="overlay-example" {...props}>
             <p>{`ID : ${node.id}`} <br/>
-              {`Total Particles : ${node.particles}`}
+              {`Total Particles : ${node.particles}`} <br/>
+              {`Total Mass: ${node.mass}`} <br/>
+              {`Avg. Temp: ${node.temp}`} <br/>
+              {`Total Length: ${node.length}`}
             </p>
              
           </Tooltip>
