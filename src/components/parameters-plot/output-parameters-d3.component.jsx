@@ -68,6 +68,7 @@ export default class OutputParametersD3 {
             }
 
             function get_mean_attr_val(data){
+                  console.log(data)
                   var total_sum =0
                   for(var i = 0; i< data.length; i++){
                         const normalized_data = normalize_data(data[i])
@@ -188,39 +189,81 @@ export default class OutputParametersD3 {
             }
 
             const ids = dataRegistry.map(el => { return el['id'] })
-            const T_euls = dataRegistry.map(el => {
-                  var e = el['output-parameters']
-                  return e['T_eul_avg_timepoints']
-            })
-            const T_lags = dataRegistry.map(el => {
-                  var e = el['output-parameters']
-                  return e['T_lag_avg_timepoints']
-            })
+            // const T_euls = dataRegistry.map(el => {
+            //       // console.log(el['output-parameters'])
+            //       if(el['output-parameters'] !== undefined){
+            //             var e = el['output-parameters']
+            //             return e['T_eul_avg_timepoints']
+            //       }
+                  
+            // })
+            const T_euls = dataRegistry.reduce((res, el) => {
+                  // console.log(el)
+                  if(el['output-parameters'] !== undefined){
+                        var e = el['output-parameters']
+                        res.push(e['T_eul_avg_timepoints'])
+                  }
+                  return res
+            }, [])
+
+            const T_lags = dataRegistry.reduce((res, el) => {
+                  // console.log(el)
+                  if(el['output-parameters'] !== undefined){
+                        var e = el['output-parameters']
+                        res.push(e['T_lag_avg_timepoints'])
+                  }
+                  
+                  return res
+            }, [])
             // const Ygas_lags = dataRegistry.map(el => {var e = el['output-parameters']
             //       return e['Ygas_lag_avg']})
-            const d_lags = dataRegistry.map(el => {
-                  var e = el['output-parameters']
-                  return e['d_lag_avg_timepoints']
-            })
+
+            const d_lags = dataRegistry.reduce((res, el) => {
+                  // console.log(el)
+                  if(el['output-parameters'] !== undefined){
+                        var e = el['output-parameters']
+                        res.push(e['d_lag_avg_timepoints'])
+                  }
+                  
+                  return res
+            }, [])
             // const rho_euls = dataRegistry.map(el => {
             //       var e = el['output-parameters']
             //       return e['rho_eul_avg_timepoints']
             // })
-            const rho_lags = dataRegistry.map(el => {
-                  var e = el['output-parameters']
-                  return e['rho_lag_avg_timepoints']
-            })
-            const p_euls = dataRegistry.map(el => {
-                  var e = el['output-parameters']
-                  return e['p_eul_avg_timepoints']
-            })
-            const k_euls = dataRegistry.map(el => {
-                  var e = el['output-parameters']
-                  return e['k_eul_avg_timepoints']
-            })
+            const rho_lags = dataRegistry.reduce((res, el) => {
+                  // console.log(el)
+                  if(el['output-parameters'] !== undefined){
+                        var e = el['output-parameters']
+                        res.push(e['rho_lag_avg_timepoints'])
+                  }
+                  
+                  return res
+            }, [])
+            
+            const p_euls = dataRegistry.reduce((res, el) => {
+                  // console.log(el)
+                  if(el['output-parameters'] !== undefined){
+                        var e = el['output-parameters']
+                        res.push(e['p_eul_avg_timepoints'])
+                  }
+                  
+                  return res
+            }, [])
+            const k_euls = dataRegistry.reduce((res, el) => {
+                  // console.log(el)
+                  if(el['output-parameters'] !== undefined){
+                        // console.log('c')
+                        var e = el['output-parameters']
+                        res.push(e['k_eul_avg_timepoints'])
+                  }
+                  
+                  return res
+            }, [])
 
 
 
+            // console.log(T_lags)
             create_tendril_plot(T_lags, 15, 100, [{ x: 15, y: 100 }], 'T_lag_avg', ids, get_mean_attr_val(T_lags))
             create_tendril_plot(T_euls, 15, 200, [{ x: 15, y: 200 }], 'T_eul_avg', ids, get_mean_attr_val(T_euls))
             create_tendril_plot(d_lags, 15, 320, [{ x: 15, y: 320 }], 'd_lag_avg', ids, get_mean_attr_val(d_lags))

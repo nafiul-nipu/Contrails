@@ -28,6 +28,7 @@ export default class InputParametersD3 {
     const width = d3.select(element).node().parentNode.clientWidth
     const height = 180
 
+    console.log(data)
     // console.log('draw inputs')
     // console.log(d3.select(element).node().parentNode)
     function check_member_similarity(m1, m2) {
@@ -135,7 +136,12 @@ export default class InputParametersD3 {
       return result_member
     }
 
-    var ids = data.map(d => d['id'])
+    var ids = data.reduce((res,d) => {
+      if(d['id'] !== 20){
+        res.push(d['id'])
+      }
+      return res
+    }, [])
     var members_dict = new Object()
 
     while (ids.length > 0) {
