@@ -12,7 +12,8 @@ class OutputParameters extends React.Component {
 
     componentDidMount() {
         // console.log('inside output view component did mount')
-        this.setState({ chartoutput: new OutputParametersD3(this.chartin.current, this.props.outputelements, this.props.split_tendrils) })
+        // console.log(this.props.memberTop, this.props.memberBottom)
+        this.setState({ chartoutput: new OutputParametersD3(this.chartin.current, this.props.outputelements, this.props.split_tendrils, this.props.memberTop, this.props.memberBottom) })
     }
 
     shouldComponentUpdate(nextProps){
@@ -21,7 +22,7 @@ class OutputParameters extends React.Component {
         // console.log(nextProps)
         // console.log(this.state.hasOwnProperty('output'))
         if(this.state.hasOwnProperty('chartoutput')){
-            this.state.chartoutput.update(nextProps.outputelements, !this.props.split_tendrils)
+            this.state.chartoutput.update(nextProps.outputelements, !this.props.split_tendrils, nextProps.memberTop, nextProps.memberBottom)
         }
 
         return true

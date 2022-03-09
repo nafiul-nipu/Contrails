@@ -13,12 +13,13 @@ export default class OutputParametersD3 {
 
 
 
-      constructor(element,  data_registry) {
+      constructor(element,  data_registry, tendril, top, bottom) {
             this.element = element
-            this.draw_tendrils(element, data_registry)
+            this.contrailMembers = [top, bottom]
+            this.draw_tendrils(element, data_registry, this.contrailMembers)
       }
 
-      draw_tendrils(element, data_registry, split) {
+      draw_tendrils(element, data_registry, split, members) {
             const dataRegistry = data_registry
 
             const line = d3.line()
@@ -80,7 +81,7 @@ export default class OutputParametersD3 {
             }
 
 
-            function create_tendril_plot(data, prevX_first, prevY_first, points, title, ids, avg_val) {
+            function create_tendril_plot(data, prevX_first, prevY_first, points, title, ids, avg_val, members) {
                   svg.append("text").text(title)
                         .attr('transform', `translate(${prevX_first + 30},${prevY_first - 50})`)
                         .attr('fill', 'white')
@@ -89,7 +90,6 @@ export default class OutputParametersD3 {
                   var prevY = new Array(data.length)
 
                   // console.log(data.length)
-                  const contrailMembers = [17,18,19]
                   for (var i = 0; i<data.length; i++) {
                         
                         // if(ids[i] == 5 || ids[i] == 6){
@@ -129,14 +129,15 @@ export default class OutputParametersD3 {
                               prevY[i] = val[1] + prevY[i];
                               p.push({ x: prevX[i], y: prevY[i] })
                               g.append('circle')
-                                    .attr('class', 'circles circle_' + title_id)
+                                    .attr('class', 'output-circle circle_' + title_id)
+                                    .attr('id', "circles_" + title_id + "_")
                                     .attr('cx', prevX[i])
                                     .attr('cy', prevY[i])
                                     .attr('r', 4)
                                     .attr('fill-opacity', 0.65)
                                     .attr('fill', () => {
-                                          if(contrailMembers.includes(title_id)){
-                                                return 'black'
+                                          if(members.includes(title_id)){
+                                                return '#42A5B3'
                                           }else{
                                                 return '#FF6F61'
                                           }
@@ -147,8 +148,8 @@ export default class OutputParametersD3 {
                               .attr('fill', 'none')
                               .attr('stroke', () => {
                                     // console.log(title_id)
-                                    if(contrailMembers.includes(title_id)){
-                                          return 'black'
+                                    if(members.includes(title_id)){
+                                          return '#42A5B3'
                                     }else{
                                           return '#FF6F61'
                                     }
@@ -263,23 +264,25 @@ export default class OutputParametersD3 {
 
 
 
-            // console.log(T_lags)
-            create_tendril_plot(T_lags, 15, 100, [{ x: 15, y: 100 }], 'T_lag_avg', ids, get_mean_attr_val(T_lags))
-            create_tendril_plot(T_euls, 15, 200, [{ x: 15, y: 200 }], 'T_eul_avg', ids, get_mean_attr_val(T_euls))
-            create_tendril_plot(d_lags, 15, 320, [{ x: 15, y: 320 }], 'd_lag_avg', ids, get_mean_attr_val(d_lags))
-            create_tendril_plot(rho_lags, 15, 440, [{ x: 15, y: 440 }], 'rho_lag_avg', ids, get_mean_attr_val(rho_lags))
-            // create_tendril_plot(rho_euls, 15, 580, [{ x: 15, y: 580 }], 'rho_eul_avg', ids, get_mean_attr_val(rho_euls))
-            create_tendril_plot(k_euls, 15, 560, [{ x: 15, y: 560 }], 'k_eul_avg', ids, get_mean_attr_val(k_euls))
-            create_tendril_plot(p_euls, 15, 680, [{ x: 15, y: 680 }], 'p_eul_avg', ids, get_mean_attr_val(p_euls))
+            // console.log(this.contrailMembers)
+            create_tendril_plot(T_lags, 15, 100, [{ x: 15, y: 100 }], 'T_lag_avg', ids, get_mean_attr_val(T_lags), this.contrailMembers)
+            create_tendril_plot(T_euls, 15, 200, [{ x: 15, y: 200 }], 'T_eul_avg', ids, get_mean_attr_val(T_euls), this.contrailMembers)
+            create_tendril_plot(d_lags, 15, 320, [{ x: 15, y: 320 }], 'd_lag_avg', ids, get_mean_attr_val(d_lags), this.contrailMembers)
+            create_tendril_plot(rho_lags, 15, 440, [{ x: 15, y: 440 }], 'rho_lag_avg', ids, get_mean_attr_val(rho_lags), this.contrailMembers)
+            // create_tendril_plot(rho_euls, 15, 580, [{ x: 15, y: 580 }], 'rho_eul_avg', ids, get_mean_attr_val(rho_euls), this.contrailMembers)
+            create_tendril_plot(k_euls, 15, 560, [{ x: 15, y: 560 }], 'k_eul_avg', ids, get_mean_attr_val(k_euls), this.contrailMembers)
+            create_tendril_plot(p_euls, 15, 680, [{ x: 15, y: 680 }], 'p_eul_avg', ids, get_mean_attr_val(p_euls), this.contrailMembers)
 
            
       }
 
-      update(data, split) {
+      update(data, split, top, bottom) {
             let el = this
             d3.select(el.element).select('svg').remove()
 
-            this.draw_tendrils(el.element, data, split)
+            console.log(data)
+            this.contrailMembers = [top, bottom]
+            this.draw_tendrils(el.element, data, split, this.contrailMembers)
 
       }
 

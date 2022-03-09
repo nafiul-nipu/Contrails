@@ -14,15 +14,16 @@ const url = "https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example
 export default class InputParametersD3 {
 
 
-  constructor(element, data, first_time) {
+  constructor(element, data, first_time, top, bottom) {
     this.element = element
     this.data = data
     this.color = d3.scaleOrdinal()
+    this.members = [top, bottom]
     this.boundaries = ["bypassInlet", "engine", "farfield", "inlet", "nozzle", "outlet", "turbine"]
-    this.draw_inputs(element, data, first_time)
+    this.draw_inputs(element, data, first_time, this.members)
   }
 
-  draw_inputs(element, new_data, first_time) {
+  draw_inputs(element, new_data, first_time, hmembers) {
     const self = this;
     const data = new_data;
     const width = d3.select(element).node().parentNode.clientWidth
@@ -223,7 +224,20 @@ export default class InputParametersD3 {
 
       // HIGHLIGHTING THE CONTRAILS DATA ONLY
         // HARD CODED NOW WILL CHANGE LATER OR MAYBE NO NEED IN FUTURE
-        if(members_dict[el].includes(19)){
+        if(members_dict[el].includes(hmembers[0])){
+          // console.log("19")
+          group.append('rect')
+            .attr("x", 5)
+            .attr("y", ((height + 40) * i) + 25)
+            .attr("class", highlight_class_name)
+            .attr('id', 'input-bar')
+            .attr("width", width - 30)
+            .attr("height", height - 20)
+            .attr("fill", 'grey')
+            .attr('opacity', 1)
+            .attr('rx', '15')
+
+        }else if(members_dict[el].includes(hmembers[1])){
           // console.log("19")
           group.append('rect')
             .attr("x", 5)
@@ -335,10 +349,11 @@ export default class InputParametersD3 {
   }
 
 
-  update(data) {
+  update(data, top, bottom) {
     let vis = this
     d3.select(vis.element).select('svg').remove()
-    this.draw_inputs(vis.element, data, false)
+    this.members = [top, bottom]
+    this.draw_inputs(vis.element, data, false, this.members)
 
   }
 

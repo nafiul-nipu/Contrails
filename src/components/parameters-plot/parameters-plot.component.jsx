@@ -24,10 +24,17 @@ class ParametersPlot extends React.Component {
                         <InputParameters 
                             elements={this.props.elements}
                             shouldRender={this.props.shouldRender}
+                            memberTop = {this.props.memberTop}
+                            memberBottom = {this.props.memberBottom}
                         />
                     </Col>
                     <Col xs={7} style={{ margin: "0px" }}>
-                        <OutputParameters style={{ margin: "0px" }} outputelements={this.props.elements} split_tendrils={this.props.split_tendrils}/>
+                        <OutputParameters style={{ margin: "0px" }} 
+                            outputelements={this.props.elements} 
+                            split_tendrils={this.props.split_tendrils}
+                            memberTop = {this.props.memberTop}
+                            memberBottom = {this.props.memberBottom}
+                        />
                     </Col>
                 </Row>
             </Container>

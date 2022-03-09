@@ -120,13 +120,21 @@ class ComponentsContainer extends React.Component {
                 d3.selectAll('#input-bar').style('opacity', 0)
                 d3.select(`.highlight_${self.memberTop}`).style('opacity', 1)
                 d3.select(`.highlight_${self.memberBottom}`).style('opacity', 1)
+
+                d3.selectAll('.output-circle').style('fill', '#FF6F61')
+                d3.selectAll(`#circles_${self.memberTop}_`).style('fill', "steelblue")
+                d3.selectAll(`#circles_${self.memberBottom}_`).style('fill', "steelblue")
+
+                d3.selectAll('.tendrils').style('stroke', '#FF6F61')
+                d3.selectAll(`#path_${self.memberTop}_`).style('stroke', "steelblue")
+                d3.selectAll(`#path_${self.memberBottom}_`).style('stroke', "steelblue")
             }
 
         })
     }
 
     handleFilteringTop(member, timestep, attribute, dataRange, range){
-        // console.log(this.state.volumeDataTop)
+        // console.log("filtering top")
 
         const self = this
         loader(member, timestep, attribute).then(function(){
@@ -196,10 +204,18 @@ class ComponentsContainer extends React.Component {
             }
 
             if(member !== 20){
-                console.log(self.memberTop)
+                // console.log(self.memberTop)
                 d3.selectAll('#input-bar').style('opacity', 0)
                 d3.select(`.highlight_${self.memberTop}`).style('opacity', 1)
                 d3.select(`.highlight_${self.memberBottom}`).style('opacity', 1)
+
+                d3.selectAll('.output-circle').style('fill', '#FF6F61')
+                d3.selectAll(`#circles_${self.memberTop}_`).style('fill', "#42A5B3")
+                d3.selectAll(`#circles_${self.memberBottom}_`).style('fill', "#42A5B3")
+
+                d3.selectAll('.tendrils').style('stroke', '#FF6F61')
+                d3.selectAll(`#path_${self.memberTop}_`).style('stroke', "#42A5B3")
+                d3.selectAll(`#path_${self.memberBottom}_`).style('stroke', "#42A5B3")
             }
         })
     }
@@ -753,6 +769,8 @@ class ComponentsContainer extends React.Component {
                                         split_tendrils={this.state.split_tendrils} 
                                         key={this.state.parameterDisplay}
                                         shouldRender ={this.state.parameterDisplay}
+                                        memberTop = {this.memberTop}
+                                        memberBottom = {this.memberBottom}
                                     />
                                 </Col>
 
