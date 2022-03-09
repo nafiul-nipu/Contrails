@@ -68,7 +68,7 @@ export default class OutputParametersD3 {
             }
 
             function get_mean_attr_val(data){
-                  console.log(data)
+                  // console.log(data)
                   var total_sum =0
                   for(var i = 0; i< data.length; i++){
                         const normalized_data = normalize_data(data[i])
