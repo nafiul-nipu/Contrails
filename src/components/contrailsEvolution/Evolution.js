@@ -32,6 +32,7 @@ export const Evolution = ({
                 xScale = {xScale}
                 heightOffset = {margin.top}
                 innerHeight={innerHeight}
+                name={name}
             />
     
             <ContrailsEvolution 

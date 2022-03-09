@@ -44,12 +44,12 @@ class ComponentsContainer extends React.Component {
 
         this.volumeDataTop = null
         this.memberTop = 17
-        this.timeTop =  0.06
+        this.timeTop =  0.10
         this.attributeTop =  'temp'
 
         this.volumeDataBottom = null
         this.memberBottom = 19
-        this.timeBottom =  0.06
+        this.timeBottom =  0.10
         this.attributeBottom = 'temp'
 
 
@@ -92,6 +92,30 @@ class ComponentsContainer extends React.Component {
             self.timeTop = timestep;
             self.attributeTop = attribute;
             self.setState({volumeDataTop : getData(), memberTop: self.memberTop})
+            if(member === 17){
+                // console.log("hello")
+                // d3.select(`#borderc1${timestep}`).style('fill', '#cccecf')
+                d3.selectAll('.evolutionRectc1').style('fill', '#818385')
+                    .style('opacity', 0.5)
+                document.getElementById(`borderc1${timestep}`).style.fill = '#cccecf'
+                document.getElementById(`borderc1${timestep}`).style.opacity = '0.5'
+            }else if(member === 18){
+                // console.log("hello")
+                // d3.select(`#borderc1${timestep}`).style('fill', '#cccecf')
+                d3.selectAll('.evolutionRectc2').style('fill', '#818385')
+                .style('opacity', 0.5)
+                document.getElementById(`borderc2${timestep}`).style.fill = '#cccecf'
+                document.getElementById(`borderc2${timestep}`).style.opacity = '0.5'
+                
+            }else if(member === 19){
+                // console.log("hello")
+                // d3.select(`#borderc1${timestep}`).style('fill', '#cccecf')
+                d3.selectAll('.evolutionRectc3').style('fill', '#818385')
+                .style('opacity', 0.5)
+                document.getElementById(`borderc3${timestep}`).style.fill = '#cccecf'
+                document.getElementById(`borderc3${timestep}`).style.opacity = '0.5'
+                
+            }
 
         })
     }
@@ -141,6 +165,30 @@ class ComponentsContainer extends React.Component {
             self.timeBottom = timestep;
             self.attributeBottom = attribute;
             self.setState({volumeDataBottom: getData(), memberBottom: self.memberBottom})
+            if(member === 17){
+                // console.log("hello")
+                // d3.select(`#borderc1${timestep}`).style('fill', '#cccecf')
+                d3.selectAll('.evolutionRectc1').style('fill', '#818385')
+                    .style('opacity', 0.5)
+                document.getElementById(`borderc1${timestep}`).style.fill = '#cccecf'
+                document.getElementById(`borderc1${timestep}`).style.opacity = '0.5'
+            }else if(member === 18){
+                // console.log("hello")
+                // d3.select(`#borderc1${timestep}`).style('fill', '#cccecf')
+                d3.selectAll('.evolutionRectc2').style('fill', '#818385')
+                .style('opacity', 0.5)
+                document.getElementById(`borderc2${timestep}`).style.fill = '#cccecf'
+                document.getElementById(`borderc2${timestep}`).style.opacity = '0.5'
+                
+            }else if(member === 19){
+                // console.log("hello")
+                // d3.select(`#borderc1${timestep}`).style('fill', '#cccecf')
+                d3.selectAll('.evolutionRectc3').style('fill', '#818385')
+                .style('opacity', 0.5)
+                document.getElementById(`borderc3${timestep}`).style.fill = '#cccecf'
+                document.getElementById(`borderc3${timestep}`).style.opacity = '0.5'
+                
+            }
         })
     }
 

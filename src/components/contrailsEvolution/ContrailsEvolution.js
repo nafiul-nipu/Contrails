@@ -48,8 +48,8 @@ export   const ContrailsEvolution = ({
         cluster.forEach(cl => {
           // console.log(cl)
           // console.log(cluster.indexOf(cl))
-          console.log(min, max)
-          console.log(circleRadius(info[cl]))
+          // console.log(min, max)
+          // console.log(circleRadius(info[cl]))
           evolutionData.nodes.push({
             "id": cl,
             "particles": info[cl],
