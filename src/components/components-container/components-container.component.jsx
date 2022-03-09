@@ -116,6 +116,11 @@ class ComponentsContainer extends React.Component {
                 document.getElementById(`borderc3${timestep}`).style.opacity = '0.5'
                 
             }
+            if(member !== 20){
+                d3.selectAll('#input-bar').style('opacity', 0)
+                d3.select(`.highlight_${self.memberTop}`).style('opacity', 1)
+                d3.select(`.highlight_${self.memberBottom}`).style('opacity', 1)
+            }
 
         })
     }
@@ -188,6 +193,13 @@ class ComponentsContainer extends React.Component {
                 document.getElementById(`borderc3${timestep}`).style.fill = '#cccecf'
                 document.getElementById(`borderc3${timestep}`).style.opacity = '0.5'
                 
+            }
+
+            if(member !== 20){
+                console.log(self.memberTop)
+                d3.selectAll('#input-bar').style('opacity', 0)
+                d3.select(`.highlight_${self.memberTop}`).style('opacity', 1)
+                d3.select(`.highlight_${self.memberBottom}`).style('opacity', 1)
             }
         })
     }

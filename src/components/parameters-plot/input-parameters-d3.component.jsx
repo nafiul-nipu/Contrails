@@ -28,7 +28,7 @@ export default class InputParametersD3 {
     const width = d3.select(element).node().parentNode.clientWidth
     const height = 180
 
-    console.log(data)
+    // console.log(data)
     // console.log('draw inputs')
     // console.log(d3.select(element).node().parentNode)
     function check_member_similarity(m1, m2) {
@@ -187,9 +187,9 @@ export default class InputParametersD3 {
 
     var dif_memeber = return_differences_member(copy_m)
 
-    console.log(members_dict)
+    // console.log(members_dict)
     Object.keys(members_dict).forEach((el, index) => {
-      console.log(el, index)
+      // console.log(el, index)
       // console.log(typeof(members_dict[el][0]))
 
       var member = m[index]
@@ -228,24 +228,29 @@ export default class InputParametersD3 {
           group.append('rect')
             .attr("x", 5)
             .attr("y", ((height + 40) * i) + 25)
-            .attr("class", "contrails-bar")
+            .attr("class", highlight_class_name)
+            .attr('id', 'input-bar')
             .attr("width", width - 30)
             .attr("height", height - 20)
-            .attr("fill", '#5a5a5a')
+            .attr("fill", 'grey')
             .attr('opacity', 1)
             .attr('rx', '15')
 
+        }else{
+          group.append('rect')
+            .attr("x", 5)
+            .attr("y", ((height + 40) * i) + 25)
+            .attr("class", highlight_class_name)
+            .attr('id', 'input-bar')
+            .attr("width", width - 30)
+            .attr("height", height - 20)
+            .attr("fill", 'grey')
+            .attr('opacity', 0)
+            .attr('rx', '15')  
+
         }
 
-      group.append('rect')
-        .attr("x", 30)
-        .attr("y", ((height + 40) * i) + 25)
-        .attr("class", highlight_class_name)
-        .attr("width", width-100)
-        .attr("height", height - 20)
-        .attr("fill", 'grey')
-        .attr('opacity', 0)
-        .attr('rx', '15')        
+            
 
 
       let keys = Object.keys(inputValues)
