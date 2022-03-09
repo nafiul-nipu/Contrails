@@ -13,6 +13,18 @@ export   const ContrailsEvolution = ({
     offset,
     name
   }) => {
+    let min,max
+    clusterKey.forEach(clk => {
+      let cluster = sortdata[clk]
+
+        min = clusterData[clk][cluster[0]].length
+        max = clusterData[clk][cluster[0]].length
+        cluster.forEach(point => {
+          if(clusterData[clk][point].length < min) min = clusterData[clk][point].length
+          if(clusterData[clk][point].length > max) max = clusterData[clk][point].length
+        })
+    })
+    
       // console.log(name)
       let evolutionData = {"nodes":[], "links":[]}
       clusterKey.forEach(clk => {
@@ -23,18 +35,21 @@ export   const ContrailsEvolution = ({
 
         circleYScale.domain([0, cluster.length])
         let info = {}
-        let min = clusterData[clk][cluster[0]].length
-        let max = clusterData[clk][cluster[0]].length
+        // let min = clusterData[clk][cluster[0]].length
+        // let max = clusterData[clk][cluster[0]].length
         cluster.forEach(point => {
           info[point] = clusterData[clk][point].length
-          if(clusterData[clk][point].length < min) min = clusterData[clk][point].length
-          if(clusterData[clk][point].length > max) max = clusterData[clk][point].length
+          // if(clusterData[clk][point].length < min) min = clusterData[clk][point].length
+          // if(clusterData[clk][point].length > max) max = clusterData[clk][point].length
         })
         // console.log(info, min, max)
         circleRadius.domain([min, max])
+        
         cluster.forEach(cl => {
           // console.log(cl)
           // console.log(cluster.indexOf(cl))
+          console.log(min, max)
+          console.log(circleRadius(info[cl]))
           evolutionData.nodes.push({
             "id": cl,
             "particles": info[cl],
