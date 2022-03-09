@@ -649,10 +649,10 @@ class QueryPanel extends React.Component {
         return (
             // <div>Query panel and val is {this.state.currentVal}</div>
             <Container style={{}}>
-                <Row style={{ "height": '20vh', 'borderStyle': 'solid', 'borderWidth': '.5px', 'borderColor': '#05ecec', overflowY: "auto" }} >
+                <Row style={{ "height": '23vh', 'borderStyle': 'solid', 'borderWidth': '.5px', 'borderColor': '#05ecec', overflowY: "auto" }} >
                     <OutputParametersPanel onOutputSelectChange={this.handleOutputChange} onSplitTendrilsChange={this.changeSplitTendrils} />
                 </Row>
-                <Row style={{ "height": '80vh', 'borderStyle': 'solid', 'borderWidth': '.5px', 'borderColor': '#05ecec', overflowY: "auto" }} className="input-parameters-container">
+                <Row style={{ "height": '69vh', 'borderStyle': 'solid', 'borderWidth': '.5px', 'borderColor': '#05ecec', overflowY: "auto" }} className="input-parameters-container">
                     <InputParametersPanel onInputSelectChange={this.handleInputChange} />
                 </Row>
                 {/* <Row style={{ "height": '25vh', 'borderStyle': 'solid', 'borderWidth': '.5px', 'borderColor': '#05ecec', overflowY: "auto" }}>

@@ -157,12 +157,12 @@ class OutputParametersPanel extends React.Component {
 
                 <Container>
                     <h6>Output Params</h6>
-                    <Form onChange={this.handleChange}>
+                    {/* <Form onChange={this.handleChange}>
                         <Form.Control as="select" className="form-control-sm" style={{ backgroundColor: 'grey', color: 'white' }}>
                             <option value="lagrangian">Lagrangian</option>
                             <option value="eulerian">Eulerian</option>
                         </Form.Control>
-                    </Form>
+                    </Form> */}
                     <Row>
                         <Col xs={5}>
                             {this.state.paramType == 'lagrangian' ?
