@@ -95,7 +95,7 @@ if(select('#evCon').node() !== null){
 
 
   const circleRadius = scaleLinear()
-                        .range([5, 10])
+                        .range([5, 12])
   
 
   if(memberID === 17){

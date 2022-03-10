@@ -264,6 +264,17 @@ export default class InputParametersD3 {
 
         }
 
+        group.append('rect')
+            .attr("x", 5)
+            .attr("y", ((height + 40) * i) + 25)
+            .attr("class", `hover${highlight_class_name}`)
+            .attr('id', 'input-bar')
+            .attr("width", width - 30)
+            .attr("height", height - 20)
+            .attr("fill", 'grey')
+            .attr('opacity', 0)
+            .attr('rx', '15')  
+
             
 
 

@@ -6,6 +6,7 @@ import $ from 'jquery'
 
 import d3Tip from 'd3-tip'
 import "./parameters-plot.styles.css"
+import { filter } from 'd3';
 
 
 const height = window.innerHeight
@@ -16,10 +17,11 @@ export default class OutputParametersD3 {
       constructor(element,  data_registry, tendril, top, bottom) {
             this.element = element
             this.contrailMembers = [top, bottom]
-            this.draw_tendrils(element, data_registry, this.contrailMembers)
+            this.draw_tendrils(element, data_registry, false, this.contrailMembers)
       }
 
       draw_tendrils(element, data_registry, split, members) {
+            // console.log(members)
             const dataRegistry = data_registry
 
             const line = d3.line()
@@ -91,6 +93,7 @@ export default class OutputParametersD3 {
 
                   // console.log(data.length)
                   for (var i = 0; i<data.length; i++) {
+                        // console.log(data[i])
                         
                         // if(ids[i] == 5 || ids[i] == 6){
                               if(true){
@@ -136,7 +139,10 @@ export default class OutputParametersD3 {
                                     .attr('r', 4)
                                     .attr('fill-opacity', 0.65)
                                     .attr('fill', () => {
+                                          // console.log(members)
+                                          // console.log(title_id)
                                           if(members.includes(title_id)){
+                                                
                                                 return '#42A5B3'
                                           }else{
                                                 return '#FF6F61'
@@ -149,6 +155,7 @@ export default class OutputParametersD3 {
                               .attr('stroke', () => {
                                     // console.log(title_id)
                                     if(members.includes(title_id)){
+                                          // console.log('i am here inside tendrils')
                                           return '#42A5B3'
                                     }else{
                                           return '#FF6F61'
@@ -164,12 +171,13 @@ export default class OutputParametersD3 {
                                     tendrilTip.show(this)
                                     const el_id = this.id.replace("path_","")
                                     const el_idfinal = el_id.replace("_",'')
+                                    // console.log(el_idfinal)
                                     $('.tendrils').css("opacity", '0.1')
                                     $('.circles').css("opacity", '0.1')
                                     $(`.${this.id}`).css("stroke-width", '2.8')
                                           .css('opacity', 1)
                                     $(`.circle_${this.id}`).css("opacity", '1')
-                                    $(`.highlight_${el_idfinal}`).css("opacity", '0.7')
+                                    $(`.hoverhighlight_${el_idfinal}`).css("opacity", '0.7')
                                     $(`.cluster_airplane_${el_idfinal}`).css("fill", '#05ecec')
                               })
                               .on('mouseout', function () {
@@ -180,7 +188,7 @@ export default class OutputParametersD3 {
                                     $('.tendrils').css("opacity", '1')
                                     $('.circles').css("opacity", '0.65')
                                     tendrilTip.hide(this)
-                                    $(`.highlight_${el_idfinal}`).css("opacity", '0')
+                                    $(`.hoverhighlight_${el_idfinal}`).css("opacity", '0')
                                     $(`.cluster_airplane_${el_idfinal}`).css("fill", 'white')
                               })
 
@@ -188,8 +196,10 @@ export default class OutputParametersD3 {
             }
 
             }
+            // console.log(dataRegistry)
 
             const ids = dataRegistry.map(el => { return el['id'] })
+            
             // const T_euls = dataRegistry.map(el => {
             //       // console.log(el['output-parameters'])
             //       if(el['output-parameters'] !== undefined){
@@ -265,24 +275,36 @@ export default class OutputParametersD3 {
 
 
             // console.log(this.contrailMembers)
-            create_tendril_plot(T_lags, 15, 100, [{ x: 15, y: 100 }], 'T_lag_avg', ids, get_mean_attr_val(T_lags), this.contrailMembers)
-            create_tendril_plot(T_euls, 15, 200, [{ x: 15, y: 200 }], 'T_eul_avg', ids, get_mean_attr_val(T_euls), this.contrailMembers)
-            create_tendril_plot(d_lags, 15, 320, [{ x: 15, y: 320 }], 'd_lag_avg', ids, get_mean_attr_val(d_lags), this.contrailMembers)
-            create_tendril_plot(rho_lags, 15, 440, [{ x: 15, y: 440 }], 'rho_lag_avg', ids, get_mean_attr_val(rho_lags), this.contrailMembers)
-            // create_tendril_plot(rho_euls, 15, 580, [{ x: 15, y: 580 }], 'rho_eul_avg', ids, get_mean_attr_val(rho_euls), this.contrailMembers)
-            create_tendril_plot(k_euls, 15, 560, [{ x: 15, y: 560 }], 'k_eul_avg', ids, get_mean_attr_val(k_euls), this.contrailMembers)
-            create_tendril_plot(p_euls, 15, 680, [{ x: 15, y: 680 }], 'p_eul_avg', ids, get_mean_attr_val(p_euls), this.contrailMembers)
+            create_tendril_plot(T_lags, 15, 100, [{ x: 15, y: 100 }], 'T_lag_avg', ids, get_mean_attr_val(T_lags), members)
+            create_tendril_plot(T_euls, 15, 200, [{ x: 15, y: 200 }], 'T_eul_avg', ids, get_mean_attr_val(T_euls), members)
+            create_tendril_plot(d_lags, 15, 320, [{ x: 15, y: 320 }], 'd_lag_avg', ids, get_mean_attr_val(d_lags), members)
+            // create_tendril_plot(rho_lags, 15, 440, [{ x: 15, y: 440 }], 'rho_lag_avg', ids, get_mean_attr_val(rho_lags), members)
+            // create_tendril_plot(rho_euls, 15, 580, [{ x: 15, y: 580 }], 'rho_eul_avg', ids, get_mean_attr_val(rho_euls), members)
+            create_tendril_plot(k_euls, 15, 440, [{ x: 15, y: 440 }], 'k_eul_avg', ids, get_mean_attr_val(k_euls), members)
+            create_tendril_plot(p_euls, 15, 560, [{ x: 15, y: 560 }], 'p_eul_avg', ids, get_mean_attr_val(p_euls), members)
 
            
       }
 
       update(data, split, top, bottom) {
             let el = this
+            // console.log(el.element)
             d3.select(el.element).select('svg').remove()
 
-            console.log(data)
+            // let updatedData = []
+
+            console.log(top, bottom)
+            let filtered_d = data.filter(d => d['id'] !== top && d['id'] !== bottom && d['id'] !== 20)
+            // console.log(filtered_d)
+            // console.log(data)
+            let topdata = data.filter(d => d['id'] == top)[0]
+            let bottomdata = data.filter(d => d['id'] == bottom)[0]
+            filtered_d.push(topdata)
+            filtered_d.push(bottomdata)
+            // console.log(filtered_d)
+
             this.contrailMembers = [top, bottom]
-            this.draw_tendrils(el.element, data, split, this.contrailMembers)
+            this.draw_tendrils(el.element, filtered_d, split, this.contrailMembers)
 
       }
 
