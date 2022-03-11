@@ -727,14 +727,17 @@ class ComponentsContainer extends React.Component {
 
         }
         if (filter_params2) {
-
+            // console.log(filter_params2)
 
             if (filter_params2['T_lag_avg']) {
                 data = data.filter(el => {
                     if(el['id'] !== 20){
                         var e = []
-                    e.push(el['output-parameters']['T_lag_avg'])
-                    var result = e.some(r => (filter_params2['T_lag_avg'] >= r - 10) && (filter_params2['T_lag_avg'] <= r + 10))
+                        e.push(el['output-parameters']['T_lag_avg'])
+                        // console.log(filter_params2['T_lag_avg'] )
+                        console.log(e)
+                        // console.log(e.some(r => (r <= filter_params2['T_lag_avg'] )))
+                        var result = e.some(r => r <= filter_params2['T_lag_avg'])
                     }
                     
                     return result
@@ -746,7 +749,7 @@ class ComponentsContainer extends React.Component {
                     if(el['id'] !== 20){
                         var e = []
                     e.push(el['output-parameters']['T_eul_avg'])
-                    var result = e.some(r => (filter_params2['T_eul_avg'] >= r - 10) && (filter_params2['T_eul_avg'] <= r + 10))
+                    var result = e.some(r => (r <= filter_params2['T_eul_avg']))
                     }
                     
                     return result
@@ -755,37 +758,37 @@ class ComponentsContainer extends React.Component {
             }
 
 
-            if (filter_params2['rho_lag_avg']) {
-                data = data.filter(el => {
-                    if(el['id'] !== 20){
-                        var e = []
-                    e.push(el['output-parameters']['rho_lag_avg'])
-                    var result = e.some(r => (filter_params2['rho_lag_avg'] >= r - 10) && (filter_params2['rho_lag_avg'] <= r + 10))
-                    }
+            // if (filter_params2['rho_lag_avg']) {
+            //     data = data.filter(el => {
+            //         if(el['id'] !== 20){
+            //             var e = []
+            //         e.push(el['output-parameters']['rho_lag_avg'])
+            //         var result = e.some(r => (filter_params2['rho_lag_avg'] - 10) && (filter_params2['rho_lag_avg'] + 10))
+            //         }
                     
-                    return result
+            //         return result
 
-                })
-            }
-            if (filter_params2['rho_eul_avg']) {
-                data = data.filter(el => {
-                    if(el['id'] !== 20){
-                        var e = []
-                    e.push(el['output-parameters']['rho_eul_avg'])
-                    var result = e.some(r => (filter_params2['rho_eul_avg'] >= r - 0.0001) && (filter_params2['rho_eul_avg'] <= r + 0.0001))
-                    }
+            //     })
+            // }
+            // if (filter_params2['rho_eul_avg']) {
+            //     data = data.filter(el => {
+            //         if(el['id'] !== 20){
+            //             var e = []
+            //         e.push(el['output-parameters']['rho_eul_avg'])
+            //         var result = e.some(r => (filter_params2['rho_eul_avg'] - 0.0001) && (filter_params2['rho_eul_avg'] + 0.0001))
+            //         }
                     
-                    return result
+            //         return result
 
-                })
-            }
+            //     })
+            // }
 
             if (filter_params2['d_lag_avg']) {
                 data = data.filter(el => {
                     if(el['id'] !== 20){
                         var e = []
                     e.push(el['output-parameters']['d_lag_avg'])
-                    var result = e.some(r => (filter_params2['d_lag_avg'] >= r - 0.00001) && (filter_params2['d_lag_avg'] <= r + 0.00001))
+                    var result = e.some(r => (r <= filter_params2['d_lag_avg']))
                     }
                     
                     return result
@@ -797,7 +800,7 @@ class ComponentsContainer extends React.Component {
                     if(el['id'] !== 20){
                         var e = []
                         e.push(el['output-parameters']['p_eul_avg'])
-                        var result = e.some(r => (filter_params2['p_eul_avg'] >= r - 800) && (filter_params2['p_eul_avg'] <= r + 800))
+                        var result = e.some(r => (r <= filter_params2['p_eul_avg']))
                     }
                    
                     return result
@@ -806,24 +809,24 @@ class ComponentsContainer extends React.Component {
             }
 
 
-            if (filter_params2['Ygas_lag_avg']) {
-                data = data.filter(el => {
-                    if(el['id'] !== 20){
-                        var e = []
-                    e.push(el['output-parameters']['Ygas_lag_avg'])
-                    var result = e.some(r => (filter_params2['Ygas_lag_avg'] >= r - 10) && (filter_params2['Ygas_lag_avg'] <= r + 10))
-                    }
+            // if (filter_params2['Ygas_lag_avg']) {
+            //     data = data.filter(el => {
+            //         if(el['id'] !== 20){
+            //             var e = []
+            //         e.push(el['output-parameters']['Ygas_lag_avg'])
+            //         var result = e.some(r => (filter_params2['Ygas_lag_avg'] - 10) && (filter_params2['Ygas_lag_avg'] + 10))
+            //         }
                     
-                    return result
+            //         return result
 
-                })
-            }
+            //     })
+            // }
             if (filter_params2['k_eul_avg']) {
                 data = data.filter(el => {
                     if(el['id'] !== 20){
                         var e = []
                         e.push(el['output-parameters']['k_eul_avg'])
-                        var result = e.some(r => (filter_params2['k_eul_avg'] >= r - 10) && (filter_params2['k_eul_avg'] <= r + 10))
+                        var result = e.some(r => (r <= filter_params2['k_eul_avg']))
                     }
                    
                     return result
@@ -835,7 +838,7 @@ class ComponentsContainer extends React.Component {
 
 
         }
-        console.log(data)
+        // console.log(data)
         this.setState({ filtered_data: data })
 
     }

@@ -592,6 +592,7 @@ class QueryPanel extends React.Component {
     }
 
     handleOutputChange(param) {
+        // console.log(param)
         var el = param[0]
         var val = param[1]
         if (!param[1] || isNaN(param[1])) {
@@ -603,14 +604,14 @@ class QueryPanel extends React.Component {
                 this.setState({ d_lag_avg: null }, () => { this.changeOutputFilters() })
             if (el == "k_eul_avg")
                 this.setState({ k_eul_avg: null }, () => { this.changeOutputFilters() })
-            if (el == "rho_eul_avg")
-                this.setState({ rho_eul_avg: null }, () => { this.changeOutputFilters() })
-            if (el == "rho_lag_avg")
-                this.setState({ rho_lag_avg: null }, () => { this.changeOutputFilters() })
+            // if (el == "rho_eul_avg")
+            //     this.setState({ rho_eul_avg: null }, () => { this.changeOutputFilters() })
+            // if (el == "rho_lag_avg")
+            //     this.setState({ rho_lag_avg: null }, () => { this.changeOutputFilters() })
             if (el == "p_eul_avg")
                 this.setState({ p_eul_avg: null }, () => { this.changeOutputFilters() })
-            if (el == "Ygas_lag_avg")
-                this.setState({ Ygas_lag_avg: null }, () => { this.changeOutputFilters() })
+            // if (el == "Ygas_lag_avg")
+            //     this.setState({ Ygas_lag_avg: null }, () => { this.changeOutputFilters() })
         }
         else {
             if (el == "T_lag_avg")
@@ -619,16 +620,16 @@ class QueryPanel extends React.Component {
                 this.setState({ T_eul_avg: val }, () => { this.changeOutputFilters() })
             if (el == "d_lag_avg")
                 this.setState({ d_lag_avg: val }, () => { this.changeOutputFilters() })
-            if (el == "d_eul_avg")
-                this.setState({ k_eul_avg: val }, () => { this.changeOutputFilters() })
-            if (el == "rho_eul_avg")
-                this.setState({ rho_eul_avg: val }, () => { this.changeOutputFilters() })
-            if (el == "rho_lag_avg")
-                this.setState({ rho_lag_avg: val }, () => { this.changeOutputFilters() })
+            // if (el == "d_eul_avg")
+            //     this.setState({ k_eul_avg: val }, () => { this.changeOutputFilters() })
+            // if (el == "rho_eul_avg")
+            //     this.setState({ rho_eul_avg: val }, () => { this.changeOutputFilters() })
+            // if (el == "rho_lag_avg")
+            //     this.setState({ rho_lag_avg: val }, () => { this.changeOutputFilters() })
             if (el == "p_eul_avg")
                 this.setState({ p_eul_avg: val }, () => { this.changeOutputFilters() })
-            if (el == "Ygas_lag_avg")
-                this.setState({ Ygas_lag_avg: val }, () => { this.changeOutputFilters() })
+            // if (el == "Ygas_lag_avg")
+            //     this.setState({ Ygas_lag_avg: val }, () => { this.changeOutputFilters() })
         }
 
 
@@ -637,10 +638,14 @@ class QueryPanel extends React.Component {
 
     changeOutputFilters() {
         this.props.outputFilters({
-            'T_lag_avg': this.state.T_lag_avg, 'T_eul_avg': this.state.T_eul_avg,
-            'rho_lag_avg': this.state.rho_lag_avg, 'rho_eul_avg': this.state.rho_eul_avg,
-            'd_lag_avg': this.state.d_lag_avg, 'Ygas_lag_avg': this.state.Ygas_lag_avg,
-            'p_eul_avg': this.state.p_eul_avg, 'k_eul_avg': this.state.k_eul_avg
+            'T_lag_avg': this.state.T_lag_avg, 
+            'T_eul_avg': this.state.T_eul_avg,
+            // 'rho_lag_avg': this.state.rho_lag_avg, 
+            // 'rho_eul_avg': this.state.rho_eul_avg,
+            'd_lag_avg': this.state.d_lag_avg, 
+            // 'Ygas_lag_avg': this.state.Ygas_lag_avg,
+            'p_eul_avg': this.state.p_eul_avg, 
+            'k_eul_avg': this.state.k_eul_avg
         })
 
     }

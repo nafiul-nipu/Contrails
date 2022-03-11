@@ -196,7 +196,7 @@ export default class OutputParametersD3 {
             }
 
             }
-            console.log(dataRegistry)
+            // console.log(dataRegistry)
 
             const ids = dataRegistry.map(el => { return el['id'] })
             
