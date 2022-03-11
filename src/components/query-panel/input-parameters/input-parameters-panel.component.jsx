@@ -36,15 +36,15 @@ class InputParametersPanel extends React.Component {
                             <rect width="8" height="8" rx="1" />
                         </svg>
                     </Form>
-                    <div style={{ color: "grey", marginTop: "5%" }}>Geometry</div>
+                    {/* <div style={{ color: "grey", marginTop: "5%" }}>Geometry</div>
                     <Form  >
                         <Form.Check inline type="checkbox" id="geometry-short-cowl-nozzle" label="short-cowl-nozzle" onChange={this.handleButton} />
                         <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#1a9850" xmlns="http://www.w3.org/2000/svg">
                             <rect width="8" height="8" rx="1" />
                         </svg>
 
-                    </Form>
-                    <div style={{ color: "grey", marginTop: "5%" }}>Scope</div>
+                    </Form> */}
+                    {/* <div style={{ color: "grey", marginTop: "5%" }}>Scope</div>
                     <Form  >
                         <Form.Check inline type="checkbox" id="scope-nozzle" label="nozzle" onChange={this.handleButton} />
                         <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#542788" xmlns="http://www.w3.org/2000/svg">
@@ -54,7 +54,7 @@ class InputParametersPanel extends React.Component {
                         <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#8073ac" xmlns="http://www.w3.org/2000/svg">
                             <rect width="8" height="8" rx="1" />
                         </svg>
-                    </Form>
+                    </Form> */}
 
                     <div style={{ color: "grey", marginTop: "5%" }}>Grid</div>
                     <Form  >
@@ -69,7 +69,7 @@ class InputParametersPanel extends React.Component {
                             <rect width="8" height="8" rx="1" />
                         </svg>
                     </Form>
-                    <div style={{ color: "grey", marginTop: "5%" }}>Solution - coupled</div>
+                    {/* <div style={{ color: "grey", marginTop: "5%" }}>Solution - coupled</div>
                     <Form  >
                         <Form.Check inline type="checkbox" id="solution-coupled" label="true" onChange={this.handleButton} />
                         <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#d3a27f" xmlns="http://www.w3.org/2000/svg">
@@ -79,7 +79,7 @@ class InputParametersPanel extends React.Component {
                         <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#964b00" xmlns="http://www.w3.org/2000/svg">
                             <rect width="8" height="8" rx="1" />
                         </svg>
-                    </Form>
+                    </Form> */}
 
                     <div style={{ color: "grey", marginTop: "5%" }}>Turbulence Model</div>
                     <Form  >
@@ -90,41 +90,45 @@ class InputParametersPanel extends React.Component {
                     </Form>
 
                     <div style={{ "color": "#BEBEBE", marginTop: "15px", marginLeft: "-4%" }}>Boundary Conditions</div>
-                    <div style={{ "color": "#BEBEBE", marginLeft: "-4%" }}>(T, U, p, k)</div>
+                    {/* <div style={{ "color": "#BEBEBE", marginLeft: "-4%" }}>(T, U, p, k)</div> */}
                     <div style={{marginLeft:"15px"}}>
-                        <div><svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#ffffb3" xmlns="http://www.w3.org/2000/svg">
+                        {/* <div><svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#ffffb3" xmlns="http://www.w3.org/2000/svg">
                             <rect width="8" height="8" rx="1" />
-                        </svg> <span style={{ color: "white" }}>totalTemperature</span></div>
-                        <div><svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#bebada" xmlns="http://www.w3.org/2000/svg">
+                        </svg> <span style={{ color: "white" }}>totalTemperature</span></div> */}
+                        {/* <div><svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#bebada" xmlns="http://www.w3.org/2000/svg">
                             <rect width="8" height="8" rx="1" />
-                        </svg> <span style={{ color: "white" }}>zeroGradient</span></div>
-                        <div><svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#fb8072" xmlns="http://www.w3.org/2000/svg">
+                        </svg> <span style={{ color: "white" }}>zeroGradient</span></div> */}
+                        {/* <div><svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#fb8072" xmlns="http://www.w3.org/2000/svg">
                             <rect width="8" height="8" rx="1" />
-                        </svg> <span style={{ color: "white" }}>inletOutlet</span></div>
-                        <div><svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#ffffb3" xmlns="http://www.w3.org/2000/svg">
+                        </svg> <span style={{ color: "white" }}>inletOutlet</span></div> */}
+                        {/* <div><svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#ffffb3" xmlns="http://www.w3.org/2000/svg">
                             <rect width="8" height="8" rx="1" />
-                        </svg> <span style={{ color: "white" }}>noSlip</span></div>
-                        <div><svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#b3de69" xmlns="http://www.w3.org/2000/svg">
+                        </svg> <span style={{ color: "white" }}>noSlip</span></div> */}
+                        {/* <div><svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#b3de69" xmlns="http://www.w3.org/2000/svg">
                             <rect width="8" height="8" rx="1" />
-                        </svg> <span style={{ color: "white" }}>totalPressure</span></div>
-                        <div><svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#fccde5" xmlns="http://www.w3.org/2000/svg">
+                        </svg> <span style={{ color: "white" }}>totalPressure</span></div> */}
+                        {/* <div><svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#fccde5" xmlns="http://www.w3.org/2000/svg">
                             <rect width="8" height="8" rx="1" />
-                        </svg> <span style={{ color: "white" }}>waveTransmissive</span></div>
-                        <div><svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#fdb462" xmlns="http://www.w3.org/2000/svg">
+                        </svg> <span style={{ color: "white" }}>waveTransmissive</span></div> */}
+                        {/* <div><svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#fdb462" xmlns="http://www.w3.org/2000/svg">
                             <rect width="8" height="8" rx="1" />
-                        </svg> <span style={{ color: "white" }}>freeStream</span></div>
-                        <div><svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#d9d9d9" xmlns="http://www.w3.org/2000/svg">
+                        </svg> <span style={{ color: "white" }}>freeStream</span></div> */}
+                        {/* <div><svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#d9d9d9" xmlns="http://www.w3.org/2000/svg">
                             <rect width="8" height="8" rx="1" />
-                        </svg> <span style={{ color: "white" }}>freeStreamPressure</span></div>
-                        <div><svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#bc80bd" xmlns="http://www.w3.org/2000/svg">
+                        </svg> <span style={{ color: "white" }}>freeStreamPressure</span></div> */}
+                        {/* <div><svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#bc80bd" xmlns="http://www.w3.org/2000/svg">
                             <rect width="8" height="8" rx="1" />
-                        </svg> <span style={{ color: "white" }}>turbuIntenKineticEnInlet</span></div>
-                        <div><svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#ccebc5" xmlns="http://www.w3.org/2000/svg">
+                        </svg> <span style={{ color: "white" }}>turbuIntenKineticEnInlet</span></div> */}
+                        {/* <div><svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#ccebc5" xmlns="http://www.w3.org/2000/svg">
                             <rect width="8" height="8" rx="1" />
-                        </svg> <span style={{ color: "white" }}>kqRWallFunction</span></div>
-                        <div><svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#8dd3c7" xmlns="http://www.w3.org/2000/svg">
+                        </svg> <span style={{ color: "white" }}>kqRWallFunction</span></div> */}
+                        {/* <div><svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#ffffe5" xmlns="http://www.w3.org/2000/svg">
                             <rect width="8" height="8" rx="1" />
-                        </svg> <span style={{ color: "white" }}>no data</span></div>
+                        </svg> <span style={{ color: "white" }}>no data</span></div> */}
+                        <div style={{marginLeft: "10%" }}><span style={{ color: "white" }}>no data</span><span style={{ color: "#31393F" }}>00</span>
+                        <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#ffffe5" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="8" height="8" rx="1" x='0' y='0'/>
+                        </svg> </div>
                         
                     </div>
                     {/* <div style={{ color: "#BEBEBE", marginTop: "3%" , marginLeft:"-2%"}}>T</div> */}
@@ -203,14 +207,20 @@ class InputParametersPanel extends React.Component {
                     <div style={{ color: "grey", marginTop: "2%" }}>inlet</div>
                     <Form  >
                         <Form.Check inline type="checkbox" id="boundary-U-inlet-inletOutlet" label="inletOutlet" onChange={this.handleButton} />
-                        <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#fb8072" xmlns="http://www.w3.org/2000/svg">
+                        <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#FF4E0D" xmlns="http://www.w3.org/2000/svg">
                             <rect width="8" height="8" rx="1" />
                         </svg>
                         <Form.Check inline type="checkbox" id="boundary-U-inlet-freestream" label="freestream" onChange={this.handleButton} />
                         <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#fdb462" xmlns="http://www.w3.org/2000/svg">
                             <rect width="8" height="8" rx="1" />
                         </svg>
+
+                        {/* <div style={{marginLeft: "10%" }}><span style={{ color: "white" }}>no data</span><span style={{ color: "#31393F" }}>00</span>
+                        <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#ffffe5" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="8" height="8" rx="1" x='0' y='0'/>
+                        </svg> </div> */}
                     </Form>
+                    
                     {/* <div style={{ color: "grey", marginTop: "2%" }}>nozzle</div>
                     <Form  >
                         <Form.Check inline type="checkbox" id="boundary-U-nozzle-noSlip" label="noSlip" onChange={this.handleButton} />
@@ -259,7 +269,7 @@ class InputParametersPanel extends React.Component {
                     <div style={{ color: "grey", marginTop: "2%" }}>inlet</div>
                     <Form  >
                         <Form.Check inline type="checkbox" id="boundary-p-inlet-inletOutlet" label="inletOutlet" onChange={this.handleButton} />
-                        <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#fb8072" xmlns="http://www.w3.org/2000/svg">
+                        <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#FF4E0D" xmlns="http://www.w3.org/2000/svg">
                             <rect width="8" height="8" rx="1" />
                         </svg>
                         <Form.Check inline type="checkbox" id="boundary-p-inlet-freestreamPressure" label="freestreamPressure" onChange={this.handleButton} />

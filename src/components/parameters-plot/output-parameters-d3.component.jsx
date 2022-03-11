@@ -196,7 +196,7 @@ export default class OutputParametersD3 {
             }
 
             }
-            // console.log(dataRegistry)
+            console.log(dataRegistry)
 
             const ids = dataRegistry.map(el => { return el['id'] })
             
@@ -293,14 +293,18 @@ export default class OutputParametersD3 {
 
             // let updatedData = []
 
-            console.log(top, bottom)
+            // console.log(top, bottom)
             let filtered_d = data.filter(d => d['id'] !== top && d['id'] !== bottom && d['id'] !== 20)
             // console.log(filtered_d)
             // console.log(data)
             let topdata = data.filter(d => d['id'] == top)[0]
             let bottomdata = data.filter(d => d['id'] == bottom)[0]
-            filtered_d.push(topdata)
+            if(topdata !==undefined && bottomdata !== undefined){
+                  filtered_d.push(topdata)
             filtered_d.push(bottomdata)
+                  
+            }
+            
             // console.log(filtered_d)
 
             this.contrailMembers = [top, bottom]

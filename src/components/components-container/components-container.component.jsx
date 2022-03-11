@@ -290,6 +290,7 @@ class ComponentsContainer extends React.Component {
     }
 
     handleInputFilters(params) {
+        console.log(params)
         this.setState({ inputFilters: params }, () => {
             this.handleInputAndOuputFilters()
         })
@@ -834,6 +835,7 @@ class ComponentsContainer extends React.Component {
 
 
         }
+        console.log(data)
         this.setState({ filtered_data: data })
 
     }

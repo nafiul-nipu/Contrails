@@ -1,7 +1,7 @@
 {
     "aircraft-engine":{
         "domain": ["one", "two"],
-        "range": ["#b2182b", "#d6604d"]
+        "range": ["#B2182B", "#D6604D"]
     },
     "geometry": {
         "domain": ["short-cowl-nozzle"],
@@ -9,7 +9,7 @@
     },
     "scope": {
         "domain": ["nozzle", "whole"],
-        "range": ["#542788" , "#8073ac"]
+        "range": ["#92C5DE" , "#8073ac"]
     },
     "solution":{
         "domain": ["coupled","uncoupled"],
@@ -20,12 +20,12 @@
         "range": ["#F1B900"]
     },
     "grid":{
-        "domain": ["coarse",  "fine", "medium"],
-        "range": ["#92c5de", "#2166ac", "#4393c3"]
+        "domain": ["coarse",  "fine"],
+        "range": ["#92c5de", "#2166AC"]
     },
     "boundary-conditions":{
         "domain": ["N/A", "totalTemperature","zeroGradient","inletOutlet","noSlip","freestream","totalPressure","waveTransmissive","freestreamPressure","turbulentIntensityKineticEnergyInlet","kqRWallFunction"],
-        "range": ["#8dd3c7","#ffffb3","#bebada","#ff4e0d","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5"]
+        "range": ["#FFFFE5","#ffffb3","#bebada","#ff4e0d","#80b1d3","#fdb462","#b3de69","#fccde5","#fdd0a2","#bc80bd","#ccebc5"]
     }
 
 
