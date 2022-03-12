@@ -29,8 +29,8 @@ class ComponentsContainer extends React.Component {
             outputFilters: null,
             split_tendrils: false,
             all_members: dataRegistryjson,
-            parameterDisplay: 'none',
-            shapeDisplay:'block'
+            parameterDisplay: 'block',
+            shapeDisplay:'none'
             // volumeDataTop:null,
             // memberTop:17,
             // timeTop: 0.06,
@@ -116,19 +116,19 @@ class ComponentsContainer extends React.Component {
                 document.getElementById(`borderc3${timestep}`).style.opacity = '0.5'
                 
             }
-            if(member !== 20){
-                // d3.selectAll('#input-bar').style('opacity', 0)
-                // d3.select(`.highlight_${self.memberTop}`).style('opacity', 1)
-                // d3.select(`.highlight_${self.memberBottom}`).style('opacity', 1)
+            // if(member !== 20){
+            //     // d3.selectAll('#input-bar').style('opacity', 0)
+            //     // d3.select(`.highlight_${self.memberTop}`).style('opacity', 1)
+            //     // d3.select(`.highlight_${self.memberBottom}`).style('opacity', 1)
 
-                // d3.selectAll('.output-circle').style('fill', '#FF6F61')
-                // d3.selectAll(`#circles_${self.memberTop}_`).style('fill', "steelblue")
-                // d3.selectAll(`#circles_${self.memberBottom}_`).style('fill', "steelblue")
+            //     // d3.selectAll('.output-circle').style('fill', '#FF6F61')
+            //     // d3.selectAll(`#circles_${self.memberTop}_`).style('fill', "steelblue")
+            //     // d3.selectAll(`#circles_${self.memberBottom}_`).style('fill', "steelblue")
 
-                // d3.selectAll('.tendrils').style('stroke', '#FF6F61')
-                // d3.selectAll(`#path_${self.memberTop}_`).style('stroke', "steelblue")
-                // d3.selectAll(`#path_${self.memberBottom}_`).style('stroke', "steelblue")
-            }
+            //     // d3.selectAll('.tendrils').style('stroke', '#FF6F61')
+            //     // d3.selectAll(`#path_${self.memberTop}_`).style('stroke', "steelblue")
+            //     // d3.selectAll(`#path_${self.memberBottom}_`).style('stroke', "steelblue")
+            // }
 
         })
     }
@@ -203,20 +203,20 @@ class ComponentsContainer extends React.Component {
                 
             }
 
-            if(member !== 20){
-                // console.log(self.memberTop)
-                // d3.selectAll('#input-bar').style('opacity', 0)
-                // d3.select(`.highlight_${self.memberTop}`).style('opacity', 1)
-                // d3.select(`.highlight_${self.memberBottom}`).style('opacity', 1)
+            // if(member !== 20){
+            //     // console.log(self.memberTop)
+            //     // d3.selectAll('#input-bar').style('opacity', 0)
+            //     // d3.select(`.highlight_${self.memberTop}`).style('opacity', 1)
+            //     // d3.select(`.highlight_${self.memberBottom}`).style('opacity', 1)
 
-                // d3.selectAll('.output-circle').style('fill', '#FF6F61')
-                // d3.selectAll(`#circles_${self.memberTop}_`).style('fill', "#42A5B3")
-                // d3.selectAll(`#circles_${self.memberBottom}_`).style('fill', "#42A5B3")
+            //     // d3.selectAll('.output-circle').style('fill', '#FF6F61')
+            //     // d3.selectAll(`#circles_${self.memberTop}_`).style('fill', "#42A5B3")
+            //     // d3.selectAll(`#circles_${self.memberBottom}_`).style('fill', "#42A5B3")
 
-                // d3.selectAll('.tendrils').style('stroke', '#FF6F61')
-                // d3.selectAll(`#path_${self.memberTop}_`).style('stroke', "#42A5B3")
-                // d3.selectAll(`#path_${self.memberBottom}_`).style('stroke', "#42A5B3")
-            }
+            //     // d3.selectAll('.tendrils').style('stroke', '#FF6F61')
+            //     // d3.selectAll(`#path_${self.memberTop}_`).style('stroke', "#42A5B3")
+            //     // d3.selectAll(`#path_${self.memberBottom}_`).style('stroke', "#42A5B3")
+            // }
         })
     }
 
@@ -274,6 +274,7 @@ class ComponentsContainer extends React.Component {
             // document.getElementById('parameterView').style.display = 'none';
             // document.getElementById('parameter2View').style.display = 'none';
             // document.getElementById('shapeView').style.display = 'block';
+            // this.handleVolumeDataTop(20, 210, 'temp')
         }
     }
 
@@ -874,7 +875,7 @@ class ComponentsContainer extends React.Component {
                                         value="shapeView"
                                         className='radin'
                                         onChange={this.handleRadioViewChange}    
-                                        defaultChecked                                 
+                                        // defaultChecked                                 
                                         />
                                         <Form.Check
                                         inline
@@ -884,7 +885,7 @@ class ComponentsContainer extends React.Component {
                                         id={`inline-radio-2`}
                                         value="parameterView"
                                         onChange={this.handleRadioViewChange}
-                                        // defaultChecked
+                                        defaultChecked
                                         />
                                     </Form.Group>
                                     </Form>
@@ -906,7 +907,9 @@ class ComponentsContainer extends React.Component {
                                 </Col>
 
                                 <Col style={{ backgroundColor: '#31393f', height: '100vh', "padding": "0", display:`${this.state.shapeDisplay}` }} id='shapeView'>
-                                    <ShapeContainerComponent />
+                                    <ShapeContainerComponent 
+                                        key={this.state.shapeDisplay}
+                                    />
                                 </Col>
                             </Row>
                         </Col>
