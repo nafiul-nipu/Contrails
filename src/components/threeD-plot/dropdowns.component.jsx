@@ -84,7 +84,13 @@ class DropDowns extends React.Component {
                                 return false;
                             }
                         })
-                        .text((d) => {return "Member : "+d.ensembleMember})
+                        .text((d) => {
+                          if(d.ensembleMember == 20){
+                            return "NewData"
+                          }else{
+                            return "Member : "+d.ensembleMember
+                          }
+                          })
       // console.log($(`#member${this.props.area}`))
 
       d3.select(upperID).append('button')
