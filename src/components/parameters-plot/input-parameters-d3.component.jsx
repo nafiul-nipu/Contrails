@@ -1,13 +1,14 @@
-import { faCommentsDollar } from '@fortawesome/free-solid-svg-icons';
-import { getDefaultNormalizer } from '@testing-library/react';
+// import { faCommentsDollar } from '@fortawesome/free-solid-svg-icons';
+// import { getDefaultNormalizer } from '@testing-library/react';
 import * as d3 from 'd3';
-import $ from 'jquery'
+// import $ from 'jquery'
 
 import d3Tip from 'd3-tip'
 import "./parameters-plot.styles.css"
 
 import inputDomain from '../data-component/parameters.json'
-import { ConeBufferGeometry } from 'three';
+// import { ConeBufferGeometry } from 'three';
+// import { isDOMComponent } from 'react-dom/test-utils';
 
 // const height = 900
 const url = "https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/2_TwoNum.csv"
@@ -204,15 +205,18 @@ export default class InputParametersD3 {
 
       let dif_input = dif_memeber['input']
 
-      // console.log(members_dict[el])
+      // console.log(el, index)
+      
       group.append("text").text( () => {
-        if(index === 0){
-          return `Members: 1 - 6`
-        }else if(index === 2){
-          return `Members: 7 - 9, 11 - 19`
-        }else{
-          return `Members: ${members_dict[el]} `
-        }
+        // if(index === 0){
+        //   return `Members: 1 - 6`
+        // }else if(index === 2){
+        //   return `Members: 7 - 9, 11 - 19`
+        // }else{
+        //   return `Members: ${members_dict[el]} `
+        // }
+        var text = createMemberListText(members_dict[el])
+        return text
         
       })
         .attr('transform', `translate(${width - 170}, ${(height + 40) * i + 20})`)
@@ -357,7 +361,49 @@ export default class InputParametersD3 {
       i = i + 1
     })
 
+
+    function createMemberListText(array){
+      //  member 1
+      if(array.length == 1){
+        return  `Member : ${array[0]}`
+      }else if(array.length == 1){
+        // member 1,2,
+        return `Members: ${array[0]}, ${array[1]}`
+        
+      }else{
+        // member 1,2,3,4,5,7,8,9
+        var last = array[1]
+        var isdash = array[0]
+        var text = `Member: ${array[0]}`
+        for(var i = 1; i < array.length; i++){
+          if(i == 1 && array[i] != array[i-1] +1 ){
+            text += ` , ${array[i]}`
+            last = array[i]
+            isdash = array[i]
+          }else if(array[i] == array[i - 1] + 1){
+            last = array[i]
+          }else if(array[i] != array[i-1] +1 ){
+            text += ` - ${last}, ${array[i]}`
+            last = array[i]
+            isdash = array[i]
+          }
+
+        }
+        console.log(last, isdash)
+        if((last - 1) == isdash){
+          text+= ` , ${last}`
+        }else{
+          text += ` - ${last}`
+        }
+        
+        return text
+      }
+        
+    }
+
   }
+
+  
 
 
   update(data, top, bottom) {

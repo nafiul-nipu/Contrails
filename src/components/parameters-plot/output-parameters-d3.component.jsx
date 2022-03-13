@@ -91,7 +91,7 @@ export default class OutputParametersD3 {
                   var prevX = new Array(data.length)
                   var prevY = new Array(data.length)
 
-                  // console.log(data.length)
+                  // console.log(data)
                   for (var i = 0; i<data.length; i++) {
                         // console.log(data[i])
                         
@@ -104,7 +104,7 @@ export default class OutputParametersD3 {
                         let tendrilTip = d3Tip().attr().attr('class', 'd3-tip')
                                           .html(function(){
                                                 let tip = `Member: ${title_id} <br>
-                                                Time Points : ${data[title_id - 1]}
+                                                Time Points : ${values}
                                                 `
                                                 return tip
                                           })
@@ -199,6 +199,7 @@ export default class OutputParametersD3 {
             // console.log(dataRegistry)
 
             const ids = dataRegistry.map(el => { return el['id'] })
+            // console.log(ids)
             
             // const T_euls = dataRegistry.map(el => {
             //       // console.log(el['output-parameters'])

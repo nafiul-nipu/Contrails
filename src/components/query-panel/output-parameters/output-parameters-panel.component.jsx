@@ -186,11 +186,11 @@ class OutputParametersPanel extends React.Component {
                                     <Form style={{ "padding": "2px" }} onChange={this.handleOutputFilterChange} className={this.state.T_lag == true ? 'show' : 'hidden'} >
                                         <Form.Control as="select" defaultValue={this.state.T_lag_avg} className="form-control-sm interior-form" id="T_lag_avg_dropdown" style={{ backgroundColor: '#636363', color: 'white' }}>
                                             <option value="" >T_avg</option>
-                                            <option value="300">300</option>
+                                            <option value="320">320</option>
+                                            <option value="330">330</option>
+                                            <option value="340">340</option>
                                             <option value="350">350</option>
                                             <option value="400">400</option>
-                                            <option value="450">450</option>
-                                            <option value="500">500</option>
                                         </Form.Control>
                                     </Form>
 

@@ -724,12 +724,16 @@ class ComponentsContainer extends React.Component {
             if (filter_params2['T_lag_avg']) {
                 data = data.filter(el => {
                     if(el['id'] !== 20){
-                        var e = []
-                        e.push(el['output-parameters']['T_lag_avg'])
-                        // console.log(filter_params2['T_lag_avg'] )
-                        console.log(e)
-                        // console.log(e.some(r => (r <= filter_params2['T_lag_avg'] )))
-                        var result = e.some(r => r <= filter_params2['T_lag_avg'])
+                        // var e = []
+                        // e.push(el['output-parameters']['T_lag_avg'])
+                        // // console.log(filter_params2['T_lag_avg'] )
+                        // console.log(el['output-parameters']['T_lag_avg'], filter_params2['T_lag_avg'])
+                        // console.log(el['output-parameters']['T_lag_avg'] <= filter_params2['T_lag_avg'])
+                        // var result = e.some(r => r <= filter_params2['T_lag_avg'])
+                        if(el['output-parameters']['T_lag_avg'] <= filter_params2['T_lag_avg']){
+                            var result = true
+                        }
+                        // console.log(result)
                     }
                     
                     return result
