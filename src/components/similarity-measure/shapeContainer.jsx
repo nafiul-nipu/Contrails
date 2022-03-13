@@ -62,7 +62,7 @@ class ShapeContainerComponent extends React.Component{
                 <Container fluid>
                     <Row xs={12} style={{height: '5vh'}}>
                     <Col xs={3} style={{color: 'white'}}>
-                        {`newdata - ${this.props.value}`}
+                        {`Simulation - ${this.props.value}`}
                             {/* <select id='selection' onChange={this.handleOnChange}>
                                 
                                 {
