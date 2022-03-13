@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container'
 import { Col, Row, Form} from 'react-bootstrap';
 
 import GenerateSimilarShapes from './generateSimilarShapes';
+import { color } from 'd3';
 
 
 
@@ -30,10 +31,11 @@ class ShapeContainerComponent extends React.Component{
     }
 
     componentDidMount(){
+        console.log('shape component did mount')
         // let up = parseInt(this.divs / 2)
         // this.setState({
-        //     upper: up,
-        //     lower: parseInt(this.divs - up)
+        //     value: this.props.value,
+            
         // })
 
     }
@@ -53,21 +55,22 @@ class ShapeContainerComponent extends React.Component{
 
     render(){
         // console.log(this.state)
-        if(this.state.value){
+        if(this.props.value){
             console.log('shape-container')
             // console.log(this.state)
             return(
                 <Container fluid>
                     <Row xs={12} style={{height: '5vh'}}>
-                    <Col xs={3}>
-                            <select id='selection' onChange={this.handleOnChange}>
-                                {/* <option value='contrails1'>contrails1</option> */}
+                    <Col xs={3} style={{color: 'white'}}>
+                        {`newdata - ${this.props.value}`}
+                            {/* <select id='selection' onChange={this.handleOnChange}>
+                                
                                 {
                                     this.simulation.map((el, i) =>{
                                         return <option value={`${el}`} key={i}>{el}</option>
                                     })
                                 }
-                            </select>
+                            </select> */}
                         </Col>
                     <Col xs={6}>
                     <Form>
@@ -102,7 +105,7 @@ class ShapeContainerComponent extends React.Component{
                     </Row>
 
                     <GenerateSimilarShapes 
-                        value = {this.state.value}
+                        value = {this.props.value}
                         folder = {this.state.folder}
                         similarity = {this.state.similarity}
                     />

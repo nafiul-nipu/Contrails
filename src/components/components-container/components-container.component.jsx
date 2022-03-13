@@ -30,7 +30,8 @@ class ComponentsContainer extends React.Component {
             split_tendrils: false,
             all_members: dataRegistryjson,
             parameterDisplay: 'block',
-            shapeDisplay:'none'
+            shapeDisplay:'none',
+            newData: '210'
             // volumeDataTop:null,
             // memberTop:17,
             // timeTop: 0.06,
@@ -116,19 +117,9 @@ class ComponentsContainer extends React.Component {
                 document.getElementById(`borderc3${timestep}`).style.opacity = '0.5'
                 
             }
-            // if(member !== 20){
-            //     // d3.selectAll('#input-bar').style('opacity', 0)
-            //     // d3.select(`.highlight_${self.memberTop}`).style('opacity', 1)
-            //     // d3.select(`.highlight_${self.memberBottom}`).style('opacity', 1)
-
-            //     // d3.selectAll('.output-circle').style('fill', '#FF6F61')
-            //     // d3.selectAll(`#circles_${self.memberTop}_`).style('fill', "steelblue")
-            //     // d3.selectAll(`#circles_${self.memberBottom}_`).style('fill', "steelblue")
-
-            //     // d3.selectAll('.tendrils').style('stroke', '#FF6F61')
-            //     // d3.selectAll(`#path_${self.memberTop}_`).style('stroke', "steelblue")
-            //     // d3.selectAll(`#path_${self.memberBottom}_`).style('stroke', "steelblue")
-            // }
+            if(member == 20 && self.state.shapeDisplay == 'block'){
+                self.setState({newData: timestep})
+            }
 
         })
     }
@@ -909,6 +900,7 @@ class ComponentsContainer extends React.Component {
                                 <Col style={{ backgroundColor: '#31393f', height: '100vh', "padding": "0", display:`${this.state.shapeDisplay}` }} id='shapeView'>
                                     <ShapeContainerComponent 
                                         key={this.state.shapeDisplay}
+                                        value={this.state.newData}
                                     />
                                 </Col>
                             </Row>
