@@ -429,6 +429,7 @@ class ThreeDView extends React.Component {
                 <DropDowns
                     area={this.props.renderArea}
                     colormaps={this.colormaps}
+                    shapeDisplay={this.props.shapeView}
                     // data={this.data}
                     selectColormap={this.selectColormap}
                     onShaderChange={this.onShaderChange}

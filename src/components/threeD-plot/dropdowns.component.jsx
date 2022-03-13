@@ -23,7 +23,8 @@ class DropDowns extends React.Component {
     
     componentDidMount(){
       const self = this
-      // console.log(`dropdown - ${this.props.member}`)
+      console.log(`dropdown - ${this.props.member}`)
+      console.log(this.props.shapeDisplay)
       // if(this.props.area === 'top'){
       //   loader(17, 0.06, 'temp').then(function(){
       //     // console.log("data loaded")
@@ -40,7 +41,13 @@ class DropDowns extends React.Component {
       //   })
 
       // }
-      this.createDropDown(this.props.member)
+      if(this.props.shapeDisplay == 'none'){
+        this.createDropDown(this.props.member)
+
+      }else if(this.props.shapeDisplay == 'block' && this.props.area =='top'){
+        this.createDropDown(20)
+      }
+      
       
     }
 

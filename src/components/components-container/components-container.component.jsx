@@ -274,7 +274,7 @@ class ComponentsContainer extends React.Component {
             // document.getElementById('parameterView').style.display = 'none';
             // document.getElementById('parameter2View').style.display = 'none';
             // document.getElementById('shapeView').style.display = 'block';
-            // this.handleVolumeDataTop(20, 210, 'temp')
+            this.handleVolumeDataTop(20, 210, 'temp')
         }
     }
 
@@ -917,6 +917,8 @@ class ComponentsContainer extends React.Component {
                             <Row style={{ height: '70vh' }}>
                                 <Col xs={6}>
                                     <ThreeDView
+                                        key={this.state.shapeDisplay}
+                                        shapeView={this.state.shapeDisplay}
                                         renderArea={'top'}
                                         data={this.state.volumeDataTop}
                                         member={this.memberTop}
@@ -927,6 +929,7 @@ class ComponentsContainer extends React.Component {
                                 </Col>
                                 <Col xs={6}>
                                     <ThreeDView 
+                                        shapeView={this.state.shapeDisplay}
                                         renderArea={'bottom'} 
                                         data={this.state.volumeDataBottom}
                                         member={this.memberBottom}
