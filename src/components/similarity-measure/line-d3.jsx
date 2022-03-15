@@ -1,3 +1,4 @@
+import { faCommentsDollar } from '@fortawesome/free-solid-svg-icons';
 import * as d3 from 'd3';
 
 
@@ -48,6 +49,8 @@ export default class LineD3{
                 .attr('class', 'axes')
                 .call(d3.axisLeft(y));
 
+        console.log(y(-3.9933))
+        console.log(y(-3.3916))
         let line = d3.line()
                 .x(function(d) { return x(d.X) })
                 .y(function(d) { return y(d.Y) })
