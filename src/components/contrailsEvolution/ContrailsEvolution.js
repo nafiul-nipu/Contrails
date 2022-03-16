@@ -52,7 +52,7 @@ export   const ContrailsEvolution = ({
           // console.log(circleRadius(info[cl]))
           evolutionData.nodes.push({
             "id": cl,
-            "particles": info[cl],
+            "particles": info[cl] * 38,
             "temp":attr[cl].temp,
             "length":attr[cl].length,
             "mass":attr[cl].mass.toFixed(5),
