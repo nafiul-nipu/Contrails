@@ -1,0 +1,72 @@
+{
+    "210": {
+        "group": 4,
+        "length": 48.179,
+        "mass": 2.2100000000000002e-05,
+        "particles": 13262,
+        "temp": 233.858
+    },
+    "211": {
+        "group": 5,
+        "length": 39.344,
+        "mass": 1.83e-05,
+        "particles": 11324,
+        "temp": 232.828
+    },
+    "212": {
+        "group": 6,
+        "length": 50.059,
+        "mass": 1.4300000000000002e-05,
+        "particles": 10716,
+        "temp": 232.491
+    },
+    "213": {
+        "group": 6,
+        "length": 49.466,
+        "mass": 1.24e-05,
+        "particles": 9044,
+        "temp": 232.615
+    },
+    "214": {
+        "group": 6,
+        "length": 48.686,
+        "mass": 1.15e-05,
+        "particles": 9044,
+        "temp": 232.29
+    },
+    "215": {
+        "group": 7,
+        "length": 49.284,
+        "mass": 1.01e-05,
+        "particles": 11704,
+        "temp": 227.968
+    },
+    "216": {
+        "group": 6,
+        "length": 50.977,
+        "mass": 8.59e-06,
+        "particles": 10602,
+        "temp": 227.789
+    },
+    "217": {
+        "group": 6,
+        "length": 50.636,
+        "mass": 8.08e-06,
+        "particles": 10564,
+        "temp": 228.395
+    },
+    "218": {
+        "group": 4,
+        "length": 47.286,
+        "mass": 8.01e-06,
+        "particles": 7068,
+        "temp": 232.497
+    },
+    "219": {
+        "group": 4,
+        "length": 49.071,
+        "mass": 5.42e-06,
+        "particles": 9538,
+        "temp": 228.623
+    }
+}
