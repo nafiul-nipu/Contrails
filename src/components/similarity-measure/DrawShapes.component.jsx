@@ -52,7 +52,7 @@ class DrawShapes extends React.Component{
                     yDomain = {min: -2, max: 2}
                 }
             
-                new LineD3(this.scatterId.current, data, xDomain, yDomain, this.props.id, this.props.time, this.props.folder)
+                new LineD3(this.scatterId.current, data, xDomain, yDomain, this.props.id, this.props.time, this.props.folder, this.props.kiviatData, this.props.kScale)
                 
             })
 

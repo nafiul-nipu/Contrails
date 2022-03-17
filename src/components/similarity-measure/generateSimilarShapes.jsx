@@ -1,11 +1,12 @@
 import React from "react";
 import { Col, Row } from 'react-bootstrap';
 
-// import * as d3 from 'd3'
+import * as d3 from 'd3'
 import DrawShapes from "./DrawShapes.component";
 
 import neighbors from '../data-component/similarData/neighbors.json'
 import neighbors2 from '../data-component/similarData/neighbors2.json'
+import shapeAttributes from '../data-component/shapeAttributes.json' ;
 
 class GenerateSimilarShapes extends React.Component{
     constructor(props){
@@ -14,13 +15,15 @@ class GenerateSimilarShapes extends React.Component{
             
         }
         this.neighbors = neighbors
+        this.kiviatScale = d3.scaleLinear()
+        .range([5, 25])
     }
 
     componentDidMount(){
     }
 
     render(){
-        // console.log(this.props.dimension)
+        // console.log(this.domains)
         if(this.props.similarity === 'io'){
             this.neighbors = neighbors2
             // console.log(this.neighbors)
@@ -44,7 +47,9 @@ class GenerateSimilarShapes extends React.Component{
                                     key = {`${el}`}
                                     folder ={this.props.folder}     
                                     time={el}    
-                                    id={i}                      
+                                    id={i}   
+                                    kiviatData={shapeAttributes[el]}
+                                    kScale={this.kiviatScale}                     
                                 />                            
                                 </Col>
                             )                                    
@@ -66,7 +71,9 @@ class GenerateSimilarShapes extends React.Component{
                                     key = {`${this.props.value}-${el}`}
                                     folder ={this.props.folder}     
                                     time={el}      
-                                    id={i}                    
+                                    id={i} 
+                                    kiviatData={shapeAttributes[el]}
+                                    kScale={this.kiviatScale}                   
                                 />                            
                                 </Col>
                             ) 
@@ -87,7 +94,9 @@ class GenerateSimilarShapes extends React.Component{
                                     key = {`${this.props.value}-${el}`}
                                     folder ={this.props.folder}     
                                     time={el}      
-                                    id={i}                    
+                                    id={i}   
+                                    kiviatData={shapeAttributes[el]}
+                                    kScale={this.kiviatScale}                    
                                 />                            
                                 </Col>
                             ) 
