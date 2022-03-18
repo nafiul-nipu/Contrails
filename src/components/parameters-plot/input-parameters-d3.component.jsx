@@ -389,7 +389,7 @@ export default class InputParametersD3 {
           }
 
         }
-        console.log(last, isdash)
+        // console.log(last, isdash)
         if((last - 1) == isdash){
           text+= ` , ${last}`
         }else{

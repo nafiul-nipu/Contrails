@@ -31,7 +31,7 @@ class ShapeContainerComponent extends React.Component{
     }
 
     componentDidMount(){
-        console.log('shape component did mount')
+        // console.log('shape component did mount')
         // let up = parseInt(this.divs / 2)
         // this.setState({
         //     value: this.props.value,
@@ -56,7 +56,7 @@ class ShapeContainerComponent extends React.Component{
     render(){
         // console.log(this.state)
         if(this.props.value){
-            console.log('shape-container')
+            // console.log('shape-container')
             // console.log(this.state)
             return(
                 <Container fluid>

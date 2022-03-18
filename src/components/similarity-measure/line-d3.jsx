@@ -4,7 +4,7 @@ import * as d3 from 'd3';
 import { getKiviatDomain } from './kiviatDomains';
 import d3Tip from 'd3-tip'
 import './line-d3.css'
-const attributes = ['temp', 'particles', 'mass', 'length']
+const attributes = ['temp', "area", 'particles', 'mass', 'length']
 
 export default class LineD3{
     constructor(element, data, xDomain, yDomain, tID, time, folder, kiviatData, kScale){
@@ -32,11 +32,11 @@ export default class LineD3{
         let kiviatCenterTip = d3Tip().attr().attr('class', 'd3-tip')
           .html(function () {
             let tip = `Member: ${time} <br>
-                Temp: ${kiviatData['temp']} <br>
+                Temp: ${kiviatData['temp']} k <br>
                 Particles: ${kiviatData['particles'] * 38} <br>
                 Mass: ${kiviatData['mass'].toFixed(7)} <br>
-                Length: ${kiviatData['length']} <br>
-                Group: ${kiviatData['group']} <br>
+                Length: ${kiviatData['length']} m <br>
+                Area: ${kiviatData['area']} m<sup>2</sup> <br>
                 `
             return tip
           })

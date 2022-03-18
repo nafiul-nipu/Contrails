@@ -5,7 +5,7 @@ let domains = {
     'particles': [shapeAttributes["210"].particles, shapeAttributes["210"].particles],
     'mass': [shapeAttributes["210"].mass, shapeAttributes["210"].mass],
     'length': [shapeAttributes["210"].length, shapeAttributes["210"].length],
-    'group': [shapeAttributes["210"].group, shapeAttributes["210"].group],
+    'area': [shapeAttributes["210"].area, shapeAttributes["210"].area],
   }
 
   export const getKiviatDomain = () =>{

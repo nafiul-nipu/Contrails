@@ -84,7 +84,7 @@ class ThreeDView extends React.Component {
     }  
     
     componentDidMount(){
-        console.log("three d view component did mount")
+        // console.log("three d view component did mount")
         // console.log(this.props.data)
         this.onLoad()
         this.selectVolume(this.props.data, this.props.member)
@@ -103,14 +103,14 @@ class ThreeDView extends React.Component {
         let time = dataRegistry[this.props.member-1].timeSteps
         if(this.props.member != nextProps.member){
             this.selectVolume(nextProps.data, nextProps.member)
-            console.log('member updated')
+            // console.log('member updated')
             return true
         }else if(this.props.member === nextProps.member && this.props.time != nextProps.time && time.includes(nextProps.time)){
             this.selectVolume(nextProps.data, nextProps.member)
-            console.log(' time member updated')
+            // console.log(' time member updated')
             return true
         }else if(this.props.data != nextProps.data){
-            console.log("filter updated")
+            // console.log("filter updated")
             this.selectVolume(nextProps.data, nextProps.member)
             return true
         }else{
@@ -119,7 +119,7 @@ class ThreeDView extends React.Component {
     }
 
     onLoad = () =>{
-        console.log("on load")
+        // console.log("on load")
         const self = this;
         // get container dimensions and use them for scene sizing
         const width = d3.select(`.threeContainer${this.props.renderArea}`).node().clientWidth;
@@ -283,7 +283,7 @@ class ThreeDView extends React.Component {
     }
 
     createShader = (shaderNumber) =>{
-        console.log("shader created")
+        // console.log("shader created")
         if(shaderNumber === 1){  // basic
             this.shader = new Shader(this.gl, vertShader, fragShaderbasic);
         }else if(shaderNumber === 2){ //with light
@@ -300,13 +300,13 @@ class ThreeDView extends React.Component {
     }
 
     onShaderChange = (value) =>{
-        console.log("on shader change", value)
+        // console.log("on shader change", value)
         this.createShader(value)
         this.selectVolume(this.props.data, this.props.member)
     }
 
     selectVolume = (data, member) =>{
-        console.log("select volume")
+        // console.log("select volume")
         const self = this;
         let dataBuffer = data;
         // console.log(data)

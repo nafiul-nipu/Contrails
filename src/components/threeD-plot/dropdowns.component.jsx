@@ -23,8 +23,8 @@ class DropDowns extends React.Component {
     
     componentDidMount(){
       const self = this
-      console.log(`dropdown - ${this.props.member}`)
-      console.log(this.props.shapeDisplay)
+      // console.log(`dropdown - ${this.props.member}`)
+      // console.log(this.props.shapeDisplay)
       // if(this.props.area === 'top'){
       //   loader(17, 0.06, 'temp').then(function(){
       //     // console.log("data loaded")
@@ -76,7 +76,7 @@ class DropDowns extends React.Component {
                             let member = this.value
                             self.updateDropdown(member)
 
-                            console.log("i am triggered")
+                            // console.log("i am triggered")
                         })
                         .selectAll('option')
                         .data(dataRegistry)
@@ -131,7 +131,7 @@ class DropDowns extends React.Component {
                       .attr('class', "filters form-control-sm form-control")
                       .attr("id", `shader${this.props.area}`)
                       .on('change', function(d){
-                        console.log(this.value)
+                        // console.log(this.value)
                         self.props.onShaderChange(+this.value)
                           
                       })

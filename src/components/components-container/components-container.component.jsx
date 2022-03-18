@@ -71,7 +71,7 @@ class ComponentsContainer extends React.Component {
     }
 
     componentDidMount() {
-        console.log("component container component did mount")
+        // console.log("component container component did mount")
         const self = this
         // console.log(this.memberTop, this.timeTop, this.attributeTop)
         loader(this.memberTop, this.timeTop, this.attributeTop).then(function(){
@@ -248,7 +248,7 @@ class ComponentsContainer extends React.Component {
     }
 
     handleRadioViewChange(event){
-        console.log(event.target.value)
+        // console.log(event.target.value)
         if(event.target.value === 'parameterView'){
             this.setState({
                 parameterDisplay: 'block',
@@ -282,7 +282,7 @@ class ComponentsContainer extends React.Component {
     }
 
     handleInputFilters(params) {
-        console.log(params)
+        // console.log(params)
         this.setState({ inputFilters: params }, () => {
             this.handleInputAndOuputFilters()
         })

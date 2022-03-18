@@ -6,7 +6,7 @@ export default class ProjeProjection2DD3 {
     constructor(element,members){
         const width=300
         const height=200
-        console.log(members)
+        // console.log(members)
         const svg = d3.select(element)
                     .append("svg")
                     .attr("width",300)
