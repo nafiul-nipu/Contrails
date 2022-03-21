@@ -79,7 +79,7 @@ export default class LineD3{
         svg.append("g")
                 .attr("transform", "translate(10,10)")
                 .append('text')
-                .text(`${folder}_${time}`)
+                .text(`Simulation-${time}`)
                 .attr('fill', '#a2a3a3')
                 
 
