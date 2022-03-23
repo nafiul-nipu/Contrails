@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/Contrails/static/css/main.0f7fef0e.chunk.css",
+    "main.css": "/Contrails/static/css/main.5cd1dce3.chunk.css",
     "main.js": "/Contrails/static/js/main.2c08b5cc.chunk.js",
     "main.js.map": "/Contrails/static/js/main.2c08b5cc.chunk.js.map",
     "runtime-main.js": "/Contrails/static/js/runtime-main.30226489.js",
@@ -10,13 +10,13 @@
     "static/js/3.a9fa0175.chunk.js": "/Contrails/static/js/3.a9fa0175.chunk.js",
     "static/js/3.a9fa0175.chunk.js.map": "/Contrails/static/js/3.a9fa0175.chunk.js.map",
     "index.html": "/Contrails/index.html",
-    "static/css/main.0f7fef0e.chunk.css.map": "/Contrails/static/css/main.0f7fef0e.chunk.css.map",
+    "static/css/main.5cd1dce3.chunk.css.map": "/Contrails/static/css/main.5cd1dce3.chunk.css.map",
     "static/js/2.b7cea3d3.chunk.js.LICENSE.txt": "/Contrails/static/js/2.b7cea3d3.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.30226489.js",
     "static/js/2.b7cea3d3.chunk.js",
-    "static/css/main.0f7fef0e.chunk.css",
+    "static/css/main.5cd1dce3.chunk.css",
     "static/js/main.2c08b5cc.chunk.js"
   ]
 }
