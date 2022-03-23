@@ -95,7 +95,7 @@ export default class LineD3{
                         // }else if(time === 212 || time === 215 || time === 217 || time === 218 || time === 219){
                         //         return 'green'
                         // }else{
-                                return '#42A5B3'
+                                return '#03DAC5'
                         // }
                 })
                 .attr("stroke-width", 1)
@@ -143,7 +143,7 @@ export default class LineD3{
         kiviatGroup.append("path")
             .attr("class", "kiviatPath")
             .attr("d", calculatePath(kiviatData, this.domains, kScale))
-            .style("fill", "#42A5B3")
+            .style("fill", "#03DAC5")
             .style("opacity", 0.75);
 
             kiviatGroup.append("circle")
