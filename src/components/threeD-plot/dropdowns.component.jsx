@@ -93,7 +93,7 @@ class DropDowns extends React.Component {
                         })
                         .text((d) => {
                           if(d.ensembleMember == 20){
-                            return "NewData"
+                            return "Simulation"
                           }else{
                             return "Member : "+d.ensembleMember
                           }

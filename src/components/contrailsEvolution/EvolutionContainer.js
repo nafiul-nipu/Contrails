@@ -153,6 +153,6 @@ if(select('#evCon').node() !== null){
         /> 
       )
   }else{
-      return(<div style={{color:'white'}}>Select between 17-19</div>)
+      return(<div style={{color:'white'}}>No Temporal Data</div>)
   }
 }
