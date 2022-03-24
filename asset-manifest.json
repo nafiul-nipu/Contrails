@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Contrails/static/css/main.5cd1dce3.chunk.css",
-    "main.js": "/Contrails/static/js/main.2c08b5cc.chunk.js",
-    "main.js.map": "/Contrails/static/js/main.2c08b5cc.chunk.js.map",
+    "main.js": "/Contrails/static/js/main.c7e16f6f.chunk.js",
+    "main.js.map": "/Contrails/static/js/main.c7e16f6f.chunk.js.map",
     "runtime-main.js": "/Contrails/static/js/runtime-main.30226489.js",
     "runtime-main.js.map": "/Contrails/static/js/runtime-main.30226489.js.map",
     "static/js/2.b7cea3d3.chunk.js": "/Contrails/static/js/2.b7cea3d3.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.30226489.js",
     "static/js/2.b7cea3d3.chunk.js",
     "static/css/main.5cd1dce3.chunk.css",
-    "static/js/main.2c08b5cc.chunk.js"
+    "static/js/main.c7e16f6f.chunk.js"
   ]
 }
