@@ -91,7 +91,7 @@ class InputParametersPanel extends React.Component {
 
                     <div style={{ "color": "#BEBEBE", marginTop: "15px", marginLeft: "-4%" }}>Boundary Conditions</div>
                     {/* <div style={{ "color": "#BEBEBE", marginLeft: "-4%" }}>(T, U, p, k)</div> */}
-                    <div style={{marginLeft:"15px"}}>
+                    <div style={{marginLeft:"2px"}}>
                         {/* <div><svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#ffffb3" xmlns="http://www.w3.org/2000/svg">
                             <rect width="8" height="8" rx="1" />
                         </svg> <span style={{ color: "white" }}>totalTemperature</span></div> */}
@@ -210,6 +210,7 @@ class InputParametersPanel extends React.Component {
                         <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#FF4E0D" xmlns="http://www.w3.org/2000/svg">
                             <rect width="8" height="8" rx="1" />
                         </svg>
+                        <br/>
                         <Form.Check inline type="checkbox" id="boundary-U-inlet-freestream" label="freestream" onChange={this.handleButton} />
                         <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#fdb462" xmlns="http://www.w3.org/2000/svg">
                             <rect width="8" height="8" rx="1" />
