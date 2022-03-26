@@ -125,12 +125,17 @@ class InputParametersPanel extends React.Component {
                         {/* <div><svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#ffffe5" xmlns="http://www.w3.org/2000/svg">
                             <rect width="8" height="8" rx="1" />
                         </svg> <span style={{ color: "white" }}>no data</span></div> */}
-                        <div style={{marginLeft: "10%" }}><span style={{ color: "white" }}>no data</span><span style={{ color: "#31393F" }}>00</span>
+                        {/* <div style={{marginLeft: "10%" }}><span style={{ color: "white" }}>no data</span><span style={{ color: "#31393F" }}>00</span>
                         <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#ffffe5" xmlns="http://www.w3.org/2000/svg">
                             <rect width="8" height="8" rx="1" x='0' y='0'/>
-                        </svg> </div>
+                        </svg> </div> */}
                         
                     </div>
+                    <div style={{ color: "white", marginTop: "2%" }}><span>no data</span><span style={{ color: "#31393F" }}>00</span>
+                    <svg className="bi bi-square color-svg" width="1em" height="1em" viewBox="0 0 10 10" fill="#ffffe5" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="8" height="8" rx="1" x='0' y='0'/>
+                        </svg>
+                        </div>
                     {/* <div style={{ color: "#BEBEBE", marginTop: "3%" , marginLeft:"-2%"}}>T</div> */}
                     {/* <div style={{ color: "grey", marginTop: "2%" }}>bypassInlet</div>
                     <Form  >
