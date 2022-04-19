@@ -3,3 +3,10 @@
 18 - 0.08 sharpness 0.1 eccentricity 0.1 ellipgaus
 
 19 - 0.04 2 2 elg
+
+
+
+
+new data
+0.001 
+-15
