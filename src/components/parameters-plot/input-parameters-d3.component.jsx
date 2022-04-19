@@ -139,7 +139,7 @@ export default class InputParametersD3 {
     }
 
     var ids = data.reduce((res,d) => {
-      if(d['id'] !== 20){
+      if(d['id'] !== 20 && d['id'] !== 21){
         res.push(d['id'])
       }
       return res
