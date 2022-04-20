@@ -10,6 +10,10 @@ import dataRegistry from '../data-component/dataRegistry.json'
 
 import {loader, getMin, getMax, getData, getRawData, getRangeData} from "./dataHandler.js"
 
+const singleTimeData = [20, 21]
+
+const getRangeDataList = [14, 15, 16, 17, 18, 19, 20, 21]
+
 
 class DropDowns extends React.Component {
 
@@ -92,7 +96,7 @@ class DropDowns extends React.Component {
                             }
                         })
                         .text((d) => {
-                          if(d.ensembleMember == 20 || d.ensembleMember == 21){
+                          if(singleTimeData.includes(d.ensembleMember)){
                             return "Simulation"
                           }else{
                             return "Member : "+d.ensembleMember
@@ -179,7 +183,7 @@ class DropDowns extends React.Component {
       let filter = $(`#filter${self.props.area}`).val();
       let dataRange;
       // change this line later
-      if((member === 14 || member === 15 || member === 16 || member === 17 || member === 18 || member === 19 || member === 20)){
+      if(getRangeDataList.includes(member)){
         dataRange = getRangeData(member, timestep, filter);
         // console.log(dataRange)
       }else{

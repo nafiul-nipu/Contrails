@@ -19,6 +19,7 @@ import Form from 'react-bootstrap/Form'
 import {EvolutionContainer} from '../contrailsEvolution/EvolutionContainer';
 import ShapeContainerComponent from '../similarity-measure/shapeContainer';
 
+const singleTimeData = [20, 21]
 class ComponentsContainer extends React.Component {
     constructor() {
         super();
@@ -304,7 +305,7 @@ class ComponentsContainer extends React.Component {
         if (filters_param) {
             if (filters_param['aircraft_engine'].length > 0 && data.length > 0) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var e = []
                         e.push(el['input']['aircraft-engine'])
                         var result = e.some(r => filters_param['aircraft_engine'].includes(r))
@@ -316,7 +317,7 @@ class ComponentsContainer extends React.Component {
             }
             if (filters_param['geometry'].length > 0 && data.length > 0) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var e = []
                         e.push(el['input']['geometry'])
                         var result = e.some(r => filters_param['geometry'].includes(r))
@@ -328,7 +329,7 @@ class ComponentsContainer extends React.Component {
             }
             if (filters_param['grid'].length > 0 && data.length > 0) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var e = []
                     e.push(el['input']['grid'])
                     var result = e.some(r => filters_param['grid'].includes(r))
@@ -340,7 +341,7 @@ class ComponentsContainer extends React.Component {
             }
             if (filters_param['scope'].length > 0 && data.length > 0) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var e = []
                     e.push(el['input']['scope'])
                     var result = e.some(r => filters_param['scope'].includes(r))
@@ -352,7 +353,7 @@ class ComponentsContainer extends React.Component {
             }
             if (filters_param['solution'].length > 0 && data.length > 0) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var e = []
                     e.push(el['input']['solution'])
                     var result = e.some(r => filters_param['solution'].includes(r))
@@ -365,7 +366,7 @@ class ComponentsContainer extends React.Component {
             if (filters_param['turbulence'].length > 0 && data.length > 0) {
 
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var e = []
                     e.push(el['input']['turbulence'])
                     var result = e.some(r => filters_param['turbulence'].includes(r))
@@ -377,7 +378,7 @@ class ComponentsContainer extends React.Component {
             }
             if (filters_param['boundary-T-bypassInlet'].length > 0 && data.length > 0) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var aux = el['boundary-conditions']
                     var e = aux['T'][0]
                     var result = filters_param['boundary-T-bypassInlet'].includes(e)
@@ -389,7 +390,7 @@ class ComponentsContainer extends React.Component {
             }
             if (filters_param['boundary-T-engine'].length > 0 && data.length > 0) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var aux = el['boundary-conditions']
                     var e = aux['T'][1]
                     var result = filters_param['boundary-T-engine'].includes(e)
@@ -401,7 +402,7 @@ class ComponentsContainer extends React.Component {
             }
             if (filters_param['boundary-T-farfield'].length > 0 && data.length > 0) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var aux = el['boundary-conditions']
                     var e = aux['T'][2]
                     var result = filters_param['boundary-T-farfield'].includes(e)
@@ -413,7 +414,7 @@ class ComponentsContainer extends React.Component {
             }
             if (filters_param['boundary-T-inlet'].length > 0 && data.length > 0) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var aux = el['boundary-conditions']
                     var e = aux['T'][3]
                     var result = filters_param['boundary-T-inlet'].includes(e)
@@ -426,7 +427,7 @@ class ComponentsContainer extends React.Component {
             if (filters_param['boundary-T-nozzle'].length > 0 && data.length > 0) {
 
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var aux = el['boundary-conditions']
                     var e = aux['T'][4]
                     var result = filters_param['boundary-T-nozzle'].includes(e)
@@ -438,7 +439,7 @@ class ComponentsContainer extends React.Component {
             }
             if (filters_param['boundary-T-outlet'].length > 0 && data.length > 0) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var aux = el['boundary-conditions']
                     var e = aux['T'][5]
                     var result = filters_param['boundary-T-outlet'].includes(e)
@@ -450,7 +451,7 @@ class ComponentsContainer extends React.Component {
             }
             if (filters_param['boundary-T-turbine'].length > 0 && data.length > 0) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var aux = el['boundary-conditions']
                     var e = aux['T'][6]
                     var result = filters_param['boundary-T-turbine'].includes(e)
@@ -463,7 +464,7 @@ class ComponentsContainer extends React.Component {
 
             if (filters_param['boundary-U-bypassInlet'].length > 0 && data.length > 0) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var aux = el['boundary-conditions']
                     var e = aux['U'][0]
                     var result = filters_param['boundary-U-bypassInlet'].includes(e)
@@ -475,7 +476,7 @@ class ComponentsContainer extends React.Component {
             }
             if (filters_param['boundary-U-engine'].length > 0 && data.length > 0) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var aux = el['boundary-conditions']
                         var e = aux['U'][1]
                         var result = filters_param['boundary-U-engine'].includes(e)
@@ -487,7 +488,7 @@ class ComponentsContainer extends React.Component {
             }
             if (filters_param['boundary-U-farfield'].length > 0 && data.length > 0) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var aux = el['boundary-conditions']
                     var e = aux['U'][2]
                     var result = filters_param['boundary-U-farfield'].includes(e)
@@ -499,7 +500,7 @@ class ComponentsContainer extends React.Component {
             }
             if (filters_param['boundary-U-inlet'].length > 0 && data.length > 0) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var aux = el['boundary-conditions']
                     var e = aux['U'][3]
                     var result = filters_param['boundary-U-inlet'].includes(e)
@@ -511,7 +512,7 @@ class ComponentsContainer extends React.Component {
             }
             if (filters_param['boundary-U-nozzle'].length > 0 && data.length > 0) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var aux = el['boundary-conditions']
                     var e = aux['U'][4]
                     var result = filters_param['boundary-U-nozzle'].includes(e)
@@ -523,7 +524,7 @@ class ComponentsContainer extends React.Component {
             }
             if (filters_param['boundary-U-outlet'].length > 0 && data.length > 0) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var aux = el['boundary-conditions']
                         var e = aux['U'][5]
                         var result = filters_param['boundary-U-outlet'].includes(e)
@@ -535,7 +536,7 @@ class ComponentsContainer extends React.Component {
             }
             if (filters_param['boundary-U-turbine'].length > 0 && data.length > 0) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var aux = el['boundary-conditions']
                     var e = aux['U'][6]
                     var result = filters_param['boundary-U-turbine'].includes(e)
@@ -548,7 +549,7 @@ class ComponentsContainer extends React.Component {
             if (filters_param['boundary-p-bypassInlet'].length > 0 && data.length > 0) {
 
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var aux = el['boundary-conditions']
                     var e = aux['p'][0]
                     var result = filters_param['boundary-p-bypassInlet'].includes(e)
@@ -560,7 +561,7 @@ class ComponentsContainer extends React.Component {
             }
             if (filters_param['boundary-p-engine'].length > 0 && data.length > 0) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var aux = el['boundary-conditions']
                     var e = aux['p'][1]
                     var result = filters_param['boundary-p-engine'].includes(e)
@@ -572,7 +573,7 @@ class ComponentsContainer extends React.Component {
             }
             if (filters_param['boundary-p-farfield'].length > 0 && data.length > 0) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var aux = el['boundary-conditions']
                     var e = aux['p'][2]
                     var result = filters_param['boundary-p-farfield'].includes(e)
@@ -584,7 +585,7 @@ class ComponentsContainer extends React.Component {
             }
             if (filters_param['boundary-p-inlet'].length > 0 && data.length > 0) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var aux = el['boundary-conditions']
                     var e = aux['p'][3]
                     var result = filters_param['boundary-p-inlet'].includes(e)
@@ -596,7 +597,7 @@ class ComponentsContainer extends React.Component {
             }
             if (filters_param['boundary-p-nozzle'].length > 0 && data.length > 0) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var aux = el['boundary-conditions']
                     var e = aux['p'][4]
                     var result = filters_param['boundary-p-nozzle'].includes(e)
@@ -608,7 +609,7 @@ class ComponentsContainer extends React.Component {
             }
             if (filters_param['boundary-p-outlet'].length > 0 && data.length > 0) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var aux = el['boundary-conditions']
                     var e = aux['p'][5]
                     var result = filters_param['boundary-p-outlet'].includes(e)
@@ -620,7 +621,7 @@ class ComponentsContainer extends React.Component {
             }
             if (filters_param['boundary-p-turbine'].length > 0 && data.length > 0) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var aux = el['boundary-conditions']
                     var e = aux['p'][6]
                     var result = filters_param['boundary-p-turbine'].includes(e)
@@ -633,7 +634,7 @@ class ComponentsContainer extends React.Component {
 
             if (filters_param['boundary-k-bypassInlet'].length > 0 && data.length > 0) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var aux = el['boundary-conditions']
                     var e = aux['k'][0]
                     var result = filters_param['boundary-k-bypassInlet'].includes(e)
@@ -645,7 +646,7 @@ class ComponentsContainer extends React.Component {
             }
             if (filters_param['boundary-k-engine'].length > 0 && data.length > 0) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var aux = el['boundary-conditions']
                     var e = aux['k'][1]
                     var result = filters_param['boundary-k-engine'].includes(e)
@@ -657,7 +658,7 @@ class ComponentsContainer extends React.Component {
             }
             if (filters_param['boundary-k-farfield'].length > 0 && data.length > 0) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var aux = el['boundary-conditions']
                     var e = aux['k'][2]
                     var result = filters_param['boundary-k-farfield'].includes(e)
@@ -669,7 +670,7 @@ class ComponentsContainer extends React.Component {
             }
             if (filters_param['boundary-k-inlet'].length > 0 && data.length > 0) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var aux = el['boundary-conditions']
                     var e = aux['k'][3]
                     var result = filters_param['boundary-k-inlet'].includes(e)
@@ -681,7 +682,7 @@ class ComponentsContainer extends React.Component {
             }
             if (filters_param['boundary-k-nozzle'].length > 0 && data.length > 0) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var aux = el['boundary-conditions']
                     var e = aux['k'][4]
                     var result = filters_param['boundary-k-nozzle'].includes(e)
@@ -693,7 +694,7 @@ class ComponentsContainer extends React.Component {
             }
             if (filters_param['boundary-k-outlet'].length > 0 && data.length > 0) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var aux = el['boundary-conditions']
                     var e = aux['k'][5]
                     var result = filters_param['boundary-k-outlet'].includes(e)
@@ -705,7 +706,7 @@ class ComponentsContainer extends React.Component {
             }
             if (filters_param['boundary-k-turbine'].length > 0 && data.length > 0) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var aux = el['boundary-conditions']
                     var e = aux['k'][6]
                     var result = filters_param['boundary-k-turbine'].includes(e)
@@ -723,7 +724,7 @@ class ComponentsContainer extends React.Component {
 
             if (filter_params2['T_lag_avg']) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         // var e = []
                         // e.push(el['output-parameters']['T_lag_avg'])
                         // // console.log(filter_params2['T_lag_avg'] )
@@ -742,7 +743,7 @@ class ComponentsContainer extends React.Component {
             }
             if (filter_params2['T_eul_avg']) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var e = []
                     e.push(el['output-parameters']['T_eul_avg'])
                     var result = e.some(r => (r <= filter_params2['T_eul_avg']))
@@ -756,7 +757,7 @@ class ComponentsContainer extends React.Component {
 
             // if (filter_params2['rho_lag_avg']) {
             //     data = data.filter(el => {
-            //         if(el['id'] !== 20 && el['id'] !== 21){
+            //         if(singleTimeData.includes(el['id'])){
             //             var e = []
             //         e.push(el['output-parameters']['rho_lag_avg'])
             //         var result = e.some(r => (filter_params2['rho_lag_avg'] - 10) && (filter_params2['rho_lag_avg'] + 10))
@@ -768,7 +769,7 @@ class ComponentsContainer extends React.Component {
             // }
             // if (filter_params2['rho_eul_avg']) {
             //     data = data.filter(el => {
-            //         if(el['id'] !== 20 && el['id'] !== 21){
+            //         if(singleTimeData.includes(el['id'])){
             //             var e = []
             //         e.push(el['output-parameters']['rho_eul_avg'])
             //         var result = e.some(r => (filter_params2['rho_eul_avg'] - 0.0001) && (filter_params2['rho_eul_avg'] + 0.0001))
@@ -781,7 +782,7 @@ class ComponentsContainer extends React.Component {
 
             if (filter_params2['d_lag_avg']) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var e = []
                     e.push(el['output-parameters']['d_lag_avg'])
                     var result = e.some(r => (r <= filter_params2['d_lag_avg']))
@@ -793,7 +794,7 @@ class ComponentsContainer extends React.Component {
             }
             if (filter_params2['p_eul_avg']) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var e = []
                         e.push(el['output-parameters']['p_eul_avg'])
                         var result = e.some(r => (r <= filter_params2['p_eul_avg']))
@@ -807,7 +808,7 @@ class ComponentsContainer extends React.Component {
 
             // if (filter_params2['Ygas_lag_avg']) {
             //     data = data.filter(el => {
-            //         if(el['id'] !== 20 && el['id'] !== 21){
+            //         if(singleTimeData.includes(el['id'])){
             //             var e = []
             //         e.push(el['output-parameters']['Ygas_lag_avg'])
             //         var result = e.some(r => (filter_params2['Ygas_lag_avg'] - 10) && (filter_params2['Ygas_lag_avg'] + 10))
@@ -819,7 +820,7 @@ class ComponentsContainer extends React.Component {
             // }
             if (filter_params2['k_eul_avg']) {
                 data = data.filter(el => {
-                    if(el['id'] !== 20 && el['id'] !== 21){
+                    if(singleTimeData.includes(el['id'])){
                         var e = []
                         e.push(el['output-parameters']['k_eul_avg'])
                         var result = e.some(r => (r <= filter_params2['k_eul_avg']))

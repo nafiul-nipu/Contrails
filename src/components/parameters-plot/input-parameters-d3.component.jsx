@@ -12,6 +12,9 @@ import inputDomain from '../data-component/parameters.json'
 
 // const height = 900
 const url = "https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/2_TwoNum.csv"
+
+const singleTimeData = [20,21]
+
 export default class InputParametersD3 {
 
 
@@ -139,7 +142,7 @@ export default class InputParametersD3 {
     }
 
     var ids = data.reduce((res,d) => {
-      if(d['id'] !== 20 && d['id'] !== 21){
+      if(!singleTimeData.includes(d['id'])){
         res.push(d['id'])
       }
       return res

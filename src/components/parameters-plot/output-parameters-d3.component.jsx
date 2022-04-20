@@ -8,6 +8,7 @@ import d3Tip from 'd3-tip'
 import "./parameters-plot.styles.css"
 import { filter } from 'd3';
 
+const singleTimeData = [20,21]
 
 const height = window.innerHeight
 export default class OutputParametersD3 {
@@ -295,7 +296,7 @@ export default class OutputParametersD3 {
             // let updatedData = []
 
             // console.log(top, bottom)
-            let filtered_d = data.filter(d => d['id'] !== top && d['id'] !== bottom && d['id'] !== 20)
+            let filtered_d = data.filter(d => d['id'] !== top && d['id'] !== bottom && !singleTimeData.includes(d['id']))
             // console.log(filtered_d)
             // console.log(data)
             let topdata = data.filter(d => d['id'] == top)[0]
